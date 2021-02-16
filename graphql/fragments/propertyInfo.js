@@ -14,7 +14,6 @@ const PropertyInfoFragment = gql`
     updatedAt
     createdAt
     type
-    titleType
     headline
     rooms
     maximumOccupants
@@ -29,7 +28,6 @@ const PropertyInfoFragment = gql`
     garageSpaces
     carportSpaces
     offStreetSpaces
-    insulationProof
     insulationForm {
       id
     }
@@ -85,7 +83,6 @@ const PropertyInfoFragment = gql`
       suffix
     }
     rehouserManaged
-    bondType
   }
   ${FileInfoFragment}
   ${PublicUserInfoFragment}

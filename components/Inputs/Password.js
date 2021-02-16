@@ -1,67 +1,36 @@
-import { useState } from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import PasswordField from 'material-ui-password-field';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing(1, 0, 1, 0),
-  },
-}));
+// just use valid hml5 => https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types
+const styles = theme => ({
+  //   root: {
+  //     display: 'flex',
+  //     flexWrap: 'wrap',
+  //   },
+});
 
-export default function PasswordField(props) {
-  const {
-    id,
-    buttonDisabled,
-    visible: visibleProp, // eslint-disable-line
-    ...other
-  } = props;
-  const classes = useStyles();
-  const [values, setValues] = useState({
-    showPassword: false,
-  });
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
-  };
-
+const PasswordInput = props => {
+  const { classes, value, onChange } = props;
   return (
-    <FormControl
-      className={clsx(classes.margin, classes.textField)}
-      fullWidth={true}>
-      <InputLabel htmlFor={`standard-adornment-password-${id}`}>
-        Password
-      </InputLabel>
-      <Input
-        fullWidth={true}
-        {...other}
-        id={`standard-adornment-password-${id}`}
-        type={values.showPassword ? 'text' : 'password'}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}>
-              {values.showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </InputAdornment>
-        }
-      />
-    </FormControl>
+    <PasswordField
+      // password props
+      hintText="At least 8 characters"
+      floatingLabelText="Enter your password"
+      errorText="Your password is too short"
+      value={value}
+      onChange={onChange}
+      //   margin="normal"
+      {...props}
+    />
   );
-}
+};
+
+PasswordInput.propTypes = {
+  classes: PropTypes.any,
+  onChange: PropTypes.any,
+  value: PropTypes.any,
+};
+
+export default withStyles(styles)(PasswordInput);

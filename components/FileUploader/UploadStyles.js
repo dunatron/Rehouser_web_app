@@ -10,8 +10,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   upload: {
     display: 'flex',

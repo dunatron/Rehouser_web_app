@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import Head from 'next/head';
 import Card from '@/Styles/Card';
-import { useRouter } from 'next/router';
 
 /**
  * Superstar will you make it ? the rise : or the fall
@@ -20,24 +19,14 @@ const PageHeader = ({
   intro,
   children,
   metaData,
-  metaKeywords,
   hidden,
 }) => {
-  const router = useRouter();
   return (
     <>
-      {metaKeywords && (
-        <Head>
-          <meta name="keywords" content={metaKeywords} />
-        </Head>
-      )}
       {metaData && (
         <Head>
-          <title>{metaData.title}</title>
           <meta name="description" content={metaData.content} />
-          <meta property="og:description" content={metaData.content} />
-          <meta property="og:title" content={metaData.title} />
-          <meta property="og:url" content={router.pathname} />
+          <title>{metaData.title}</title>
         </Head>
       )}
       {!hidden && (
@@ -56,7 +45,7 @@ const PageHeader = ({
           )}
 
           {intro && (
-            <Typography gutterBottom={children ? true : false} hidden={hidden}>
+            <Typography gutterBottom={false} hidden={hidden}>
               {intro}
             </Typography>
           )}

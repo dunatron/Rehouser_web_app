@@ -23,6 +23,7 @@ function MaterialPage(props) {
   const theme = useTheme();
   const classes = useStyles();
 
+  console.log('Props in Material Page => ', props);
   const { container, appData } = props;
   const { currentUser } = appData;
 
@@ -44,6 +45,13 @@ function MaterialPage(props) {
     }
     return child;
   });
+
+  useEffect(() => {
+    console.log('render: Material Page useEffect');
+    return () => {
+      console.log('render: Material Page useEffect cleanup');
+    };
+  }, []);
 
   return (
     <>

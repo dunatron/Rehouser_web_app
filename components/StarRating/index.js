@@ -4,10 +4,6 @@ import StarIcon from '@/Styles/icons/StarIcon';
 import StarBorderIcon from '@/Styles/icons/StarBorderIcon';
 import StarHalfIcon from '@/Styles/icons/StarHalfIcon';
 
-const iProps = {
-  color: 'primary',
-};
-const emptyIProps = {};
 export default class StarRating extends Component {
   render() {
     const val = this.props.percentage;
@@ -17,34 +13,34 @@ export default class StarRating extends Component {
     let star4 = <StarBorderIcon />;
     let star5 = <StarBorderIcon />;
     if (val >= 10) {
-      star1 = <StarHalfIcon {...iProps} />;
+      star1 = <StarHalfIcon color="secondary" />;
     }
     if (val >= 20) {
-      star1 = <StarIcon {...iProps} />;
+      star1 = <StarIcon color="secondary" />;
     }
     if (val >= 30) {
-      star2 = <StarHalfIcon {...iProps} />;
+      star2 = <StarHalfIcon color="secondary" />;
     }
     if (val >= 40) {
-      star2 = <StarIcon {...iProps} />;
+      star2 = <StarIcon color="secondary" />;
     }
     if (val >= 50) {
-      star3 = <StarHalfIcon {...iProps} />;
+      star3 = <StarHalfIcon color="secondary" />;
     }
     if (val >= 60) {
-      star3 = <StarIcon {...iProps} />;
+      star3 = <StarIcon color="secondary" />;
     }
     if (val >= 70) {
-      star4 = <StarHalfIcon {...iProps} />;
+      star4 = <StarHalfIcon color="secondary" />;
     }
     if (val >= 80) {
-      star4 = <StarIcon {...iProps} />;
+      star4 = <StarIcon color="secondary" />;
     }
     if (val >= 90) {
-      star5 = <StarHalfIcon {...iProps} />;
+      star5 = <StarHalfIcon color="secondary" />;
     }
     if (val >= 100) {
-      star5 = <StarIcon {...iProps} />;
+      star5 = <StarIcon color="secondary" />;
     }
     return (
       <div>
@@ -59,5 +55,5 @@ export default class StarRating extends Component {
 }
 
 StarRating.propTypes = {
-  percentage: PropTypes.number.isRequired,
+  percentage: PropTypes.number.isRequired
 };

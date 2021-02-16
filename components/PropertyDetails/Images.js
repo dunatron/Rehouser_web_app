@@ -62,9 +62,7 @@ const PropertyImages = ({ property, updateProperty }) => {
         updateCacheOnRemovedFile={(cache, result) => {
           updateProperty({
             variables: {
-              where: {
-                id: property.id,
-              },
+              id: property.id,
               data: {
                 images: {
                   disconnect: [
@@ -80,9 +78,7 @@ const PropertyImages = ({ property, updateProperty }) => {
         recieveFile={file => {
           updateProperty({
             variables: {
-              where: {
-                id: property.id,
-              },
+              id: property.id,
               data: {
                 images: {
                   connect: [
@@ -96,9 +92,9 @@ const PropertyImages = ({ property, updateProperty }) => {
           });
         }}
       />
-      {/* <CarouselSlider
+      <CarouselSlider
         slides={property.images.map(imgObj => ({ ...imgObj, img: imgObj.url }))}
-      /> */}
+      />
     </div>
   );
 };

@@ -1,151 +1,75 @@
-import React, { useRef, useState, useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import Router from 'next/router';
+
+import SuperiorTable from '@/Components/SuperiorTable';
+
+//icons
+import DetailsIcon from '@/Styles/icons/DetailsIcon';
+
 import PropTypes from 'prop-types';
-import { store } from '../../store';
-import { useApolloClient } from '@apollo/client';
-import { makeStyles } from '@material-ui/core/styles';
-// import MaterialTable from 'material-table';
-import ConnectionTable, {
-  getEnumLookupList,
-} from '@/Components/SuperiorTable/ConnectionTable';
+import { mePropTypes, propertyPropTypes } from '../../propTypes';
 
-//components
-import Error from '@/Components/ErrorMessage';
-import UserDetails from '../../components/UserDetails';
-import List from '@material-ui/core/List';
+const handleLink = (route = '/', query = {}) => {
+  Router.push({
+    pathname: route,
+    query: query,
+  });
+};
 
-import {
-  PROPERTIES_CONNECTION_QUERY,
-  PROPERTIES_COUNT_QUERY,
-} from '../../graphql/connections';
-// mutations
+const PropertiesTable = props => {
+  const { properties, me } = props;
+  /**
+   * We have freezeResults: true for apollo cache objects so we will have to manually add the new objects we want.
+   * We should be able to just create a new instance of the object
+   */
+  const formattedData = properties.map(property => ({
+    ...property,
+  }));
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-  tableHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-  },
-}));
+  const columns = [
+    // { title: 'id', field: 'id', filtering: false },
+    { title: 'location', field: 'location' },
+    { title: 'isLeased', field: 'isLeased' },
+    { title: 'advertising', field: 'onTheMarket' },
+    { title: 'rent', field: 'rent', export: true },
+    {
+      field: 'owners',
+      title: 'Owners',
+      render: rowData => {
+        return rowData.owners.map((owner, idx) => {
+          return (
+            <div key={owner.id}>
+              {owner.firstName}
+              {rowData.owners.length > idx + 1 ? ', ' : null}
+            </div>
+          );
+        });
+      },
+    },
+  ];
 
-const PropertiesTable = ({
-  where,
-  me,
-  orderBy = 'createdAt_DESC',
-  enableAddressParams,
-  baseManageLink = '/landlord/properties/',
-}) => {
-  const router = useRouter();
-
-  const connectionKey = 'propertiesConnection'; // e.g inspectionsConnection
-  const globalStore = useContext(store);
-  const { dispatch, state } = globalStore;
-  const classes = useStyles();
-  const client = useApolloClient();
-  const tableRef = useRef(null);
-  const [tableErr, setTableErr] = useState({});
-
-  const houseTypeLookup = getEnumLookupList('PropertyType');
-  const titleTypeLookup = getEnumLookupList('PropertyTitleType');
-  const heatSourceLookup = getEnumLookupList('HeatSource');
-  const tenancyTypeLookup = getEnumLookupList('TenancyType');
-
-  const columns = React.useMemo(
-    () => [
-      {
-        title: 'property',
-        field: 'location',
-        editable: false,
-        searchable: true,
-        filtering: false,
-      },
-      {
-        title: 'type',
-        field: 'type',
-        lookup: houseTypeLookup,
-        removable: true,
-      },
-
-      {
-        title: 'titleType',
-        field: 'titleType',
-        lookup: titleTypeLookup,
-        filtering: true,
-      },
-      {
-        title: 'tenancyType',
-        field: 'tenancyType',
-        lookup: tenancyTypeLookup,
-        filtering: true,
-      },
-      {
-        title: 'created',
-        field: 'createdAt',
-        editable: false,
-        type: 'date',
-        sorting: true,
-      },
-      {
-        title: 'onTheMarket',
-        field: 'onTheMarket',
-        type: 'boolean',
-        filtering: true,
-      },
-      // { title: 'owners', field: 'owners' },
-      {
-        title: 'isLeased',
-        field: 'isLeased',
-        type: 'boolean',
-        filtering: true,
-      },
-      {
-        field: 'creator',
-        title: 'creator',
-        filtering: false,
-        render: rowData => (
-          <List>
-            {rowData.creator && <UserDetails user={rowData.creator} me={me} />}
-          </List>
-        ),
-      },
-      {
-        field: 'agents',
-        title: 'agents',
-        filtering: false,
-        render: rowData => (
-          <List>
-            {rowData.agents &&
-              rowData.agents.map((agent, idx) => {
-                return <UserDetails key={idx} user={agent} me={me} />;
-              })}
-          </List>
-        ),
-      },
-    ],
-    [houseTypeLookup, tenancyTypeLookup, titleTypeLookup]
-  );
-
-  const manageProperty = (e, rowData) =>
-    router.push({
-      pathname: `${baseManageLink}${rowData.id}`,
-    });
+  const manageProperty = (event, rowData) => {
+    // handleLink('/landlord/properties/property', {
+    //   id: rowData.id,
+    // });
+    handleLink(`/landlord/properties/${rowData.id}`);
+  };
 
   return (
-    <div className={classes.root}>
-      <Error error={tableErr} />
-      <ConnectionTable
-        enableAddressParams={enableAddressParams}
-        title="All Properties"
-        connectionKey={connectionKey}
-        where={where}
-        countQuery={PROPERTIES_COUNT_QUERY}
-        gqlQuery={PROPERTIES_CONNECTION_QUERY}
-        searchKeysOR={['location_contains', 'id_contains']}
-        orderBy="createdAt_DESC"
-        tableRef={tableRef}
+    <>
+      <SuperiorTable
+        title="Properties"
         columns={columns}
+        data={formattedData}
+        options={{
+          search: true,
+          exportButton: true,
+          exportAllData: true, // Flag for export all data instead of rendered data
+          filtering: true,
+          grouping: true,
+          // selection: true,
+          sorting: true,
+        }}
         actions={[
           {
             icon: 'settings',
@@ -154,17 +78,13 @@ const PropertiesTable = ({
           },
         ]}
       />
-    </div>
+    </>
   );
 };
 
 PropertiesTable.propTypes = {
-  where: PropTypes.object,
-  orderBy: PropTypes.object,
-  baseManageLink: PropTypes.oneOf([
-    '/landlord/properties/',
-    '/admin/properties/',
-  ]),
+  me: mePropTypes,
+  properties: PropTypes.arrayOf(propertyPropTypes),
 };
 
 export default PropertiesTable;

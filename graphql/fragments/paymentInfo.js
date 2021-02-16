@@ -5,28 +5,23 @@ import gql from 'graphql-tag';
 const PaymentInfoFragment = gql`
   fragment paymentInfo on Payment {
     id
-    wallet {
-      id
-    }
     userId
-    bankName
-    bankNumber
-    bankBranch
-    bankAccount
-    bankSuffix
-    bankRef
-    type
-    reason
     leaseId
     propertyId
     stripePaymentId
     object
     amount
-    createdAt
+    amount_refunded
+    balance_transaction
+    captured
+    created
+    currency
+    customer
     description
+    paid
+    payment_method
     status
   }
 `;
 
 export { PaymentInfoFragment };
-export default PaymentInfoFragment;

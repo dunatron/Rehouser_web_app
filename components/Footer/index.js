@@ -18,7 +18,7 @@ const Footer = () => {
     <Paper
       square={false}
       style={{
-        minHeight: '150px',
+        height: '150px',
         width: '100%',
         maxWidth: '100%',
         overflow: 'hidden',

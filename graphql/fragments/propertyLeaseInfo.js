@@ -4,9 +4,7 @@ import { PropertyInfoFragment } from '../fragments/propertyInfo';
 const PropertyLeaseInfoFragment = gql`
   fragment propertyLeaseInfo on PropertyLease {
     id
-    bankRef
     stage
-    tenancyType
     updatedAt
     createdAt
     property {
@@ -15,33 +13,21 @@ const PropertyLeaseInfoFragment = gql`
     lessees {
       id
       signed
-      signedAt
       user {
         id
         email
         firstName
         lastName
-        dob
-        signature {
-          id
-          url
-        }
       }
     }
     lessors {
       id
       signed
-      signedAt
       user {
         id
         email
         firstName
         lastName
-        dob
-        signature {
-          id
-          url
-        }
       }
     }
     rooms
@@ -62,11 +48,6 @@ const PropertyLeaseInfoFragment = gql`
       id
       amount
     }
-    bondType
-    petsAllowed
-    pets
-    maximumOccupants
-    chattels
   }
   ${PropertyInfoFragment}
 `;

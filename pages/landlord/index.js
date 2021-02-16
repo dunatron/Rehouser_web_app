@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import OwnerProperties from '@/Components/OwnerProperties/index';
 import PleaseSignIn from '@/Components/PleaseSignIn';
 import ConfirmEmail from '@/Components/ConfirmEmail';
 import PageHeader from '@/Components/PageHeader';
@@ -53,11 +54,10 @@ const LandlordPage = ({ appData: { currentUser } }) => {
             it will be readily available to the Property Owner.
           </Typography>,
         ]}
-        metaKeywords="Rentals, Property, Management, Landlord"
         metaData={{
           title: 'Landlord Portal',
           content:
-            'Manage your rental properties from the rehouser landlord portal',
+            'Manage your property portfolio from rehousers landlord portal. It provides you with the tools and data to manage all of your properties',
         }}
       />
       <PleaseSignIn

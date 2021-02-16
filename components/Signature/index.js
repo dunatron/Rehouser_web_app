@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, ButtonGroup, IconButton } from '@material-ui/core';
+import { Typography, Button, IconButton } from '@material-ui/core';
 
 import SignatureCanvas from 'react-signature-canvas';
 import { useMutation } from '@apollo/client';
@@ -13,10 +13,14 @@ import { css } from 'glamor';
 import Image from 'material-ui-image';
 import CloseIcon from '@material-ui/icons/Close';
 
-import useSignatureStyles from './useSignatureStyles';
+const useStyles = makeStyles(theme => ({
+  canvas: {
+    border: '2px solid grey',
+  },
+}));
 
 const SignatureComponent = () => {
-  const classes = useSignatureStyles();
+  const classes = useStyles();
 
   // canvas pen settings
   // const [velocityFilterWeight, setVelocityFilterWeight] = useState(0.7); // default: 0.7
@@ -67,9 +71,16 @@ const SignatureComponent = () => {
       // refetchQueries: [{ query: CURRENT_USER_QUERY }],
       onCompleted: handleCompleted,
       update: (cache, { data }) => {
+        console.log('The data after sig update => ', data);
         cache.modify({
           fields: {
             me(existingMeRef = {}, { readField }) {
+              console.log('The data for a signin => ', data.data);
+              console.log(
+                'WIll this even work => existingRefs ',
+                existingMeRef
+              );
+              console.log('WIll this even work => readField ', existingMeRef);
               return { ...data.uploadSignature };
             },
           },
@@ -138,47 +149,43 @@ const SignatureComponent = () => {
 
   if (!isEditing) {
     return (
-      <>
-        <div
-          style={{
-            maxWidth: '100%',
-            overflowX: 'auto',
-          }}>
-          {me.signature && (
-            <Typography gutterBottom>
-              Signature set for {me.firstName} {me.lastName}
-            </Typography>
-          )}
-          {me.signature && (
-            <Image
-              style={{
-                paddingTop: '200px',
-              }}
-              src={me.signature.url}
-              imageStyle={{
-                height: '200px',
-                width: '500px',
-              }}
-            />
-          )}
-        </div>
-        <Button onClick={() => setIsEditing(true)} variant="outlined">
-          Edit Signature
-        </Button>
-      </>
+      <div
+        style={{
+          maxWidth: '100%',
+          overflowX: 'auto',
+        }}>
+        {me.signature && (
+          <Image
+            style={{
+              paddingTop: '200px',
+            }}
+            src={me.signature.url}
+            imageStyle={{
+              height: '200px',
+              width: '500px',
+            }}
+          />
+        )}
+        <Button onClick={() => setIsEditing(true)}>Edit Signature</Button>
+      </div>
     );
   }
 
   return (
     <>
-      <div className={classes.notSetWrapper}>
-        <div className={classes.innerWrapper}>
+      <div style={{ maxWidth: '100%', overflow: 'auto' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}>
           {me.signature && (
             <IconButton onClick={() => setIsEditing(false)}>
               <CloseIcon />
             </IconButton>
           )}
-          <Typography gutterBottom>
+          <Typography>
             {me.firstName} {me.lastName} Signature
           </Typography>
         </div>
@@ -200,30 +207,28 @@ const SignatureComponent = () => {
             className: classes.canvas,
           }}
         />
-        <Typography gutterBottom>
-          This Signature will be used accross documents you sign. e.g. when you
-          sign a lease.
+        <Typography>
+          This Signature will be used accross documents you sign. e.g. clicking
+          sign Lease button
         </Typography>
       </div>
       <Error error={error} />
-      <div
-        style={{ display: 'flex', alignItems: 'flex-end', margin: '16px 0' }}>
-        <ButtonGroup color="default" size="large">
-          <StyledButton onClick={clear} variant="outlined">
-            Clear
-          </StyledButton>
-          <ButtonLoader
-            btnProps={{
-              variant: 'outlined',
-            }}
-            onClick={trim}
-            loading={loading}
-            text="Set Signature"
-            successText="Signature is set"
-            // color="secondary"
-            disabled={loading}
-            success={!error && !loading && called}></ButtonLoader>
-        </ButtonGroup>
+      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <StyledButton onClick={clear} variant="outlined">
+          Clear
+        </StyledButton>
+        <ButtonLoader
+          // variant="filled"
+          onClick={trim}
+          loading={loading}
+          text="Set Signature"
+          successText="Signature is set"
+          style={{
+            marginTop: '16px',
+          }}
+          color="secondary"
+          disabled={loading}
+          success={!error && !loading && called}></ButtonLoader>
       </div>
       {!me.signature && (
         <Typography variant="body1" color="error">

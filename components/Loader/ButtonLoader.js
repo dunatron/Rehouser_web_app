@@ -85,6 +85,7 @@ const ButtonLoader = props => {
       type={type}
       data-cy={cy}
       variant="contained"
+      color="primary"
       className={buttonClassname}
       disabled={loading}
       onClick={handleOnClick}

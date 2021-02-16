@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component, useState } from 'react';
-import Section from '@/Components/Section';
 import PropertyCard from '@/Styles/PropertyCard';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -92,7 +91,7 @@ const PropertyCardComponent = props => {
 
 PropertyCardComponent.propTypes = {
   isSearch: PropTypes.any,
-  property: PropTypes.any,
+  property: PropTypes.any
 };
 
 export default PropertyCardComponent;

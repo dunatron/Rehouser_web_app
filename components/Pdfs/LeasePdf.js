@@ -14,12 +14,26 @@ import moment from 'moment';
 //https://github.com/diegomura/react-pdf/blob/master/examples/pageWrap/index.js
 
 Font.register({
-  family: 'AzoSansRegular',
-  src: `${__dirname}../../fonts/azo-sans/AzoSans-Regular.woff`,
+  family: 'GustanLight',
+  //   src: `${__dirname}/fonts/Roboto-Regular.ttf`,
+  src: `${__dirname}../../static/fonts/Gustan-Light.woff`,
 });
 Font.register({
-  family: 'AzoSansBold',
-  src: `${__dirname}../../fonts/azo-sans/AzoSans-Bold.woff`,
+  family: 'GustanMedium',
+  //   src: `${__dirname}/fonts/Roboto-Regular.ttf`,
+  src: `${__dirname}../../static/fonts/Gustan-Medium.woff`,
+});
+
+Font.register({
+  family: 'GustanBold',
+  //   src: `${__dirname}/fonts/Roboto-Regular.ttf`,
+  src: `${__dirname}../../static/fonts/Gustan-Bold.woff`,
+});
+
+Font.register({
+  family: 'GustanExtraBlack',
+  //   src: `${__dirname}/fonts/Roboto-Regular.ttf`,
+  src: `${__dirname}../../static/fonts/Gustan-Extrablack.woff`,
 });
 
 // Create styles
@@ -58,7 +72,7 @@ const styles = StyleSheet.create({
     right: 0,
     textAlign: 'center',
     color: 'grey',
-    fontFamily: 'AzoSansRegular',
+    fontFamily: 'GustanLight',
   },
 });
 

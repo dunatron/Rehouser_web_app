@@ -103,6 +103,7 @@ const AddUserToList = ({
   const droppableId1 = `${id}-droppable`;
   const droppableId2 = `${id}-droppable2`;
   const theme = useTheme();
+  const [seconds, setSeconds] = useState(0);
 
   const [state, setState] = useState({
     items: [],

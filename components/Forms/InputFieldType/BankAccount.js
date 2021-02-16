@@ -77,17 +77,12 @@ const PhoneInput = props => {
 
   // register({ name: fieldProps.name }, refConf);
 
-  // register the field
   useEffect(() => {
     register({ name: fieldProps.name }, refConf);
-  }, []);
-
-  // set the default value if it has one and monitor for its change
-  useEffect(() => {
     if (defaultValue) {
       setValue(fieldProps.name, defaultValue);
     }
-  }, [defaultValue]);
+  }, []);
 
   return (
     <FormControl variant="outlined" className={classes.formControl}>

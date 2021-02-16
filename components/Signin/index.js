@@ -30,7 +30,7 @@ const Signin = props => {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
     });
-    setCookie(null, 'refresh-token', data.signin.refreshToken, {
+    setCookie(null, 'tron-token-copy', data.signin.token, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
     });

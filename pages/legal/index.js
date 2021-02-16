@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
+import OwnerProperties from '@/Components/OwnerProperties/index';
+import PleaseSignIn from '@/Components/PleaseSignIn';
+import ConfirmEmail from '@/Components/ConfirmEmail';
 import PageHeader from '@/Components/PageHeader';
+import { Box, Typography } from '@material-ui/core';
 import Dashboard from '@/Components/Dashboard';
 import LEGAL_STATMENTS_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/legalStatementsDashConf';
 
@@ -11,6 +15,7 @@ const LegalPage = props => {
   const {
     appData: { currentUser },
   } = props;
+  console.log('props on legal page => ', props);
   const me = currentUser.data ? currentUser.data.me : null;
   return (
     <>

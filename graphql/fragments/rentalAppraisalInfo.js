@@ -8,9 +8,6 @@ const RentalAppraisalInfoFragment = gql`
     requestedBy {
       ...publicUserInfo
     }
-    appraisedBy {
-      ...publicUserInfo
-    }
     placeId
     location
     locationLat

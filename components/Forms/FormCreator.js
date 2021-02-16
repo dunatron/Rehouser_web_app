@@ -9,7 +9,6 @@ import FormErrors from './FormErrors';
 import formatData from './formatters/formatData';
 import { useCurrentUser } from '../User';
 import { toast } from 'react-toastify';
-import ButtonLoader from '@/Components/Loader/ButtonLoader';
 
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
@@ -58,7 +57,6 @@ const FormCreator = props => {
     handleWatchChanges,
     hasCancel,
     cancel,
-    selectOptionTypes,
   } = props;
 
   // awesome we have {me} which now has isAdmin and isWizard
@@ -206,25 +204,24 @@ const FormCreator = props => {
           })}
         <FormErrors errors={errors} />
         <Errors error={error} />
+
         <ButtonGroup
           style={{
             marginTop: '16px',
           }}
           color="primary"
           aria-label="outlined primary button group square">
-          {/* MAKE THIS A BUTTON LOADER PLEASE */}
-          <ButtonLoader
-            loading={posting}
-            text={isNew ? _createText() : _updateText()}
+          <Button
+            disabled={posting}
             onClick={handleSubmit(onSubmit)}
-            btnProps={{
-              startIcon: isNew ? <AddIcon /> : <EditIcon />,
-              variant: 'contained',
-              color: 'primary',
-            }}
-          />
+            startIcon={isNew ? <AddIcon /> : <EditIcon />}>
+            {/* {`${isNew ? 'create' : 'update'}: ${title ? title : 'Form'}`} */}
+
+            {isNew ? _createText() : _updateText()}
+          </Button>
           {hasCancel && (
             <Button disabled={posting} onClick={cancel}>
+              {/* {`${isNew ? 'create' : 'update'}: ${title ? title : 'Form'}`} */}
               <AddIcon />
               Cancel
             </Button>

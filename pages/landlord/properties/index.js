@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import OwnerProperties from '@/Components/OwnerProperties/index';
 import PleaseSignIn from '@/Components/PleaseSignIn';
 import PageHeader from '@/Components/PageHeader';
 import { Typography } from '@material-ui/core';
@@ -6,42 +7,17 @@ import { Typography } from '@material-ui/core';
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
 import { CURRENT_USER_QUERY } from '@/Gql/queries';
-import PropertiesTable from '@/Components/Tables/PropertiesTable';
-
-import AddIcon from '@material-ui/icons/Add';
-import { ButtonGroup, Button } from '@material-ui/core';
-
-import Router from 'next/router';
-
-const handleLink = (route = '/', query = {}) => {
-  Router.push({
-    pathname: route,
-    query: query,
-  });
-};
+import { OWNER_PROPERTIES_QUERY } from '@/Gql/queries';
 
 const PropertiesPage = props => {
   const {
     appData: { currentUser },
   } = props;
+  console.log('props on Properties Page page => ', props);
   const pleaseSignInMessage =
     'You must be signed in to manager your properties';
 
   const me = currentUser.data ? currentUser.data.me : null;
-
-  const where = {
-    owners_some: {
-      id: me.id,
-    },
-  };
-
-  const goToAddPropertyPage = () => {
-    handleLink('/landlord/properties/add');
-  };
-
-  const goToAddBulkProperty = () => {
-    handleLink('/landlord/properties/bulkadd');
-  };
   return (
     <>
       <PageHeader
@@ -64,19 +40,7 @@ const PropertiesPage = props => {
             <Typography component="strong">{pleaseSignInMessage}</Typography>
           </Typography>
         }>
-        <div style={{ marginBottom: '16px' }}>
-          <ButtonGroup
-            color="secondary"
-            aria-label="outlined secondary button group">
-            <Button onClick={goToAddPropertyPage} startIcon={<AddIcon />}>
-              Property
-            </Button>
-            <Button onClick={goToAddBulkProperty} startIcon={<AddIcon />}>
-              Bulk Upload
-            </Button>
-          </ButtonGroup>
-        </div>
-        <PropertiesTable where={where} enableAddressParams />
+        <OwnerProperties me={me} />
       </PleaseSignIn>
     </>
   );

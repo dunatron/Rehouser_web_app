@@ -2,11 +2,8 @@
 import gql from 'graphql-tag';
 
 const UPDATE_PROPERTY_MUTATION = gql`
-  mutation UPDATE_PROPERTY_MUTATION(
-    $data: PropertyUpdateInput!
-    $where: PropertyWhereUniqueInput!
-  ) {
-    updateProperty(data: $data, where: $where) {
+  mutation UPDATE_PROPERTY_MUTATION($id: ID!, $data: PropertyUpdateInput!) {
+    updateProperty(id: $id, data: $data) {
       id
       rooms
       rent

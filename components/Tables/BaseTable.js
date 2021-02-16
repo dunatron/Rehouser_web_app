@@ -1,5 +1,4 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { store } from '@/Store/index';
 import gql from 'graphql-tag';
 import { useApolloClient, useQuery, useMutation } from '@apollo/client';
@@ -7,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MaterialTable from 'material-table';
 import Error from '@/Components/ErrorMessage';
 import Loader from '@/Components/Loader';
-import { Typography, Button, IconButton } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 
 import { RENTAL_APPRAISALS_CONNECTION_QUERY } from '@/Gql/connections';
 import PropTypes from 'prop-types';
@@ -187,6 +186,7 @@ const BaseTable = ({ where, me, orderBy = 'createdAt_ASC' }) => {
 };
 
 BaseTable.propTypes = {
+  me: mePropTypes,
   where: PropTypes.object,
   orderBy: PropTypes.object,
 };

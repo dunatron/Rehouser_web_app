@@ -32,7 +32,7 @@ import Modal from '@/Components/Modal';
 
 // Modal Contents
 import Map from '@/Components/Map';
-import PropertyPublicDetails from '@/Components/Property/PublicDetails';
+import PublicProperty from '@/Components/PublicProperty';
 
 import RentalApplications from '@/Components/PropertyCard/RentalApplications';
 import Viewings from '@/Components/Viewings/index';
@@ -233,7 +233,7 @@ const PropertyResultHit = ({ hit, me }) => {
         open={modalIdx ? true : false}
         close={() => setModalIdx(null)}
         title={`${modalIdx} for ${hit.location}`}>
-        {modalIdx === 'Details' && <PropertyPublicDetails id={hit.id} />}
+        {modalIdx === 'Details' && <PublicProperty propertyId={hit.id} />}
         {modalIdx === 'Share' && <div>share Modal content</div>}
         {modalIdx === 'Viewings' && (
           <Viewings

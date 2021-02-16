@@ -1,5 +1,4 @@
-// import PasswordField from 'material-ui-password-field';
-import PasswordField from '@/Components/Inputs/Password';
+import PasswordField from 'material-ui-password-field';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import PhoneInput from '../../Inputs/PhoneInput';

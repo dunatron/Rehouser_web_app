@@ -12,7 +12,7 @@ import {
 // https://material-ui-pickers.dev/api/DatePicker
 const RehouserDatePicker = ({ value, onChange, ...rest }) => {
   // const [selectedDate, handleDateChange] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(value);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleDateChange = date => {
     onChange(date);

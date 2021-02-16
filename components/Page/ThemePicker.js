@@ -19,7 +19,9 @@ const ThemePicker = ({ setTheme }) => {
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    console.info(`You clicked ${options[selectedIndex]}`);
+  };
 
   const handleMenuItemClick = (event, index) => {
     setTheme(THEME_PICKER_CONFIG[index]);

@@ -52,37 +52,20 @@ const ColumnSizerExample = props => {
   const windowWidth = useCurrentWidth();
   const theme = useTheme();
 
-  // const setMobile = () => {
-  //   setColHeight(672);
-  //   setColWidth(windowWidth - windowWidth * 0.15);
-  // };
-
-  // const setTablet = () => {
-  //   // setColHeight(436);
-  //   setColHeight(460);
-  //   setColWidth(500);
-  // };
-
-  // const setDesktop = () => {
-  //   // setColHeight(436);
-  //   setColHeight(460);
-  //   setColWidth(500);
-  // };
-
   const setMobile = () => {
-    setColHeight(700);
+    setColHeight(672);
     setColWidth(windowWidth - windowWidth * 0.15);
   };
 
   const setTablet = () => {
     // setColHeight(436);
-    setColHeight(550);
+    setColHeight(460);
     setColWidth(500);
   };
 
   const setDesktop = () => {
     // setColHeight(436);
-    setColHeight(530);
+    setColHeight(460);
     setColWidth(500);
   };
 

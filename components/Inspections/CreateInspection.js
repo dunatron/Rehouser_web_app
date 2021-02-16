@@ -17,30 +17,33 @@ const CreateInspection = ({ connectName, connectId, property }) => {
     CREATE_INSPECTION_MUTATION
   );
   return (
-    <FormCreator
-      config={CREATE_INSPECTION_FORM_CONF}
-      posting={loading}
-      error={error}
-      onSubmit={d => {
-        createInspection({
-          variables: {
-            data: {
-              [connectName]: {
-                connect: {
-                  id: connectId,
+    <div>
+      I will handle creating an inspection if you give me a couply props
+      <FormCreator
+        config={CREATE_INSPECTION_FORM_CONF}
+        posting={loading}
+        error={error}
+        onSubmit={d => {
+          createInspection({
+            variables: {
+              data: {
+                [connectName]: {
+                  connect: {
+                    id: connectId,
+                  },
                 },
-              },
-              ...d,
-              inspectionForm: {
-                create: {
-                  json: makeInspectionForm(property),
+                ...d,
+                inspectionForm: {
+                  create: {
+                    json: makeInspectionForm(property),
+                  },
                 },
               },
             },
-          },
-        });
-      }}
-    />
+          });
+        }}
+      />
+    </div>
   );
 };
 

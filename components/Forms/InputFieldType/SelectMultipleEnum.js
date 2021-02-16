@@ -38,25 +38,17 @@ const SelectMultipleEnum = props => {
   } = props;
 
   const { fieldProps, refConf } = config;
-  const defaultValue = defaultValues[fieldProps.name]
-    ? defaultValues[fieldProps.name].map((v, i) => ({ name: v, value: v }))
-    : [];
-
+  const defaultValue = defaultValues[fieldProps.name];
   const { data, error, loading } = useQuery(GET_ENUM_QUERY, {
     variables: {
       name: __type,
     },
   });
 
-  const setFormValue = arr => {
-    setValue(fieldProps.name, arr.length > 0 ? arr.map(val => val.value) : []);
-  };
-
   useEffect(() => {
     register({ name: fieldProps.name }, refConf);
     if (defaultValue) {
-      // setValue(fieldProps.name, defaultValue);
-      setFormValue(defaultValue);
+      setValue(fieldProps.name, defaultValue);
     } else {
       setValue(fieldProps.name, []);
     }
@@ -67,9 +59,12 @@ const SelectMultipleEnum = props => {
 
   const handleOnValueChange = (event, valueArr, reason) => {
     if (valueArr.length > 0) {
-      setFormValue(valueArr);
+      setValue(
+        fieldProps.name,
+        valueArr.map(val => val.value)
+      );
     } else {
-      setFormValue(valueArr);
+      setValue(fieldProps.name, valueArr);
     }
   };
 
@@ -86,8 +81,6 @@ const SelectMultipleEnum = props => {
 
   return (
     <Autocomplete
-      loading={loading}
-      loadingText={`loading ${__type} values`}
       multiple
       disableCloseOnSelect={true}
       variant={fieldProps.variant ? fieldProps.variant : 'outlined'}

@@ -3,8 +3,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Router from 'next/router';
-import { useRouter } from 'next/router';
 
 import {
   ButtonGroup,
@@ -132,14 +130,12 @@ const getStepContent = ({ stepIdx, completed, ...rest }) => {
 };
 
 const RentalApplicationStepper = props => {
-  const router = useRouter();
-  const { me, property, rentalApplication, refetch, refetching } = props;
+  const { me, property, rentalApplication } = props;
   const { owner, applicants } = rentalApplication;
   const classes = useStyles();
   const [updateApplication, updateApplicationProps] = useMutation(
     UPDATE_RENTAL_APPLICATION_MUTATION
   );
-  const invited = true;
   // 2. update rental group applicant mutation
   const [updateRentalGroupApplicant] = useMutation(
     UPDATE_RENTAL_GROUP_APPLICANT_MUTATION
@@ -154,20 +150,13 @@ const RentalApplicationStepper = props => {
     isAnAdmin: isAnAdmin,
     isOwner: isOwner,
     isAnApplicant: isAnApplicant,
-    refetch: refetch,
-    refetching: refetching,
   };
 
   // an update user Mutation
   const [updateUser] = useMutation(UPDATE_USER_MUTATION);
 
   // Note: all hooks must go before first render
-  const [activeStep, setActiveStep] = useState(
-    router.query.step ? parseInt(router.query.step) : 0
-  );
-  // const [activeStep, setActiveStep] = useState(
-  //   1
-  // );
+  const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
   const [userInfo, setUserInfo] = useState(editableMeData(me));
   const [applicationInfo, setApplicationInfo] = useState({});
@@ -303,13 +292,6 @@ const RentalApplicationStepper = props => {
 
   return (
     <div className={classes.root}>
-      {refetching && (
-        <Loader
-          loading={refetching}
-          text="refetching application data"
-          fullScreen
-        />
-      )}
       <Stepper
         nonLinear
         activeStep={activeStep}

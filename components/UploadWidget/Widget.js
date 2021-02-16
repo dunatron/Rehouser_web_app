@@ -34,6 +34,7 @@ const UploadWidget = ({ options, onUploadCompleted }) => {
    * the challenge will be to handle images that have been uploaded? or is it. we could show them locally in reaact...
    */
   const logSuccess = result => {
+    console.log('Cloudinary upload result => ', result);
     if (onUploadCompleted) {
       onUploadCompleted(result);
     }

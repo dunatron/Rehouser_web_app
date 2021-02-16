@@ -8,7 +8,6 @@ import Error from '@/Components/ErrorMessage/index';
 import styled from 'styled-components';
 import Head from 'next/head';
 import { Tabs, Tab } from '@material-ui/core';
-import Section from '@/Components/Section';
 // tabs
 import Details from './Details';
 import Leases from './Leases';
@@ -90,7 +89,6 @@ const RENTAL_APPLICATIONS_CONNECTION = gql`
 const PropertyApplicationsBadgeCount = ({ property }) => {
   const { data, loading, error } = useQuery(RENTAL_APPLICATIONS_CONNECTION, {
     variables: {
-      fetchPolicy: 'network-only',
       where: {
         property: {
           id: property.id,
@@ -151,7 +149,6 @@ const PropertyDetails = ({ id, location, me }) => {
 
   // INITIALIZING, PENDING, SHORTLISTED, DENIED, ACCEPTED
   const rentalApplicationsCount = useRentalApplicationCount({
-    fetchPolicy: 'network-only',
     where: {
       ...countVariables.where,
       stage_in: ['INITIALIZING', 'SHORTLISTED', 'PENDING'],
@@ -159,7 +156,6 @@ const PropertyDetails = ({ id, location, me }) => {
   });
   // INITIALIZING, SIGNED, PAID, COMPLETED
   const leasesCount = useLeasesCount({
-    fetchPolicy: 'network-only',
     where: {
       ...countVariables.where,
       // OR: [
@@ -169,7 +165,6 @@ const PropertyDetails = ({ id, location, me }) => {
     },
   });
   const inspectionsCount = useInspectionsCount({
-    fetchPolicy: 'network-only',
     where: {
       ...countVariables.where,
       completed: false,
@@ -213,10 +208,9 @@ const PropertyDetails = ({ id, location, me }) => {
       <PageHeader
         title={property ? property.location : null}
         titleVariant="h4"
-        // intro={`this is where you can manage ${
-        //   property ? property.location : null
-        // }. This is where you can review and accept applications, sign and manage leases associated with this property, and change the details before it goes on the market`}
-        intro={property.headline}
+        intro={`this is where you can manage ${
+          property ? property.location : null
+        }. This is where you can review and accept applications, sign and manage leases associated with this property, and change the details before it goes on the market`}
         metaData={{
           title: `${property ? property.location : null}`,
           content: 'The properties for the current logged in user',
@@ -224,50 +218,49 @@ const PropertyDetails = ({ id, location, me }) => {
       />
       <div>
         {/* <h1 className="location__name"> {property ? property.location : null}</h1> */}
-        <Section botSpace={1}>
-          <Tabs
-            value={tabIndex}
-            onChange={(e, v) => setTabIndex(v)}
-            // indicatorColor="secondary"
-            // textColor="secondary"
-            // wrapped={false}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="scrollable"
-            scrollButtons="auto">
-            <Tab label="Details" icon={<DetailsIcon />} />
-            <Tab
-              label={
-                <Badge
-                  color="secondary"
-                  badgeContent={rentalApplicationsCount.count}>
-                  Applications
-                </Badge>
-              }
-              icon={<DescriptionIcon />}
-            />
-            <Tab
-              label={
-                <Badge color="secondary" badgeContent={leasesCount.count}>
-                  Leases
-                </Badge>
-              }
-              icon={<AssignmentIcon />}
-            />
-            <Tab label="Activity" icon={<EventNoteIcon />} />
-            <Tab label="Viewings" icon={<StreetviewIcon />} />
-            <Tab
-              label={
-                <Badge color="secondary" badgeContent={inspectionsCount.count}>
-                  Inspections
-                </Badge>
-              }
-              icon={<EventAvailableIcon />}
-            />
-            <Tab label="Files" icon={<FileCopyIcon />} />
-            <Tab label="Share" icon={<ShareIcon />} />
-          </Tabs>
-        </Section>
+
+        <Tabs
+          value={tabIndex}
+          onChange={(e, v) => setTabIndex(v)}
+          // indicatorColor="secondary"
+          // textColor="secondary"
+          // wrapped={false}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto">
+          <Tab label="Details" icon={<DetailsIcon />} />
+          <Tab
+            label={
+              <Badge
+                color="secondary"
+                badgeContent={rentalApplicationsCount.count}>
+                Applications
+              </Badge>
+            }
+            icon={<DescriptionIcon />}
+          />
+          <Tab
+            label={
+              <Badge color="secondary" badgeContent={leasesCount.count}>
+                Leases
+              </Badge>
+            }
+            icon={<AssignmentIcon />}
+          />
+          <Tab label="Activity" icon={<EventNoteIcon />} />
+          <Tab label="Viewings" icon={<StreetviewIcon />} />
+          <Tab
+            label={
+              <Badge color="secondary" badgeContent={inspectionsCount.count}>
+                Inspections
+              </Badge>
+            }
+            icon={<EventAvailableIcon />}
+          />
+          <Tab label="Files" icon={<FileCopyIcon />} />
+          <Tab label="Share" icon={<ShareIcon />} />
+        </Tabs>
 
         {tabIndex === 0 && (
           <TabContainer>

@@ -54,6 +54,7 @@ const AdminSettings = ({ me }) => {
   delete originalSettings.__typename; // or delete person["age"];
   const [updates, setUpdates] = useState({});
   const [originalValues, setOriginalValues] = useState(originalSettings);
+  console.log('Admin Settings me => ', me);
 
   const saveToUpdates = e => {
     setUpdates({ ...updates, [e.target.name]: e.target.checked });
@@ -85,7 +86,13 @@ const AdminSettings = ({ me }) => {
     }
   );
 
+  console.log('updateUser data => ', data);
+
   const handleChange = e => {
+    console.log('e => ', e);
+    console.log('e.target.checked => ', e.target.checked);
+    console.log('E.name => ', e.name);
+    console.log('E.target.name => ', e.target.name);
     setState({
       ...state,
       [e.target.name]: e.target.checked,
@@ -94,6 +101,8 @@ const AdminSettings = ({ me }) => {
 
   const canSave = () => {
     if (isEmpty(updates)) return false;
+    console.log('original Values => ', originalValues);
+    console.log('update Values => ', updates);
     if (equals(originalValues, updates)) return false;
     return true;
   };

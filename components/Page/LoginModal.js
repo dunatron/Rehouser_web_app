@@ -15,15 +15,12 @@ const LoginModal = props => {
   };
 
   const handleSignedIn = data => {
+    console.log('SIgnedin from Login Modal => ', data);
     _close();
   };
 
   return (
-    <Modal
-      title="Login / Signup / Reset"
-      open={loginModal.open}
-      close={_close}
-      disableBackdrop>
+    <Modal title="Login / Signup / Reset" open={loginModal.open} close={_close}>
       <SuperLogin handleSignedIn={handleSignedIn} />
     </Modal>
   );

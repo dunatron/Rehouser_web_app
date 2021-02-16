@@ -15,11 +15,6 @@ const ApplyToGroup = props => {
   const userProps = useCurrentUser();
   const { me } = userProps.data;
 
-  const userId = me ? me.id : null;
-  const userFirstname = me ? me.firstName : '';
-  const userLastname = me ? me.lastName : '';
-  const userEmail = me ? me.email : '';
-
   const [applyToRentalGroup, applyToRentalGroupProps] = useMutation(
     APPLY_TO_RENTAL_GROUP_APPLICATION,
     {
@@ -27,14 +22,10 @@ const ApplyToGroup = props => {
         data: {
           user: {
             connect: {
-              id: userId,
+              id: me.id,
             },
           },
           approved: false,
-          completed: false,
-          firstName: userFirstname,
-          lastName: userLastname,
-          email: userEmail,
           application: {
             connect: {
               id: applicationId,
@@ -44,6 +35,7 @@ const ApplyToGroup = props => {
       },
       update: (proxy, payload) => {
         const rentalData = payload.data.applyToRentalGroup;
+        console.log('THE RENTAL GROUP DATA => ', rentalData);
         // openRentalAppModal(rentalData);
       },
     }

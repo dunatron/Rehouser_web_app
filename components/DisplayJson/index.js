@@ -5,6 +5,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import RehouserPaper from '@/Styles/RehouserPaper';
 
+
 const DisplayJson = ({ json, title }) => {
   const [open, setOpen] = useState(false);
 
