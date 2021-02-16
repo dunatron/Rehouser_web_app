@@ -4,7 +4,10 @@ import { store } from '../../store';
 import gql from 'graphql-tag';
 import { useApolloClient, useQuery, NetworkStatus } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
-import MaterialTable from 'material-table';
+// import MaterialTable from 'material-table';
+import ConnectionTable, {
+  getEnumLookupList,
+} from '@/Components/SuperiorTable/ConnectionTable';
 import {
   Input,
   Typography,
@@ -32,12 +35,6 @@ import { PROPERTIES_CONNECTION_QUERY } from '../../graphql/connections';
 // mutations
 import { OFFER_RENTAL_APPRAISAL_MUTATION } from '../../graphql/mutations';
 
-//icons
-import SearchIcon from '@material-ui/icons/Search';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import CachedIcon from '@material-ui/icons/Cached';
-
 const useStyles = makeStyles(theme => ({
   root: {},
   tableHeader: {
@@ -49,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 }));
 //https://medium.com/@harshverma04111989/material-table-with-graphql-remote-data-approach-f05298e1d670
 //https://github.com/harshmons/material-table-with-graphql-using-remote-data-approach
-const PROPERTIES_COUNT_QUERY = gql`
+export const PROPERTIES_COUNT_QUERY = gql`
   query PROPERTIES_COUNT_QUERY(
     $where: PropertyWhereInput
     $orderBy: PropertyOrderByInput
@@ -75,6 +72,15 @@ const PROPERTIES_COUNT_QUERY = gql`
   }
 `;
 
+// const getEnumLookupList = __type => {
+//   const { data, error, loading } = useQuery(GET_ENUM_QUERY, {
+//     variables: {
+//       name: __type,
+//     },
+//   });
+//   return data ? data.__type.enumValues.map(enumObj => enumObj.name) : [];
+// };
+
 const AdminRentalApplicationsTable = ({
   where,
   me,
@@ -88,184 +94,106 @@ const AdminRentalApplicationsTable = ({
   const tableRef = useRef(null);
   const [searchText, setSearchText] = useState('');
   const [networkOnly, setNetworkOnly] = useState(false);
-  const [tableErr, setTableErr] = useState(null);
+  const [tableErr, setTableErr] = useState({});
 
-  const tableColumnConfig = [
-    // { title: 'id', field: 'id', editable: false },
-    { title: 'property', field: 'location', editable: false },
-    // { title: 'created', field: 'createdAt', editable: false },
-    { title: 'onTheMarket', field: 'onTheMarket' },
-    // { title: 'owners', field: 'owners' },
+  const houseTypeLookup = getEnumLookupList('PropertyType');
+  const titleTypeLookup = getEnumLookupList('PropertyTitleType');
+  const heatSourceLookup = getEnumLookupList('HeatSource');
+  const tenancyTypeLookup = getEnumLookupList('TenancyType');
 
-    { title: 'isLeased', field: 'isLeased' },
-    {
-      field: 'creator',
-      title: 'creator',
-      render: rowData => (
-        <List>
-          {rowData.creator && <UserDetails user={rowData.creator} me={me} />}
-        </List>
-      ),
-    },
-  ];
-
-  const sharedWhere = {
-    ...where,
-  };
-
-  const { data, loading, error, refetch, networkStatus } = useQuery(
-    PROPERTIES_COUNT_QUERY,
-    {
-      variables: {
-        where: {
-          ...where,
-        },
+  const columns = React.useMemo(
+    () => [
+      {
+        title: 'property',
+        field: 'location',
+        editable: false,
+        searchable: true,
+        filtering: false,
       },
-    }
+      {
+        title: 'type',
+        field: 'type',
+        lookup: houseTypeLookup,
+        removable: true,
+      },
+
+      {
+        title: 'titleType',
+        field: 'titleType',
+        lookup: titleTypeLookup,
+        filtering: true,
+      },
+      {
+        title: 'tenancyType',
+        field: 'tenancyType',
+        lookup: tenancyTypeLookup,
+        filtering: true,
+      },
+      {
+        title: 'created',
+        field: 'createdAt',
+        editable: false,
+        type: 'date',
+        sorting: true,
+      },
+      {
+        title: 'onTheMarket',
+        field: 'onTheMarket',
+        type: 'boolean',
+        filtering: true,
+      },
+      // { title: 'owners', field: 'owners' },
+
+      {
+        title: 'isLeased',
+        field: 'isLeased',
+        type: 'boolean',
+        filtering: true,
+      },
+      {
+        field: 'creator',
+        title: 'creator',
+        filtering: false,
+        render: rowData => (
+          <List>
+            {rowData.creator && <UserDetails user={rowData.creator} me={me} />}
+          </List>
+        ),
+      },
+      {
+        field: 'agents',
+        title: 'agents',
+        filtering: false,
+        render: rowData => (
+          <List>
+            {rowData.agents &&
+              rowData.agents.map((agent, idx) => {
+                return <UserDetails key={idx} user={agent} me={me} />;
+              })}
+          </List>
+        ),
+      },
+    ],
+    [houseTypeLookup, tenancyTypeLookup, titleTypeLookup]
   );
-
-  if (error) return <Error error={error} />;
-
-  const totalItemCount = data ? data[connectionKey].aggregate.count : 0;
-
-  const handleSearchTextChange = e => {
-    setSearchText(e.target.value);
-  };
-
-  const handleGetSubscriptionItems = async () => {
-    await setNetworkOnly(true);
-    dispatch({
-      type: 'updateState',
-      payload: {
-        newPropertiesCount: 0,
-      },
-    });
-    await tableRef.current.onQueryChange();
-    setNetworkOnly(false);
-  };
-
-  const handleSearch = () => {
-    tableRef.current.onQueryChange(); // informs table that we need to refetch remoteData
-  };
-
-  const refetchTable = async () => {
-    setNetworkOnly(true);
-    refetch({
-      variables: {
-        where: {
-          ...where,
-        },
-        orderBy: orderBy,
-      },
-    });
-    client.cache.modify({
-      fields: {
-        [connectionKey](existingRef, { readField }) {
-          return existingRef.edges ? {} : existingRef;
-        },
-      },
-    });
-    await tableRef.current.onQueryChange();
-  };
 
   const manageProperty = (e, rowData) =>
     Router.push({
       pathname: `/landlord/properties/${rowData.id}`,
     });
 
-  const remoteData = query => {
-    return client
-      .query({
-        query: PROPERTIES_CONNECTION_QUERY,
-        fetchPolicy: networkOnly ? 'network-only' : 'cache-first', // who needs a tradeoff when your a god
-        variables: {
-          where: {
-            location_contains: searchText,
-            ...where,
-            ...sharedWhere,
-          },
-          orderBy: orderBy,
-          skip: query.page * query.pageSize,
-          first: query.pageSize,
-          limit: query.pageSize,
-        },
-      })
-      .then(res => {
-        const {
-          data: {
-            [connectionKey]: { pageInfo, aggregate, edges },
-          },
-        } = res;
-        // immutatble/freezeObject
-        const formattedData = edges.map(edge => ({
-          ...edge.node,
-        }));
-        return {
-          data: formattedData,
-          page: query.page,
-          totalCount: totalItemCount,
-        };
-      })
-      .catch(e => {
-        setTableErr(e);
-      })
-      .finally(() => {
-        setNetworkOnly(false);
-      });
-  };
-
-  if (loading && networkStatus === NetworkStatus.loading)
-    return <Loader loading={loading} text="Getting total properties count" />;
-
-  if (error) return <Error error={error} />;
-
   return (
     <div className={classes.root}>
-      <div className={classes.tableHeader}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}>
-          <Typography variant="h5">Rental Applications</Typography>
-          <IconButton onClick={refetchTable}>
-            <CachedIcon />
-          </IconButton>
-          <SubscriberBell
-            me={me}
-            variable="propertyCreatedSub"
-            title="property created subscription"
-          />
-          <IconButton
-            onClick={handleGetSubscriptionItems}
-            disabled={state.newPropertiesCount > 0 ? false : true}>
-            <Badge badgeContent={state.newPropertiesCount} color="primary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </div>
-        <div>
-          <Input
-            value={searchText}
-            onChange={handleSearchTextChange}
-            placeholder="id or amount"
-          />
-          <IconButton onClick={handleSearch} aria-label="search-table">
-            <SearchIcon />
-          </IconButton>
-        </div>
-      </div>
       <Error error={tableErr} />
-      <MaterialTable
-        style={{
-          marginBottom: '16px',
-        }}
+      <ConnectionTable
+        title="All Properties"
+        connectionKey={connectionKey}
+        countQuery={PROPERTIES_COUNT_QUERY}
+        gqlQuery={PROPERTIES_CONNECTION_QUERY}
+        searchKeysOR={['location_contains', 'id_contains']}
+        orderBy="createdAt_DESC"
         tableRef={tableRef}
-        columns={tableColumnConfig}
-        data={remoteData}
-        options={{
-          toolbar: false, // This will disable the in-built toolbar where search is one of the functionality
-        }}
+        columns={columns}
         actions={[
           {
             icon: 'settings',

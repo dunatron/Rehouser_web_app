@@ -34,6 +34,11 @@ import { UPDATE_RENTAL_APPRAISAL_MUTATION } from './updateRentalAppraisal';
 import { COMPLETE_INSPECTION_MUTATION } from './completeInspection';
 import { CREATE_FILE_MUTATION } from './createFile';
 import { INVITE_USER_MUTATION } from './inviteUser';
+import { ADD_BANK_TRANSFER_TO_LEASE_MUTATION } from './addBankTransferToLease';
+import { UPDATE_WALLET_MUTATION } from './updateWallet';
+import { UPDATE_CONTACT_SUBMISSION_MUTATION } from './updateContactSubmission';
+import { CREATE_FOREIGN_LINK_MUTATION } from './createForeignLink';
+import { UPDATE_FOREIGN_LINK_MUTATION } from './updateForeignLink';
 
 export {
   SIGNUP_MUTATION,
@@ -72,4 +77,9 @@ export {
   COMPLETE_INSPECTION_MUTATION,
   CREATE_FILE_MUTATION,
   INVITE_USER_MUTATION,
+  ADD_BANK_TRANSFER_TO_LEASE_MUTATION,
+  UPDATE_WALLET_MUTATION,
+  UPDATE_CONTACT_SUBMISSION_MUTATION,
+  CREATE_FOREIGN_LINK_MUTATION,
+  UPDATE_FOREIGN_LINK_MUTATION,
 };

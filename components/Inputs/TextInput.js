@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +8,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    margin: theme.spacing(1, 0),
   },
 });
 
@@ -15,6 +16,7 @@ const TextInput = props => {
   const { classes, value, onChange } = props;
   return (
     <TextField
+      className={classes.root}
       id="standard-name"
       label="Name"
       value={value}
@@ -28,7 +30,7 @@ const TextInput = props => {
 TextInput.propTypes = {
   classes: PropTypes.any,
   onChange: PropTypes.any,
-  value: PropTypes.any
-}
+  value: PropTypes.any,
+};
 
 export default withStyles(styles)(TextInput);

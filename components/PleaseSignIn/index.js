@@ -6,6 +6,7 @@ import Error from '@/Components/ErrorMessage';
 import Loader from '@/Components/Loader/index';
 import Typography from '@material-ui/core/Typography';
 import { useCurrentUser } from '@/Components/User';
+import { is } from 'ramda';
 
 const Message = ({ message, alert }) => {
   // only fire alerts once per mount
@@ -16,7 +17,19 @@ const Message = ({ message, alert }) => {
       });
   }, []);
 
-  if (message) return <Typography variant="h5">{message}</Typography>;
+  if (message) {
+    if (is(String, message)) {
+      return (
+        <Typography variant="h5" display="inline">
+          {message}
+        </Typography>
+      );
+    }
+    return message;
+  }
+
+  // if string return this else if components render it by itself
+
   return null;
 };
 
@@ -37,15 +50,15 @@ const PleaseSignIn = props => {
   if (loading) return <Loader loading={loading} text="Loading user settings" />;
   if (error) return <Error error={error} />;
 
-  const notSIgnedInRender = (
+  const notSignedInRender = (
     <div>
       <Message message={props.message} alert={props.alert} />
       <OpenSuperLoginButton />
     </div>
   );
 
-  if (!data) return notSIgnedInRender;
-  if (!data.me) return notSIgnedInRender;
+  if (!data) return notSignedInRender;
+  if (!data.me) return notSignedInRender;
   const children = React.Children.map(props.children, child => {
     if (React.isValidElement(child)) {
       return React.cloneElement(child, {

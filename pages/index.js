@@ -18,6 +18,8 @@ import { CURRENT_USER_QUERY } from '@/Gql/queries';
 
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
+import FileUploader from '@/Components/FileUploader';
+
 // const DynamicParticleBanner = dynamic(
 //   () => import('@/Components/Banner/ParticleBanner'),
 //   { ssr: false }
@@ -29,7 +31,7 @@ const HomePageBannerBody = () => {
       <Typography
         variant="h1"
         style={{ marginBottom: '64px', textAlign: 'center' }}>
-        Welcome to Rehouser
+        Rehouser Ltd
       </Typography>
       <div
         style={{
@@ -90,7 +92,6 @@ const HomePageBannerBody = () => {
 };
 
 const HomePage = props => {
-  console.log('Props passed into the home Page => ', props);
   return (
     <div>
       <ParticleBanner
@@ -113,6 +114,24 @@ const HomePage = props => {
         heading=""
         intro=""
       />
+
+      <FileUploader
+        title="Upload test file"
+        files={[]}
+        fileParams={{
+          folder: 'test',
+        }}
+        recieveFile={() => alert('FIle was recieved')}
+      />
+      {/* fileParams: PropTypes.shape({
+    public_id: PropTypes.string,
+    filename: PropTypes.string,
+    folder: PropTypes.string,
+    resource_type: PropTypes.oneOf(['image', 'raw', 'video', 'auto']),
+    tags: PropTypes.arrayOf(PropTypes.string),
+    type: PropTypes.oneOf(['upload', 'private', 'authenticated']),
+    access_mode: PropTypes.oneOf(['public', 'authenticated']),
+  }).isRequired, */}
     </div>
   );
 };

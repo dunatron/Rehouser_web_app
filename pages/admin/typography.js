@@ -11,6 +11,9 @@ import {
   ToolTipExamples,
   RenderInputExamples,
   ExamplePdfExamples,
+  AlertExamples,
+  SectionExamples,
+  ContainerExamples,
 } from '@/Components/StyleExamples';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -19,7 +22,22 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import RichTextEditor from '@/Components/RichTextEditor';
+
+// server side props
+import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
+import { CURRENT_USER_QUERY } from '@/Gql/queries';
+
 const EXAMPLES_CONF = [
+  {
+    label: 'COntainer Examples',
+    component: <ContainerExamples />,
+  },
+  {
+    label: 'Section Examples',
+    component: <SectionExamples />,
+  },
+
   {
     label: 'Typography Examples',
     component: <TypographyExamples />,
@@ -41,6 +59,10 @@ const EXAMPLES_CONF = [
     component: <ExamplePdfExamples />,
   },
   {
+    label: 'Alert Examples',
+    component: <AlertExamples />,
+  },
+  {
     label: 'Toast/Notifiction',
     component: (
       <div>
@@ -52,6 +74,10 @@ const EXAMPLES_CONF = [
         </a>
       </div>
     ),
+  },
+  {
+    label: 'Rich Text =)',
+    component: <RichTextEditor />,
   },
 ];
 
@@ -99,5 +125,15 @@ ConnectedTypographyPage.propTypes = {
     currentUser: PropTypes.object.isRequired,
   }),
 };
+
+export async function getServerSideProps(ctx) {
+  const apolloClient = initializeApollo(null, ctx);
+  await apolloClient.query({
+    query: CURRENT_USER_QUERY,
+  });
+  return addApolloState(apolloClient, {
+    props: {},
+  });
+}
 
 export default ConnectedTypographyPage;

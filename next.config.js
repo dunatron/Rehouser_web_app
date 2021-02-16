@@ -39,8 +39,10 @@ module.exports = withPWA(
       disable: process.env.NODE_ENV === 'development',
       // disable: false,
       dest: 'public',
-      register: false, // we enable/register it in Page component
-      skipWaiting: false,
+      // register: false, // we enable/register it in Page component
+      // skipWaiting: false,
+      register: true, // trying to auto download
+      skipWaiting: true, // trying to auto download
       runtimeCaching,
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -51,7 +53,7 @@ module.exports = withPWA(
             '@/Components': path.resolve(__dirname, 'components/'),
             '@/AdminComponents': path.resolve(__dirname, 'admin-components/'),
             '@/Containers': path.resolve(__dirname, 'containers/'),
-            '@/Styles': path.resolve(__dirname, 'admin-components/'),
+            '@/Styles': path.resolve(__dirname, 'styles/'),
             '@/Lib': path.resolve(__dirname, 'lib/'),
             '@/Gql': path.resolve(__dirname, 'graphql/'),
             '@/Store': path.resolve(__dirname, 'store/'),

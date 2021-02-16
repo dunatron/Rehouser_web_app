@@ -8,12 +8,18 @@ import { SINGLE_LEASE_QUERY } from '@/Gql/queries';
 import LeaseChat from './LeaseChat';
 import { toast } from 'react-toastify';
 
+import DownloadLease from './DownloadLease';
 // stages
 import StageInitializing from './stages/Stage_Initializing';
 import StageSigned from './stages/Stage_Signed';
 import StagePaid from './stages/Stage_Paid';
 import { Typography } from '@material-ui/core';
 import { PROPERTY_LEASE_SUBSCRIPTION } from '@/Gql/subscriptions/PropertyLeaseSub';
+
+import PROPERTY_LEASE_DETAILS_EDITABLE_DISPLAY_CONF from '@/Lib/configs/editableDisplays/leaseDetails';
+import EditableDisplayItems from '@/Components/EditableDisplay/EditableDisplayItems';
+
+import LeaseVariablesModal from './LeaseVariablesModal';
 
 const LeaseManager = ({ leaseId }) => {
   const user = useCurrentUser();
@@ -116,6 +122,13 @@ const LeaseManager = ({ leaseId }) => {
           </Typography>
         </>
       )}
+      <LeaseVariablesModal
+        lease={data.myLease}
+        userIsLessor={userIsLessor}
+        userIsLessee={userIsLessee}
+      />
+
+      <DownloadLease lease={data.myLease} me={me} />
       {componentstage}
       {/* <LeaseChat leaseId={leaseId} /> */}
     </div>

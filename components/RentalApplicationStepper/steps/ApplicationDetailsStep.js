@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   Share,
   ShareButton,
@@ -25,7 +25,7 @@ import {
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useForm } from 'react-hook-form';
 import SuperiorTable from '@/Components/SuperiorTable';
-import UserProfile from '@/Components/UserProfile';
+import PublicUserDetails from '@/Components/User/PublicUserDetails';
 import {
   UPDATE_RENTAL_APPLICATION_MUTATION,
   UPDATE_RENTAL_GROUP_APPLICANT_MUTATION,
@@ -41,8 +41,12 @@ const ApplicationDetailsStep = ({
   isAnAdmin,
   isOwner,
   isAnApplicant,
+  refetch,
+  refetching,
 }) => {
   const { applicants } = rentalApplication;
+
+  console.log('RENTAL APPLICATION DATA => ', rentalApplication);
 
   // SHould really use hooks ContextProvider as the main index has this
   const [updateApplication, { error, loading }] = useMutation(
@@ -110,9 +114,9 @@ const ApplicationDetailsStep = ({
     {
       field: 'url',
       title: 'Avatar',
-      render: rowData => <UserProfile user={rowData.user} me={me} />,
+      render: rowData => <PublicUserDetails id={rowData.user.id} me={me} />,
     },
-    { title: 'firstName', field: 'firstName', editable: false },
+    { title: 'firstName', field: 'user.firstName', editable: false },
     { title: 'completed', field: 'completed', editable: false },
     {
       title: 'hasPreTenancyForm',
@@ -143,7 +147,13 @@ const ApplicationDetailsStep = ({
     },
   ];
 
-  if (completed) return 'Section is completed';
+  const refreshTableData = () => {
+    refetch(); // actually refetching the entire rentalApplication...
+    // maybe this is a thing for the actual rentalApplication where we have a button at the top somewhere that allows a refresh
+  };
+
+  if (completed) return <Typography>Section is completed</Typography>;
+  if (refetching) return <Typography>Remaking Table</Typography>; // or the data doesnt get updated
 
   return (
     <div>
@@ -164,7 +174,7 @@ const ApplicationDetailsStep = ({
           />
         </>
       )}
-      {isAnApplicant && (
+      {isAnApplicant && !isOwner && (
         <Alert severity="info">
           <AlertTitle>You are an Applicant for this application.</AlertTitle>
           <Typography gutterBottom variant="body2">
@@ -179,6 +189,7 @@ const ApplicationDetailsStep = ({
       <SuperiorTable
         title="Application applicants"
         columns={columns}
+        isLoading={refetching}
         data={formattedApplicants}
         options={{
           search: true,
@@ -189,24 +200,14 @@ const ApplicationDetailsStep = ({
           // selection: true,
           sorting: true,
         }}
-        // actions={[
-        //   {
-        //     icon: 'person',
-        //     tooltip: 'Manage application',
-        //     onClick: (event, rowData) => {
-        //       // manageApplicationForCurrentUser(rowData, me);
-        //       alert('Hiii');
-        //     },
-        //   },
-        //   {
-        //     icon: 'person',
-        //     tooltip: 'Manage application',
-        //     onClick: (event, rowData) => {
-        //       <UserProfile />;
-        //     },
-        //   },
-        //   ,
-        // ]}
+        actions={[
+          {
+            icon: 'refresh',
+            tooltip: 'Refresh Data',
+            isFreeAction: true,
+            onClick: refreshTableData,
+          },
+        ]}
       />
       {/* <CustomChat
         // pageId="123456789"

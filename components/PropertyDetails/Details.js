@@ -1,6 +1,6 @@
 import React, { Component, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@/Components/Alert';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -16,6 +16,10 @@ import {
   Switch,
   Typography,
   Paper,
+  ButtonGroup,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@material-ui/core';
 import RehouserPaper from '@/Styles/RehouserPaper';
 import Card from '@/Styles/Card';
@@ -33,6 +37,7 @@ import {
 } from '@/Components/LeaseManager/LeaseLengthInfo';
 
 import UserDetails from '@/Components/UserDetails';
+import PropertyPublicDetails from '@/Components/Property/PublicDetails';
 
 import { FileInfoFragment } from '@/Gql/fragments/fileInfo';
 import { PropertyInfoFragment } from '@/Gql/fragments/propertyInfo';
@@ -40,8 +45,22 @@ import DetailItems from './DetailItems';
 import ImportantDetails from './ImportantDetails';
 import PropertyImages from './Images';
 
-import AddUserToList from '@/Components/User/AddUserToList';
+import DynamicAddUserToList from '@/Components/User/DynamicAddUserToList';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import DisplayJson from '../DisplayJson';
+
+import SaveButtonLoader from '@/Components/Loader/SaveButtonLoader';
+import EnumMultiSelectChip from '@/Components/Inputs/EnumMultiSelectChip';
+import { isEmpty } from 'ramda';
+import EditableDisplayItems from '@/Components/EditableDisplay/EditableDisplayItems';
+import EditableDisplay from '@/Components/EditableDisplay';
+
+import PROPERTY_DETAILS_EDITABLE_DISPLAY_CONF from '@/Lib/configs/editableDisplays/propertyDetails';
+import Modal from '@/Components/Modal';
+import ForeignLinksTable from '@/Components/Tables/ForeignLinksTable';
+
+// icons
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,15 +82,33 @@ const useStyles = makeStyles(theme => ({
     marginTop: '16px',
     marginLeft: '16px',
   },
+  saveButtonContainer: {
+    position: 'fixed',
+    bottom: '16px',
+    right: '16px',
+    zIndex: 1200,
+  },
 }));
 
 const Details = props => {
   const { property, isAdmin, me, isOwner, isAgent } = props;
   const classes = useStyles();
 
+  const [updates, setUpdates] = useState({});
+  const [publicDetailsModalIsOpen, setPublicDetailsModalIsOpen] = useState(
+    false
+  );
+
+  const handleClosePublicDetailsModal = () =>
+    setPublicDetailsModalIsOpen(false);
+  const handleOpenPublicDetailsModal = () => setPublicDetailsModalIsOpen(true);
+
   const PROPERTY_SINGLE_PROPERTY_MUTATION = gql`
-    mutation UPDATE_PROPERTY_MUTATION($id: ID!, $data: PropertyUpdateInput!) {
-      updateProperty(id: $id, data: $data) {
+    mutation UPDATE_PROPERTY_MUTATION(
+      $data: PropertyUpdateInput!
+      $where: PropertyWhereUniqueInput!
+    ) {
+      updateProperty(data: $data, where: $where) {
         id
         images {
           ...fileInfo
@@ -86,10 +123,14 @@ const Details = props => {
     PROPERTY_SINGLE_PROPERTY_MUTATION
   );
 
+  const _submitUpdates = () => {};
+
   const handleAddOwner = result =>
     updateProperty({
       variables: {
-        id: property.id,
+        where: {
+          id: property.id,
+        },
         data: {
           owners: {
             connect: {
@@ -139,7 +180,9 @@ const Details = props => {
   const handleAddAgent = result =>
     updateProperty({
       variables: {
-        id: property.id,
+        where: {
+          id: property.id,
+        },
         data: {
           agents: {
             connect: {
@@ -175,7 +218,9 @@ const Details = props => {
   const handleRemoveAgent = result =>
     updateProperty({
       variables: {
-        id: property.id,
+        where: {
+          id: property.id,
+        },
         data: {
           agents: {
             disconnect: {
@@ -196,6 +241,16 @@ const Details = props => {
 
   return (
     <div>
+      {!isEmpty(updates) && (
+        <div className={classes.saveButtonContainer}>
+          <SaveButtonLoader
+            loading={updatePropertyPayload.loading}
+            onClick={() => {
+              _submitUpdates();
+            }}
+          />
+        </div>
+      )}
       {isOwner && (
         <RehouserPaper attrs={{ disablePadding: true }}>
           <Alert>
@@ -238,6 +293,30 @@ const Details = props => {
           </Alert>
         </RehouserPaper>
       )}
+      {me.isAgent ||
+        (me.isWizard && (
+          <DisplayJson
+            title="Show property properties"
+            json={property}></DisplayJson>
+        ))}
+
+      <RehouserPaper>
+        <ButtonGroup
+          variant="text"
+          color="primary"
+          aria-label="text primary button group">
+          <Button onClick={handleOpenPublicDetailsModal}>
+            View Public Details
+          </Button>
+          {isAdmin && (
+            <ChangeRouteButton
+              title="Edit with Original Form"
+              route={`/landlord/properties/${property.id}/edit`}
+            />
+          )}
+        </ButtonGroup>
+      </RehouserPaper>
+
       {isAgent && (
         <RehouserPaper attrs={{ disablePadding: true }}>
           <Alert severity="info">
@@ -250,14 +329,6 @@ const Details = props => {
             </Typography>
           </Alert>
         </RehouserPaper>
-      )}
-      {isAdmin && (
-        <Card>
-          <ChangeRouteButton
-            title="Edit with Original Form"
-            route={`/landlord/properties/${property.id}/edit`}
-          />
-        </Card>
       )}
 
       <ImportantDetails property={property} />
@@ -305,7 +376,9 @@ const Details = props => {
           recieveFile={file => {
             updateProperty({
               variables: {
-                id: property.id,
+                where: {
+                  id: property.id,
+                },
                 data: {
                   insulationStatementFile: {
                     connect: {
@@ -318,6 +391,25 @@ const Details = props => {
           }}
         />
       </RehouserPaper>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header">
+          <Typography className={classes.heading}>Editable Displays</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <RehouserPaper>
+            <EditableDisplayItems
+              __typename="Property"
+              data={property}
+              items={PROPERTY_DETAILS_EDITABLE_DISPLAY_CONF}
+              where={{ id: property.id }}
+            />
+          </RehouserPaper>
+        </AccordionDetails>
+      </Accordion>
+
       <DetailItems
         title="Property Variables"
         property={property}
@@ -325,7 +417,7 @@ const Details = props => {
           {
             name: 'rent',
             label: 'Rent',
-            type: 'number',
+            type: 'money',
             icon: <CameraIcon color="default" />,
           },
           {
@@ -346,8 +438,32 @@ const Details = props => {
             type: 'int',
             icon: <CameraIcon color="default" />,
           },
+          {
+            name: 'chattels',
+            label: 'chattels',
+            type: 'enum',
+            fieldProps: {
+              __type: '',
+              variant: 'multi',
+            },
+            icon: <CameraIcon color="default" />,
+          },
         ]}
       />
+
+      <RehouserPaper>
+        <EnumMultiSelectChip
+          label="Chattels"
+          __type="PropertyChattel"
+          values={updates.chattels ? updates.chattels : property.chattels}
+          handleChange={values => {
+            setUpdates({
+              ...updates,
+              chattels: values,
+            });
+          }}
+        />
+      </RehouserPaper>
       <RehouserPaper>
         <LeaseLength
           title="Lease will be for"
@@ -366,7 +482,7 @@ const Details = props => {
             return <UserDetails me={me} user={owner} />;
           })}
         {me.isWizard && (
-          <AddUserToList
+          <DynamicAddUserToList
             id="properties-owners"
             filters=""
             selected={property.owners}
@@ -395,7 +511,7 @@ const Details = props => {
             return <UserDetails me={me} user={agent} />;
           })}
         {me.isWizard && (
-          <AddUserToList
+          <DynamicAddUserToList
             id="properties-agents"
             filters="(permissions:ADMIN OR permissions:WIZARD)"
             selected={property.agents}
@@ -417,6 +533,20 @@ const Details = props => {
           }}
         />
       </Card>
+      <ForeignLinksTable
+        type="property"
+        id={property.id}
+        where={{
+          property: {
+            id: property.id,
+          },
+        }}
+      />
+      <Modal
+        open={publicDetailsModalIsOpen}
+        close={handleClosePublicDetailsModal}>
+        <PropertyPublicDetails id={property.id} />
+      </Modal>
     </div>
   );
 };

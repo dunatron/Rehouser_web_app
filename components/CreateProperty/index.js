@@ -16,6 +16,8 @@ import CheckAndSubmit from './CheckAndSubmit';
 import Modal from '@/Components/Modal';
 import AcceptTermsOfEngagementForm from '@/Components/Forms/AcceptTermsOfEngagementForm';
 import AssociatedAppraisal from './AssociatedAppraisal';
+import RPaper from '@/Styles/RehouserPaper';
+import Alert from '@/Components/Alert';
 
 const LoadingAppraisal = () => (
   <Loader loading={true} text="Loading in Appraisal" />
@@ -178,8 +180,7 @@ const CreatePropertyComponent = props => {
         </Typography>
         <ChangeRouteButton
           title="Go to property"
-          route="/landlord/properties/property"
-          query={{ id: createdData.createProperty.id }}
+          route={`/landlord/properties/${createdData.createProperty.id}`}
           variant="contained"
           color="primary"
         />
@@ -215,13 +216,16 @@ const CreatePropertyComponent = props => {
         />
       </Modal>
       {!me.acceptedTermsOfEngagement && (
-        <div>
-          <Typography variant="h5" gutterBottom>
-            To add Property to our platform you must first accept the terms of
-            engagement
-          </Typography>
+        <>
+          {/* <Alert severity="info"> */}
+          <Alert severity="info">
+            <Typography variant="body1">
+              To add Property to our platform you must first accept the terms of
+              engagement
+            </Typography>
+          </Alert>
           <AcceptTermsOfEngagementForm me={me} />
-        </div>
+        </>
       )}
 
       {me.acceptedTermsOfEngagement && (
