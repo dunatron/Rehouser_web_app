@@ -1,0 +1,51 @@
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import gql from 'graphql-tag';
+import { useQuery, useMutation } from '@apollo/client';
+import Error from '@/Components/ErrorMessage';
+import Button from '@material-ui/core/Button';
+import { toast } from 'react-toastify';
+import { SINGLE_LEASE_QUERY } from '@/Gql/queries';
+import {PropertyLeaseInfoFragment} from '@/Gql/fragments/propertyLeaseInfo'
+
+const FINALISE_PROPERTY_LEASE_MUTATION = gql`
+  mutation FINALISE_PROPERTY_LEASE_MUTATION($leaseId: ID!) {
+    finalisePropertyLease(leaseId: $leaseId) {
+      ...propertyLeaseInfo
+    }
+  }
+  ${PropertyLeaseInfoFragment}
+`;
+
+const FinaliseLeaseBtn = ({ leaseId, stage, disabled }) => {
+  const [finaliseLease, finaliseLeaseProps] = useMutation(
+    FINALISE_PROPERTY_LEASE_MUTATION,
+    {
+      variables: {
+        leaseId: leaseId,
+      },
+    }
+  );
+  if (stage === 'SIGNED') {
+    return 'Lease has been signed and finalised';
+  }
+  return (
+    <div>
+      <Button
+        variant="outlined"
+        onClick={() => finaliseLease()}
+        disabled={disabled || finaliseLeaseProps.loading}>
+        {finaliseLeaseProps.loading ? 'FINALISING LEASE' : 'FINALISE LEASE'}
+      </Button>
+      {finaliseLeaseProps.error && <Error error={finaliseLeaseProps.error} />}
+    </div>
+  );
+};
+
+FinaliseLeaseBtn.propTypes = {
+  disabled: PropTypes.any,
+  leaseId: PropTypes.any,
+  stage: PropTypes.string.isRequired
+};
+
+export default FinaliseLeaseBtn;
