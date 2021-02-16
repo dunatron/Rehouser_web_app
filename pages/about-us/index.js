@@ -4,10 +4,6 @@ import { SITE_NAME } from '@/Lib/const';
 import PageHeader from '@/Components/PageHeader';
 import TeamInfoText from '@/Components/Team/TeamInfoText';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const AboutUsPage = () => {
   return (
     <>
@@ -23,16 +19,6 @@ const AboutUsPage = () => {
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 AboutUsPage.propTypes = {};
 

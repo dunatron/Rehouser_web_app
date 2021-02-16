@@ -10,13 +10,6 @@ const CustomToastContainer = () => {
       style={{
         minWidth: '280px',
       }}
-      closeButton={
-        <div>
-          <IconButton color={'primary'} aria-label="Delete">
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        </div>
-      }
       position="top-right"
       autoClose={10000}
       hideProgressBar={false}
@@ -26,6 +19,13 @@ const CustomToastContainer = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
+      closeButton={
+        <div>
+          <IconButton color={'primary'} aria-label="Delete">
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </div>
+      }
     />
   );
 };

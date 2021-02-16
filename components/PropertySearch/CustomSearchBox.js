@@ -16,10 +16,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    color: theme.palette.secondary.contrastText,
-    // color: 'red',
-    // color: theme.palette.primary.main,
-    // backgroundColor: theme.palette.secondary.contrastText,
+    color: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.contrastText,
     fontSize: '26px',
     // border: '2px solid red',
     padding: theme.spacing(1),
@@ -47,8 +45,8 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
 };
 
 SearchBox.propTypes = {
-  currentRefinement: PropTypes.any,
-  isSearchStalled: PropTypes.any,
+  currentRefinement: PropTypes.any.isRequired,
+  isSearchStalled: PropTypes.any.isRequired,
   refine: PropTypes.func.isRequired,
 };
 

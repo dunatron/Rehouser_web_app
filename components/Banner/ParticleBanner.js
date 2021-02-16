@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 //hooks
 import useCurrentWidth from '@/Lib/hooks/useCurrentWidth';
@@ -52,7 +52,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ParticleBanner = props => {
-  const [windowUsed, setWindowUsed] = useState(false);
   const bannerNode = useRef();
   const { children, footer, disablePointerEvents = false } = props;
   const classes = useStyles();
@@ -64,15 +63,12 @@ const ParticleBanner = props => {
   useEffect(() => {
     const offsetAmount = windowWidth > 600 ? '-64px' : '-56px';
 
-    if (window !== undefined && windowUsed === false) {
-      document.getElementById('main-content').style.top = offsetAmount;
-      setWindowUsed(true);
-    }
-
+    window &&
+      (document.getElementById('main-content').style.top = offsetAmount);
     return () => {
       window && (document.getElementById('main-content').style.top = '0');
     };
-  }, [windowWidth]);
+  }, [windowWidth, windowHeight]);
 
   return (
     <div
@@ -99,9 +95,9 @@ const ParticleBanner = props => {
 };
 
 ParticleBanner.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any.isRequired,
   disablePointerEvents: PropTypes.bool.isRequired,
-  footer: PropTypes.any,
+  footer: PropTypes.any.isRequired
 };
 
 export default ParticleBanner;

@@ -7,9 +7,9 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import Accordion from '@/Styles/Accordion';
-import AccordionSummary from '@/Styles/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpansionPanel from '@/Styles/ExpansionPanel';
+import ExpansionPanelSummary from '@/Styles/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@/Styles/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 //icons
@@ -166,7 +166,10 @@ const ApplicationItem = props => {
       <div>
         <ChangeRouteBtn
           title="Update Application"
-          route={`/tenant/applications/${application.id}`}
+          route={`/tenant/applications/application`}
+          query={{
+            id: application.id,
+          }}
         />
         <Button
           variant="outlined"
@@ -201,8 +204,8 @@ const ApplicationItem = props => {
 
   if (!canShow) return null;
   return (
-    <Accordion highlight={isAnApplicant}>
-      <AccordionSummary
+    <ExpansionPanel highlight={isAnApplicant}>
+      <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         highlight={isAnApplicant}
         highlightReverse={isOwner}
@@ -228,8 +231,8 @@ const ApplicationItem = props => {
           style={{ padding: '0 16px 0 4px' }}>
           {applicationStage}
         </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>
         <Item>
           <Typography>Application ID: {application.id}</Typography>
           {creatingDoc && <div>Generating your application please wait</div>}
@@ -260,8 +263,8 @@ const ApplicationItem = props => {
               );
             })}
         </Item>
-      </AccordionDetails>
-    </Accordion>
+      </ExpansionPanelDetails>
+    </ExpansionPanel>
   );
 };
 
@@ -278,9 +281,9 @@ ApplicationItem.propTypes = {
     stage: PropTypes.any,
     visibility: PropTypes.string,
   }).isRequired,
-  index: PropTypes.any,
+  index: PropTypes.any.isRequired,
   openRentalAppModal: PropTypes.func.isRequired,
-  property: PropTypes.any,
+  property: PropTypes.any.isRequired,
 };
 
 export default ApplicationItem;

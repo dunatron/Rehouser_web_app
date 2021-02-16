@@ -5,10 +5,6 @@ import { Typography } from '@material-ui/core';
 import Dashboard from '@/Components/Dashboard';
 import TENANT_DASHBOARD_CONFIG from '@/Lib/configs/tenantDashboardConfig';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const TenantPage = ({ appData: { currentUser } }) => {
   const pleaseSignInMessage =
     'You must be signed in to the system to do tenant activities';
@@ -34,25 +30,13 @@ const TenantPage = ({ appData: { currentUser } }) => {
         <Dashboard
           config={TENANT_DASHBOARD_CONFIG}
           elevation={10}
-          heading="Tenant Dashboard"
+          heading="Tenant Portal"
           intro="Here is the tenant portal dashboard"
         />
       </PleaseSignIn>
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {
-      query: ctx.query,
-    },
-  });
-}
 
 TenantPage.propTypes = {
   appData: PropTypes.shape({

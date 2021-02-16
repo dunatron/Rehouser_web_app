@@ -12,7 +12,6 @@ import { toast } from 'react-toastify';
 
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
-import Card from '@/Styles/Card';
 
 const configIsValid = config => {
   if (isEmpty(config)) return false;
@@ -59,14 +58,6 @@ const FormCreator = props => {
     cancel,
   } = props;
 
-  // awesome we have {me} which now has isAdmin and isWizard
-  // we can on the form creator if it has something like requiredPermissions
-  // or adminOnly and wizardOnly then disable the fields? or do we ommit them from the config entirely
-  // easiset right now is to ommit the config object entirely if they cannot edit it
-  // requiredPermissions : ["ADMIN", "WIZARD", "PERMISSIONUPDATE"]
-  // while isAdmin and isWizard @client is cool. We should use me.permissions
-  // we would check that on the requiredPermissions for each item we must find it in me.permissions
-  // if we dont it will remove the config object
   const currentUser = useCurrentUser();
   const me = currentUser.data ? currentUser.data.me : null;
   const keysWithTypes = getKeyTypes(config);
@@ -93,6 +84,8 @@ const FormCreator = props => {
   }
 
   const handleClearError = name => {
+    console.log('handleClearError name => ', name);
+    console.log('handleClearError errors => ', errors);
     if (errors[name]) {
       clearError(name);
     }
@@ -121,17 +114,18 @@ const FormCreator = props => {
   const onSubmit = data => {
     if (!canSubmit()) return;
     const postFormattedFormData = formatData(data, keysWithTypes, 'post');
+    console.log('date bug postFormattedFormData => ', postFormattedFormData);
     props.onSubmit(postFormattedFormData);
   };
 
   const _createText = () => {
     if (createText) return createText;
-    return 'Create ' + title;
+    return 'Create ' + title + ' Form';
   };
 
   const _updateText = () => {
     if (updateText) return updateText;
-    return 'Update ' + title;
+    return 'Update ' + title + ' Form';
   };
 
   useEffect(() => {
@@ -144,6 +138,7 @@ const FormCreator = props => {
       // mmm not true. I think maybe we do want to postFormat and preFormat
       const formValsToSave = getValues();
       // alert('ToDo: CreateForm COntext which will handle all form values');
+      console.log('formValsToSave => ', formValsToSave);
       // Maybe a bit of a caveat here and will have to be robust
       // ie. saving the form type to redux. if persistState = true
       // Also perhaps a flag to say submitted? Would we have a clear? and a reset?
@@ -151,27 +146,16 @@ const FormCreator = props => {
     };
   });
 
-  const filteredConf = config.filter((item, idx) => {
-    if (!item.permissions) return item;
-    if (item.permissions.includes('ADMIN')) {
-      if (!me.isAdmin) return;
-    }
-    if (item.permissions.includes('WIZARD')) {
-      if (!me.isWizard) return;
-    }
-    return item;
-  });
+  // clearError('test');
 
   return (
     <>
-      <Card
+      <div
         style={{
           marginBottom: '16px',
-          maxWidth: '800px',
-          overflow: 'initial',
         }}>
         {configIsValid(config) &&
-          filteredConf.map((item, idx) => {
+          config.map((item, idx) => {
             return (
               <div key={idx}>
                 <InputFieldType
@@ -210,6 +194,7 @@ const FormCreator = props => {
             marginTop: '16px',
           }}
           color="primary"
+          square
           aria-label="outlined primary button group square">
           <Button
             disabled={posting}
@@ -220,34 +205,37 @@ const FormCreator = props => {
             {isNew ? _createText() : _updateText()}
           </Button>
           {hasCancel && (
-            <Button disabled={posting} onClick={cancel}>
+            <Button disabled={posting} onClick={cancel} square>
               {/* {`${isNew ? 'create' : 'update'}: ${title ? title : 'Form'}`} */}
               <AddIcon />
               Cancel
             </Button>
           )}
         </ButtonGroup>
-      </Card>
+      </div>
     </>
   );
 };
 
 FormCreator.propTypes = {
-  config: PropTypes.array.isRequired,
-  createText: PropTypes.any,
-  data: PropTypes.any,
-  error: PropTypes.any,
-  folder: PropTypes.any,
-  handleWatchChanges: PropTypes.func,
-  isNew: PropTypes.any,
-  name: PropTypes.string,
+  config: PropTypes.shape({
+    forEach: PropTypes.func,
+    map: PropTypes.func,
+  }).isRequired,
+  createText: PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
+  error: PropTypes.any.isRequired,
+  folder: PropTypes.any.isRequired,
+  handleWatchChanges: PropTypes.func.isRequired,
+  isNew: PropTypes.any.isRequired,
+  name: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  posting: PropTypes.any,
-  refetchQueries: PropTypes.any,
-  title: PropTypes.any,
-  updateCacheOnRemovedFile: PropTypes.any,
-  updateText: PropTypes.any,
-  watchFields: PropTypes.array,
+  posting: PropTypes.any.isRequired,
+  refetchQueries: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired,
+  updateCacheOnRemovedFile: PropTypes.any.isRequired,
+  updateText: PropTypes.any.isRequired,
+  watchFields: PropTypes.array.isRequired,
 };
 
 export { FormCreator };

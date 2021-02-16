@@ -23,8 +23,8 @@ const InspectionsTab = ({ property, me }) => {
 };
 
 InspectionsTab.propTypes = {
-  me: PropTypes.any,
-  property: PropTypes.any,
+  me: PropTypes.any.isRequired,
+  property: PropTypes.any.isRequired,
 };
 
 export default InspectionsTab;

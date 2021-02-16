@@ -33,9 +33,9 @@ const ErrorSupplier = ({ errors, tronM }) =>
 
 ErrorSupplier.propTypes = {
   errors: PropTypes.shape({
-    map: PropTypes.func,
+    map: PropTypes.func
   }).isRequired,
-  tronM: PropTypes.any,
+  tronM: PropTypes.any.isRequired
 };
 
 const AcceptApplicationButton = ({ application }) => {
@@ -65,15 +65,14 @@ const AcceptApplicationButton = ({ application }) => {
           toast.success(
             <div>
               <p>
-                New Lease Created Id:{' '}
-                {payload.data.acceptRentalApplication.property.id} location:{' '}
-                {payload.data.acceptRentalApplication.property.location}
+                New Lease Created Id: {payload.data.acceptRentalApplication.id}{' '}
+                location: {payload.data.acceptRentalApplication.location}
                 Complete The Lease Here Todo: route to new lease
               </p>
               <ChangeRouteButton
                 title="Manage & Sign Lease"
                 route="/landlord/leases/lease"
-                query={{ id: payload.data.acceptRentalApplication.property.id }}
+                query={{ id: payload.data.acceptRentalApplication.id }}
               />
             </div>,
             {
@@ -90,7 +89,7 @@ const AcceptApplicationButton = ({ application }) => {
   });
   return (
     <>
-      <ErrorSupplier errors={[error]} tronM="Acccepting application failed" />
+      <ErrorSupplier errors={[error]} tronM="Acccepting applicatiion failed" />
       {/* <Example /> */}
       <Button
         className={buttonClassname}
@@ -111,14 +110,14 @@ const AcceptApplicationButton = ({ application }) => {
 AcceptApplicationButton.propTypes = {
   application: PropTypes.shape({
     applicants: PropTypes.shape({
-      filter: PropTypes.func,
+      filter: PropTypes.func
     }),
     id: PropTypes.any,
     owner: PropTypes.shape({
-      id: PropTypes.any,
+      id: PropTypes.any
     }),
-    stage: PropTypes.string,
-  }).isRequired,
+    stage: PropTypes.string
+  }).isRequired
 };
 
 export default AcceptApplicationButton;

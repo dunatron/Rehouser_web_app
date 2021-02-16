@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { Card, IconButton, Tooltip } from '@material-ui/core';
-import Accordion from '@/Styles/Accordion';
-import AccordionSummary from '@/Styles/AccordionSummary';
+import ExpansionPanel from '@/Styles/ExpansionPanel';
+import ExpansionPanelSummary from '@/Styles/ExpansionPanelSummary';
 
-// import AccordionSummary from "@material-ui/core/AccordionSummary"
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+// import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 // import Typography from "@material-ui/core/Typography"
-import { Box, Typography } from '@material-ui/core/';
-
+import Typography from '@/Styles/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 //icons
 import PersonIcon from '@material-ui/icons/Person';
@@ -17,7 +16,6 @@ import AdminApplicantDetails from '@/Components/ApplicantDetails/AdminApplicantD
 import AcceptApplicationButton from '@/Components/MutationButtons/AcceptApplicationButton';
 import DenyApplicationButton from '@/Components/MutationButtons/DenyApplicationButton';
 import { makeStyles } from '@material-ui/core/styles';
-import ChangeRouteBtn from '@/Components/Routes/ChangeRouteButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ApplicationCard = ({ application, property, me }) => {
+  console.log('WHat do I have for this application => ', application);
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -74,40 +73,19 @@ const ApplicationCard = ({ application, property, me }) => {
       </div>
 
       {application.leaseId && (
-        <Box>
-          <Typography gutterBottom>
-            Application has been accepted as it has a leaseId associated with it
-          </Typography>
-
-          <ChangeRouteBtn
-            title="Go to lease"
-            route="/landlord/leases/lease"
-            query={{
-              id: application.leaseId,
-            }}
-            variant="contained"
-            color="secondary"
-          />
-          <Typography gutterBottom>LeaseId: {application.leaseId}</Typography>
-        </Box>
+        <Typography>LeaseId: {application.leaseId}</Typography>
       )}
 
       {/* <AcceptApplication application={application} property={property} /> */}
-      {!application.leaseId && (
-        <div className={classes.actions}>
-          <AcceptApplicationButton
-            application={application}
-            property={property}
-          />
-          <DenyApplicationButton
-            application={application}
-            property={property}
-          />
-        </div>
-      )}
-
-      <Accordion highlight={false}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <div className={classes.actions}>
+        <AcceptApplicationButton
+          application={application}
+          property={property}
+        />
+        <DenyApplicationButton application={application} property={property} />
+      </div>
+      <ExpansionPanel highlight={false}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <PersonIcon color={'secondary'} />
           <Typography
             // highlightReverse={isOwner}
@@ -115,16 +93,16 @@ const ApplicationCard = ({ application, property, me }) => {
             style={{ padding: '0 16px 0 4px' }}>
             {application.applicants.length} Applicants
           </Typography>
-        </AccordionSummary>
-        <AccordionDetails
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails
           style={{
             display: 'block',
           }}>
           {application.applicants.map((applicant, i) => (
             <AdminApplicantDetails key={applicant.id} applicant={applicant} />
           ))}
-        </AccordionDetails>
-      </Accordion>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </Card>
   );
 };
@@ -141,7 +119,7 @@ ApplicationCard.propTypes = {
     stage: PropTypes.any,
     visibility: PropTypes.any,
   }).isRequired,
-  property: PropTypes.any,
+  property: PropTypes.any.isRequired,
 };
 
 export default ApplicationCard;

@@ -175,8 +175,8 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
 };
 
 ChatRoomScreen.propTypes = {
-  chat: PropTypes.any,
-  chatId: PropTypes.any,
+  chat: PropTypes.any.isRequired,
+  chatId: PropTypes.any.isRequired,
   me: PropTypes.shape({
     id: PropTypes.any
   }).isRequired
@@ -198,7 +198,7 @@ const ChatRoomScreenConnection = props => {
 };
 
 ChatRoomScreenConnection.propTypes = {
-  chatId: PropTypes.any
+  chatId: PropTypes.any.isRequired
 };
 
 export default ChatRoomScreenConnection;

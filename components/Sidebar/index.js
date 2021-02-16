@@ -5,7 +5,6 @@ import Router from 'next/router';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Link from 'next/link';
 
 // material
 import {
@@ -25,11 +24,29 @@ import navConfig from './navConf';
 // styles
 import useSideBarStyles from './useStyles';
 
+const StyledListItem = withStyles({
+  root: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+  selected: {
+    background: 'black',
+  },
+})(ListItem);
+
 const handleLink = (route = '/', query = {}) => {
   Router.push({
     pathname: route,
     query: query,
-  });
+  }).then(() => window.scrollTo(0, 0));
 };
 
 const Nav = props => {
@@ -38,6 +55,7 @@ const Nav = props => {
   const NAV_CONF = navConfig(me, loadingUser, router.pathname);
   const classes = useSideBarStyles();
 
+  console.log('render: SideBar props =>', props);
   useEffect(() => {
     console.log('render: SideBar useEffect');
     return () => {
@@ -79,8 +97,8 @@ const Nav = props => {
 };
 
 Nav.propTypes = {
-  loadingUser: PropTypes.any,
-  me: PropTypes.any,
+  loadingUser: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired,
 };
 
 const SideBarItemWithRouter = ({ item, pathname }) => {
@@ -93,31 +111,35 @@ const SideBarItemWithRouter = ({ item, pathname }) => {
   if (!item.canRender()) return null;
 
   return (
-    <Link href={item.route} passHref>
-      <ListItem
+    <ListItem
+      classes={{
+        root: classes.listItem,
+        selected: classes.listItemSelected,
+        divider: classes.listItemDivider,
+      }}
+      selected={containsPath}
+      button
+      divider
+      onClick={() => {
+        if (item.action) {
+          item.action();
+        } else {
+          handleLink(item.route);
+        }
+      }}>
+      {/* <ListItemIcon
+        style={item.style ? item.style : null}
+        className={classes.listItemIcon}>
+        {item.icon}
+      </ListItemIcon> */}
+      <ListItemText
+        primary={item.text}
         classes={{
-          root: classes.listItem,
-          selected: classes.listItemSelected,
-          divider: classes.listItemDivider,
+          root: classes.listItemText,
+          primary: classes.listItemText,
         }}
-        selected={containsPath}
-        button
-        component="a"
-        divider
-        onClick={e => {
-          if (item.action) {
-            item.action();
-          }
-        }}>
-        <ListItemText
-          primary={item.text}
-          classes={{
-            root: classes.listItemText,
-            primary: classes.listItemText,
-          }}
-        />
-      </ListItem>
-    </Link>
+      />
+    </ListItem>
   );
 };
 

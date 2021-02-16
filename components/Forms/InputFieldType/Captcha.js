@@ -52,7 +52,7 @@ CaptchaField.propTypes = {
   config: PropTypes.shape({
     refConf: PropTypes.any,
   }).isRequired,
-  errors: PropTypes.any,
+  errors: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
 };

@@ -1,5 +1,4 @@
-// import gql from 'graphql-tag';
-import { gql } from '@apollo/client';
+import gql from 'graphql-tag';
 import { FileInfoFragment } from './fileInfo';
 import { PublicUserInfoFragment } from './publicUserInfo';
 import { AccommodationInfoFragment } from './accommodationInfo';
@@ -48,9 +47,6 @@ const PropertyInfoFragment = gql`
     creator {
       ...publicUserInfo
     }
-    agents {
-      ...publicUserInfo
-    }
     images {
       ...fileInfo
     }
@@ -82,7 +78,6 @@ const PropertyInfoFragment = gql`
       accountNumber
       suffix
     }
-    rehouserManaged
   }
   ${FileInfoFragment}
   ${PublicUserInfoFragment}

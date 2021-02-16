@@ -13,10 +13,6 @@ import {
 } from 'react-facebook';
 import PropTypes from 'prop-types';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const groupsConf = [
   {
     label: 'Dunedin',

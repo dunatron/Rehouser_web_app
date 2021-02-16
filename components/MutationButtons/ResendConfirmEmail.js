@@ -30,7 +30,10 @@ const useStyles = makeStyles(theme => ({
 const ResendConfirmEmailButton = ({ email, ...rest }) => {
   const classes = useStyles();
   const [success, setSuccess] = useState(false);
+
   const user = useCurrentUser();
+
+  console.log('current user to get email => ', user);
 
   const handleCompleted = data => {
     toast.info(

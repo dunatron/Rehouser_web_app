@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { FileInfoFragment } from './fileInfo';
 
 const InspectionInfoFragment = gql`
   fragment inspectionInfo on Inspection {
@@ -35,10 +34,10 @@ const InspectionInfoFragment = gql`
       vals
     }
     files {
-      ...fileInfo
+      id
+      url
     }
   }
-  ${FileInfoFragment}
 `;
 
 export { InspectionInfoFragment };

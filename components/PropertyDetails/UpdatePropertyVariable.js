@@ -44,6 +44,7 @@ import {
   LeaseLength,
 } from '@/Components/LeaseManager/LeaseLengthInfo';
 
+import FileUploader from '@/Components/FileUploader';
 import { FileInfoFragment } from '@/Gql/fragments/fileInfo';
 import SaveButtonLoader from '@/Components/Loader/SaveButtonLoader';
 import AdminDetails from './AdminDetails';
@@ -235,10 +236,10 @@ const UpdatePropertyVariable = ({
 };
 
 UpdatePropertyVariable.propTypes = {
-  cy: PropTypes.any,
-  label: PropTypes.any,
-  name: PropTypes.any,
-  propertyId: PropTypes.any,
+  cy: PropTypes.any.isRequired,
+  label: PropTypes.any.isRequired,
+  name: PropTypes.any.isRequired,
+  propertyId: PropTypes.any.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 };

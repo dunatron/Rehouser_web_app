@@ -17,8 +17,8 @@ const DownloadLease = ({ lease, me }) => {
 };
 
 DownloadLease.propTypes = {
-  lease: PropTypes.any,
-  me: PropTypes.any
+  lease: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired
 }
 
 export default DownloadLease;

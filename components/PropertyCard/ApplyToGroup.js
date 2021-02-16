@@ -57,10 +57,10 @@ const ApplyToGroup = props => {
 };
 
 ApplyToGroup.propTypes = {
-  application: PropTypes.any,
-  applicationId: PropTypes.any,
+  application: PropTypes.any.isRequired,
+  applicationId: PropTypes.any.isRequired,
   openRentalAppModal: PropTypes.func.isRequired,
-  property: PropTypes.any
+  property: PropTypes.any.isRequired
 };
 
 export default ApplyToGroup;

@@ -97,7 +97,7 @@ const PhoneInput = props => {
         onChange={handleChange}
         label={label}
         inputComponent={TextMaskCustom}
-        // {...fieldProps} // dont spread all that trash
+        {...fieldProps}
       />
 
       {fieldProps.helperText && (
@@ -109,18 +109,18 @@ const PhoneInput = props => {
 };
 
 PhoneInput.propTypes = {
-  config: PropTypes.any,
-  defaultValue: PropTypes.any,
-  defaultValues: PropTypes.any,
-  errors: PropTypes.any,
-  extractErrorFromErrors: PropTypes.any,
-  fieldError: PropTypes.any,
-  getValues: PropTypes.any,
-  onChange: PropTypes.any,
+  config: PropTypes.any.isRequired,
+  defaultValue: PropTypes.any.isRequired,
+  defaultValues: PropTypes.any.isRequired,
+  errors: PropTypes.any.isRequired,
+  extractErrorFromErrors: PropTypes.any.isRequired,
+  fieldError: PropTypes.any.isRequired,
+  getValues: PropTypes.any.isRequired,
+  onChange: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
-  reset: PropTypes.any,
+  reset: PropTypes.any.isRequired,
   setValue: PropTypes.func.isRequired,
-  updateCacheOnRemovedFile: PropTypes.any,
+  updateCacheOnRemovedFile: PropTypes.any.isRequired,
 };
 
 export default PhoneInput;

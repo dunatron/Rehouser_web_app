@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   Share,
   ShareButton,
@@ -39,6 +39,7 @@ const ShareProperty = ({ property }) => {
                       ) : (
                         <button
                           onClick={() => {
+                            console.log('The api => ', api);
                             api.login(function(response) {
                               if (response.authResponse) {
                                 console.log(
@@ -67,8 +68,8 @@ const ShareProperty = ({ property }) => {
 };
 
 ShareProperty.propTypes = {
-  property: PropTypes.any,
-};
+  property: PropTypes.any.isRequired
+}
 
 const LoggedInComponents = ({ api, property }) => {
   return (
@@ -123,13 +124,13 @@ const LoggedInComponents = ({ api, property }) => {
 
 LoggedInComponents.propTypes = {
   api: PropTypes.shape({
-    logout: PropTypes.func,
+    logout: PropTypes.func
   }).isRequired,
   property: PropTypes.shape({
     location: PropTypes.any,
     moveInDate: PropTypes.any,
-    placeId: PropTypes.any,
-  }).isRequired,
-};
+    placeId: PropTypes.any
+  }).isRequired
+}
 
 export default ShareProperty;

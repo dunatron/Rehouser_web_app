@@ -81,6 +81,7 @@ const SearchAndRequestFriend = props => {
       </Button>
       {results &&
         results.map((result, i) => {
+          console.log('Ohh cool a result => ', result);
           return (
             <div key={result.id}>
               <UserDetails me={me} user={result} />
@@ -93,7 +94,7 @@ const SearchAndRequestFriend = props => {
 };
 
 SearchAndRequestFriend.propTypes = {
-  me: PropTypes.any,
+  me: PropTypes.any.isRequired
 };
 
 export default SearchAndRequestFriend;

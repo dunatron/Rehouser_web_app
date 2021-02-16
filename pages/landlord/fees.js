@@ -2,10 +2,6 @@ import { Paper, Typography } from '@material-ui/core';
 import Fees from '@/Components/Fees';
 import PageHeader from '@/Components/PageHeader';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const LandlordFeesPage = () => {
   return (
     <>
@@ -25,16 +21,6 @@ const LandlordFeesPage = () => {
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 LandlordFeesPage.propTypes = {};
 

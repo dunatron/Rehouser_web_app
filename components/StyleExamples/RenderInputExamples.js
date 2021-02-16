@@ -30,49 +30,49 @@ const RenderInputExamples = () => {
       </div>
       <BankAccount
         defaultValue={null}
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           name: 'bankAccount',
           label: 'BankAccount',
         }}
       />
       <Date
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           name: 'date',
           label: 'Date',
         }}
       />
       <DateTime
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           name: 'dateTime',
           label: 'DateTime',
         }}
       />
       <Email
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           name: 'email',
           label: 'Email',
         }}
       />
       <Phone
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           name: 'phone',
           label: 'Phone',
         }}
       />
       <String
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           name: 'string',
           label: 'String',
         }}
       />
       <String
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           variant: 'filled',
           size: 'small',
@@ -81,7 +81,7 @@ const RenderInputExamples = () => {
         }}
       />
       <String
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           variant: 'outlined',
           size: 'small',
@@ -90,7 +90,7 @@ const RenderInputExamples = () => {
         }}
       />
       <String
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           size: 'small',
           name: 'string',
@@ -99,7 +99,7 @@ const RenderInputExamples = () => {
         }}
       />
       <String
-        onChange={v => {}}
+        onChange={v => console.log(v)}
         fieldProps={{
           size: 'small',
           name: 'string',

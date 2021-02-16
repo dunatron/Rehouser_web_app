@@ -5,7 +5,7 @@ import REFEREE_FORM_CONF from '@/Lib/configs/forms/refereeForm';
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER_MUTATION } from '@/Gql/mutations/index';
 
-const AddReferee = ({ me }) => {
+const AddReferee = () => {
   const [adding, setAdding] = useState();
 
   const [updateUser, { error, loading }] = useMutation(UPDATE_USER_MUTATION);
@@ -13,6 +13,7 @@ const AddReferee = ({ me }) => {
   const toggleAdding = () => setAdding(!adding);
 
   const handleSubmit = data => {
+    console.log('REFEREE FORM DATA => ', data);
     updateUser({
       variables: {
         data: {
@@ -22,9 +23,7 @@ const AddReferee = ({ me }) => {
             },
           },
         },
-        where: {
-          id: me.id,
-        },
+        where: {},
       },
     });
   };

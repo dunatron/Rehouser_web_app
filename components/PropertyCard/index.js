@@ -90,8 +90,8 @@ const PropertyCardComponent = props => {
 };
 
 PropertyCardComponent.propTypes = {
-  isSearch: PropTypes.any,
-  property: PropTypes.any
+  isSearch: PropTypes.any.isRequired,
+  property: PropTypes.any.isRequired
 };
 
 export default PropertyCardComponent;

@@ -37,21 +37,10 @@ import Signature from './Signature';
 import Image from './Image';
 import CaptchaField from './Captcha';
 import Email from './Email';
-import Password from './Password';
-import { path } from 'ramda';
 
 const extractErrorFromErrors = (errors, name) => {
   if (!errors || !name) return null;
   return errors[name] ? errors[name].message : null;
-};
-
-const extractDefaultValue = (defaultValues, name, type) => {
-  if (!defaultValues || !name) {
-    return null; // may need to do extra for different types
-  }
-  const dV = path(name.split('.'), defaultValues);
-  // we should have the field values at this point. if we need to do more based on type we do it here
-  return dV;
 };
 
 const InputFieldType = props => {
@@ -75,7 +64,7 @@ const InputFieldType = props => {
   const label = fieldProps ? fieldProps.label : null;
 
   const fieldError = extractErrorFromErrors(errors, name);
-  const defaultValue = extractDefaultValue(defaultValues, name, type);
+  const defaultValue = defaultValues ? defaultValues[name] : null;
 
   const TypeToRender = () => {
     switch (type) {
@@ -87,8 +76,6 @@ const InputFieldType = props => {
         return <Typography {...config.fieldProps}>{config.content}</Typography>;
       case 'Section':
         return <FormSection {...props} />;
-      case 'Password':
-        return <Password {...props} fieldError={fieldError} />;
       case 'String':
         return (
           <String
@@ -272,21 +259,21 @@ const InputFieldType = props => {
 
 // };
 InputFieldType.propTypes = {
-  clearErrors: PropTypes.any,
+  clearErrors: PropTypes.any.isRequired,
   config: PropTypes.shape({
     __type: PropTypes.any,
     content: PropTypes.any,
     fieldProps: PropTypes.any,
-  }),
-  defaultValues: PropTypes.any,
-  errors: PropTypes.any,
-  getValues: PropTypes.any,
-  inners: PropTypes.arrayOf(PropTypes.any),
-  onChange: PropTypes.any,
-  rawData: PropTypes.any,
-  register: PropTypes.any,
-  reset: PropTypes.any,
-  setValue: PropTypes.any,
+  }).isRequired,
+  defaultValues: PropTypes.any.isRequired,
+  errors: PropTypes.any.isRequired,
+  getValues: PropTypes.any.isRequired,
+  inners: PropTypes.arrayOf(PropTypes.any).isRequired,
+  onChange: PropTypes.any.isRequired,
+  rawData: PropTypes.any.isRequired,
+  register: PropTypes.any.isRequired,
+  reset: PropTypes.any.isRequired,
+  setValue: PropTypes.any.isRequired,
   type: PropTypes.oneOf([
     'Header',
     'Subheader',
@@ -302,9 +289,9 @@ InputFieldType.propTypes = {
     'Date',
     'DateTime',
     'AcceptTerms',
-  ]),
-  unregister: PropTypes.any,
-  updateCacheOnRemovedFile: PropTypes.any,
+  ]).isRequired,
+  unregister: PropTypes.any.isRequired,
+  updateCacheOnRemovedFile: PropTypes.any.isRequired,
 };
 
 export { InputFieldType };

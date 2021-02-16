@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
+import PropTypes from "prop-types";
+import React from 'react';
 import {
-  PDFDownloadLink,
   PDFViewer,
   Page,
   Text,
@@ -12,8 +10,10 @@ import {
   Image,
   Font,
 } from '@react-pdf/renderer';
+import moment from 'moment';
 
 import styles from '../styles';
+
 import PageWithFooter from '../PageWithFooter';
 
 // Sections
@@ -22,53 +22,31 @@ import Section2 from './Section2'; // objective
 import Section3 from './Section3'; // policy
 import Section4 from './Section4'; // risks
 
-const SecurityStatementPdf = ({ me, lease }) => {
-  const [loading, setLoading] = useState(true);
+const ExamplePdf = ({ me, lease }) => {
   return (
-    <>
-      {loading && <Typography gutterBottom>Generating Pdf...</Typography>}
-      <PDFViewer width="100%" height={loading ? '0' : '500px'}>
-        <SecurityStatementDocument
-          onRender={() => {
-            setLoading(false);
-          }}
-        />
-      </PDFViewer>
-    </>
+    <PDFViewer width="100%" height="500px">
+      <Document>
+        <PageWithFooter size="A4" style={styles.page}>
+          <Section1 />
+          <Section2 />
+          <Section3 />
+          <Section4 />
+          <Image
+            src="/static/images/signatures/rehouser_admin_signature.png"
+            // src={{
+            //   uri: '/static/images/signatures/rehouser_admin_signature.png',
+            //   method: 'GET',
+            // }}
+          />
+        </PageWithFooter>
+      </Document>
+    </PDFViewer>
   );
 };
 
-const SecurityStatementDocument = ({ onRender }) => {
-  return (
-    <Document
-      title="Rehouser Security Statement"
-      author="Dunatron"
-      subject="Rehouser security statement to our users"
-      keywords="Security statemenet, security, files, pdf"
-      creator="Heath Dunlop"
-      producer="Heath McDonough"
-      onRender={onRender}>
-      <PageWithFooter size="A4" style={styles.page}>
-        <Section1 />
-        <Section2 />
-        <Section3 />
-        <Section4 />
-        <Image
-          style={{
-            width: '50%',
-            padding: 20,
-            border: '1px solid grey',
-          }}
-          src="/images/signatures/rehouser_admin_signature.png"
-        />
-      </PageWithFooter>
-    </Document>
-  );
-};
+ExamplePdf.propTypes = {
+  lease: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired
+}
 
-SecurityStatementPdf.propTypes = {
-  lease: PropTypes.any,
-  me: PropTypes.any,
-};
-
-export default SecurityStatementPdf;
+export default ExamplePdf;

@@ -6,10 +6,6 @@ import { Typography } from '@material-ui/core';
 
 import PageHeader from '@/Components/PageHeader';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const FreeAppraisalPage = ({ appData: { currentUser } }) => {
   const me = currentUser.data ? currentUser.data.me : null;
   return (
@@ -45,16 +41,6 @@ const FreeAppraisalPage = ({ appData: { currentUser } }) => {
     </div>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 FreeAppraisalPage.propTypes = {
   appData: PropTypes.shape({

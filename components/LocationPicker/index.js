@@ -7,7 +7,6 @@ import StyledGeoSuggest from '@/Styles/GeoSuggest';
 
 // icons
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 /**
  * This is not ok,
@@ -134,11 +133,4 @@ LocationPicker.propTypes = {
   selection: PropTypes.func.isRequired,
 };
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API_KEY,
-  LoadingContainer: props => {
-    return <div>Loading Google Instance</div>;
-  },
-})(LocationPicker);
-
-// export default LocationPicker;
+export default LocationPicker;

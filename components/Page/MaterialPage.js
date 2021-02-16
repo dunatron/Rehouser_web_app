@@ -11,7 +11,7 @@ import LoginModal from './LoginModal';
 import AppDrawer from './AppDrawer';
 import { store } from '@/Store/index';
 import Announcements from '@/Components/Announcements';
-import IsOnline from './IsOnline';
+
 /**
  *
  * This CUNT IS RERENDERING LIKE EVERYTHING WHEN WE OPEN THE FUCKEN SIDEBAR
@@ -23,7 +23,6 @@ function MaterialPage(props) {
   const theme = useTheme();
   const classes = useStyles();
 
-  console.log('Props in Material Page => ', props);
   const { container, appData } = props;
   const { currentUser } = appData;
 
@@ -36,6 +35,7 @@ function MaterialPage(props) {
   // maybe memo the children. but into a function that depends on the children key changing ony...
   // I actually have no idea
   const children = React.Children.map(props.children, child => {
+    console.log('Mapping children pages inside MAterial Page');
     if (React.isValidElement(child)) {
       return React.cloneElement(child, {
         appData: {
@@ -46,6 +46,7 @@ function MaterialPage(props) {
     return child;
   });
 
+  console.log('render: Material Page props =>', props);
   useEffect(() => {
     console.log('render: Material Page useEffect');
     return () => {
@@ -73,15 +74,10 @@ function MaterialPage(props) {
 
         <main className={classes.content} id="main-content">
           <div className={classes.toolbar} />
-          <div
-            style={{
-              maxWidth: '1080px',
-              margin: 'auto',
-            }}>
+          <div>
             <Announcements bannerRoutes={['/']} me={me} />
             {children}
           </div>
-          <IsOnline />
           <Footer />
         </main>
         {me && <ChatsBar me={me} />}

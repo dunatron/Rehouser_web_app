@@ -27,9 +27,9 @@ const EmailInput = props => {
 };
 
 EmailInput.propTypes = {
-  config: PropTypes.any,
-  defaultValue: PropTypes.any,
-  fieldError: PropTypes.any,
+  config: PropTypes.any.isRequired,
+  defaultValue: PropTypes.any.isRequired,
+  fieldError: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
 };
 

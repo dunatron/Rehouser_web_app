@@ -12,13 +12,11 @@ import Router from 'next/router';
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { SIGNUP_MUTATION } from '@/Gql/mutations';
-// import ReCAPTCHA from 'react-google-recaptcha';
-import ReCAPTCHA from '@/Components/Recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 import ButtonLoader from '@/Components/Loader/ButtonLoader';
 import ConfinedHeight from '@/Components/ConfinedHeight';
 import SignupTerms from '@/Components/Terms/SignupTerms';
 import PhoneInput from '@/Components/Inputs/PhoneInput';
-import PasswordInput from '@/Components/Inputs/Password';
 
 const Signup = props => {
   const recaptchaRef = useRef();
@@ -56,9 +54,6 @@ const Signup = props => {
       }
     );
     clearRecaptcha();
-
-    // we should create a message between the admin and rehouser?
-
     props.handleCompleted();
   };
 
@@ -135,7 +130,6 @@ const Signup = props => {
           id="signup-email"
           inputProps={{
             'data-cy': 'signup-email',
-            autoComplete: 'email',
           }}
           label="Email"
           fullWidth={true}
@@ -149,7 +143,6 @@ const Signup = props => {
           id="signup-firstName"
           inputProps={{
             'data-cy': 'signup-firstName',
-            autoComplete: 'given-name',
           }}
           label="First Name"
           fullWidth={true}
@@ -163,7 +156,6 @@ const Signup = props => {
           id="signup-lastName"
           inputProps={{
             'data-cy': 'signup-lastName',
-            autoComplete: 'family-name',
           }}
           label="Last Name"
           fullWidth={true}
@@ -179,24 +171,23 @@ const Signup = props => {
           // regions={['oceania']}
           inputProps={{
             'data-cy': 'signup-phone',
-            autoComplete: 'tel',
           }}
           name="phone"
           label="Phone Number"
           fullWidth={true}
           placeholder="please enter your phone number"
           onChange={v => {
+            console.log('Mui phone change => ', v);
             setState({
               ...state,
               phone: v,
             });
           }}
         />
-        <PasswordInput
+        <TextInput
           id="signup-password"
           inputProps={{
             'data-cy': 'signup-password',
-            autoComplete: 'new-password',
           }}
           label="Password"
           fullWidth={true}
@@ -230,7 +221,6 @@ const Signup = props => {
           style={{
             padding: '16px 0',
           }}>
-          {/* theme */}
           <ReCAPTCHA
             data-cy="signup-recaptcha-component"
             ref={recaptchaRef}
@@ -264,13 +254,13 @@ const Signup = props => {
 };
 
 Signup.propTypes = {
-  email: PropTypes.any,
-  firstName: PropTypes.any,
+  email: PropTypes.any.isRequired,
+  firstName: PropTypes.any.isRequired,
   handleCompleted: PropTypes.func.isRequired,
-  lastName: PropTypes.any,
-  password: PropTypes.any,
-  phone: PropTypes.any,
-  update: PropTypes.func.isRequired,
+  lastName: PropTypes.any.isRequired,
+  password: PropTypes.any.isRequired,
+  phone: PropTypes.any.isRequired,
+  update: PropTypes.func.isRequired
 };
 
 export default Signup;

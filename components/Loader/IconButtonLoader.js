@@ -51,20 +51,21 @@ const RenderBtnText = ({ success, text, successText }) => {
 };
 
 RenderBtnText.propTypes = {
-  success: PropTypes.any,
-  successText: PropTypes.any,
-  text: PropTypes.any,
-};
+  success: PropTypes.any.isRequired,
+  successText: PropTypes.any.isRequired,
+  text: PropTypes.any.isRequired
+}
 
-const IconButtonLoader = props => {
+const ButtonLoader = props => {
   const {
     loading,
     success,
     onClick,
+    text,
+    successText,
     cy,
     btnProps,
     children,
-    style = {},
   } = props;
   const classes = useStyles();
   const buttonClassname = clsx({
@@ -80,8 +81,7 @@ const IconButtonLoader = props => {
       className={buttonClassname}
       disabled={loading}
       {...btnProps}
-      style={style}
-      // {...props}
+      {...props}
       onClick={onClick}>
       {children}
       {loading && (
@@ -91,14 +91,16 @@ const IconButtonLoader = props => {
   );
 };
 
-IconButtonLoader.propTypes = {
-  btnProps: PropTypes.any,
-  children: PropTypes.any,
-  cy: PropTypes.any,
+ButtonLoader.propTypes = {
+  btnProps: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired,
+  cy: PropTypes.any.isRequired,
   loading: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  success: PropTypes.bool,
+  success: PropTypes.bool.isRequired,
+  successText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
 };
 
-export { StyledIconButton, IconButtonLoader };
-export default IconButtonLoader;
+export { StyledIconButton, ButtonLoader };
+export default ButtonLoader;

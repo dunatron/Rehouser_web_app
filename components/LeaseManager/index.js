@@ -6,7 +6,6 @@ import Loader from '@/Components/Loader';
 import Error from '@/Components/ErrorMessage';
 import { SINGLE_LEASE_QUERY } from '@/Gql/queries';
 import LeaseChat from './LeaseChat';
-import { toast } from 'react-toastify';
 
 // stages
 import StageInitializing from './stages/Stage_Initializing';
@@ -24,13 +23,12 @@ const LeaseManager = ({ leaseId }) => {
         id: leaseId,
       },
     },
+    suspend: false,
   });
 
   // maybe list to a sub for this on the leaseManager?
   const handleOnSubscriptionData = ({ client, subscriptionData }) => {
-    toast(
-      'pushData for lease. Possibly need to manually update cache? check with two people on the lease as it is modified'
-    );
+    alert('Subscription data for lease manager');
   };
 
   useSubscription(PROPERTY_LEASE_SUBSCRIPTION, {
@@ -109,7 +107,7 @@ const LeaseManager = ({ leaseId }) => {
       {stage !== 'PAID' && (
         <>
           <Typography variant="h5" gutterBottom>
-            Draft Lease for {data.myLease.property.location}
+            Lease for {data.myLease.property.location}
           </Typography>
           <Typography variant="h6" gutterBottom>
             stage: {stage}
@@ -117,13 +115,13 @@ const LeaseManager = ({ leaseId }) => {
         </>
       )}
       {componentstage}
-      {/* <LeaseChat leaseId={leaseId} /> */}
+      <LeaseChat leaseId={leaseId} />
     </div>
   );
 };
 
 LeaseManager.propTypes = {
-  leaseId: PropTypes.any,
+  leaseId: PropTypes.any.isRequired
 };
 
 export default LeaseManager;

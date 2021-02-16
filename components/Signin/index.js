@@ -7,11 +7,8 @@ import Error from '@/Components/ErrorMessage/index';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import TextInput from '@/Styles/TextInput';
 import { SIGNIN_MUTATION } from '@/Gql/mutations';
-// import ReCAPTCHA from 'react-google-recaptcha';
-import ReCAPTCHA from '@/Components/Recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 import ButtonLoader from '@/Components/Loader/ButtonLoader';
-import { parseCookies, setCookie, destroyCookie } from 'nookies';
-import PasswordInput from '@/Components/Inputs/Password';
 
 const Signin = props => {
   const [state, setState] = useState({
@@ -26,14 +23,6 @@ const Signin = props => {
     recaptchaRef.current ? recaptchaRef.current.reset() : null;
 
   const handleCompleted = data => {
-    setCookie(null, 'token', data.signin.token, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
-    setCookie(null, 'tron-token-copy', data.signin.token, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
     toast.success(
       <p>
         <strong>
@@ -86,6 +75,15 @@ const Signin = props => {
             cache.modify({
               fields: {
                 me(existingMeRef = {}, { readField }) {
+                  console.log('The data for a signin => ', data.data);
+                  console.log(
+                    'WIll this even work => existingRefs ',
+                    existingMeRef
+                  );
+                  console.log(
+                    'WIll this even work => readField ',
+                    existingMeRef
+                  );
                   return { ...data.data.signin };
                 },
               },
@@ -102,7 +100,6 @@ const Signin = props => {
           id="email"
           inputProps={{
             'data-cy': 'email',
-            autoComplete: 'email',
           }}
           label="Email"
           fullWidth={true}
@@ -112,12 +109,11 @@ const Signin = props => {
           value={state.email}
           onChange={saveToState}
         />
-        <PasswordInput
+        <TextInput
           id="password"
           label="Password"
           inputProps={{
             'data-cy': 'password',
-            autoComplete: 'current-password',
           }}
           fullWidth={true}
           type="password"
@@ -146,6 +142,7 @@ const Signin = props => {
         <ButtonLoader
           type="submit"
           data-cy="submit-login"
+          // variant="filled"
           loading={loading}
           text="Sign in"
           successText="Logged In"
@@ -163,10 +160,10 @@ const Signin = props => {
 };
 
 Signin.propTypes = {
-  email: PropTypes.any,
+  email: PropTypes.any.isRequired,
   handleCompleted: PropTypes.func.isRequired,
-  password: PropTypes.any,
-  update: PropTypes.func.isRequired,
+  password: PropTypes.any.isRequired,
+  update: PropTypes.func.isRequired
 };
 
 export default Signin;

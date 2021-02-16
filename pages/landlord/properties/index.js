@@ -4,16 +4,7 @@ import PleaseSignIn from '@/Components/PleaseSignIn';
 import PageHeader from '@/Components/PageHeader';
 import { Typography } from '@material-ui/core';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-import { OWNER_PROPERTIES_QUERY } from '@/Gql/queries';
-
-const PropertiesPage = props => {
-  const {
-    appData: { currentUser },
-  } = props;
-  console.log('props on Properties Page page => ', props);
+const PropertiesPage = ({ appData: { currentUser } }) => {
   const pleaseSignInMessage =
     'You must be signed in to manager your properties';
 
@@ -34,6 +25,7 @@ const PropertiesPage = props => {
         }}
       />
       <PleaseSignIn
+        currentUser={currentUser}
         message={pleaseSignInMessage}
         alert={
           <Typography variant="body1" gutterBottom color="inherit">
@@ -45,23 +37,6 @@ const PropertiesPage = props => {
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-
-  try {
-    await apolloClient.query({
-      query: CURRENT_USER_QUERY,
-    });
-    await apolloClient.query({
-      query: OWNER_PROPERTIES_QUERY,
-    });
-  } catch (e) {}
-
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 PropertiesPage.propTypes = {
   appData: PropTypes.shape({

@@ -3,54 +3,33 @@ import gql from 'graphql-tag';
 const FileInfoFragment = gql`
   fragment fileInfo on File {
     id
-    public_id
-    resource_type
-    access_mode
     url
     uploaderId
     filename
     mimetype
     encoding
-    url
-    secure_url
+    createdAt
+    updatedAt
+    asset_id
+    public_id
+    signature
+    version
+    version_id
+    width
+    height
+    format
+    resource_type
+    created_at
+    tags
+    pages
     bytes
     type
-    userPhotoId {
-      id
-    }
-    userProfilePhoto {
-      id
-    }
-    userSignature {
-      id
-    }
-    preTenancyProofOfAddress {
-      id
-    }
-    userProofOfAddress {
-      id
-    }
-    propertyOwnershipProof {
-      id
-    }
-    propertyImages {
-      id
-    }
-    propertyInsulationFile {
-      id
-    }
-    inspectionFiles {
-      id
-    }
-    codeComplianceCert {
-      id
-    }
-    certOfAcceptance {
-      id
-    }
-    insurancePolicy {
-      id
-    }
+    etag
+    placeholder
+    url
+    secure_url
+    access_mode
+    original_filename
   }
 `;
 

@@ -1,42 +1,29 @@
 // https://in-your-saas.github.io/material-ui-theme-editor/
 //https://react-theming.github.io/create-mui-theme/
-
-// secondary color dark blue
-export const mainPrimaryColor = '#fff59d';
-export const lightPrimaryColor = '#fff7b0';
-export const darkPrimaryColor = '#b2ab6d';
-// export const primaryContrastText = '#000';
-export const primaryContrastText = '#000';
-
-// secondary color dark blue
-export const mainSecondaryColor = '#90caf9';
-export const lightSecondaryColor = '#a6d4fa';
-export const darkSecondaryColor = '#648dae';
-export const secondaryContrastText = '#000';
-
-import { yellow, purple, teal, blue } from '@material-ui/core/colors';
+import { yellow } from '@material-ui/core/colors';
 const theme = {
   palette: {
     nProgress: {
-      main: mainSecondaryColor,
+      main: 'red',
     },
     type: 'dark',
     common: { black: 'rgba(59, 40, 40, 1)', white: 'rgba(255, 255, 255, 1)' },
-    background: { paper: '#424242', default: '#303030' },
-    primary: {
-      // main: yellow[200], // #fff59d
-      light: lightPrimaryColor,
-      main: mainPrimaryColor,
-      dark: darkPrimaryColor,
-      contrastText: primaryContrastText,
-    },
+    background: { paper: '#212121', default: '#212121' },
+    primary: yellow,
+    // secondary: {
+    //   light: '#ff4081',
+    //   main: '#f50057',
+    //   dark: '#c51162',
+    //   contrastText: '#fff',
+    // },
     secondary: {
-      // main: blue[200],
-      light: lightSecondaryColor,
-      main: mainSecondaryColor,
-      dark: darkSecondaryColor,
-      contrastText: secondaryContrastText,
+      light: '#8561c5',
+      main: '#673ab7',
+      dark: '#482880',
+      contrastText: '#fff',
     },
+    // primary: blueGrey,
+    // secondary: deepOrange,
     error: {
       light: '#e57373',
       main: '#f44336',

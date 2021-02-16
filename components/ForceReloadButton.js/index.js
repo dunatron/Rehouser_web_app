@@ -10,7 +10,7 @@ const ForceReloadButton = ({ title }) => (
 );
 
 ForceReloadButton.propTypes = {
-  title: PropTypes.any
+  title: PropTypes.any.isRequired
 }
 
 export default ForceReloadButton;

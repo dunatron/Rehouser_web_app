@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import * as fragments from '../fragments';
 
 const CHAT_SUBSCRIPTION = gql`
-  subscription chatSub($where: ChatSubscriptionWhereInput) {
+  subscription($where: ChatSubscriptionWhereInput) {
     chatSub(where: $where) {
       mutation
       previousValues {
@@ -20,7 +20,7 @@ const CHAT_SUBSCRIPTION = gql`
 export { CHAT_SUBSCRIPTION };
 
 // const CHAT_SUBSCRIPTION = gql`
-//   subscription chatSub($where: ChatSubscriptionWhereInput) {
+//   subscription($where: ChatSubscriptionWhereInput) {
 //     chatSub(where: $where) {
 //       mutation
 //       previousValues {

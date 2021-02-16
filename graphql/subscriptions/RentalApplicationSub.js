@@ -1,18 +1,38 @@
 import gql from 'graphql-tag';
-import { RentalApplicationInfoFragment } from '../fragments/rentalApplicationInfo';
 
 const RENTAL_APPLICATION_SUBSCRIPTION = gql`
-  subscription rentalApplicationSub(
-    $where: RentalApplicationSubscriptionWhereInput
-  ) {
-    rentalApplicationSub(where: $where) {
+  subscription($where: RentalApplicationSubscriptionWhereInput) {
+    rentalApplicationUpdateSub(where: $where) {
       node {
-        ...rentalApplicationInfo
+        id
+        visibility
+        stage
+        finalised
+        owner {
+          id
+          email
+          firstName
+          lastName
+        }
+        property {
+          id
+          location
+        }
+        applicants {
+          id
+          approved
+          completed
+          email
+          firstName
+          user {
+            id
+            firstName
+            lastName
+          }
+        }
       }
     }
   }
-  ${RentalApplicationInfoFragment}
 `;
-
 
 export { RENTAL_APPLICATION_SUBSCRIPTION };

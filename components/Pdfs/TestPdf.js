@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import React from 'react';
 import {
   PDFViewer,
@@ -72,9 +72,9 @@ MyDocument.propTypes = {
     email: PropTypes.any,
     firstName: PropTypes.any,
     profilePhoto: PropTypes.shape({
-      url: PropTypes.any,
-    }),
-  }),
-};
+      url: PropTypes.any
+    })
+  }).isRequired
+}
 
 export default MyDocument;

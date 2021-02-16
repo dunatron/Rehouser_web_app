@@ -74,9 +74,6 @@ const UserDetails = ({ me }) => {
         data: {
           ...updates,
         },
-        where: {
-          id: me.id,
-        },
       },
     });
   };
@@ -115,7 +112,7 @@ const UserDetails = ({ me }) => {
 };
 
 UserDetails.propTypes = {
-  me: PropTypes.any,
+  me: PropTypes.any.isRequired
 };
 
 export default UserDetails;

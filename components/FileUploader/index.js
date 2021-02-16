@@ -10,13 +10,11 @@ import React, {
 } from 'react';
 import { useMutation, gql, useApolloClient } from '@apollo/client';
 import clsx from 'clsx';
-import { useTheme } from '@material-ui/core/styles';
 import {
   Paper,
   ButtonGroup,
   Button,
   IconButton,
-  Box,
   Typography,
 } from '@material-ui/core';
 
@@ -289,16 +287,9 @@ const UploadFile = forwardRef((props, ref) => {
           file: file.raw,
           data: fileParams
             ? {
-                resource_type: fileParams.resource_type,
-                folder: fileParams.folder,
-                access_mode: fileParams.access_mode,
+                ...fileParams,
               }
             : {},
-          // data: fileParams
-          //   ? {
-          //       ...fileParams,
-          //     }
-          //   : {},
         },
       })
       .then(res => {
@@ -408,32 +399,26 @@ const UploadFile = forwardRef((props, ref) => {
           style={{
             width: '100%',
           }}>
-          <Typography variant="h6">Recently Uploaded</Typography>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="subtitle1">Recently Uploaded</Typography>
+          <Typography variant="body2">
             These files will be connected when you upload the form
           </Typography>
           {/* Recently Added */}
-          <ul>
-            {files
-              .filter(f => f.uploadCompleted)
-              .map((f, i) => {
-                const { serverFile } = f;
-                if (!serverFile) return null;
-                return (
-                  <Box component="li">
-                    <Typography
-                      variant="body2"
-                      gutterBottom
-                      key={f.id}
-                      style={{
-                        width: '100%',
-                      }}>
-                      {serverFile.filename}
-                    </Typography>
-                  </Box>
-                );
-              })}
-          </ul>
+          {files
+            .filter(f => f.uploadCompleted)
+            .map((f, i) => {
+              const { serverFile } = f;
+              if (!serverFile) return null;
+              return (
+                <div
+                  key={f.id}
+                  style={{
+                    width: '100%',
+                  }}>
+                  Uploaded: {serverFile.filename}
+                </div>
+              );
+            })}
           <FilePreviewer
             files={recentlyUploadedWithoutAttached}
             remove={remove}
@@ -466,15 +451,19 @@ const UploadFile = forwardRef((props, ref) => {
 });
 
 UploadFile.propTypes = {
-  description: PropTypes.any,
+  description: PropTypes.any.isRequired,
   dispatch: PropTypes.func.isRequired,
-  fileParams: PropTypes.any,
-  isRemoving: PropTypes.any,
-  maxFilesAllowed: PropTypes.any,
+  fileParams: PropTypes.any.isRequired,
+  isRemoving: PropTypes.any.isRequired,
+  maxFilesAllowed: PropTypes.any.isRequired,
   recieveFile: PropTypes.func.isRequired,
-  remove: PropTypes.any,
-  serverFiles: PropTypes.array.isRequired,
-  store: PropTypes.any,
+  remove: PropTypes.any.isRequired,
+  serverFiles: PropTypes.shape({
+    forEach: PropTypes.func,
+    length: PropTypes.number,
+    map: PropTypes.func,
+  }).isRequired,
+  store: PropTypes.any.isRequired,
 };
 
 const FlipCardHeader = ({
@@ -511,9 +500,9 @@ const FlipCardHeader = ({
 };
 
 FlipCardHeader.propTypes = {
-  flip: PropTypes.any,
-  isFlipped: PropTypes.any,
-  title: PropTypes.any,
+  flip: PropTypes.any.isRequired,
+  isFlipped: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired,
 };
 
 const UploadedServerFiles = ({
@@ -543,15 +532,14 @@ const UploadedServerFiles = ({
 };
 
 UploadedServerFiles.propTypes = {
-  isRemoving: PropTypes.any,
-  remove: PropTypes.any,
-  serverFiles: PropTypes.any,
-  store: PropTypes.any,
+  isRemoving: PropTypes.any.isRequired,
+  remove: PropTypes.any.isRequired,
+  serverFiles: PropTypes.any.isRequired,
+  store: PropTypes.any.isRequired,
 };
 
 //remove gets fed into here
 const FileManager = props => {
-  const theme = useTheme();
   const {
     title,
     description,
@@ -668,7 +656,7 @@ const FileManager = props => {
       <Error error={error} />
       {state.expanded && (
         <ReactCardFlip
-          cardZIndex={theme.zIndex.flipCard}
+          cardZIndex="900"
           containerStyle={{
             position: 'relative',
           }}
@@ -709,13 +697,11 @@ const FileManager = props => {
 FileManager.propTypes = {
   description: PropTypes.string.isRequired,
   fileParams: PropTypes.shape({
-    public_id: PropTypes.string,
     filename: PropTypes.string,
     folder: PropTypes.string,
     resource_type: PropTypes.oneOf(['image', 'raw', 'video', 'auto']),
     tags: PropTypes.arrayOf(PropTypes.string),
     type: PropTypes.oneOf(['upload', 'private', 'authenticated']),
-    access_mode: PropTypes.oneOf(['public', 'authenticated']),
   }).isRequired,
   fileRemovedFromServer: PropTypes.func.isRequired,
   files: PropTypes.arrayOf(
@@ -727,7 +713,7 @@ FileManager.propTypes = {
   ).isRequired,
   maxFilesAllowed: PropTypes.number.isRequired,
   recieveFile: PropTypes.func.isRequired,
-  refetchQueries: PropTypes.any,
+  refetchQueries: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
   updateCacheOnRemovedFile: PropTypes.func.isRequired,
 };

@@ -92,13 +92,13 @@ const CheckMultipleWithText = props => {
 };
 
 CheckMultipleWithText.propTypes = {
-  config: PropTypes.any,
-  defaultValue: PropTypes.any,
-  errorMessage: PropTypes.any,
-  errors: PropTypes.any,
+  config: PropTypes.any.isRequired,
+  defaultValue: PropTypes.any.isRequired,
+  errorMessage: PropTypes.any.isRequired,
+  errors: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
-  reset: PropTypes.any,
-  setValue: PropTypes.any
+  reset: PropTypes.any.isRequired,
+  setValue: PropTypes.any.isRequired
 };
 
 export default CheckMultipleWithText;

@@ -8,8 +8,6 @@ import { CEO_DETAILS } from '../../config';
 import { useMutation } from '@apollo/client';
 import { CREATE_CONTACT_FORM_MUTATION } from '@/Gql/mutations';
 import { toast } from 'react-toastify';
-import Card from '@/Styles/Card';
-import FlexLayout from '@/Styles/layouts/FlexLayout';
 
 const ContactForm = ({ createText }) => {
   const [sent, setSent] = useState(false);
@@ -44,36 +42,34 @@ const ContactForm = ({ createText }) => {
 
   return (
     <>
-      <Card
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
           margin: '16px 0',
         }}>
-        <FlexLayout>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              // marginBottom: '8px',
-              marginRight: '8px',
-              justifyContent: 'center',
-            }}>
-            <PhoneIcon style={{ marginRight: '4px' }} />
-            <Typography>{CEO_DETAILS.phone}</Typography>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              // marginBottom: '8px',
-            }}>
-            <EmailIcon style={{ marginRight: '4px' }} />{' '}
-            <Typography>{CEO_DETAILS.email}</Typography>
-          </div>
-        </FlexLayout>
-      </Card>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '8px',
+            marginRight: '8px',
+            justifyContent: 'center',
+          }}>
+          <PhoneIcon style={{ marginRight: '4px' }} />
+          <Typography>{CEO_DETAILS.phone}</Typography>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '8px',
+          }}>
+          <EmailIcon style={{ marginRight: '4px' }} />{' '}
+          <Typography>{CEO_DETAILS.email}</Typography>
+        </div>
+      </div>
       <FormCreator
         title="Contact form"
         createText={createText ? createText : 'Submit contact form'}

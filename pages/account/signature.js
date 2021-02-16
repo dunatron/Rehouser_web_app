@@ -4,10 +4,6 @@ import PleaseSignIn from '@/Components/PleaseSignIn';
 import Signature from '@/Components/Signature/index';
 import { Typography } from '@material-ui/core';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const AccountPage = ({ appData: { currentUser } }) => {
   return (
     <PleaseSignIn
@@ -26,16 +22,6 @@ const AccountPage = ({ appData: { currentUser } }) => {
     </PleaseSignIn>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 AccountPage.propTypes = {
   appData: PropTypes.shape({

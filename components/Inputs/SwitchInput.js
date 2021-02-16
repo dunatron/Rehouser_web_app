@@ -19,10 +19,10 @@ const SwitchInput = ({ checked, onChange, label, checkedLabel = label }) => {
 };
 
 SwitchInput.propTypes = {
-  checked: PropTypes.any,
-  checkedLabel: PropTypes.any,
-  label: PropTypes.any,
-  onChange: PropTypes.any
+  checked: PropTypes.any.isRequired,
+  checkedLabel: PropTypes.any.isRequired,
+  label: PropTypes.any.isRequired,
+  onChange: PropTypes.any.isRequired
 }
 
 export default SwitchInput;

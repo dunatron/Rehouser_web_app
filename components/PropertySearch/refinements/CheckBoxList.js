@@ -96,8 +96,14 @@ const MaterialUiCheckBoxRefinementList = ({
 };
 
 MaterialUiCheckBoxRefinementList.propTypes = {
-  attribute: PropTypes.string.isRequired,
-  operator: PropTypes.string,
+  attribute: PropTypes.shape({
+    toUpperCase: PropTypes.func,
+  }).isRequired,
+  createURL: PropTypes.any.isRequired,
+  items: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+  refine: PropTypes.func.isRequired,
 };
 
 const CheckBoxList = connectRefinementList(MaterialUiCheckBoxRefinementList);

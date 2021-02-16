@@ -1,35 +1,30 @@
+import AdminAlertNewRentalApplicationSub from '../components/SubscriptionComponents/AdminAlertNewRentalApplicationSub';
+import AdminNewPropertyAppraisalSub from '../components/SubscriptionComponents/AdminNewPropertyAppraisalSub';
 import GeneralUserUpdatesSub from '../components/SubscriptionComponents/GeneralUserUpdatesSub';
 import ChatCreatedSub from '../components/SubscriptionComponents/ChatCreatedSub';
 import MessageCreatedSub from '../components/SubscriptionComponents/MessageCreatedSub';
-import { useCurrentUser } from '@/Components/User';
-import Loader from '@/Components/Loader';
-import Error from '@/Components/ErrorMessage';
+import User from '../components/User/index';
 
 const GeneralSubsContainer = props => {
-  const { data, error, loading } = useCurrentUser();
-
-  if (loading)
-    return (
-      <Loader loading={loading} text="Loading your data for general subs" />
-    );
-
-  if (error) return <Error error={error} />;
-  const me = data.me;
-
-  if (!me) return null;
-  if (!me.id) return null;
-
-  const userId = me.id;
-
+  console.log('GeneralUserUpdatesSub: Container');
   return (
     <>
-      <GeneralUserUpdatesSub userId={userId} />
-      <ChatCreatedSub userId={userId} />
-      <MessageCreatedSub userId={userId} />
+      <User>
+        {({ data }) => {
+          const me = data ? data.me : null;
+          if (!me) return null;
+          console.log('General Subs container has user => ', me);
+          return (
+            <>
+              <GeneralUserUpdatesSub me={me} />
+              <ChatCreatedSub me={me} />
+              <MessageCreatedSub me={me} />
+            </>
+          );
+        }}
+      </User>
     </>
   );
 };
 
-const MemoizedGeneralSubsContainer = React.memo(GeneralSubsContainer);
-
-export default MemoizedGeneralSubsContainer;
+export default GeneralSubsContainer;

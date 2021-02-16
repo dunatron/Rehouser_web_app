@@ -4,9 +4,15 @@ import { store } from '@/Store/index';
 
 import Dashboard from '@/Components/Dashboard';
 import PageHeader from '@/Components/PageHeader';
-import AdminOnly from '@/Components/AdminOnly';
 
-import ADMIN_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/adminDashConf';
+//material
+import { Badge } from '@material-ui/core';
+
+import TextFieldsIcon from '@material-ui/icons/TextFields';
+import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import SettingsIcon from '@material-ui/icons/Settings';
+import FriendManager from '@/Components/FriendManager';
+import AdminOnly from '@/Components/AdminOnly';
 
 /**
  *
@@ -18,11 +24,73 @@ const AdminDashboardPage = ({ appData: { currentUser } }) => {
   const globalStore = useContext(store);
   const { dispatch, state } = globalStore;
 
+  const ADMIN_DASHBOARD_CONFIG = [
+    {
+      label: 'Appraisals',
+      route: '/admin/appraisals',
+      description: 'Review system appraisals',
+      color: 'secondary',
+      icon: (
+        <Badge badgeContent={state.newRentalAppraisalCount} color="primary">
+          <HomeWorkIcon />
+        </Badge>
+      ),
+    },
+    {
+      label: 'Rental Applications',
+      route: '/admin/applications',
+      description: 'View all rental applications currently in the system',
+      color: 'secondary',
+      icon: (
+        <Badge badgeContent={state.newRentalApplicationsCount} color="primary">
+          <HomeWorkIcon />
+        </Badge>
+      ),
+    },
+    {
+      label: 'Properties',
+      route: '/admin/properties',
+      description: 'View all properties on the system',
+      color: 'secondary',
+      icon: (
+        <Badge badgeContent={state.newPropertiesCount} color="primary">
+          <HomeWorkIcon />
+        </Badge>
+      ),
+    },
+    {
+      label: 'Inspections',
+      route: '/admin/inspections',
+      description: 'View allinspections on the system',
+      color: 'secondary',
+      icon: <HomeWorkIcon />,
+    },
+    {
+      label: 'Typography',
+      route: '/admin/typography',
+      description: 'Review system typography',
+      color: 'secondary',
+      icon: <TextFieldsIcon />,
+    },
+    {
+      label: 'Admin Settings',
+      route: '/admin/settings',
+      description: 'Subscribe to system events',
+      color: 'secondary',
+      icon: <SettingsIcon />,
+    },
+    {
+      label: 'Security statement',
+      route: '/admin/security-statement',
+      description: 'View our security statement',
+      color: 'secondary',
+      icon: <SettingsIcon />,
+    },
+  ];
   return (
     <div>
       <PageHeader
         title="Admin Portal"
-        intro="The admin portal is where staff can get an overview of the system"
         metaData={{
           title: 'Admin portal',
           content:
@@ -30,11 +98,8 @@ const AdminDashboardPage = ({ appData: { currentUser } }) => {
         }}
       />
       <AdminOnly me={me}>
-        <Dashboard
-          config={ADMIN_DASHBOARD_CONFIG({ state: state })}
-          // elevation={20}
-          elevation={0}
-        />
+        <Dashboard config={ADMIN_DASHBOARD_CONFIG} />
+        <FriendManager />
       </AdminOnly>
     </div>
   );

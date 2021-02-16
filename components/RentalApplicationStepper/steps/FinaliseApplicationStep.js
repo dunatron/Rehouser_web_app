@@ -13,7 +13,7 @@ const FinaliseApplicationStep = ({
   applicationInfo,
   applicantData,
   completed,
-  steps,
+  stepHeaders,
 }) => {
   // ToDo: Mutation Props
   const [completeApplication, completeApplicationProps] = useMutation(
@@ -43,13 +43,13 @@ const FinaliseApplicationStep = ({
   return (
     <div>
       <Error error={completeApplicationProps.error} />
-      {steps
-        .filter(step => step.key !== 'finaliseDetails')
-        .map((step, idx) => {
+      {stepHeaders
+        .filter(step => step !== 'Finalise')
+        .map((stepHeader, idx) => {
           return (
             <div key={idx}>
               <h2>
-                {step.label} {completed[idx] ? 'YES' : 'NO'}
+                {stepHeader} {completed[idx] ? 'YES' : 'NO'}
               </h2>
             </div>
           );
@@ -69,15 +69,17 @@ const FinaliseApplicationStep = ({
 };
 
 FinaliseApplicationStep.propTypes = {
-  applicantData: PropTypes.any,
-  applicationInfo: PropTypes.any,
-  completed: PropTypes.any,
-  me: PropTypes.any,
-  property: PropTypes.any,
+  applicantData: PropTypes.any.isRequired,
+  applicationInfo: PropTypes.any.isRequired,
+  completed: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired,
+  property: PropTypes.any.isRequired,
   rentalApplication: PropTypes.shape({
-    id: PropTypes.any,
+    id: PropTypes.any
   }).isRequired,
-  steps: PropTypes.array.isRequired,
+  stepHeaders: PropTypes.shape({
+    filter: PropTypes.func
+  }).isRequired
 };
 
 export default FinaliseApplicationStep;

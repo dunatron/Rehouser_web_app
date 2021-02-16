@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import {
   Box,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
   Grid,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -112,7 +112,7 @@ const LabelArrayVal = ({ label, val }) => {
 };
 
 LabelArrayVal.propTypes = {
-  label: PropTypes.any,
+  label: PropTypes.any.isRequired,
   val: PropTypes.shape({
     map: PropTypes.func,
   }).isRequired,
@@ -132,8 +132,8 @@ const LabelKeyVal = ({ label, val }) => {
 };
 
 LabelKeyVal.propTypes = {
-  label: PropTypes.any,
-  val: PropTypes.any,
+  label: PropTypes.any.isRequired,
+  val: PropTypes.any.isRequired,
 };
 
 export default RentalAppraisalView;

@@ -23,39 +23,36 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     display: 'flex',
     bottom: 0,
+
     pointerEvents: 'none', // allows click through to elements behind
     background: 'transparent',
   },
   barItem: {
-    background: theme.palette.background.paper,
+    background: '#fff',
     pointerEvents: 'auto', // re-enable pointer events
     width: '280px',
     marginRight: '8px',
   },
   barItemIn: {
+    // height: '5000px',
+    height: '460px',
     maxHeight: 'calc(100vh - 64px)',
     borderBottomLeftRadius: '0',
     borderBottomRightRadius: '0',
   },
   barItemHeader: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding: theme.spacing(1),
   },
   barItemTitle: {
+    padding: '4px',
     display: 'flex',
     alignItems: 'center',
   },
-  actions: {
-    display: 'flex',
-  },
   chatName: {
     marginLeft: '6px',
-    maxHeight: '64px',
-    margin: '0 0 0 8px',
-    overflow: 'auto',
-    lineHeight: 1.2,
   },
   close: {
     display: 'flex',
@@ -68,28 +65,6 @@ const ActiveChat = ({ id, chat, me }) => {
   const { state, dispatch } = useContext(store);
   const classes = useStyles();
   const [contentIn, setContentIn] = useState(true);
-
-  const toggleActiveChatOpen = e => {
-    setContentIn(!contentIn);
-    e.preventDefault();
-    dispatch({
-      type: 'setActiveChat',
-      payload: null,
-    });
-  };
-
-  const closeActiveChat = e => {
-    e.preventDefault();
-    dispatch({
-      type: 'closeChat',
-      payload: chat.id,
-    });
-    dispatch({
-      type: 'setActiveChat',
-      payload: null,
-    });
-  };
-
   return (
     <Paper
       className={`${classes.barItem} ${contentIn ? classes.barItemIn : ''}`}
@@ -99,11 +74,32 @@ const ActiveChat = ({ id, chat, me }) => {
           {getChatImage(chat, me)}
           <div className={classes.chatName}>{getChatName(chat, me)}</div>
         </div>
-        <div className={classes.actions}>
-          <IconButton size="small" onClick={toggleActiveChatOpen}>
+        <div>
+          <IconButton
+            size="small"
+            onClick={e => {
+              setContentIn(!contentIn);
+              e.preventDefault();
+              dispatch({
+                type: 'setActiveChat',
+                payload: null,
+              });
+            }}>
             <RemoveIcon />
           </IconButton>
-          <IconButton size="small" onClick={closeActiveChat}>
+          <IconButton
+            size="small"
+            onClick={e => {
+              e.preventDefault();
+              dispatch({
+                type: 'closeChat',
+                payload: chat.id,
+              });
+              dispatch({
+                type: 'setActiveChat',
+                payload: null,
+              });
+            }}>
             <CloseIcon />
           </IconButton>
         </div>
@@ -119,9 +115,9 @@ const ActiveChat = ({ id, chat, me }) => {
 
 ActiveChat.propTypes = {
   chat: PropTypes.shape({
-    id: PropTypes.any,
+    id: PropTypes.any
   }).isRequired,
-  id: PropTypes.any,
-  me: PropTypes.any,
+  id: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired
 };
 export default ActiveChat;

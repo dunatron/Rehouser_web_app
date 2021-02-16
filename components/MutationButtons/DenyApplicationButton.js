@@ -33,7 +33,7 @@ ErrorSupplier.propTypes = {
   errors: PropTypes.shape({
     map: PropTypes.func
   }).isRequired,
-  tronM: PropTypes.any
+  tronM: PropTypes.any.isRequired
 };
 
 const DenyApplicationButton = ({ application }) => {

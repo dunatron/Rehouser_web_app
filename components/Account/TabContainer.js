@@ -8,9 +8,6 @@ function TabContainer(props) {
 
   return (
     <div
-      style={{
-        padding: '8px 0 ',
-      }}
       role="tabpanel"
       hidden={value !== index}
       id={`wrapped-tabpanel-${index}`}
@@ -28,8 +25,8 @@ function TabContainer(props) {
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  index: PropTypes.any,
-  value: PropTypes.any,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 export default TabContainer;

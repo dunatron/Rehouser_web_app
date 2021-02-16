@@ -37,10 +37,9 @@ const HasBeenUsedMessage = () => {
 
 const CreatePropertyComponent = props => {
   const router = useRouter();
-
-  const appraisal_id = router.query.appraisal_id;
-
-  const [waitForLazy, setWaitForLazy] = useState(appraisal_id ? true : false);
+  const [waitForLazy, setWaitForLazy] = useState(
+    router.query.appraisalId ? true : false
+  );
   const { me } = props;
   const [createdPropertyId, setCreatedPropertyId] = useState(null);
   const [createdData, setCreatedData] = useState({});
@@ -89,7 +88,9 @@ const CreatePropertyComponent = props => {
       ...defaultFormData,
       bankDetails: me.bankDetails,
     });
-    return () => {};
+    return () => {
+      console.log('Create Property dismounted');
+    };
   }, [me.bankDetails]);
 
   const [updateAppraisal, updateAppraisalProps] = useMutation(
@@ -97,9 +98,8 @@ const CreatePropertyComponent = props => {
   );
 
   const handlePropertyCreated = data => {
-    const newPropertyId = data.createProperty.id;
     setCreatedData(data);
-    setCreatedPropertyId(newPropertyId);
+    setCreatedPropertyId(data.createProperty.id);
     setIsChecking(false);
     setDefaultFormData({
       ...defaultMeData,
@@ -111,16 +111,17 @@ const CreatePropertyComponent = props => {
         </Typography>
         <ChangeRouteButton
           title="Go to property"
-          route={`/landlord/properties/${newPropertyId}`}
+          route="/landlord/properties/property"
+          query={{ id: data.createProperty.id }}
         />
       </Box>
     );
 
-    if (appraisal_id) {
+    if (router.query.appraisalId) {
       updateAppraisal({
         variables: {
           where: {
-            id: appraisal_id,
+            id: router.query.appraisalId,
           },
           data: {
             hasBeenUsed: true,
@@ -134,18 +135,18 @@ const CreatePropertyComponent = props => {
   const submitFormWithData = data => {
     setSubmittedData({
       ...data,
-      // bankDetails: data.bankDetails
-      //   ? {
-      //       create: {
-      //         ...data.bankDetails,
-      //       },
-      //     }
-      //   : {},
-      // rehouserAssist: {
-      //   create: {
-      //     ...data.rehouserAssist,
-      //   },
-      // },
+      bankDetails: data.bankDetails
+        ? {
+            create: {
+              ...data.bankDetails,
+            },
+          }
+        : {},
+      rehouserAssist: {
+        create: {
+          ...data.rehouserAssist,
+        },
+      },
     });
     setIsChecking(true);
   };
@@ -186,18 +187,18 @@ const CreatePropertyComponent = props => {
       </SuccessPaper>
     );
   }
-  if (!called && appraisal_id) {
+  if (!called && router.query.appraisalId) {
     loadAppraisal({
       variables: {
         where: {
-          id: appraisal_id,
+          id: router.query.appraisalId,
         },
       },
     });
     return <LoadingAppraisal />;
   }
 
-  if ((!called && appraisal_id) || loading) {
+  if ((!called && router.query.appraisalId) || loading) {
     return <LoadingAppraisal />;
   }
 
@@ -235,7 +236,7 @@ const CreatePropertyComponent = props => {
             <>
               <AssociatedAppraisal
                 rentalAppraisal={data.rentalAppraisal}
-                appraisalId={appraisal_id}
+                appraisalId={router.query.appraisalId}
               />
               {data.rentalAppraisal.hasBeenUsed && (
                 <Box

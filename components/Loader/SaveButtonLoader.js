@@ -52,9 +52,9 @@ const RenderBtnText = ({ success, text, successText }) => {
 };
 
 RenderBtnText.propTypes = {
-  success: PropTypes.any,
-  successText: PropTypes.any,
-  text: PropTypes.any
+  success: PropTypes.any.isRequired,
+  successText: PropTypes.any.isRequired,
+  text: PropTypes.any.isRequired
 }
 
 const SaveButtonLoader = ({
@@ -90,7 +90,7 @@ const SaveButtonLoader = ({
 };
 
 SaveButtonLoader.propTypes = {
-  disabled: PropTypes.any,
+  disabled: PropTypes.any.isRequired,
   loading: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   success: PropTypes.bool.isRequired,

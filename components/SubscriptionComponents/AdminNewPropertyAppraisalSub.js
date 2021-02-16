@@ -3,8 +3,6 @@ import { useSubscription } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { PROPERTY_APPRAISAL_SUBSCRIPTION } from '@/Gql/subscriptions/PropertyAppraisalSub';
 import { store } from '@/Store/index';
-import Error from '@/Components/ErrorMessage';
-import Loader from '@/Components/Loader';
 
 const AdminNewRentalAppraisalSub = () => {
   const globalStore = useContext(store);
@@ -12,6 +10,7 @@ const AdminNewRentalAppraisalSub = () => {
   const { loading, data, error } = useSubscription(
     PROPERTY_APPRAISAL_SUBSCRIPTION,
     {
+      // suspend: false,
       variables: {
         where: {
           mutation_in: 'CREATED',
@@ -25,26 +24,32 @@ const AdminNewRentalAppraisalSub = () => {
         },
       },
       onSubscriptionData: ({ client, subscriptionData }) => {
+        console.log(
+          'recieved new appraisal data from subscription => ',
+          subscriptionData
+        );
         dispatch({
           type: 'updateState',
           payload: {
             newRentalAppraisalCount: state.newRentalAppraisalCount + 1,
           },
         });
-        toast.success(<p>New Rental Appraisal has been requested</p>);
+        toast.success(<p>New Rental APpraisal has been requested</p>);
       },
     }
   );
-
-  if (loading) return null;
-  if (error) {
+  console.log('subscription: RentalAppraisal 1');
+  if (loading) {
+    return null;
+  }
+  console.log('subscription: RentalAppraisal 2');
+  if (error)
     return (
       <div>
-        Not SUbScribed To: PROPERTY_APPRAISAL_SUBSCRIPTION
-        <Error error={error} />
+        No Websocket connection. You will need to manually refresh for updates
       </div>
     );
-  }
+  console.log('subscription: RentalAppraisal 3');
   return null;
 };
 

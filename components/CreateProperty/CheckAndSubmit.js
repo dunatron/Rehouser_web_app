@@ -6,9 +6,9 @@ import { PROPERTIES_QUERY, OWNER_PROPERTIES_QUERY } from '@/Gql/queries/index';
 import {
   Typography,
   Button,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
   Chip,
 } from '@material-ui/core';
 import Error from '@/Components/ErrorMessage';
@@ -50,62 +50,49 @@ const CheckAndSubmit = ({ me, formData, handlePropertyCreated }) => {
   );
 
   const handleCreate = () => {
-    const variables = {
-      data: {
-        ...formData,
-        rent: rentVal,
-        onTheMarket: false,
-        useAdvancedRent: false,
-        bankDetails: formData.bankDetails
-          ? {
-              create: {
-                ...formData.bankDetails,
-              },
-            }
-          : {},
-        owners: {
-          connect: {
-            id: me.id,
+    const connectedFiles = connectFiles(formData.files);
+    createProperty({
+      variables: {
+        data: {
+          ...formData,
+          rent: rentVal,
+          onTheMarket: false,
+          useAdvancedRent: false,
+          owners: {
+            connect: {
+              id: me.id,
+            },
           },
-        },
-        creator: {
-          connect: {
-            id: me.id,
+          creator: {
+            connect: {
+              id: me.id,
+            },
           },
-        },
-        files: {
-          create: connectFiles(formData.files),
-        },
-        insulationForm: formData.insulationForm
-          ? {
-              create: {
-                ...formData.insulationForm,
-              },
-            }
-          : {},
-        rehouserAssist: {
-          create: {
-            ...formData.rehouserAssist,
+          files: {
+            create: connectFiles(formData.files),
           },
+          insulationForm: formData.insulationForm
+            ? {
+                create: {
+                  ...formData.insulationForm,
+                },
+              }
+            : {},
         },
       },
-    };
-
-    createProperty({
-      variables: variables,
     });
   };
 
   return (
     <>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Terms of Engagement</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <TermsOfEngagement me={me} />
-        </AccordionDetails>
-      </Accordion>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
       <Typography variant="h6" gutterBottom>
         Check your property details
       </Typography>
@@ -283,8 +270,8 @@ CheckAndSubmit.propTypes = {
     carportSpaces: PropTypes.any,
     chattels: PropTypes.shape({
       set: PropTypes.shape({
-        map: PropTypes.func,
-      }),
+        map: PropTypes.func
+      })
     }),
     expiryDate: PropTypes.any,
     files: PropTypes.any,
@@ -293,14 +280,14 @@ CheckAndSubmit.propTypes = {
     headline: PropTypes.any,
     heatSources: PropTypes.shape({
       set: PropTypes.shape({
-        map: PropTypes.func,
-      }),
+        map: PropTypes.func
+      })
     }),
     inHallway3mOfEachBedroom: PropTypes.any,
     indoorFeatures: PropTypes.shape({
       set: PropTypes.shape({
-        map: PropTypes.func,
-      }),
+        map: PropTypes.func
+      })
     }),
     insulationForm: PropTypes.any,
     landlordProtectionCover: PropTypes.any,
@@ -313,29 +300,29 @@ CheckAndSubmit.propTypes = {
     offStreetSpaces: PropTypes.any,
     outdoorFeatures: PropTypes.shape({
       set: PropTypes.shape({
-        map: PropTypes.func,
-      }),
+        map: PropTypes.func
+      })
     }),
     pets: PropTypes.shape({
       set: PropTypes.shape({
-        map: PropTypes.func,
-      }),
+        map: PropTypes.func
+      })
     }),
     petsAllowed: PropTypes.any,
     rent: PropTypes.shape({
-      replace: PropTypes.func,
+      replace: PropTypes.func
     }),
     rooms: PropTypes.any,
     tenYearPhotoelectricAlarms: PropTypes.any,
     type: PropTypes.any,
-    workingAlarms: PropTypes.any,
+    workingAlarms: PropTypes.any
   }).isRequired,
   handlePropertyCreated: PropTypes.func.isRequired,
   me: PropTypes.shape({
     firstName: PropTypes.any,
     id: PropTypes.any,
-    lastName: PropTypes.any,
-  }).isRequired,
+    lastName: PropTypes.any
+  }).isRequired
 };
 
 export default CheckAndSubmit;

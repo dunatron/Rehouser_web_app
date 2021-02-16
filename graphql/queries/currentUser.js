@@ -1,5 +1,4 @@
-// import gql from 'graphql-tag';
-import { gql } from '@apollo/client';
+import gql from 'graphql-tag';
 import { UserInfoFragment } from '../fragments/userInfo';
 
 const CURRENT_USER_QUERY = gql`
@@ -12,4 +11,3 @@ const CURRENT_USER_QUERY = gql`
 `;
 
 export { CURRENT_USER_QUERY };
-export default CURRENT_USER_QUERY;

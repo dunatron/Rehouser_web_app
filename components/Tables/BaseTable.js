@@ -70,7 +70,7 @@ const BaseTable = ({ where, me, orderBy = 'createdAt_ASC' }) => {
       title: 'createdAt',
       field: 'createdAt',
       render: rowData => {
-        return moment(rowData.createdAt).format('Do MMM YYYY');
+        return moment(rowData.createdAt).format('Mo MMM YYYY');
       },
     },
     { title: 'rent', field: 'rent', editable: false },
@@ -141,6 +141,8 @@ const BaseTable = ({ where, me, orderBy = 'createdAt_ASC' }) => {
     client.cache.modify({
       fields: {
         [connectionKey](existingRef, { readField }) {
+          // console.log('existingRefs  item => ', existingRef);
+          // console.log('existingRefs edges => ', existingRef.edges);
           return existingRef.edges ? {} : existingRef;
         },
       },

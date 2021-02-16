@@ -51,9 +51,12 @@ const RefinementValue = ({ item, refine, url }) => {
 };
 
 RefinementValue.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    label: PropTypes.any,
+    value: PropTypes.any,
+  }).isRequired,
   refine: PropTypes.func.isRequired,
-  url: PropTypes.any,
+  url: PropTypes.any.isRequired,
 };
 
 const RefinementGroupList = ({ item, refine, createURL }) => {
@@ -77,8 +80,13 @@ const RefinementGroupList = ({ item, refine, createURL }) => {
 
 RefinementGroupList.propTypes = {
   createURL: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-  refine: PropTypes.any,
+  item: PropTypes.shape({
+    items: PropTypes.shape({
+      map: PropTypes.func,
+    }),
+    label: PropTypes.any,
+  }).isRequired,
+  refine: PropTypes.any.isRequired,
 };
 
 const CurrentRefinements = ({ items, refine, createURL }) => (
@@ -103,7 +111,13 @@ const CurrentRefinements = ({ items, refine, createURL }) => (
   </CurrentRefinementStyles>
 );
 
-CurrentRefinements.propTypes = {};
+CurrentRefinements.propTypes = {
+  createURL: PropTypes.func.isRequired,
+  items: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+  refine: PropTypes.any.isRequired,
+};
 
 const CustomCurrentRefinements = connectCurrentRefinements(CurrentRefinements);
 

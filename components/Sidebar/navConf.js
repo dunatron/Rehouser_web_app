@@ -104,14 +104,6 @@ const NavigationConfig = (me, loadingUser, pathname) => {
           canRender: () => true, // set to try just to run it alot on the same account in dev
         },
         {
-          key: 'legal',
-          icon: <InfoIcon />,
-          text: 'Legal',
-          route: '/legal',
-          style: { ...defaultNavItemStyle },
-          canRender: () => true, // set to try just to run it alot on the same account in dev
-        },
-        {
           key: 'contact',
           icon: <ContactPhoneIcon />,
           text: 'Contact',
@@ -180,10 +172,10 @@ const NavigationConfig = (me, loadingUser, pathname) => {
 };
 
 NavigationConfig.propTypes = {
-  friendRequests: PropTypes.any,
+  friendRequests: PropTypes.any.isRequired,
   permissions: PropTypes.shape({
-    includes: PropTypes.func,
-  }).isRequired,
+    includes: PropTypes.func
+  }).isRequired
 };
 
 export default NavigationConfig;

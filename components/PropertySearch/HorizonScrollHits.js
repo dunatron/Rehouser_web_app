@@ -7,7 +7,6 @@ import { Box, IconButton } from '@material-ui/core';
 
 import { AutoSizer, List, ColumnSizer, Grid } from 'react-virtualized';
 import VirtualizedColumns from './VirtualizedColumns';
-import NoSSRVirtualizedColumns from './NoSSRVirtualizedColumns';
 // import 'react-virtualized/styles.css'; // only needs to be imported once
 
 // icons
@@ -85,7 +84,7 @@ const ScrollRightBox = ({ onClick }) => {
 };
 
 ScrollRightBox.propTypes = {
-  onClick: PropTypes.any,
+  onClick: PropTypes.any.isRequired,
 };
 
 const ScrollLeftBox = ({ onClick }) => {
@@ -105,7 +104,7 @@ const ScrollLeftBox = ({ onClick }) => {
 };
 
 ScrollLeftBox.propTypes = {
-  onClick: PropTypes.any,
+  onClick: PropTypes.any.isRequired,
 };
 
 const list = [
@@ -122,20 +121,87 @@ function rowRenderer({ key, index, style, hits }) {
 }
 
 const Hits = ({ hits, me }) => {
+  const scrollNode = useRef();
+  const classes = useStyles();
+
+  const handleScrollLeft = () => {
+    alert('YES');
+  };
+
+  const handleScrollRight = () => {};
+
   useEffect(() => {
     return () => {};
   }, []);
 
+  // return hits.map(hit => (
+  //   <Box component="div" className={classes.item}>
+  //     <PropertyResultHit key={hit.objectID} hit={hit} />
+  //   </Box>
+  // ));
+
   return (
-    <NoSSRVirtualizedColumns
+    <VirtualizedColumns
       hits={hits}
       columnCount={hits.length ? hits.length : 0}
     />
   );
+
+  return (
+    <div>
+      <AutoSizer disableHeight>
+        {({ width }) => (
+          <ColumnSizer
+            // columnMaxWidth={columnMaxWidth}
+            // columnMinWidth={columnMinWidth}
+            // columnCount={columnCount}
+            key="GridColumnSizer"
+            width={width}>
+            {({ adjustedWidth, columnWidth, registerChild }) => (
+              <div
+                // className={styles.GridContainer}
+                style={{
+                  height: 50,
+                  width: adjustedWidth,
+                }}>
+                <Grid
+                  ref={registerChild}
+                  columnWidth={columnWidth}
+                  // columnCount={columnCount}
+                  height={50}
+                  // noContentRenderer={this._noContentRenderer}
+                  // cellRenderer={this._cellRenderer}
+                  rowHeight={50}
+                  rowCount={1}
+                  width={adjustedWidth}
+                />
+              </div>
+            )}
+          </ColumnSizer>
+        )}
+      </AutoSizer>
+    </div>
+  );
+
+  return (
+    <Box component="div" className={classes.root}>
+      {/* <ScrollLeftBox onClick={handleScrollLeft} /> */}
+      <Box ref={scrollNode} component="div" className={classes.scrollContainer}>
+        {hits.map(hit => (
+          <Box component="div" className={classes.item}>
+            <PropertyResultHit key={hit.objectID} hit={hit} />
+          </Box>
+        ))}
+      </Box>
+      {/* <ScrollRightBox onClick={handleScrollRight} /> */}
+    </Box>
+  );
 };
 
 Hits.propTypes = {
-  hits: PropTypes.array.isRequired,
+  hits: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
 };
 
 const CustomHits = connectHits(Hits);

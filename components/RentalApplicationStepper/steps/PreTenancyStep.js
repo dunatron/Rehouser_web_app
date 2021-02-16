@@ -43,6 +43,13 @@ const PreTenancyStep = ({
 
   const { preTenancyApplicationForm } = currentApplicant;
 
+  console.log(
+    'preTenancyApplicationForm currentApplicant => ',
+    currentApplicant
+  );
+
+  console.log('preTenancyApplicationForm form => ', preTenancyApplicationForm);
+
   const hasForm = preTenancyApplicationForm ? true : false;
 
   const formData = {
@@ -87,9 +94,6 @@ const PreTenancyStep = ({
         if (!me.dob && data.dob) {
           updateUser({
             variables: {
-              where: {
-                id: me.id,
-              },
               data: {
                 dob: data.dob,
               },
@@ -148,7 +152,7 @@ const PreTenancyStep = ({
 };
 
 PreTenancyStep.propTypes = {
-  completed: PropTypes.any,
+  completed: PropTypes.any.isRequired,
   me: PropTypes.shape({
     dob: PropTypes.any,
     email: PropTypes.any,
@@ -157,13 +161,13 @@ PreTenancyStep.propTypes = {
     lastName: PropTypes.any,
     phone: PropTypes.any,
   }).isRequired,
-  property: PropTypes.any,
+  property: PropTypes.any.isRequired,
   rentalApplication: PropTypes.shape({
     applicants: PropTypes.shape({
       find: PropTypes.func,
     }),
   }).isRequired,
-  update: PropTypes.any,
+  update: PropTypes.any.isRequired,
   updateUser: PropTypes.func.isRequired,
 };
 

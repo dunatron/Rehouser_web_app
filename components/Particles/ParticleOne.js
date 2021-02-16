@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Particles from 'react-particles-js';
 import { useTheme } from '@material-ui/core';
 import debounce from '@/Lib/debounce';
-import isBrowser from '@/Lib/isBrowser';
 
 const _createParticlesObj = theme => {
   // const lineColor = mainPrimaryColor;
@@ -144,8 +143,8 @@ const interactivityObj = {
 const ParticleOne = () => {
   const theme = useTheme();
   const [dimensions, setDimensions] = useState({
-    height: isBrowser() ? window.innerHeight : '100vh',
-    width: isBrowser() ? window.innerWidth : '100vw',
+    height: window.innerHeight,
+    width: window.innerWidth,
   });
 
   const particlesObj = _createParticlesObj(theme);

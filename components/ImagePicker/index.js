@@ -79,5 +79,5 @@ ImageTile.propTypes = {
       content: PropTypes.any
     })
   }).isRequired,
-  remove: PropTypes.any
+  remove: PropTypes.any.isRequired
 };

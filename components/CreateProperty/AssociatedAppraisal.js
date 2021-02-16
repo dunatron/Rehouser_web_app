@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import {
   Box,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
   Grid,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -15,14 +15,14 @@ const AssociatedAppraisal = ({ appraisalId, rentalAppraisal }) => {
   if (!appraisalId) return null;
   return (
     <div style={{ marginBottom: '16px' }}>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Appraisal for: {rentalAppraisal.location}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <RentalAppraisal rentalAppraisal={rentalAppraisal} />
-        </AccordionDetails>
-      </Accordion>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
   );
 };

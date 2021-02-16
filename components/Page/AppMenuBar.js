@@ -38,7 +38,7 @@ function HideOnScroll(props) {
 }
 
 HideOnScroll.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any.isRequired,
   window: PropTypes.func,
 };
 
@@ -63,7 +63,7 @@ const AppMenuBar = props => {
     noTransparency ? classes.appBarSolid : classes.appBarTransparent
   );
 
-  const pathParts = router.asPath.split('/');
+  const pathParts = router.pathname.split('/');
   const formattedPathParts = pathParts.filter(part => part !== '');
 
   const routeToClickedPart = partIndex => {
@@ -77,6 +77,7 @@ const AppMenuBar = props => {
     }, '/');
     router.push({
       pathname: newRoute,
+      query: router.query,
     });
   };
 
@@ -84,6 +85,8 @@ const AppMenuBar = props => {
     if (formattedPathParts.length === 0) return;
     router.back();
   };
+
+  console.log('render: AppMenuBar');
 
   return (
     <HideOnScroll {...props}>
@@ -125,37 +128,25 @@ const AppMenuBar = props => {
             </IconButton>
           )}
           {formattedPathParts.length > 0 && (
-            <div
-              style={{
-                marginRight: '112px',
-                display: 'flex',
-                overflow: 'auto',
-                direction: 'rtl',
-              }}>
-              <div
-                style={{
-                  display: 'flex',
-                  direction: 'ltr',
-                }}>
-                {formattedPathParts.map((urlPart, idx) => {
-                  const isLastPart =
-                    idx + 1 === formattedPathParts.length ? true : false;
-                  return (
-                    <Typography
-                      key={idx}
-                      variant="h6"
-                      className={!isLastPart ? classes.routeablePart : null}
-                      noWrap
-                      onClick={() => {
-                        !isLastPart ? routeToClickedPart(idx) : null;
-                      }}>
-                      {urlPart}
-                      {!isLastPart && '/'}
-                    </Typography>
-                  );
-                })}
-              </div>
-            </div>
+            <>
+              {formattedPathParts.map((urlPart, idx) => {
+                const isLastPart =
+                  idx + 1 === formattedPathParts.length ? true : false;
+                return (
+                  <Typography
+                    key={idx}
+                    variant="h6"
+                    className={!isLastPart ? classes.routeablePart : null}
+                    noWrap
+                    onClick={() => {
+                      !isLastPart ? routeToClickedPart(idx) : null;
+                    }}>
+                    {urlPart}
+                    {!isLastPart && '/'}
+                  </Typography>
+                );
+              })}
+            </>
           )}
           <div
             style={{

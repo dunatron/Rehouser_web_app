@@ -21,8 +21,8 @@ const UserDetailsStep = ({
   me,
   userInfo,
   property,
-  handleDetailsChange,
-  userErrorsBag,
+  onChange,
+  errorsBag,
   applicantData,
   completed,
   rentalApplication,
@@ -34,8 +34,6 @@ const UserDetailsStep = ({
   const hasPhotoId = me.identificationNumber;
   const [showUploader, setShowUploader] = useState(!hasPhotoId);
   if (completed) return <Typography>Step is complete</Typography>;
-
-  // console.log("me in user details step => ", me)
 
   return (
     <div>
@@ -49,13 +47,11 @@ const UserDetailsStep = ({
               disabled={!userInfo[userVar].editable}
               label={userInfo[userVar].label}
               value={userInfo[userVar].value}
-              onChange={e => handleDetailsChange(e)}
+              onChange={e => onChange(e)}
             />
-            {userErrorsBag[userVar] && (
+            {errorsBag[userVar] && (
               <InputErrors
-                errors={
-                  userErrorsBag[userVar] ? userErrorsBag[userVar].errors : null
-                }
+                errors={errorsBag[userVar] ? errorsBag[userVar].errors : null}
               />
             )}
           </div>
@@ -65,11 +61,6 @@ const UserDetailsStep = ({
       <FileUploader
         me={me}
         title="Your Photo ID"
-        fileParams={{
-          folder: `users/photoIdentification/${me.id}`,
-          type: 'authenticated',
-          access_mode: 'authenticated',
-        }}
         description="We require a valid photo id of you. We accept the following. Passport, drivers license"
         files={
           userRentalApplicantData.user.photoIdentification
@@ -78,6 +69,9 @@ const UserDetailsStep = ({
         }
         maxFilesAllowed={1}
         removeFile={file => {}}
+        refetchQueries={[
+          { query: CURRENT_USER_QUERY, fetchPolicy: 'network-only' },
+        ]}
         recieveFile={file => {
           updateRentalGroupApplicant({
             variables: {
@@ -104,22 +98,22 @@ const UserDetailsStep = ({
 };
 
 UserDetailsStep.propTypes = {
-  applicantData: PropTypes.any,
-  completed: PropTypes.any,
-  errorsBag: PropTypes.any,
+  applicantData: PropTypes.any.isRequired,
+  completed: PropTypes.any.isRequired,
+  errorsBag: PropTypes.any.isRequired,
   me: PropTypes.shape({
     id: PropTypes.any,
     identificationNumber: PropTypes.any,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
-  property: PropTypes.any,
+  property: PropTypes.any.isRequired,
   rentalApplication: PropTypes.shape({
     applicants: PropTypes.shape({
       find: PropTypes.func,
     }),
   }).isRequired,
   updateRentalGroupApplicant: PropTypes.func.isRequired,
-  userInfo: PropTypes.any,
+  userInfo: PropTypes.any.isRequired,
 };
 
 export default UserDetailsStep;

@@ -13,10 +13,13 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import Meta from '../Meta/index';
 
 // Admin Area Addisions
-import NoSSRGeneralSubs from '@/Containers/NoSSRGeneralSubs';
-import NoSSRAdminAlertsSub from '@/Containers/NoSSRAdminAlertsSub';
+import AdminAlertsContainer from '@/Containers/AdminAlertsContainer';
+import GeneralSubsContainer from '@/Containers/GeneralSubsContainer';
 
 import GlobalStyle from './GlobalStyle';
+
+// Google
+import { GoogleApiWrapper } from 'google-maps-react';
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
@@ -30,10 +33,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { useRecoilState } from 'recoil';
 import { themeState } from '@/Recoil/themeState';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { NoSsr } from '@material-ui/core';
-import useServiceWorker from '@/Lib/hooks/useServiceWorker';
-import useDisableDrop from '@/Lib/hooks/useDisableDrop';
-import useDisableDragover from '@/Lib/hooks/useDisableDragover';
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -41,19 +40,10 @@ Router.onRouteChangeStart = () => {
 
 Router.onRouteChangeComplete = () => {
   NProgress.done();
-  window.scroll({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  });
 };
 
 Router.onRouteChangeError = () => {
   NProgress.done();
-};
-
-const SubLoader = () => {
-  return <div>Loading General Notifications</div>;
 };
 
 /**
@@ -61,15 +51,31 @@ const SubLoader = () => {
  */
 const Page = props => {
   const [stripe, setStripe] = useState(null);
-
-  useServiceWorker();
-  useDisableDrop();
-  useDisableDragover();
-
   useEffect(() => {
     if (window.Stripe) {
       setStripe(window.Stripe(process.env.STRIPE_KEY));
     }
+  }, [window.Stripe]);
+
+  const handleDefaultDragover = e => {
+    e = e || event;
+    e.preventDefault();
+  };
+
+  const handleDefaultDrop = e => {
+    e = e || event;
+    e.preventDefault();
+  };
+
+  // I think we should disable default onDrop for window while a drag and drop element is present
+  // Simply in the case they drag it onto the site and not the drop area
+  useEffect(() => {
+    window.addEventListener('dragover', handleDefaultDragover, false);
+    window.addEventListener('drop', handleDefaultDrop, false);
+    return () => {
+      window.removeEventListener('dragover', handleDefaultDragover);
+      window.removeEventListener('drop', handleDefaultDrop);
+    };
   }, []);
 
   const [themeObj, setThemeObj] = useRecoilState(themeState);
@@ -91,9 +97,8 @@ const Page = props => {
               <Elements stripe={stripe}>
                 <WithUser>
                   <MaterialPage children={props.children} {...props} />
-                  {/* Admin Alerts straight up break general subs. general subs should be copied */}
-                  {/* <NoSSRAdminAlertsSub /> */}
-                  <NoSSRGeneralSubs />
+                  <AdminAlertsContainer />
+                  <GeneralSubsContainer />
                 </WithUser>
               </Elements>
             </StateProvider>
@@ -104,4 +109,10 @@ const Page = props => {
   );
 };
 
-export default Page;
+Page.propTypes = {
+  children: PropTypes.any.isRequired,
+};
+
+export default GoogleApiWrapper({
+  apiKey: process.env.GOOGLE_API_KEY,
+})(Page);

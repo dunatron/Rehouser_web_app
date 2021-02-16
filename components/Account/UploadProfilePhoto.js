@@ -29,7 +29,7 @@ const UploadProfilePhoto = ({ me }) => {
     },
   ];
 
-  const [updateUser, { loading, error, data }] = useMutation(
+  const [updateUserProfile, { loading, error, data }] = useMutation(
     UPDATE_USER_MUTATION,
     {
       refetchQueries: refetchQueries,
@@ -46,28 +46,24 @@ const UploadProfilePhoto = ({ me }) => {
           folder: `users/${me.id}/profile-photo`,
           type: 'upload',
           resource_type: 'image',
-          access_mode: 'public',
         }}
         title="Upload Profile photo"
         maxFilesAllowed={1}
         files={me.profilePhoto ? [me.profilePhoto] : []}
         refetchQueries={refetchQueries}
         updateCacheOnRemovedFile={(cache, result) => {
-          updateUser({
+          updateUserProfile({
             variables: {
               data: {
                 profilePhoto: {
                   disconnect: true,
                 },
               },
-              where: {
-                id: me.id,
-              },
             },
           });
         }}
         recieveFile={file => {
-          updateUser({
+          updateUserProfile({
             variables: {
               data: {
                 profilePhoto: {
@@ -75,9 +71,6 @@ const UploadProfilePhoto = ({ me }) => {
                     id: file.id,
                   },
                 },
-              },
-              where: {
-                id: me.id,
               },
             },
           });
@@ -91,9 +84,9 @@ UploadProfilePhoto.propTypes = {
   me: PropTypes.shape({
     id: PropTypes.any,
     profilePhoto: PropTypes.shape({
-      url: PropTypes.any,
-    }),
-  }).isRequired,
+      url: PropTypes.any
+    })
+  }).isRequired
 };
 
 export default UploadProfilePhoto;

@@ -2,10 +2,6 @@ import PropTypes from 'prop-types';
 import PageHeader from '@/Components/PageHeader';
 import AcceptTermsOfEngagementForm from '@/Components/Forms/AcceptTermsOfEngagementForm';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const TermsOfEngagementPage = props => {
   const {
     appData: { currentUser },
@@ -16,8 +12,8 @@ const TermsOfEngagementPage = props => {
   return (
     <>
       <PageHeader
-        // title="Terms of engagement"
-        // intro="These are the terms of engagement a landlord will need to agree to so Rehouser Property Management Ltd can act on their behalf."
+        title="Terms of engagement"
+        intro="These are the terms of engagement a landlord will need to agree to so Rehouser Property Management Ltd can act on their behalf."
         metaData={{
           title: 'Rehouser | Terms of engagement',
           content:
@@ -28,16 +24,6 @@ const TermsOfEngagementPage = props => {
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 TermsOfEngagementPage.propTypes = {
   appData: PropTypes.shape({

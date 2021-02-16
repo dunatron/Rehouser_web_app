@@ -264,8 +264,7 @@ const InsulationStatementForm = ({
         files={[property.insulationStatementFile]}
         fileParams={{
           folder: `properties/${placeId}/insulationStatementFile`,
-          type: 'upload',
-          access_mode: 'public',
+          type: 'private',
         }}
         recieveFile={recieveFile}
       />
@@ -274,12 +273,12 @@ const InsulationStatementForm = ({
 };
 
 InsulationStatementForm.propTypes = {
-  insulationFormId: PropTypes.any,
-  placeId: PropTypes.any,
+  insulationFormId: PropTypes.any.isRequired,
+  placeId: PropTypes.any.isRequired,
   property: PropTypes.shape({
     insulationStatementFile: PropTypes.any,
   }).isRequired,
-  propertyId: PropTypes.any,
+  propertyId: PropTypes.any.isRequired,
 };
 
 export { InsulationStatementForm };

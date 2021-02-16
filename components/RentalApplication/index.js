@@ -9,16 +9,9 @@ import ApplicantView from './views/ApplicantView';
 import PageHeader from '@/Components/PageHeader';
 import RentalApplicationStepper from '@/Components/RentalApplicationStepper';
 import RehouserPaper from '@/Styles/RehouserPaper';
+import isAdmin from '@/Lib/isAdmin';
 import DisplayJson from '@/Components/DisplayJson';
 import PropertyRentalApplications from '@/Components/PropertyDetails/Applications';
-import RentalApplicationSub from '@/Components/SubscriptionComponents/RentalApplicationSub';
-import { toast } from 'react-toastify';
-
-import ApplyToGroup from './ApplyToGroup';
-
-import isAdmin from '@/Lib/isAdmin';
-import { _isRentalApplicant } from '@/Lib/_isRentalApplicant';
-import { _isRentalApplicationOwner } from '@/Lib/_isRentalApplicationOwner';
 
 /**
  * page is wrapped in a must be loggedIn
@@ -31,9 +24,6 @@ const RentalApplication = ({ id, me }) => {
       },
     },
   });
-
-  // Maybe we could sub into changes for a rentalApplication?
-
   if (loading) return 'Loading';
   if (error) return <Error error={error} />;
   const {
@@ -47,14 +37,15 @@ const RentalApplication = ({ id, me }) => {
     },
   } = data;
 
-  const isAnAdmin = isAdmin(me);
-  const isOwner = _isRentalApplicationOwner(me.id, owner);
-  const isAnApplicant = _isRentalApplicant(me.id, applicants);
+  const isOwner = me.id === owner.id;
 
-  const handleSubData = ({ client, subscriptionData }) => {
-    console.log('Recieved Sub Data for APplication => ', subscriptionData);
-    toast(<div>Rental APplication has been updated</div>);
-  };
+  const isAnAdmin = isAdmin(me);
+
+  const isAnApplicant = data.rentalApplication.applicants
+    ? data.rentalApplication.applicants.includes(me.id)
+    : false;
+
+  console.log('isAnApplicant => ', isAnApplicant);
 
   return (
     <>
@@ -71,7 +62,6 @@ const RentalApplication = ({ id, me }) => {
           </Typography>,
         ]}
       />
-      <RentalApplicationSub variables={{}} onSubscriptionData={handleSubData} />
       {isAnAdmin && (
         <RehouserPaper>
           <Typography gutterBottom>
@@ -88,9 +78,7 @@ const RentalApplication = ({ id, me }) => {
         {isAnAdmin && (
           <Box>
             <Typography gutterBottom>
-              Admin: Please be careful when accepting rental applications. They
-              will then create a lease that needs to be signed by the landlord
-              and the tenants
+              Admin: Please be careful when accepting rental applications. They will then create a lease that needs to be signed by the landlord and the tenants
             </Typography>
             <PropertyRentalApplications
               property={data.rentalApplication.property}
@@ -117,19 +105,13 @@ const RentalApplication = ({ id, me }) => {
             />
           </>
         )}
-        {!isAnApplicant && (
-          <>
-            <div>Would you like to apply for this application</div>
-            <ApplyToGroup applicationId={data.rentalApplication.id} />
-          </>
-        )}
       </RehouserPaper>
     </>
   );
 };
 
 RentalApplication.propTypes = {
-  id: PropTypes.any,
+  id: PropTypes.any.isRequired,
   me: PropTypes.shape({
     id: PropTypes.any,
   }).isRequired,

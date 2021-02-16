@@ -8,7 +8,6 @@ import { CURRENT_USER_QUERY } from '@/Components/User/index';
 import NavButton from '@/Styles/NavButton';
 import Error from '@/Components/ErrorMessage/index';
 import { toast } from 'react-toastify';
-import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 const SIGN_OUT_MUTATION = gql`
   mutation SIGN_OUT_MUTATION {
@@ -22,9 +21,6 @@ const Signout = ({ label, fullWidth, me, color, variant }) => {
   const client = useApolloClient();
 
   const handleCompleted = data => {
-    destroyCookie(null, 'token');
-    destroyCookie(null, 'tron-token-copy');
-    client.cache.reset();
     client.resetStore();
     toast.success(
       <p>
@@ -35,7 +31,7 @@ const Signout = ({ label, fullWidth, me, color, variant }) => {
   const handleOnError = error => {};
 
   const [signout, { data, loading, error }] = useMutation(SIGN_OUT_MUTATION, {
-    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
     onCompleted: handleCompleted,
     onError: handleOnError,
   });
@@ -59,10 +55,10 @@ const Signout = ({ label, fullWidth, me, color, variant }) => {
 };
 
 Signout.propTypes = {
-  color: PropTypes.any,
-  fullWidth: PropTypes.any,
-  label: PropTypes.any,
-  me: PropTypes.any,
-  variant: PropTypes.any,
+  color: PropTypes.any.isRequired,
+  fullWidth: PropTypes.any.isRequired,
+  label: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired,
+  variant: PropTypes.any.isRequired
 };
 export default Signout;

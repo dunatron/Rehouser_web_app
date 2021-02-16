@@ -29,7 +29,7 @@ const Dashboard = ({ heading, intro, config, elevation, me }) => {
         {config.map((dashboardItem, i) => (
           <Reveal key={i} repeat>
             <Tween from={{ opacity: 0 }} duration={2}>
-              <BoardItemStyles key={i} elevation={1}>
+              <BoardItemStyles key={i} elevation={8}>
                 <NavButton
                   className="item-btn"
                   color={dashboardItem.color}
@@ -72,9 +72,9 @@ Dashboard.propTypes = {
       description: PropTypes.string,
     })
   ).isRequired,
-  elevation: PropTypes.any,
-  heading: PropTypes.any,
-  intro: PropTypes.any,
+  elevation: PropTypes.any.isRequired,
+  heading: PropTypes.any.isRequired,
+  intro: PropTypes.any.isRequired,
   me: PropTypes.any,
 };
 

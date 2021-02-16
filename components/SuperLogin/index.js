@@ -56,7 +56,7 @@ const LoginPage = props => {
     });
   };
 
-  const { data, error } = useQuery(CURRENT_USER_QUERY);
+  const { data, error } = useQuery(CURRENT_USER_QUERY, { suspend: true });
   if (error) {
     return <Error error={error} />;
   }
@@ -89,12 +89,13 @@ const LoginPage = props => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="default" dense>
         <Tabs
           value={loginModal.tabIndex}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
+          dense
           variant="fullWidth">
           <Tab
             label="Sign Up "
@@ -143,7 +144,7 @@ const LoginPage = props => {
 
 LoginPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleSignedIn: PropTypes.func,
+  handleSignedIn: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };
 

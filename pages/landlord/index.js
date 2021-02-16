@@ -5,11 +5,7 @@ import ConfirmEmail from '@/Components/ConfirmEmail';
 import PageHeader from '@/Components/PageHeader';
 import { Box, Typography } from '@material-ui/core';
 import Dashboard from '@/Components/Dashboard';
-import LANDLORD_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/landlordDashConf';
-
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
+import LANDLORD_DASHBOARD_CONFIG from '@/Lib/configs/landlordDashboardConfig';
 
 const LandlordPage = ({ appData: { currentUser } }) => {
   const pleaseSignInMessage =
@@ -79,22 +75,12 @@ const LandlordPage = ({ appData: { currentUser } }) => {
         config={LANDLORD_DASHBOARD_CONFIG}
         me={me}
         elevation={10}
-        heading="Landlord Dashboard"
+        heading="Landlord Portal"
         intro="Landlord portal dashboard"
       />
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 LandlordPage.propTypes = {
   appData: PropTypes.shape({

@@ -27,9 +27,9 @@ const StripeClientSideWrapper = props => {
 };
 
 StripeClientSideWrapper.propTypes = {
-  children: PropTypes.any,
-  clear: PropTypes.any,
-  stripe: PropTypes.any
+  children: PropTypes.any.isRequired,
+  clear: PropTypes.any.isRequired,
+  stripe: PropTypes.any.isRequired
 };
 
 export default injectStripe(StripeClientSideWrapper);

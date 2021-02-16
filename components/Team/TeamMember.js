@@ -1,15 +1,7 @@
-import {
-  Paper,
-  Typography,
-  ButtonGroup,
-  Button,
-  CardMedia,
-} from '@material-ui/core';
+import { Paper, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'material-ui-image';
 import PageHeader from '@/Components/PageHeader';
-import FlexLayout from '@/Styles/layouts/FlexLayout';
-import Card from '@/Styles/Card';
 
 //icons
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -22,6 +14,7 @@ const useStyles = makeStyles(theme => ({
   root: {},
   descPanel: {
     display: 'flex',
+    marginTop: '32px',
     flexWrap: 'wrap',
     [theme.breakpoints.up('md')]: {
       flexWrap: 'nowrap',
@@ -30,11 +23,10 @@ const useStyles = makeStyles(theme => ({
   imageWrapper: {
     maxWidth: '550px', // maybe we should have this
     minWidth: '320px',
-
-    padding: 0,
-    // marginRight: 'auto',
-    // marginLeft: 'auto',
+    margin: 'auto',
+    width: '90%',
     [theme.breakpoints.up('md')]: {
+      margin: 'unset',
       width: '50%',
       maxWidth: 'unset',
     },
@@ -44,32 +36,26 @@ const useStyles = makeStyles(theme => ({
     padding: '32px 16px',
     width: '100%',
     maxWidth: '750px',
-    // marginRight: 'auto',
-    // marginLeft: 'auto',
+    margin: 'auto',
     [theme.breakpoints.up('md')]: {
       padding: '0 32px 32px 32px',
       width: 'unset',
+      margin: 'unset',
     },
   },
   contactDetails: {
     fontSize: '22px',
-    margin: '16px 0',
   },
 }));
 
 const TeamMember = ({ member }) => {
   const classes = useStyles();
   return (
-    <div className={classes.root} elevation={1} variant="elevation">
+    <Paper className={classes.root} elevation={1} variant="elevation" square>
       <PageHeader
         titleOverride={
           <Typography align="center" variant="h1" component="h1">
             {member.name}
-          </Typography>
-        }
-        intro={
-          <Typography align="center" variant="h2" component="h2">
-            {member.role}
           </Typography>
         }
         metaData={{
@@ -77,41 +63,26 @@ const TeamMember = ({ member }) => {
           content: `${member.name} - ${member.name}`,
         }}
       />
-      <FlexLayout className={classes.descPanel}>
-        <Card
-          className={classes.imageWrapper}
-          attrs={{
-            disablePadding: true,
-          }}>
-          <Image
-            style={{ height: '100%' }}
-            src={member.imgPath}
-            className={classes.image}
-            cover={false}
-          />
-        </Card>
-        <Card className={classes.description}>
-          <Typography variant="body1" gutterBottom>
-            {member.description}
-          </Typography>
+      <Typography align="center" variant="h2" component="h2">
+        {member.role}
+      </Typography>
+      <div className={classes.descPanel}>
+        <div className={classes.imageWrapper}>
+          <Image src={member.imgPath} />
+        </div>
+        <div className={classes.description}>
+          {member.description}
           <div className={classes.contactDetails}>
-            <ButtonGroup
-              color="secondary"
-              variant="outlined"
-              aria-label="contact member actions group">
-              <Button href={`tel:${member.tel}`} startIcon={<PhoneIcon />}>
-                {member.phone}
-              </Button>
-              <Button
-                href={`mailto:${member.email}`}
-                startIcon={<MailOutlineIcon />}>
-                {member.email}
-              </Button>
-            </ButtonGroup>
+            <Button color="secondary" startIcon={<PhoneIcon />}>
+              {member.phone}
+            </Button>
+            <Button color="secondary" startIcon={<MailOutlineIcon />}>
+              {member.email}
+            </Button>
           </div>
-        </Card>
-      </FlexLayout>
-    </div>
+        </div>
+      </div>
+    </Paper>
   );
 };
 
@@ -122,8 +93,8 @@ TeamMember.propTypes = {
     imgPath: PropTypes.string,
     name: PropTypes.string,
     phone: PropTypes.string,
-    role: PropTypes.string,
-  }).isRequired,
+    role: PropTypes.string
+  }).isRequired
 };
 
 export default TeamMember;

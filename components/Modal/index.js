@@ -8,7 +8,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Paper } from '@material-ui/core';
 
 import { Portal } from '@/Components/Portal/index';
-import isBrowser from '@/Lib/isBrowser';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,7 +83,7 @@ const Modal = props => {
     };
   }, []);
 
-  const mainDiv = isBrowser() ? document.body : null;
+  const mainDiv = document.body;
   const setBodyOverFlowToAuto = () => {
     mainDiv.style.overflow = 'auto';
   };
@@ -163,7 +162,7 @@ const Modal = props => {
 };
 
 Modal.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any.isRequired,
   classes: PropTypes.any,
   close: PropTypes.func.isRequired,
   disableBackdrop: PropTypes.any,

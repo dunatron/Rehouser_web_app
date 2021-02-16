@@ -12,9 +12,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     pointerEvents: 'auto', // re-enable pointer events
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
     '& > *': {
       margin: theme.spacing(1),
     },
@@ -75,6 +72,6 @@ const OpenChatBubbles = ({ chats, me }) => {
 
 OpenChatBubbles.propTypes = {
   chats: PropTypes.arrayOf(PropTypes.object),
-  me: PropTypes.any,
+  me: PropTypes.any.isRequired,
 };
 export default OpenChatBubbles;

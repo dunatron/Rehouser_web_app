@@ -19,6 +19,14 @@ const LoggedInAs = ({ me }) => {
           {me.firstName} {me.lastName}
         </span>
       </h2>
+      {!me.emailValidated && (
+        <>
+          <Typography gutterBottom variant="body1" color="error">
+            Please check your email for a link or token to validate your account
+          </Typography>
+          <SendConfirmEmailButton />
+        </>
+      )}
       <Signout me={me} />
 
       <div>
@@ -40,11 +48,13 @@ const LoggedInAs = ({ me }) => {
 };
 
 LoggedInAs.propTypes = {
+  classes: PropTypes.object.isRequired,
   me: PropTypes.shape({
     emailValidated: PropTypes.any,
     firstName: PropTypes.any,
-    lastName: PropTypes.any,
+    lastName: PropTypes.any
   }).isRequired,
+  theme: PropTypes.object.isRequired
 };
 
 export default LoggedInAs;

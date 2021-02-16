@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useState } from 'react';
 
 import { CSVReader } from 'react-papaparse';
@@ -7,6 +7,7 @@ import VirtualList from 'react-virtual-list';
 const MyList = ({ virtual, itemHeight }) => (
   <ul style={virtual.style}>
     {virtual.items.map(item => {
+      console.log('A rendered Item => ', item);
       return (
         <li key={`item_${item.id}`} style={{ height: itemHeight }}>
           A row rendered in our virtuakl list. Meaning we could have 1million
@@ -22,25 +23,36 @@ const MyList = ({ virtual, itemHeight }) => (
 );
 
 MyList.propTypes = {
-  itemHeight: PropTypes.any,
+  itemHeight: PropTypes.any.isRequired,
   virtual: PropTypes.shape({
     items: PropTypes.shape({
-      map: PropTypes.func,
+      map: PropTypes.func
     }),
-    style: PropTypes.any,
-  }).isRequired,
-};
+    style: PropTypes.any
+  }).isRequired
+}
 
 const BulkUploader = () => {
   const [rows, setRows] = useState([]);
 
   const handleOnDrop = data => {
+    console.log('---------------------------');
+    console.log(data);
+    console.log('---------------------------');
     setRows(data);
   };
 
-  const handleOnError = (err, file, inputElem, reason) => {};
+  const handleOnError = (err, file, inputElem, reason) => {
+    console.log(err);
+  };
 
-  const handleOnRemoveFile = data => {};
+  const handleOnRemoveFile = data => {
+    console.log('---------------------------');
+    console.log(data);
+    console.log('---------------------------');
+  };
+
+  console.log('THE ROWS => ', rows);
 
   const MyVirtualList = VirtualList()(MyList);
 
@@ -62,6 +74,16 @@ const BulkUploader = () => {
       </div>
 
       <MyVirtualList items={rows} itemHeight={100} />
+
+      {/* {rows.map((row, idx) => {
+      return <div>A ROW. We would want to display errors for each row that would be handy yea
+
+
+          {row.errors && row.errors.map((err, errIdx) => {
+              return <div>A row error</div>
+          })}
+      </div>
+  })} */}
     </>
   );
 };

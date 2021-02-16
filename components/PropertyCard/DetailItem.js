@@ -19,10 +19,10 @@ export default class DetailItem extends Component {
 }
 
 DetailItem.propTypes = {
-  icon: PropTypes.any,
-  label: PropTypes.any,
+  icon: PropTypes.any.isRequired,
+  label: PropTypes.any.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.any,
+  value: PropTypes.any.isRequired,
 };
 
 const renderValue = (value, type) => {

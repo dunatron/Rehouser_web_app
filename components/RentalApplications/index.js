@@ -24,7 +24,7 @@ const RentalApplications = props => {
 };
 
 RentalApplications.propTypes = {
-  me: PropTypes.any
+  me: PropTypes.any.isRequired
 };
 
 export default RentalApplications;

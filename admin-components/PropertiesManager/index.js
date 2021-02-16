@@ -2,7 +2,13 @@ import React, { useRef, useState, useContext, useEffect } from 'react';
 import Router from 'next/router';
 import { store } from '../../store';
 import gql from 'graphql-tag';
-import { useApolloClient, useQuery, NetworkStatus } from '@apollo/client';
+import {
+  useApolloClient,
+  useQuery,
+  useSubscription,
+  useMutation,
+  NetworkStatus,
+} from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialTable from 'material-table';
 import {
@@ -170,7 +176,10 @@ const AdminRentalApplicationsTable = ({
 
   const manageProperty = (e, rowData) =>
     Router.push({
-      pathname: `/landlord/properties/${rowData.id}`,
+      pathname: '/landlord/properties/property',
+      query: {
+        id: rowData.id,
+      },
     });
 
   const remoteData = query => {
@@ -180,7 +189,6 @@ const AdminRentalApplicationsTable = ({
         fetchPolicy: networkOnly ? 'network-only' : 'cache-first', // who needs a tradeoff when your a god
         variables: {
           where: {
-            location_contains: searchText,
             ...where,
             ...sharedWhere,
           },

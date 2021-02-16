@@ -5,9 +5,9 @@
 import {
   Box,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -32,19 +32,19 @@ const FormDetails = ({ title, config, data }) => {
       style={{
         maxWidth: '100%',
       }}>
-      <Accordion>
-        <AccordionSummary
+      <ExpansionPanel>
+        <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header">
           {title}
-        </AccordionSummary>
-        <AccordionDetails>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <div className={classes.details}>
             <DisplayKeyVals config={config} data={data} />
           </div>
-        </AccordionDetails>
-      </Accordion>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
   );
 };

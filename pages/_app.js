@@ -1,37 +1,40 @@
-import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../lib/apolloClient';
-import Head from 'next/head';
-import { RecoilRoot } from 'recoil';
+import App, { Container } from 'next/app';
 import Page from '@/Components/Page/index';
+import { ApolloProvider } from '@apollo/client';
+import withData from '@/Lib/withData';
+import Head from 'next/head';
+import 'react-virtualized/styles.css'; // only needs to be imported once
+import 'react-toastify/dist/ReactToastify.css'; // not using custom link css. check GlobalStyle in Page component
+import { RecoilRoot } from 'recoil';
 
-// import css for SSR
-// import '../public/css/rehouser-fonts.css';
-import '../public/css/customToast.css';
-import '../public/css/geosuggest.css';
-import '../public/css/nprogress.css';
+class AppEntryPointExtension extends App {
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {};
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+    // this exposes the query to the user
+    pageProps.query = ctx.query;
+    return { pageProps };
+  }
 
-function App(props) {
-  const { Component, pageProps } = props;
-  const apolloClient = useApollo(pageProps);
-
-  return (
-    <RecoilRoot>
-      <ApolloProvider client={apolloClient}>
-        <Head>
-          {/* TIP: set viewport head meta tag in _app.js, otherwise it will show a warning */}
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-          />
-          {/* <script src="https://js.stripe.com/v3/" /> */}
-          <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>
-        </Head>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
-      </ApolloProvider>
-    </RecoilRoot>
-  );
+  render() {
+    const { Component, apollo, pageProps } = this.props;
+    return (
+      <RecoilRoot>
+        {/* <CustomToastContainer /> */}
+        <ApolloProvider client={apollo}>
+          <Head>
+            {/* <script src="https://js.stripe.com/v3/" /> */}
+            <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>
+          </Head>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </ApolloProvider>
+      </RecoilRoot>
+    );
+  }
 }
 
-export default App;
+export default withData(AppEntryPointExtension);

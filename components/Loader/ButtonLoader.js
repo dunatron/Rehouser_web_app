@@ -51,10 +51,10 @@ const RenderBtnText = ({ success, text, successText }) => {
 };
 
 RenderBtnText.propTypes = {
-  success: PropTypes.any,
-  successText: PropTypes.any,
-  text: PropTypes.any,
-};
+  success: PropTypes.any.isRequired,
+  successText: PropTypes.any.isRequired,
+  text: PropTypes.any.isRequired
+}
 
 const ButtonLoader = props => {
   const {
@@ -66,7 +66,6 @@ const ButtonLoader = props => {
     cy,
     btnProps,
     children,
-    type,
   } = props;
   const classes = useStyles();
   const buttonClassname = clsx({
@@ -74,22 +73,16 @@ const ButtonLoader = props => {
     button: true,
   });
 
-  const handleOnClick = () => {
-    if (onClick) {
-      return onClick();
-    }
-  };
-
   return (
     <StyledButton
-      type={type}
       data-cy={cy}
       variant="contained"
       color="primary"
       className={buttonClassname}
       disabled={loading}
-      onClick={handleOnClick}
-      {...btnProps}>
+      {...btnProps}
+      {...props}
+      onClick={onClick}>
       {children}
       <RenderBtnText success={success} text={text} successText={successText} />
       {loading && (
@@ -100,14 +93,14 @@ const ButtonLoader = props => {
 };
 
 ButtonLoader.propTypes = {
-  btnProps: PropTypes.any,
-  children: PropTypes.any,
-  cy: PropTypes.any,
+  btnProps: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired,
+  cy: PropTypes.any.isRequired,
   loading: PropTypes.bool.isRequired,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
   success: PropTypes.bool.isRequired,
   successText: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
 };
 
 export { StyledButton, ButtonLoader };

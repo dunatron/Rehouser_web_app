@@ -76,10 +76,10 @@ const SignLeaseBtn = ({ id, type, leaseId, signed }) => {
 };
 
 SignLeaseBtn.propTypes = {
-  id: PropTypes.any,
-  leaseId: PropTypes.any,
-  signed: PropTypes.any,
-  type: PropTypes.any
+  id: PropTypes.any.isRequired,
+  leaseId: PropTypes.any.isRequired,
+  signed: PropTypes.any.isRequired,
+  type: PropTypes.any.isRequired
 };
 
 export default SignLeaseBtn;

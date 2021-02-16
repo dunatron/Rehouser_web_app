@@ -2,9 +2,9 @@ import InspectionForm from './InspectionForm';
 import {
   Box,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
   Grid,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -13,14 +13,14 @@ const UpdateInspectionForm = ({ inspection }) => {
   return (
     <div>
       {inspection.inspector && inspection.inspector.firstName}
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography variant="h6">Start Inspection Amendment</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <InspectionForm inspection={inspection} isAmend />
-        </AccordionDetails>
-      </Accordion>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
   );
 };

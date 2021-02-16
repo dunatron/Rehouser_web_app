@@ -23,9 +23,9 @@ const MoveInTime = props => {
 };
 
 MoveInTime.propTypes = {
-  component: PropTypes.any,
-  moveInDate: PropTypes.any,
-  variant: PropTypes.any
+  component: PropTypes.any.isRequired,
+  moveInDate: PropTypes.any.isRequired,
+  variant: PropTypes.any.isRequired
 }
 export { MoveInTime };
 
@@ -46,10 +46,10 @@ const NowToDate = props => {
 };
 
 NowToDate.propTypes = {
-  component: PropTypes.any,
-  date: PropTypes.any,
-  title: PropTypes.any,
-  variant: PropTypes.any
+  component: PropTypes.any.isRequired,
+  date: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired,
+  variant: PropTypes.any.isRequired
 }
 export { NowToDate };
 
@@ -68,10 +68,10 @@ const LongDatePretty = props => {
 };
 
 LongDatePretty.propTypes = {
-  component: PropTypes.any,
-  date: PropTypes.any,
-  title: PropTypes.any,
-  variant: PropTypes.any
+  component: PropTypes.any.isRequired,
+  date: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired,
+  variant: PropTypes.any.isRequired
 }
 export { LongDatePretty };
 
@@ -103,11 +103,11 @@ const LeaseLength = props => {
 };
 
 LeaseLength.propTypes = {
-  component: PropTypes.any,
-  expiryDate: PropTypes.any,
-  moveInDate: PropTypes.any,
-  title: PropTypes.any,
-  variant: PropTypes.any
+  component: PropTypes.any.isRequired,
+  expiryDate: PropTypes.any.isRequired,
+  moveInDate: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired,
+  variant: PropTypes.any.isRequired
 }
 export { LeaseLength };
 
@@ -138,8 +138,8 @@ const LeaseLengthInfo = ({ moveInDate, expiryDate }) => {
 };
 
 LeaseLengthInfo.propTypes = {
-  expiryDate: PropTypes.any,
-  moveInDate: PropTypes.any
+  expiryDate: PropTypes.any.isRequired,
+  moveInDate: PropTypes.any.isRequired
 }
 export { LeaseLengthInfo };
 

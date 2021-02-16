@@ -76,7 +76,7 @@ const RentalApplications = ({ openRentalAppModal, property }) => {
 
 RentalApplications.propTypes = {
   openRentalAppModal: PropTypes.func.isRequired,
-  property: PropTypes.any,
+  property: PropTypes.any.isRequired,
 };
 
 export default RentalApplications;

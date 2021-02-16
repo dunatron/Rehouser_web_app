@@ -149,7 +149,7 @@ function Carousel(props) {
 }
 
 function Slides(props) {
-  return <ul style={{ margin: 0 }} {...props} />;
+  return <ul {...props} />;
 }
 
 function Slide({ isCurrent, takeFocus, image, id, title, children }) {
@@ -173,12 +173,12 @@ function Slide({ isCurrent, takeFocus, image, id, title, children }) {
 }
 
 Slide.propTypes = {
-  children: PropTypes.any,
-  id: PropTypes.any,
-  image: PropTypes.any,
-  isCurrent: PropTypes.any,
-  takeFocus: PropTypes.any,
-  title: PropTypes.any,
+  children: PropTypes.any.isRequired,
+  id: PropTypes.any.isRequired,
+  image: PropTypes.any.isRequired,
+  isCurrent: PropTypes.any.isRequired,
+  takeFocus: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired
 };
 
 function SlideNav(props) {
@@ -196,7 +196,7 @@ function SlideNavItem({ isCurrent, ...props }) {
 }
 
 SlideNavItem.propTypes = {
-  isCurrent: PropTypes.any,
+  isCurrent: PropTypes.any.isRequired
 };
 
 function Controls(props) {
@@ -218,8 +218,8 @@ function ProgressBar({ animate, time }) {
 }
 
 ProgressBar.propTypes = {
-  animate: PropTypes.any,
-  time: PropTypes.any,
+  animate: PropTypes.any.isRequired,
+  time: PropTypes.any.isRequired
 };
 
 function SpacerGif({ width }) {
@@ -227,7 +227,7 @@ function SpacerGif({ width }) {
 }
 
 SpacerGif.propTypes = {
-  width: PropTypes.any,
+  width: PropTypes.any.isRequired
 };
 
 const CarouselSlider = ({ slides, height, width }) => {
@@ -383,9 +383,12 @@ const CarouselSlider = ({ slides, height, width }) => {
 };
 
 CarouselSlider.propTypes = {
-  height: PropTypes.any,
-  slides: PropTypes.array.isRequired,
-  width: PropTypes.any,
+  height: PropTypes.any.isRequired,
+  slides: PropTypes.shape({
+    length: PropTypes.number,
+    map: PropTypes.func
+  }).isRequired,
+  width: PropTypes.any.isRequired
 };
 
 export default CarouselSlider;

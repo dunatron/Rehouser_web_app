@@ -5,15 +5,13 @@ import { RENTAL_APPLICATION_UPDATED_SUBSCRIPTION } from '@/Gql/subscriptions/Ren
 import ApplicationCard from '@/Components/PropertyDetails/ApplicationCard';
 import { ToastContainer, toast } from 'react-toastify';
 
-import Error from '@/Components/ErrorMessage';
-import Loader from '@/Components/Loader';
-
 const PropertyPendingRentalApplicationsSub = ({ property }) => {
   const [newObjects, setNewObjects] = useState([]);
   const [updateCount, setUpdateCount] = useState(0);
   const { loading, data, error } = useSubscription(
     RENTAL_APPLICATION_UPDATED_SUBSCRIPTION,
     {
+      suspend: false,
       variables: {
         where: {
           mutation_in: 'UPDATED',
@@ -44,24 +42,33 @@ const PropertyPendingRentalApplicationsSub = ({ property }) => {
       },
     }
   );
-
   if (loading) return null;
-  if (error) {
-    return (
+  if (error)
+    toast(
       <div>
-        Not SUbScribed To: RENTAL_APPLICATION_UPDATED_SUBSCRIPTION
-        <Error error={error} />
+        <p>
+          No Websocket connection. You will need to manually refresh for updates
+        </p>
       </div>
     );
-  }
-  return null;
+  if (!error)
+    toast(
+      <div>
+        <p>Subbed to {property.location}</p>
+      </div>
+    );
+  return (
+    <div>
+      No Websocket connection. You will need to manually refresh for updates
+    </div>
+  );
 };
 
 PropertyPendingRentalApplicationsSub.propTypes = {
   property: PropTypes.shape({
     id: PropTypes.any,
-    location: PropTypes.any,
-  }).isRequired,
+    location: PropTypes.any
+  }).isRequired
 };
 
 export default PropertyPendingRentalApplicationsSub;

@@ -91,7 +91,7 @@ PropertyAppraisal.propTypes = {
   me: PropTypes.shape({
     id: PropTypes.any,
   }).isRequired,
-  propertyId: PropTypes.any,
+  propertyId: PropTypes.any.isRequired,
 };
 
 export default PropertyAppraisal;

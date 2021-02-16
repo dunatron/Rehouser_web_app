@@ -13,14 +13,14 @@ export const secondaryContrastText = '#fff';
 const mainPalette = {
   palette: {
     nProgress: {
-      main: mainSecondaryColor,
+      main: mainPrimaryColor,
     },
     common: {
       black: '#000',
       white: '#fff',
     },
     type: 'light',
-    background: { paper: '#fff', default: '#fafafa' },
+    background: { paper: '#fff', default: '#fff' },
     primary: {
       light: lightPrimaryColor,
       main: mainPrimaryColor,

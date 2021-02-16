@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'GustanLight';
+  src: url('/static/fonts/Gustan-Light.woff') format('woff'); /* IE9 Compat Modes */
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'GustanMedium';
+  src: url('/static/fonts/Gustan-Medium.woff') format('woff'); /* IE9 Compat Modes */
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'GustanBold';
+  src: url('/static/fonts/Gustan-Bold.woff') format('woff'); /* IE9 Compat Modes */
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'GustanExtraBlack';
+  src: url('/static/fonts/Gustan-Extrablack.woff') format('woff'); /* IE9 Compat Modes */
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'Allison';
+  src: url('/static/fonts/Gustan-Light.woff') format('woff'); /* IE9 Compat Modes */
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODRegular';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Regular.woff') format('woff');
+  font-style: normal;
+  font-weight: 200;
+  color: 'red';
+}
+
+@font-face {
+  font-family: 'ODItalic';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Italic.woff') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODBold';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Bold.woff') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODRegular';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Regular.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+  color: 'red';
+}
+
+@font-face {
+  font-family: 'ODItalic';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Italic.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODBold';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Bold.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODRegular';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Regular.otf') format('otf');
+  font-style: normal;
+  font-weight: 200;
+  color: 'red';
+}
+
+@font-face {
+  font-family: 'ODItalic';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Italic.otf') format('otf');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODBold';
+  src: url('/static/fonts/dyslexic/OpenDyslexic-Bold.otf') format('otf');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODRegular';
+  src: url('/static/fonts/dyslexic2/OpenDyslexic-Regular.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+  color: 'red';
+}
+
+@font-face {
+  font-family: 'ODItalic';
+  src: url('/static/fonts/dyslexic2/OpenDyslexic-Italic.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'ODBold';
+  src: url('/static/fonts/dyslexic2/OpenDyslexic-Bold.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'NexaDemo-Bold';
+  src: url('/static/fonts/nexa/NexaDemo-Bold.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+  color: 'red';
+}
+
+@font-face {
+  font-family: 'NexaDemo-Light';
+  src: url('/static/fonts/nexa/NexaDemo-Light.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'NexaTextDemo-Bold';
+  src: url('/static/fonts/nexa/NexaTextDemo-Bold.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}
+
+/* NEXA FONT */
+@font-face {
+  font-family: 'NexaTextDemo-Light';
+  src: url('/static/fonts/nexa/NexaTextDemo-Light.otf') format('woff');
+  font-style: normal;
+  font-weight: 200;
+}

@@ -20,9 +20,9 @@ const PhoneInput = ({ id, name, label, onChange, ...rest }) => {
 };
 
 PhoneInput.propTypes = {
-  id: PropTypes.any,
-  label: PropTypes.any,
-  name: PropTypes.any,
+  id: PropTypes.any.isRequired,
+  label: PropTypes.any.isRequired,
+  name: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

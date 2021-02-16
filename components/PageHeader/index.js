@@ -1,16 +1,7 @@
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import Head from 'next/head';
-import Card from '@/Styles/Card';
 
-/**
- * Superstar will you make it ? the rise : or the fall
- * I feel like the world is falling, and I am rising
- * https://www.youtube.com/watch?v=Xiv6j6T7R6Q&ab_channel=LilWayne-Topic
- * https://www.youtube.com/watch?v=a6Kg-Upfqio&ab_channel=BlueRose102223
- *
- * @param {*} param0
- */
 const PageHeader = ({
   title,
   id,
@@ -22,52 +13,48 @@ const PageHeader = ({
   hidden,
 }) => {
   return (
-    <>
+    <div style={{ maxWidth: '800px' }} id={id}>
       {metaData && (
         <Head>
           <meta name="description" content={metaData.content} />
           <title>{metaData.title}</title>
         </Head>
       )}
-      {!hidden && (
-        <Card id={id} elevation={hidden ? 0 : 2}>
-          {titleOverride && !hidden && titleOverride}
-          {title && (
-            <Typography
-              display="block" // initial, block, inline
-              hidden={hidden}
-              variant={titleVariant ? titleVariant : 'h1'}
-              // color="primary"
-              component="h1"
-              gutterBottom={intro ? false : true}>
-              {title}
-            </Typography>
-          )}
-
-          {intro && (
-            <Typography gutterBottom={false} hidden={hidden}>
-              {intro}
-            </Typography>
-          )}
-          {!hidden && children}
-        </Card>
+      {titleOverride && titleOverride}
+      {title && (
+        <Typography
+          display="none"
+          hidden={hidden}
+          variant={titleVariant ? titleVariant : 'h1'}
+          // color="primary"
+          component="h1"
+          gutterBottom={intro ? false : true}>
+          {title}
+        </Typography>
       )}
-    </>
+
+      {intro && (
+        <Typography gutterBottom hidden={hidden}>
+          {intro}
+        </Typography>
+      )}
+      {!hidden && children}
+    </div>
   );
 };
 
 PageHeader.propTypes = {
-  children: PropTypes.any,
-  id: PropTypes.any,
+  children: PropTypes.any.isRequired,
+  id: PropTypes.any.isRequired,
   hidden: PropTypes.bool,
-  intro: PropTypes.any,
+  intro: PropTypes.any.isRequired,
   metaData: PropTypes.shape({
     content: PropTypes.any,
     title: PropTypes.any,
-  }),
-  title: PropTypes.any,
-  titleOverride: PropTypes.any,
-  titleVariant: PropTypes.any,
+  }).isRequired,
+  title: PropTypes.any.isRequired,
+  titleOverride: PropTypes.any.isRequired,
+  titleVariant: PropTypes.any.isRequired,
 };
 
 export default PageHeader;

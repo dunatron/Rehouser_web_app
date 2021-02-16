@@ -26,17 +26,19 @@ const File = props => {
   // we essentially dont want to set any files that have already been added
   const { fieldProps, inners } = config;
 
+  // const [serverFiles, setServerFiles] = useState(
+  //   is(Array, filesData) ? [...filesData] : []
+  // );
+
   useEffect(() => {
     if (config.refConf) {
       register({ name: config.key }, { ...config.refConf });
     }
-    // for a single file that already exists
-    if (!config.fieldProps.isMultiple && filesData) {
-      setValue(config.key, filesData[0]);
-    }
   }, []);
 
   const handleRecieveFile = file => {
+    // maybe not the best, but only register on new files added
+    // register({ name: config.key }, { ...config.refConf });
     if (config.fieldProps.isMultiple) {
       setValue(config.key, []);
     }
@@ -72,6 +74,8 @@ const File = props => {
 
     if (!fieldProps.appendFolderName)
       folderName += `/${fieldProps.name.replace('.', '/')}`;
+
+    console.log('Create folderName: after append => ', folderName);
 
     return folderName;
   };
@@ -149,19 +153,19 @@ File.propTypes = {
   config: PropTypes.shape({
     fieldProps: PropTypes.shape({
       isMultiple: PropTypes.any,
-      maxFilesAllowed: PropTypes.any,
+      maxFilesAllowed: PropTypes.any
     }),
     key: PropTypes.any,
-    refConf: PropTypes.any,
+    refConf: PropTypes.any
   }).isRequired,
-  defaultValues: PropTypes.any,
-  errors: PropTypes.any,
-  folder: PropTypes.any,
+  defaultValues: PropTypes.any.isRequired,
+  errors: PropTypes.any.isRequired,
+  folder: PropTypes.any.isRequired,
   getValues: PropTypes.func.isRequired,
-  refetchQueries: PropTypes.any,
+  refetchQueries: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
-  reset: PropTypes.any,
-  setValue: PropTypes.func.isRequired,
+  reset: PropTypes.any.isRequired,
+  setValue: PropTypes.func.isRequired
 };
 
 export default File;

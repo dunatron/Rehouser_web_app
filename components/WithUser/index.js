@@ -44,21 +44,10 @@ const WithUser = props => {
     return child;
   });
   return children;
-  // const children = React.Children.map(props.children, child => {
-  //   if (React.isValidElement(child)) {
-  //     return React.cloneElement(child, {
-  //       appData: {
-  //         currentUser: { data: { me: null }, loading: false, error: null },
-  //       },
-  //     });
-  //   }
-  //   return child;
-  // });
-  // return children;
 };
 
 WithUser.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any.isRequired
 };
 
 export default WithUser;

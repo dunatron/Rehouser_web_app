@@ -4,8 +4,7 @@ import Paper from '@material-ui/core/Paper';
 const RehouserPaper = styled(Paper)`
   && {
     margin-bottom: 16px;
-    padding: ${props =>
-      !props.attrs?.disablePadding && props.theme.spacing(2)}px;
+    padding: 16px;
     @media (min-width: 480px) {
     }
     @media (min-width: 520px) {

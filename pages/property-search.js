@@ -1,18 +1,14 @@
 import PropertySearch from '@/Components/PropertySearch/index';
-
+import NoSSR from 'react-no-ssr';
 import PageHeader from '@/Components/PageHeader';
 import { Typography } from '@material-ui/core';
-
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
 
 const PropertySearchPage = ({ appData: { currentUser } }) => {
   const me = currentUser.data ? currentUser.data.me : null;
   return (
     <>
       <PageHeader
-        hidden={false}
+        hidden={true}
         title="Property search"
         id="property-search"
         intro="Browse our range of available rental properties from your at-home comforts. 
@@ -28,20 +24,12 @@ const PropertySearchPage = ({ appData: { currentUser } }) => {
           </Typography>,
         ]}
       />
-      <PropertySearch me={me} />
+      <NoSSR>
+        <PropertySearch me={me} />
+      </NoSSR>
     </>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 PropertySearchPage.propTypes = {};
 

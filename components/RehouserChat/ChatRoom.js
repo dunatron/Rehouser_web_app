@@ -8,7 +8,6 @@ import Loader from '@/Components/Loader';
 import { writeMessage } from '../../services/cache.service';
 import { CHAT_QUERY, MESSAGES_CONNECTION_QUERY } from '@/Gql/queries/index';
 import { CREATE_MESSAGE_MUTATION } from '@/Gql/mutations/index';
-import { uuid } from 'uuidv4';
 import {
   MESSAGES_CONNECTION_ORDER_BY,
   MESSAGES_CONNECTION_FIRST,
@@ -72,7 +71,6 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
       if (!chat) return null;
       if (!data) return null;
       if (!data.messagesConnection) return null;
-      const cacheMessageId = uuid();
       createMessage({
         variables: {
           data: {
@@ -95,26 +93,17 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
             },
           },
         },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          createMessage: {
-            id: cacheMessageId,
-            chat: chat,
-            __typename: 'Message',
-            content: content,
-            createdAt: '2020-12-01T03:20:45.346Z',
-            isMine: true,
-            sender: {
-              id: me.id,
-              firstName: me.firstName,
-              lastName: me.lastName,
-              __typename: 'User',
-            },
-          },
-        },
+        // optimisticResponse: {
+        //   __typename: 'Mutation',
+        //   updateComment: {
+        //     id: commentId,
+        //     __typename: 'Comment',
+        //     content: commentContent,
+        //   },
+        // },
         update: (proxy, { data }) => {
           if (data && data.createMessage) {
-            writeMessage(client, data.createMessage, cacheMessageId);
+            writeMessage(client, data.createMessage);
           }
         },
       });
@@ -134,17 +123,16 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
       me={me}
       onSendMessage={onSendMessage}
       chat={chat}
-      handleFetchMore={handleFetchMore}
     />
   );
 };
 
 ChatRoomScreen.propTypes = {
-  chat: PropTypes.any,
-  chatId: PropTypes.any,
+  chat: PropTypes.any.isRequired,
+  chatId: PropTypes.any.isRequired,
   me: PropTypes.shape({
-    id: PropTypes.any,
-  }).isRequired,
+    id: PropTypes.any
+  }).isRequired
 };
 
 const ChatRoomScreenConnection = props => {
@@ -163,7 +151,7 @@ const ChatRoomScreenConnection = props => {
 };
 
 ChatRoomScreenConnection.propTypes = {
-  chatId: PropTypes.any,
+  chatId: PropTypes.any.isRequired
 };
 
 export default ChatRoomScreenConnection;

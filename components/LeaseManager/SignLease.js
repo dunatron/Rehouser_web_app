@@ -32,12 +32,11 @@ const SignLease = ({ lease, me, userIsLessor, userIsLessee }) => {
         userIsLessor={userIsLessor}
         userIsLessee={userIsLessee}
       />
-
       <Typography variant="h5" gutterBottom>
         Lessors
       </Typography>
       <SignDetailsBlock items={lessors} me={me} lease={lease} type="LESSOR" />
-      
+
       <Typography variant="h5" gutterBottom>
         Lessees
       </Typography>
@@ -47,10 +46,10 @@ const SignLease = ({ lease, me, userIsLessor, userIsLessee }) => {
 };
 
 SignLease.propTypes = {
-  lease: PropTypes.any,
-  me: PropTypes.any,
-  userIsLessee: PropTypes.any,
-  userIsLessor: PropTypes.any
+  lease: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired,
+  userIsLessee: PropTypes.any.isRequired,
+  userIsLessor: PropTypes.any.isRequired
 };
 
 const groupHasSigned = group => {
@@ -59,51 +58,44 @@ const groupHasSigned = group => {
   return true;
 };
 
-const LeaseDetailsBlock = ({ lease, userIsLessor, userIsLessee, me }) => {
+const LeaseDetailsBlock = ({ lease, userIsLessor, userIsLessee }) => {
   const { id, stage, rent, location, lessors, lessees } = lease;
-  const userIsAdmin = true
   const lessesHaveSigned = groupHasSigned(lessees);
   const lessorsHaveSigned = groupHasSigned(lessors);
 
   const _allSigned = () => {
     if (lessesHaveSigned && lessorsHaveSigned) return true;
-    if (lessesHaveSigned && userIsAdmin) return true;
-    if (lessesHaveSigned && lease.property.rehouserManaged) return true;
     return false;
   };
   const allSigned = _allSigned();
   return (
     <>
-      <Typography gutterBottom>
-         Signed: {allSigned ? "YES" : "NO"}
-      </Typography>
-    {lease.property.rehouserManaged && <>
-        <Typography gutterBottom>This property is managed by rehouser. Once all potential tenants have clicked the sign button rehouser 
-        will then review the draft lease. Upon success the tenants then have to supply a weeks worth or rent to secure 
-        </Typography>
-      </>}
       {allSigned && (
         <Typography gutterBottom>
-          All participants have signed and the lease can now be finalised by a {" "}
-          {lease.property.rehouserManaged ? "Rehouser property agent" : 'Landlord'}
+          All participants have signed and the lease can now be finalised by a
+          lessor
         </Typography>
       )}
       {userIsLessor && !allSigned && (
         <Typography gutterBottom>
-           Not everyone has signed the lease. As a lessor you will need to finalise the lease once everyone has signed
+          Everyone has signed the lease. As a lessor you will need to press the
+          finalise lease button
         </Typography>
       )}
-       {userIsLessee && !allSigned && (
+      {userIsLessee && !allSigned && (
         <Typography gutterBottom>
-          Not everyone has signed the lease
+          Everyone has signed the lease. You need to wait for the landlord to
+          finalise the lease. Once they have done that you will need to provide
+          1 weeks worth of rent to make evertything official
         </Typography>
       )}
-       {userIsLessee && !allSigned && (
-        <Typography gutterBottom>
-          Please review the draft lease details and when you are happy you will find a table at the bottom where you will need to sign
+      <>
+        <Typography variant="body1" gutterBottom>
+          All Lessees and Lessors must first sign the lease. Please review the
+          lease details below. If any of the details change before everyone has
+          signed, everyone will need to resign
         </Typography>
-      )}
-
+      </>
       {stage !== 'SIGNED' && (
         <FinaliseLeaseBtn leaseId={id} stage={stage} disabled={!allSigned} />
       )}
@@ -114,9 +106,9 @@ const LeaseDetailsBlock = ({ lease, userIsLessor, userIsLessee, me }) => {
 };
 
 LeaseDetailsBlock.propTypes = {
-  lease: PropTypes.any,
-  userIsLessee: PropTypes.any,
-  userIsLessor: PropTypes.any
+  lease: PropTypes.any.isRequired,
+  userIsLessee: PropTypes.any.isRequired,
+  userIsLessor: PropTypes.any.isRequired
 };
 
 const SignDetailsBlock = ({ items, me, type, lease }) => {
@@ -158,8 +150,8 @@ SignDetailsBlock.propTypes = {
   items: PropTypes.shape({
     map: PropTypes.func
   }).isRequired,
-  lease: PropTypes.any,
-  me: PropTypes.any,
+  lease: PropTypes.any.isRequired,
+  me: PropTypes.any.isRequired,
   type: PropTypes.string.isRequired
 };
 
@@ -189,7 +181,7 @@ const SignDetails = ({ item, me, type, lease }) => {
 };
 
 SignDetails.propTypes = {
-  item: PropTypes.any,
+  item: PropTypes.any.isRequired,
   lease: PropTypes.shape({
     id: PropTypes.any
   }).isRequired,

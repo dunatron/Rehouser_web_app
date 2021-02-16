@@ -5,10 +5,6 @@ import { ActivityManager, Activity } from '@/Components/ActivityManager';
 import PageHeader from '@/Components//PageHeader';
 import { Typography } from '@material-ui/core';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const ActivityPage = ({ appData: { currentUser } }) => {
   return (
     <Fragment>
@@ -39,16 +35,6 @@ const ActivityPage = ({ appData: { currentUser } }) => {
     </Fragment>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
 
 ActivityPage.propTypes = {
   appData: PropTypes.shape({

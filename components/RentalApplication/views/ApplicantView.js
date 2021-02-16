@@ -11,7 +11,7 @@ const RentalApplicationApplicantView = ({ me }) => {
 };
 
 RentalApplicationApplicantView.propTypes = {
-  me: PropTypes.any,
+  me: PropTypes.any.isRequired,
 };
 
 export default RentalApplicationApplicantView;

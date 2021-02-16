@@ -89,9 +89,9 @@ const UploadFileButton = props => {
 };
 
 UploadFileButton.propTypes = {
-  error: PropTypes.any,
-  handleClick: PropTypes.any,
-  loading: PropTypes.any,
+  error: PropTypes.any.isRequired,
+  handleClick: PropTypes.any.isRequired,
+  loading: PropTypes.any.isRequired,
   uploadCompleted: PropTypes.bool.isRequired
 };
 
@@ -170,7 +170,7 @@ FileActions.propTypes = {
     loading: PropTypes.any,
     uploadCompleted: PropTypes.any
   }).isRequired,
-  isRemoving: PropTypes.any,
+  isRemoving: PropTypes.any.isRequired,
   remove: PropTypes.func.isRequired,
   removingIds: PropTypes.shape({
     includes: PropTypes.func

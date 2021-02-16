@@ -263,7 +263,7 @@ const LeaseDetails = ({ lease }) => {
 };
 
 LeaseDetails.propTypes = {
-  lease: PropTypes.any
+  lease: PropTypes.any.isRequired
 };
 
 export default LeaseDetails;

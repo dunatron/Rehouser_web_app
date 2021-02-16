@@ -12,9 +12,9 @@ import ConnectedRefinements from './refinements/ConnectedRefinements';
 import ExpansionRefinement from './refinements/ExpansionRefinement';
 import PriceFilter from './refinements/PriceFilter';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
   Input,
   Box,
 } from '@material-ui/core';
@@ -31,15 +31,15 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
-  AccordionRoot: {
+  expansionPanelRoot: {
     alignItems: 'center',
-    // backgroundColor: 'rgb(212,220,231)',
-    // color: theme.palette.secondary.main,
+    backgroundColor: 'rgb(212,220,231)',
+    color: theme.palette.secondary.main,
   },
-  AccordionDetails: {
+  expansionPanelDetails: {
     padding: 0,
   },
-  AccordionSummaryContent: {
+  expansionPanelSummaryContent: {
     display: 'flex',
     alignItems: 'center',
   },
@@ -80,6 +80,7 @@ const SearchFilter = () => {
   const [topRoomPrice, setTopRoomPrice] = useState(9999999999);
 
   const setAndFormatMoveInDate = date => {
+    console.log('Date to format => ', moment(date).unix());
     // setMoveInDate(date);
     setMoveInDateStamp(moment(date).unix());
   };
@@ -99,19 +100,18 @@ const SearchFilter = () => {
   // const filterLogic = `move_in_date_timestamp:0000000000 TO ${moveInDateStamp} AND onTheMarket: true AND rent: ${bottomPrice} TO ${topPrice}`
   // const filterLogic = `move_in_date_timestamp:0000000000 TO ${moveInDateStamp} AND onTheMarket: true AND lowestRoomPrice >= ${bottomRoomPrice} AND highestRoomPrice <= ${topRoomPrice} AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
   // 1. ahhh where to start. date search on algolia i stimetsamp, and needs to be numeric
-  // const filterLogic = `move_in_date_timestamp:0000000000 TO ${moveInDateStamp} AND onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
-  const filterLogic = `onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
+  const filterLogic = `move_in_date_timestamp:0000000000 TO ${moveInDateStamp} AND onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
   return (
     <div>
       <Configure filters={filterLogic} />
-      <Accordion
+      <ExpansionPanel
         square={true}
-        className={classes.AccordionRoot}
+        className={classes.expansionPanelRoot}
         expanded={expanded}>
-        <AccordionSummary
+        <ExpansionPanelSummary
           classes={{
-            root: classes.AccordionRoot,
-            content: classes.AccordionSummaryContent,
+            root: classes.expansionPanelRoot,
+            content: classes.expansionPanelSummaryContent,
           }}
           expandIcon={<ExpandMoreIcon />}
           onClick={() => setExpanded(!expanded)}
@@ -121,12 +121,12 @@ const SearchFilter = () => {
           <div>
             {/* <Typography variant="button">SET FILTER</Typography> */}
             {/* <Typography>{filterLogic}</Typography> */}
-            {/* <Typography>
+            <Typography>
               <Typography component="span" variant="h6">
                 available:
               </Typography>{' '}
               {moment(moveInDate).format('ll')}
-            </Typography> */}
+            </Typography>
             <Typography>
               <Typography component="span" variant="h6">
                 rent:
@@ -136,8 +136,8 @@ const SearchFilter = () => {
             </Typography>
             <Stats />
           </div>
-        </AccordionSummary>
-        <AccordionDetails className={classes.AccordionDetails}>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.expansionPanelDetails}>
           <ConnectedRefinements childrenBefore={true}>
             <ExpansionRefinement title="Property price per week">
               <PriceFilter
@@ -191,8 +191,8 @@ const SearchFilter = () => {
               </div>
             </ExpansionRefinement>
           </ConnectedRefinements>
-        </AccordionDetails>
-      </Accordion>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     </div>
   );
 };

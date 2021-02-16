@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const PAYMENT_SUBSCRIPTION = gql`
-  subscription paymentSub($where: PaymentSubscriptionWhereInput) {
+  subscription($where: PaymentSubscriptionWhereInput) {
     paymentSub(where: $where) {
       node {
         id

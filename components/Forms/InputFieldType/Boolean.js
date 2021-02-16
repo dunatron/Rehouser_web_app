@@ -5,15 +5,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 import { InputFieldType } from './index';
 
 const BooleanField = props => {
-  const {
-    config,
-    register,
-    errors,
-    setValue,
-    defaultValue,
-    defaultValues,
-    label,
-  } = props;
+  const { config, register, errors, setValue, defaultValue, label } = props;
   const { fieldProps, refConf } = config;
   const name = fieldProps ? fieldProps.name : null;
 
@@ -49,14 +41,14 @@ const BooleanField = props => {
 BooleanField.propTypes = {
   config: PropTypes.shape({
     inners: PropTypes.shape({
-      map: PropTypes.func,
-    }),
+      map: PropTypes.func
+    })
   }).isRequired,
-  defaultValue: PropTypes.any,
-  errors: PropTypes.any,
-  label: PropTypes.any,
+  defaultValue: PropTypes.any.isRequired,
+  errors: PropTypes.any.isRequired,
+  label: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
-  setValue: PropTypes.any,
+  setValue: PropTypes.any.isRequired
 };
 
 export default BooleanField;

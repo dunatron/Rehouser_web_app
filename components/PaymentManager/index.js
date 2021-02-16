@@ -10,8 +10,8 @@ const PaymentManager = ({ payments, title }) => {
 };
 
 PaymentManager.propTypes = {
-  payments: PropTypes.any,
-  title: PropTypes.any
+  payments: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired
 }
 
 export default PaymentManager;

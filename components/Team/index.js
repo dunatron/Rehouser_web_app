@@ -52,7 +52,10 @@ const TeamComponent = () => {
 
   const handleMemberClick = ({ member }) => {
     router.push({
-      pathname: `/about-us/${member.subUrl}`,
+      pathname: `/about-us/member`,
+      query: {
+        name: member.subUrl,
+      },
       //   query: router.query,
     });
   };
@@ -82,7 +85,7 @@ const TeamComponent = () => {
                 xl={2}
                 spacing={0}
                 container>
-                <Card className={classes.cardRoot}>
+                <Card className={classes.cardRoot} square>
                   <CardActionArea
                     onClick={() => handleMemberClick({ member: member })}>
                     <div

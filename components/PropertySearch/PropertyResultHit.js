@@ -12,9 +12,6 @@ import {
   Button,
 } from '@material-ui/core';
 
-import FlexLayout from '@/Styles/layouts/FlexLayout';
-import Card from '@/Styles/Card';
-
 import RToolTip from '@/Styles/RToolTip';
 import Apply from '@/Components/PropertyCard/Apply';
 
@@ -59,7 +56,7 @@ const useStyles = makeStyles(theme => ({
       flexWrap: 'wrap',
     },
     [theme.breakpoints.up(720)]: {
-      flexWrap: 'wrap',
+      flexWrap: 'noWrap',
     },
   },
   imageContainer: {
@@ -69,30 +66,19 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       height: 'auto',
-      // width: '220px',
-      // minWidth: '220px',
+      width: '220px',
+      minWidth: '220px',
     },
     [theme.breakpoints.up('md')]: {
       height: 'auto',
-      // width: '350px',
-      // minWidth: '350px',
-    },
-  },
-  rightPanel: {
-    display: 'flex',
-    flexGrow: 1,
-    flexWrap: 'wrap',
-    [theme.breakpoints.up('sm')]: {
-      flexWrap: 'nowrap',
+      width: '350px',
+      minWidth: '350px',
     },
   },
   detailsContainer: {
     padding: theme.spacing(2),
-    flex: '1 1 auto',
-
     [theme.breakpoints.up('sm')]: {
       //   maxWidth: '220px',
-      marginRight: '16px',
     },
     [theme.breakpoints.up('md')]: {
       maxWidth: 'none',
@@ -101,16 +87,9 @@ const useStyles = makeStyles(theme => ({
   actionsContainer: {
     marginLeft: 'auto',
     display: 'flex',
-    flexGrow: 1,
     flexDirection: 'column',
     alignItems: 'flex-end',
-    // maxWidth: '320px',
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: '110px',
-    },
-    [theme.breakpoints.up('md')]: {
-      maxWidth: '110px',
-    },
+    maxWidth: '320px',
   },
   detailItems: {
     display: 'flex',
@@ -124,7 +103,7 @@ const DetailItem = ({ hit, conf }) => {
       <RToolTip
         title={`${conf.title}: ${hit[conf.name]}`}
         style={{ fontSize: '16px' }}>
-        <StyledBadge badgeContent={hit[conf.name]} color="primary">
+        <StyledBadge badgeContent={hit[conf.name]} color="secondary">
           {conf.icon}
         </StyledBadge>
       </RToolTip>
@@ -138,29 +117,29 @@ DetailItem.propTypes = {
     name: PropTypes.any,
     title: PropTypes.any,
   }).isRequired,
-  hit: PropTypes.any,
+  hit: PropTypes.any.isRequired,
 };
 
 const DetailItemsArr = [
   {
     title: 'rooms',
     name: 'rooms',
-    icon: <ApartmentIcon fontSize="large" color="inherit" />,
+    icon: <ApartmentIcon fontSize="large" color="primary" />,
   },
   {
     title: 'bathrooms',
     name: 'bathrooms',
-    icon: <BathtubIcon fontSize="large" color="inherit" />,
+    icon: <BathtubIcon fontSize="large" color="primary" />,
   },
   {
     title: 'carportSpaces',
     name: 'carportSpaces',
-    icon: <EmojiTransportationIcon fontSize="large" color="inherit" />,
+    icon: <EmojiTransportationIcon fontSize="large" color="primary" />,
   },
   {
     title: 'garageSpaces',
     name: 'garageSpaces',
-    icon: <DriveEtaIcon fontSize="large" color="inherit" />,
+    icon: <DriveEtaIcon fontSize="large" color="primary" />,
   },
 ];
 
@@ -168,11 +147,7 @@ const PropertyResultHit = ({ hit, me }) => {
   const classes = useStyles();
   const [modalIdx, setModalIdx] = useState();
   return (
-    <Card
-      className={classes.root}
-      attrs={{
-        disablePadding: true,
-      }}>
+    <Paper square className={classes.root}>
       {/* Images Container */}
       <div className={classes.imageContainer}>
         {hit.imageUrls.length > 0 && (
@@ -182,52 +157,44 @@ const PropertyResultHit = ({ hit, me }) => {
           />
         )}
       </div>
-      <div
-        className={classes.rightPanel}
-        style={{
-          display: 'flex',
-        }}>
-        {/* Details Container */}
-        <RehouserPaper className={classes.detailsContainer} elevation={0}>
-          <Typography variant="h6" color="textPrimary" gutterBottom>
-            {hit.location}
-          </Typography>
-          <Typography variant="h6" color="primary" gutterBottom>
-            ${hit.rent}{' '}
-            <Typography component="span" color="textSecondary">
-              with an average of
-            </Typography>{' '}
-            ${hit.rent / hit.rooms}
-          </Typography>
-          <Typography gutterBottom color="textSecondary">
-            {hit.type}
-          </Typography>
-          <div className={classes.detailItems}>
-            {DetailItemsArr.map((conf, i) => {
-              return <DetailItem key={i} hit={hit} conf={conf} />;
-            })}
-          </div>
-        </RehouserPaper>
-        {/* Actions Container */}
-        <RehouserPaper className={classes.actionsContainer} elevation={0}>
-          <ButtonGroup
-            orientation="vertical"
-            color="default"
-            size="small"
-            variant="text"
-            aria-label="property actions">
-            <Button onClick={() => setModalIdx('Details')}>More details</Button>
-            <Button onClick={() => setModalIdx('Share')}>
-              Share to social
-            </Button>
-            <Button onClick={() => setModalIdx('Viewings')}>Viewings</Button>
-            <Button onClick={() => setModalIdx('Map')}>Show Map</Button>
-            <Button onClick={() => setModalIdx('Applications')}>
-              Apply for Property
-            </Button>
-          </ButtonGroup>
-        </RehouserPaper>
-      </div>
+      {/* Details Container */}
+      <RehouserPaper className={classes.detailsContainer} elevation={0}>
+        <Typography variant="h6" color="textPrimary" gutterBottom>
+          {hit.location}
+        </Typography>
+        <Typography variant="h6" color="primary" gutterBottom>
+          ${hit.rent}{' '}
+          <Typography component="span" color="textSecondary">
+            with an average of
+          </Typography>{' '}
+          ${hit.rent / hit.rooms}
+        </Typography>
+        <Typography gutterBottom color="textSecondary">
+          {hit.type}
+        </Typography>
+        <div className={classes.detailItems}>
+          {DetailItemsArr.map((conf, i) => {
+            return <DetailItem key={i} hit={hit} conf={conf} />;
+          })}
+        </div>
+      </RehouserPaper>
+      {/* Actions Container */}
+      <RehouserPaper className={classes.actionsContainer} elevation={0}>
+        <ButtonGroup
+          orientation="vertical"
+          color="primary"
+          size="small"
+          variant="text"
+          aria-label="property actions">
+          <Button onClick={() => setModalIdx('Details')}>More details</Button>
+          <Button onClick={() => setModalIdx('Share')}>Share to social</Button>
+          <Button onClick={() => setModalIdx('Viewings')}>Viewings</Button>
+          <Button onClick={() => setModalIdx('Map')}>Show Map</Button>
+          <Button onClick={() => setModalIdx('Applications')}>
+            Applications
+          </Button>
+        </ButtonGroup>
+      </RehouserPaper>
       <Modal
         disableBackdrop={true}
         open={modalIdx ? true : false}
@@ -272,7 +239,7 @@ const PropertyResultHit = ({ hit, me }) => {
           </>
         )}
       </Modal>
-    </Card>
+    </Paper>
   );
 };
 
@@ -283,7 +250,10 @@ PropertyResultHit.propTypes = {
       lng: PropTypes.any,
     }),
     id: PropTypes.any,
-    imageUrls: PropTypes.array,
+    imageUrls: PropTypes.shape({
+      length: PropTypes.number,
+      map: PropTypes.func,
+    }),
     location: PropTypes.any,
     rent: PropTypes.any,
     rooms: PropTypes.any,

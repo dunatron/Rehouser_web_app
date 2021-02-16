@@ -113,12 +113,12 @@ Location.propTypes = {
     }),
     refConf: PropTypes.any,
   }).isRequired,
-  defaultValues: PropTypes.any,
-  errors: PropTypes.any,
-  fieldError: PropTypes.any,
-  rawData: PropTypes.any,
+  defaultValues: PropTypes.any.isRequired,
+  errors: PropTypes.any.isRequired,
+  fieldError: PropTypes.any.isRequired,
+  rawData: PropTypes.any.isRequired,
   register: PropTypes.func.isRequired,
-  reset: PropTypes.any,
+  reset: PropTypes.any.isRequired,
   setValue: PropTypes.func.isRequired,
 };
 

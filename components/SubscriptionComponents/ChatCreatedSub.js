@@ -4,18 +4,18 @@ import { useSubscription } from '@apollo/client';
 import { CHAT_SUBSCRIPTION } from '@/Gql/subscriptions/ChatSub';
 import { store } from '@/Store/index';
 import { toast } from 'react-toastify';
-import Error from '@/Components/ErrorMessage';
-import Loader from '@/Components/Loader';
 
-const ChatCreatedSub = ({ userId }) => {
+const ChatCreatedSub = ({ me }) => {
   const { state, dispatch } = useContext(store);
-  const { loading, data, error } = useSubscription(CHAT_SUBSCRIPTION, {
+  useSubscription(CHAT_SUBSCRIPTION, {
     variables: {
       where: {
         node: {
-          participants_some: {
-            id: userId,
-          },
+          participants_some: [
+            {
+              id: me.id,
+            },
+          ],
         },
       },
     },
@@ -25,10 +25,13 @@ const ChatCreatedSub = ({ userId }) => {
           chatSub: { mutation, node, updatedFields, previousValues },
         },
       } = subscriptionData;
+
+      // if (previousValues === null && updatedFields === null) {
+      // }
       if (mutation === 'CREATED') {
         dispatch({
           type: 'openChat',
-          payload: subscriptionData.data.chatSub.node,
+          payload: subscriptionData.data.chatSub.node.chat,
         });
         toast(
           <div>
@@ -36,28 +39,21 @@ const ChatCreatedSub = ({ userId }) => {
           </div>
         );
       }
+      // if (mutation === 'UPDATED') {
+      //   console.log('Catch chat updates');
+      // }
+      // if (mutation === 'DELETE') {
+      //   console.log('Catch when a chat gets deleted');
+      // }
     },
   });
-
-  if (loading) return null;
-  if (error) {
-    return (
-      <div>
-        Not SUbScribed To: CHAT_SUBSCRIPTION
-        <Error error={error} />
-      </div>
-    );
-  }
-
-  // they are just aledrts find the best way to return nothing
-
   return null;
 };
 
 ChatCreatedSub.propTypes = {
-  userId: PropTypes.string.isRequired,
+  me: PropTypes.shape({
+    id: PropTypes.any
+  }).isRequired
 };
 
-const MemoizedChatCreatedSub = React.memo(ChatCreatedSub);
-
-export default MemoizedChatCreatedSub;
+export default ChatCreatedSub;

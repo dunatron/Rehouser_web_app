@@ -43,7 +43,7 @@ Help.propTypes = {
     components: PropTypes.any,
     title: PropTypes.any
   }).isRequired,
-  toolTip: PropTypes.any
+  toolTip: PropTypes.any.isRequired
 };
 
 export default Help;
