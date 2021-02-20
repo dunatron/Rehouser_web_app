@@ -88,7 +88,7 @@ import '../public/css/customToast.css';
 import '../public/css/geosuggest.css';
 import '../public/css/nprogress.css';
 
-function App(props) {
+function RehouserApp(props) {
   const { Component, pageProps, apollo } = props;
   // const apolloClient = useApollo(pageProps);
 
@@ -104,12 +104,14 @@ function App(props) {
           {/* <script src="https://js.stripe.com/v3/" /> */}
           <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>
         </Head>
-        <Page>
+        {/* <Page>
           <Component {...pageProps} />
-        </Page>
+         
+        </Page> */}
+        <h1>Hello from Hell</h1>
       </ApolloProvider>
     </RecoilRoot>
   );
 }
 
-export default withData(App);
+export default withData(RehouserApp);
