@@ -104,11 +104,10 @@ function RehouserApp(props) {
           {/* <script src="https://js.stripe.com/v3/" /> */}
           <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>
         </Head>
-        {/* <Page>
+        <Page>
           <Component {...pageProps} />
-         
-        </Page> */}
-        <h1>Hello from Hell</h1>
+        </Page>
+        {/* <h1>Hello from Hell</h1> */}
       </ApolloProvider>
     </RecoilRoot>
   );

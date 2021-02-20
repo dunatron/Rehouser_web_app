@@ -80,7 +80,7 @@
     "next-absolute-url": "^1.2.2",
     "next-pwa": "^3.1.5",
     "next-transpile-modules": "^4.1.0",
-    "next-with-apollo": "5.0.0",
+    "next-with-apollo": "5.1.1",
     "nookies": "^2.5.0",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",
