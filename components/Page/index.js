@@ -99,11 +99,10 @@ const Page = props => {
           <StateProvider>
             <Elements stripe={stripe}>
               <WithUser>
-                <h2>Lets see if we can render just me</h2>
-                {/* <MaterialPage children={props.children} {...props} /> */}
+                <MaterialPage children={props.children} {...props} />
                 {/* Admin Alerts straight up break general subs. general subs should be copied */}
                 {/* <NoSSRAdminAlertsSub /> */}
-                {/* <NoSSRGeneralSubs /> */}
+                <NoSSRGeneralSubs />
               </WithUser>
             </Elements>
           </StateProvider>
