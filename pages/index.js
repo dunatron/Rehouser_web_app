@@ -13,8 +13,8 @@ import Dashboard from '@/Components/Dashboard';
 import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
 
 // server side props
-// import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-// import { CURRENT_USER_QUERY } from '@/Gql/queries';
+import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
+import { CURRENT_USER_QUERY } from '@/Gql/queries';
 
 // import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
@@ -136,15 +136,15 @@ const HomePage = props => {
   );
 };
 
-// export async function getServerSideProps(ctx) {
-//   const apolloClient = initializeApollo(null, ctx);
-//   await apolloClient.query({
-//     query: CURRENT_USER_QUERY,
-//   });
-//   return addApolloState(apolloClient, {
-//     props: {},
-//   });
-// }
+export async function getServerSideProps(ctx) {
+  const apolloClient = initializeApollo(null, ctx);
+  await apolloClient.query({
+    query: CURRENT_USER_QUERY,
+  });
+  return addApolloState(apolloClient, {
+    props: {},
+  });
+}
 
 HomePage.propTypes = {};
 
