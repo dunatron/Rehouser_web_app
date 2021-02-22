@@ -35,6 +35,36 @@ const withTM = require('next-transpile-modules')([
 
 module.exports = withPWA(
   withTM({
+    // async rewrites() {
+    //   return [
+    //     {
+    //       source: '/api/:path*',
+    //       destination: 'https://api.example.com/:path*',
+    //     },
+    //   ];
+    // },
+    async headers() {
+      return [
+        {
+          source: '/:path*',
+          headers: [
+            {
+              key: 'x-hello',
+              value: 'there',
+            },
+          ],
+        },
+        {
+          source: '/hello',
+          headers: [
+            {
+              key: 'x-hello',
+              value: 'world',
+            },
+          ],
+        },
+      ];
+    },
     pwa: {
       disable: process.env.NODE_ENV === 'development',
       // disable: false,
