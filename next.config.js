@@ -47,11 +47,24 @@ module.exports = withPWA(
     async headers() {
       return [
         {
-          source: '/:path*',
+          source: '/',
           headers: [
             {
-              key: 'x-hello',
-              value: 'there',
+              key: 'x-metatron',
+              value: 'dunatron',
+            },
+            // only the las one gets added and probbaly not what we want to be doing here anyway
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: 'dunatron',
+            },
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: 'https://app.rehouser.co.nz',
+            },
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: 'https://yoga.rehouser.co.nz',
             },
           ],
         },
