@@ -43,6 +43,7 @@ module.exports = withPWA(
     //     },
     //   ];
     // },
+    // https://nextjs.org/docs/api-routes/api-middlewares#micro-support
     async headers() {
       return [
         {

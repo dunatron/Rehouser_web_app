@@ -29,10 +29,14 @@ const Signin = props => {
     // setCookie(null, 'token', data.signin.token, {
     //   maxAge: 30 * 24 * 60 * 60,
     //   path: '/',
+    //   // sameSite: 'None',
+    //   // secure: true,
     // });
     // setCookie(null, 'refresh-token', data.signin.refreshToken, {
     //   maxAge: 30 * 24 * 60 * 60,
     //   path: '/',
+    //   // sameSite: 'None',
+    //   // secure: true,
     // });
     toast.success(
       <p>

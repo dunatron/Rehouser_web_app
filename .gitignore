@@ -38,6 +38,6 @@ variables.env
 # docz docs
 client/.docz
 
-# service workder
-/public/sw*
-public/workbox*
+# service wrker workbox? unsure if i should
+public/sw*
+public/workbox-*
