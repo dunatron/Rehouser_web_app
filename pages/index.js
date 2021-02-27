@@ -12,18 +12,9 @@ import Dashboard from '@/Components/Dashboard';
 
 import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 // import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 import FileUploader from '@/Components/FileUploader';
-
-// const DynamicParticleBanner = dynamic(
-//   () => import('@/Components/Banner/ParticleBanner'),
-//   { ssr: false }
-// );
 
 const HomePageBannerBody = () => {
   return (
@@ -123,29 +114,8 @@ const HomePage = props => {
         }}
         recieveFile={() => alert('FIle was recieved')}
       />
-      {/* fileParams: PropTypes.shape({
-    public_id: PropTypes.string,
-    filename: PropTypes.string,
-    folder: PropTypes.string,
-    resource_type: PropTypes.oneOf(['image', 'raw', 'video', 'auto']),
-    tags: PropTypes.arrayOf(PropTypes.string),
-    type: PropTypes.oneOf(['upload', 'private', 'authenticated']),
-    access_mode: PropTypes.oneOf(['public', 'authenticated']),
-  }).isRequired, */}
     </div>
   );
 };
-
-export async function getServerSideProps(ctx) {
-  const apolloClient = initializeApollo(null, ctx);
-  await apolloClient.query({
-    query: CURRENT_USER_QUERY,
-  });
-  return addApolloState(apolloClient, {
-    props: {},
-  });
-}
-
-HomePage.propTypes = {};
 
 export default HomePage;
