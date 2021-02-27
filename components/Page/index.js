@@ -102,7 +102,7 @@ const Page = props => {
                 <MaterialPage children={props.children} {...props} />
                 {/* Admin Alerts straight up break general subs. general subs should be copied */}
                 {/* <NoSSRAdminAlertsSub /> */}
-                {/* <NoSSRGeneralSubs /> */}
+                <NoSSRGeneralSubs />
               </WithUser>
             </Elements>
           </StateProvider>
