@@ -12,8 +12,8 @@ const AdminFilesPage = ({ appData: { currentUser } }) => {
   return (
     <>
       <PageHeader
-        title="Admin Inspections"
-        intro="View all system inspections so we never miss an inspection or fail to inform people of incoming inspections"
+        title="Admin files manager"
+        intro="AS an admin you should be able to view and delete most files, We will alter this in later stages to be more granular"
         metaData={{
           title: 'Admin Inspections',
           content:
