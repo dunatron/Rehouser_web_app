@@ -21,14 +21,7 @@ const AdminFilesPage = ({ appData: { currentUser } }) => {
         }}
       />
       <AdminOnly me={me}>
-        <InspectionsTable
-          me={me}
-          where={
-            {
-              // completed: false,
-            }
-          }
-        />
+        <div>SOme sort of file manager. each file hosuld have a relation</div>
       </AdminOnly>
     </>
   );
