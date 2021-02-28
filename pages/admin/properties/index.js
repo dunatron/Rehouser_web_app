@@ -11,7 +11,8 @@ import { PROPERTIES_CONNECTION_QUERY } from '@/Gql/connections';
 
 const AdminPropertiesPage = ({ appData: { currentUser } }) => {
   const me = currentUser.data ? currentUser.data.me : null;
-
+  // const AdminPropertiesPage = () => {
+  //   const me = null;
   return (
     <>
       <PageHeader
