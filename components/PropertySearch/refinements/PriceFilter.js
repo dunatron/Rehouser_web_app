@@ -18,19 +18,19 @@ const useStyles = makeStyles(theme => ({
   listRoot: {
     width: '100%',
     // maxWidth: 360,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.secondary.main,
+    // color: theme.palette.secondary.contrastText,
   },
   listItemRoot: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.secondary.main,
+    // color: theme.palette.secondary.contrastText,
   },
   listItemSelected: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: `${theme.palette.primary.main} !important`,
+    // color: theme.palette.primary.contrastText,
+    // backgroundColor: `${theme.palette.primary.main} !important`,
   },
   listItemText: {
-    color: theme.palette.primary.contrastText,
+    // color: theme.palette.primary.contrastText,
   },
   nested: {
     paddingLeft: theme.spacing(4),

@@ -43,11 +43,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
-  textInputRoot: {
-    // color: `yellow !important`,
-    color: 'inherit',
-    backgroundColor: 'inherit',
-  },
+  textInputRoot: {},
   filterGrid: {
     display: 'grid',
     gridGap: '16px',

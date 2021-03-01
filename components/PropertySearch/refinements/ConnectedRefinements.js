@@ -4,8 +4,8 @@ import ConnectedCheckBoxRefinementList from './CheckBoxList';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.secondary.main,
+    // color: theme.palette.secondary.contrastText,
   },
 }));
 const ConnectedRefinements = ({ children, childrenBefore }) => {

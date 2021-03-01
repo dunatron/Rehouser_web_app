@@ -6,8 +6,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
     padding: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.secondary.main, // Juins styles
+    // color: theme.palette.secondary.contrastText, // Juins styles
   },
 }));
 

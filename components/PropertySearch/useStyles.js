@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     flex: '1 1 auto',
     flexWrap: 'wrap',
     // padding: '16px',
-    backgroundColor: theme.palette.secondary.main,
+    // backgroundColor: theme.palette.secondary.main, // Juins styles
     [theme.breakpoints.up('sm')]: {},
     [theme.breakpoints.up('md')]: {},
     [theme.breakpoints.up('lg')]: {},

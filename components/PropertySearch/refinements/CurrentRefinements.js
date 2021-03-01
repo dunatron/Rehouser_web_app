@@ -81,27 +81,31 @@ RefinementGroupList.propTypes = {
   refine: PropTypes.any,
 };
 
-const CurrentRefinements = ({ items, refine, createURL }) => (
-  <CurrentRefinementStyles>
-    {items.map(item => (
-      <li key={item.label} className="refinement-listItem">
-        {item.items ? (
-          <RefinementGroupList
-            item={item}
-            refine={refine}
-            createURL={createURL}
-          />
-        ) : (
-          <RefinementValue
-            refine={refine}
-            item={item}
-            url={createURL(item.value)}
-          />
-        )}
-      </li>
-    ))}
-  </CurrentRefinementStyles>
-);
+const CurrentRefinements = ({ items, refine, createURL }) => {
+  if (!items) return null;
+  if (items.length === 0) return null;
+  return (
+    <CurrentRefinementStyles>
+      {items.map(item => (
+        <li key={item.label} className="refinement-listItem">
+          {item.items ? (
+            <RefinementGroupList
+              item={item}
+              refine={refine}
+              createURL={createURL}
+            />
+          ) : (
+            <RefinementValue
+              refine={refine}
+              item={item}
+              url={createURL(item.value)}
+            />
+          )}
+        </li>
+      ))}
+    </CurrentRefinementStyles>
+  );
+};
 
 CurrentRefinements.propTypes = {};
 
