@@ -13,6 +13,10 @@ const ConnectedRefinements = ({ children, childrenBefore }) => {
   return (
     <div className={classes.root}>
       {childrenBefore && children}
+      <ConnectedCheckBoxRefinementList
+        attribute="administrative_area_level_1"
+        operator="or"
+      />
       <ConnectedCheckBoxRefinementList attribute="rooms" operator="or" />
       <ConnectedCheckBoxRefinementList attribute="type" operator="or" />
       <ConnectedCheckBoxRefinementList

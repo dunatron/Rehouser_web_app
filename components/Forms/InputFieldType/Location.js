@@ -34,6 +34,32 @@ const Location = props => {
     desc: rawData ? rawData[config.fieldProps.fieldMaps['desc']] : null,
     lat: rawData ? rawData[config.fieldProps.fieldMaps['lat']] : null,
     lng: rawData ? rawData[config.fieldProps.fieldMaps['lng']] : null,
+    ...(config.fieldProps.fieldMaps['street_number'] && {
+      street_number: rawData
+        ? rawData[config.fieldProps.fieldMaps['street_number']]
+        : null,
+    }),
+    ...(config.fieldProps.fieldMaps['route'] && {
+      route: rawData ? rawData[config.fieldProps.fieldMaps['route']] : null,
+    }),
+    ...(config.fieldProps.fieldMaps['locality'] && {
+      locality: rawData
+        ? rawData[config.fieldProps.fieldMaps['locality']]
+        : null,
+    }),
+    ...(config.fieldProps.fieldMaps['administrative_area_level_1'] && {
+      administrative_area_level_1: rawData
+        ? rawData[config.fieldProps.fieldMaps['administrative_area_level_1']]
+        : null,
+    }),
+    ...(config.fieldProps.fieldMaps['country'] && {
+      country: rawData ? rawData[config.fieldProps.fieldMaps['country']] : null,
+    }),
+    ...(config.fieldProps.fieldMaps['postal_code'] && {
+      postal_code: rawData
+        ? rawData[config.fieldProps.fieldMaps['postal_code']]
+        : null,
+    }),
   };
 
   useEffect(() => {

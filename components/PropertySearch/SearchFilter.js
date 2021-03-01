@@ -27,14 +27,22 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TuneIcon from '@material-ui/icons/Tune';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   AccordionRoot: {
     alignItems: 'center',
+    fontSize: '2rem',
     // backgroundColor: 'rgb(212,220,231)',
     // color: theme.palette.secondary.main,
+  },
+  rentLabel: {
+    fontSize: '2rem',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: '400',
+    lineHeight: '1.5',
+    letterSpacing: '0.00938em',
+  },
+  ExpandIcon: {
+    width: '2em !important',
+    height: '2em !important',
   },
   AccordionDetails: {
     padding: 0,
@@ -108,6 +116,7 @@ const SearchFilter = () => {
           classes={{
             root: classes.AccordionRoot,
             content: classes.AccordionSummaryContent,
+            expandIcon: classes.ExpandIcon,
           }}
           expandIcon={<ExpandMoreIcon />}
           onClick={() => setExpanded(!expanded)}
@@ -123,10 +132,7 @@ const SearchFilter = () => {
               </Typography>{' '}
               {moment(moveInDate).format('ll')}
             </Typography> */}
-            <Typography>
-              <Typography component="span" variant="h6">
-                rent:
-              </Typography>{' '}
+            <Typography className={classes.rentLabel}>
               {formatCentsToDollarsVal(bottomPrice)} -{' '}
               {formatCentsToDollarsVal(topPrice)}
             </Typography>

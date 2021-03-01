@@ -38,13 +38,39 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
    * When a suggest got selected
    */
   const onSuggestSelect = suggest => {
+    console.log('GoOGLE SELETC OBJECT => ', suggest);
     if (!suggest) return;
     const { placeId, location, description, gmaps } = suggest;
+
+    let componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name',
+    };
+
+    for (const component of gmaps.address_components) {
+      const addressType = component.types[0];
+
+      if (componentForm[addressType]) {
+        const val = component[componentForm[addressType]];
+
+        console.log('A VALUE ) GUESS => ', val);
+        componentForm[addressType] = val;
+        // document.getElementById(addressType).value = val;
+      }
+    }
+
+    console.log('Final component form => ', componentForm);
+
     selection({
       placeId: placeId,
       lat: location.lat,
       lng: location.lng,
       desc: description,
+      ...componentForm,
     });
     setState({
       ...state,
