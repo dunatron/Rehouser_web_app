@@ -92,6 +92,8 @@ module.exports = withPWA(
       FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET,
       ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
       ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
+      CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+      CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     },
   })
 );
