@@ -59,13 +59,14 @@ const Meta = () => (
       as="script"
       defer
     />
-    <script
+    <script src="https://media-library.cloudinary.com/global/all.js"></script>
+    {/* <script
       rel="preconnect"
       key="cloudinary-widget-js"
       src="https://widget.Cloudinary.com/v2.0/global/all.js"
       type="text/javascript"
       defer
-    />
+    /> */}
   </Head>
 );
 

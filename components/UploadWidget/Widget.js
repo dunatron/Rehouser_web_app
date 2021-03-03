@@ -10,7 +10,7 @@ import { Button } from '@material-ui/core';
 const UploadWidget = ({ options, onUploadCompleted }) => {
   let widget = window.cloudinary.createUploadWidget(
     {
-      cloudName: `dkhe0hx1r`,
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
       uploadPreset: `tutorial`,
       folder: 'widget',
       maxFiles: 2,
