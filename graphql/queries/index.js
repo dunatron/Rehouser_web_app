@@ -25,6 +25,7 @@ import chats from './chats.query';
 import { PROPERTY_LEASES_QUERY } from './propertyLeases';
 import { PUBLIC_USER_QUERY } from './publicUserQuery';
 import { PRIVATE_USER_QUERY } from './privateUserQuery';
+import { MAKE_CLOUDINARY_ACCESS_QUERY } from './makeCoudinaryAccess';
 
 export {
   PROPERTIES_QUERY,
@@ -52,5 +53,6 @@ export {
   PROPERTY_LEASES_QUERY,
   PUBLIC_USER_QUERY,
   PRIVATE_USER_QUERY,
+  MAKE_CLOUDINARY_ACCESS_QUERY,
   chats,
 };
