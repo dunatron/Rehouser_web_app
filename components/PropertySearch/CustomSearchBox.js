@@ -35,7 +35,7 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
       type="search"
       value={currentRefinement}
       className={classes.root}
-      placeholder="Location"
+      placeholder="Location e.g. Christchurch"
       onChange={event => refine(event.currentTarget.value)}
       endAdornment={
         <InputAdornment position="start">

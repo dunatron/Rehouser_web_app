@@ -164,24 +164,29 @@ const DetailItemsArr = [
   },
 ];
 
-const PropertyResultHit = ({ hit, me }) => {
+const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
   const classes = useStyles();
   const [modalIdx, setModalIdx] = useState();
   return (
     <Card
+      style={{
+        flexDirection: reverse ? 'column-reverse' : 'column',
+      }}
       className={classes.root}
       attrs={{
         disablePadding: true,
       }}>
       {/* Images Container */}
-      <div className={classes.imageContainer}>
-        {hit.imageUrls.length > 0 && (
-          <CarouselSlider
-            height={'100%'}
-            slides={hit.imageUrls.map(imgUrl => ({ img: imgUrl }))}
-          />
-        )}
-      </div>
+      {!disableImages && (
+        <div className={classes.imageContainer}>
+          {hit.imageUrls.length > 0 && (
+            <CarouselSlider
+              height={'100%'}
+              slides={hit.imageUrls.map(imgUrl => ({ img: imgUrl }))}
+            />
+          )}
+        </div>
+      )}
       <div
         className={classes.rightPanel}
         style={{

@@ -6,58 +6,76 @@ import PropertyCard from '@/Components/PropertyCard/index';
 
 import { CustomMarker } from 'react-instantsearch-dom-maps';
 
+import { makeStyles } from '@material-ui/core/styles';
+
 //icons
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Modal from '@/Components/Modal/index';
+import CloseIcon from '@material-ui/icons/Close';
 import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+
+import PropertyResultHit from './PropertyResultHit';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    backgroundColor: theme.palette.secondary.contrastText,
+    color: theme.palette.secondary.main,
+    top: 0,
+    overflow: 'scroll',
+    borderTop: '3px solid gold',
+    borderBottom: '3px solid gold',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    top: 0,
+    position: 'sticky',
+    backgroundColor: theme.palette.secondary.contrastText,
+    color: theme.palette.secondary.main,
+    opacity: 0.9,
+    zIndex: 100,
+  },
+}));
 
 const MapMarker = ({ hit }) => {
   const node = useRef();
   const [showMore, setShowMore] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleClick = e => {
-    if (node.current.contains(e.target)) {
-      // inside click
-      return;
-    }
-    // outside click
-    setShowMore(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, []);
+  const classes = useStyles();
 
   return (
-    <CustomMarker key={hit.objectID} hit={hit}>
-      <div ref={node} onClick={() => setShowMore(true)} className="map-marker">
-        <Modal
-          title={hit.location}
-          open={modalOpen}
-          disableBackdrop={true}
-          close={() => setModalOpen(false)}>
-          <PropertyCard property={hit} isSearch={true} />
-        </Modal>
+    <>
+      <CustomMarker key={hit.objectID} hit={hit}>
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}>
-          {formatCentsToDollarsVal(hit.rent)}
-          {showMore && (
-            <IconButton onClick={() => setModalOpen(true)}>
-              <VisibilityIcon />
-            </IconButton>
-          )}
+          ref={node}
+          onClick={() => setShowMore(true)}
+          className="map-marker">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+            {formatCentsToDollarsVal(hit.rent)}
+          </div>
         </div>
-        {showMore && <p className="marker-location-text">{hit.location}</p>}
-      </div>
-    </CustomMarker>
+      </CustomMarker>
+      {showMore && (
+        <div className={classes.root}>
+          <div className={classes.header}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <p>{hit.location}</p>
+            </div>
+            <IconButton onClick={() => setShowMore(false)}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <PropertyResultHit hit={hit} disableImages={false} reverse={true} />
+        </div>
+      )}
+    </>
   );
 };
 

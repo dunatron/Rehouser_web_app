@@ -12,25 +12,38 @@ import Dashboard from '@/Components/Dashboard';
 
 import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
 
-// import { parseCookies, setCookie, destroyCookie } from 'nookies';
+import { makeStyles } from '@material-ui/core/styles';
+import SVG from '@/Components/Svg';
 
-import FileUploader from '@/Components/FileUploader';
+const bannerStyles = makeStyles(theme => ({
+  logo: {
+    textAlign: 'center',
+    padding: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      // marginTop: '12%',
+    },
+    [theme.breakpoints.up('md')]: {
+      // marginTop: '12%',
+    },
+  },
+  btnContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // height: '112px',
+  },
+}));
 
 const HomePageBannerBody = () => {
+  const classes = bannerStyles();
   return (
     <>
-      <Typography
-        variant="h1"
-        style={{ marginBottom: '64px', textAlign: 'center' }}>
-        Rehouser Ltd
-      </Typography>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          height: '112px',
-        }}>
+      {/* <Typography variant="h1" className={classes.title}>
+        Rehouser
+      </Typography> */}
+      {/* <div className={classes.logo}></div> */}
+      <SVG name="main_logo" style={{ padding: '64px' }} />
+      <div className={classes.btnContainer}>
         <ChangeRouteButton
           title="Free Appraisal"
           variant="contained"
@@ -40,44 +53,48 @@ const HomePageBannerBody = () => {
             size: 'large',
             style: {
               pointerEvents: 'all',
+              margin: '8px',
             },
           }}
         />
         <ChangeRouteButton
           title="Search for rental"
           variant="contained"
-          // color="primary"
+          color="secondary"
           route="/property-search"
           btnProps={{
             size: 'large',
             style: {
               pointerEvents: 'all',
+              margin: '8px',
             },
           }}
         />
       </div>
-      <Typography
-        variant="h4"
-        color="secondary"
-        style={{ marginTop: '32px', textAlign: 'center' }}>
-        Read More
-      </Typography>
-      <IconButton
-        style={{
-          marginTop: '16px',
-          pointerEvents: 'all',
-        }}
-        aria-label="read-more"
-        href="#banner-footer"
-        color="secondary">
-        <ArrowDownwardIcon
-          fontSize="large"
+      <div>
+        <Typography
+          variant="h4"
+          color="secondary"
+          style={{ marginTop: '32px', textAlign: 'center' }}>
+          More
+        </Typography>
+        <IconButton
           style={{
-            height: '3rem',
-            width: '3rem',
+            marginTop: '16px',
+            pointerEvents: 'all',
           }}
-        />
-      </IconButton>
+          aria-label="read-more"
+          href="#banner-footer"
+          color="secondary">
+          <ArrowDownwardIcon
+            fontSize="large"
+            style={{
+              height: '3rem',
+              width: '3rem',
+            }}
+          />
+        </IconButton>
+      </div>
     </>
   );
 };
@@ -104,15 +121,6 @@ const HomePage = props => {
         elevation={0}
         heading=""
         intro=""
-      />
-
-      <FileUploader
-        title="Upload test file"
-        files={[]}
-        fileParams={{
-          folder: 'test',
-        }}
-        recieveFile={() => alert('FIle was recieved')}
       />
     </div>
   );

@@ -39,10 +39,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   footer: {
-    position: 'absolute',
+    // position: 'absolute',
     bottom: 0,
     padding: theme.spacing(3),
     width: '100%',
@@ -79,6 +80,7 @@ const ParticleBanner = props => {
       ref={bannerNode}
       className={classes.bannerContainer}
       style={{
+        top: windowWidth > 600 ? '-64px' : '-56px',
         height: windowHeight,
       }}>
       <ParticleOne />

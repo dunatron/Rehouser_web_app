@@ -11,6 +11,9 @@ export const lightSecondaryColor = '#334b6e';
 export const darkSecondaryColor = '#00001d';
 export const secondaryContrastText = '#fff';
 
+// default font typography
+import defaultTypography from '../typographys/default';
+
 export const makefontRgba = (value, hue) => `rgba(${value}, ${hue})`;
 const fontRgb = `62, 62, 62`;
 const mainPalette = {
@@ -45,7 +48,9 @@ const mainPalette = {
   },
   // Make sure any changes you add here such as color you add in for other themes i.e darkPallete
   typography: {
+    ...defaultTypography,
     h1: {
+      ...defaultTypography.h1,
       color: makefontRgba(fontRgb, 0.85),
     },
   },

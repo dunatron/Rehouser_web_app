@@ -12,6 +12,8 @@ import GeoSearch from './GeoSearch';
 
 import { InstantSearch, Pagination, Stats } from 'react-instantsearch-dom';
 
+import ConnectedCheckBoxRefinementList from './refinements/CheckBoxList';
+
 import HorizonScrollHits from './HorizonScrollHits';
 import SearchHeader from './SearchHeader';
 import useStyles from './useStyles';
@@ -63,6 +65,10 @@ const PropertySearch = props => {
               <Box className={classes.leftSearchPanel}>
                 <SearchHeader />
                 <SearchFilter />
+                <ConnectedCheckBoxRefinementList
+                  attribute="administrative_area_level_1"
+                  operator="or"
+                />
               </Box>
               <Box className={classes.rightSearchPanel}>
                 <GeoSearch />

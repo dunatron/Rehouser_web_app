@@ -12,7 +12,7 @@ const mainThemeSetup = {
     values: { xs: 0, lg: 1280, sm: 600, xl: 1920, md: 960 },
   },
   zIndex: {
-    flipCard: 900, 
+    flipCard: 900,
     mobileStepper: 950,
     speedDial: 1050,
     appBar: 1100,

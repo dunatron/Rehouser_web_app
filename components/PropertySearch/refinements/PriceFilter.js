@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
     // color: theme.palette.secondary.contrastText,
   },
   listItemSelected: {
-    // color: theme.palette.primary.contrastText,
-    // backgroundColor: `${theme.palette.primary.main} !important`,
+    color: theme.palette.primary.contrastText,
+    backgroundColor: `${theme.palette.primary.main} !important`,
   },
   listItemText: {
     // color: theme.palette.primary.contrastText,

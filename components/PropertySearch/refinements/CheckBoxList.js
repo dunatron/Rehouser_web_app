@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
   },
   controlLabel: {
-    color: theme.palette.secondary.contrastText,
+    // color: theme.palette.secondary.contrastText,
   },
   label: {
     display: 'flex',
@@ -78,8 +78,8 @@ const MaterialUiCheckBoxRefinementList = ({
                 root: classes.checkboxRoot,
                 checked: classes.checkboxChecked,
               }}
-              // color="primary"
-              color="default"
+              color="primary"
+              // color="default"
               checked={isRefined}
               onClick={event => {
                 event.preventDefault();

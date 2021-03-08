@@ -128,12 +128,15 @@ const SearchInterface = styled.div`
   }
   .ais-GeoSearch {
     height: 100%;
+    position: relative;
   }
   .ais-GeoSearch-map {
     /* height: 500px; */
     height: 100%;
+    
   }
   .map-marker {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     // background-color: #002443;

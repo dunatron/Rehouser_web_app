@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     width: '50%',
     flex: '1 1 auto',
     minWidth: '50%',
-    minHeight: '300px',
+    minHeight: '340px',
+    // minHeight: '500px',
     [theme.breakpoints.up('sm')]: {},
     [theme.breakpoints.up('md')]: {
       minWidth: '50%',

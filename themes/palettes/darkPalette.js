@@ -14,6 +14,9 @@ export const lightSecondaryColor = '#a6d4fa';
 export const darkSecondaryColor = '#648dae';
 export const secondaryContrastText = '#000';
 
+// default font typography
+import defaultTypography from '../typographys/default';
+
 const fontRgb = `255, 255, 255`;
 const theme = {
   palette: {
@@ -49,7 +52,9 @@ const theme = {
     },
   },
   typography: {
+    ...defaultTypography,
     h1: {
+      ...defaultTypography.h1,
       color: makefontRgba(fontRgb, 1),
     },
   },
