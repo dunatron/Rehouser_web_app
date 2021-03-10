@@ -14,6 +14,7 @@ import {
   Button,
   Box,
   ButtonGroup,
+  Tooltip,
 } from '@material-ui/core';
 
 import Modal from '@/Components/Modal';
@@ -22,6 +23,8 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import PublicDetailsDisplay from './PublicDetailsDisplay';
+
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -36,6 +39,19 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     width: theme.spacing(8),
     height: theme.spacing(8),
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  small: {
+    margin: theme.spacing(1),
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  large: {
+    margin: theme.spacing(1),
+    width: theme.spacing(8),
+    height: theme.spacing(8),
   },
   name: {},
   content: {
@@ -45,7 +61,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PublicUserDetails({ id, email }) {
+export default function PublicUserDetails({
+  id,
+  email,
+  iconOnly = false,
+  size,
+}) {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -77,24 +98,33 @@ export default function PublicUserDetails({ id, email }) {
 
   const fullName = `${data.user.firstName} ${data.user.lastName}`;
 
+  const avatarClasses = clsx({
+    [classes.avatar]: true,
+    [classes.small]: size === 'small' ? true : false,
+  });
+
   return (
     <>
       <Paper className={classes.card} elevation={0}>
-        <Avatar
-          onClick={handleOpenModal}
-          sizes="l"
-          className={classes.avatar}
-          src={data.user.profilePhoto ? data.user.profilePhoto.url : null}
-          alt={`image of ${fullName}`}
-        />
-        <Box className={classes.content}>
-          <Typography className={classes.name} gutterBottom>
-            {data.user.firstName} {data.user.lastName}
-          </Typography>
-          <Button className={classes.name} variant="outlined">
-            {data.user.email}
-          </Button>
-        </Box>
+        <Tooltip title={`${data.user.firstName} ${data.user.lastName}`}>
+          <Avatar
+            onClick={handleOpenModal}
+            className={avatarClasses}
+            src={data.user.profilePhoto ? data.user.profilePhoto.url : null}
+            alt={`image of ${fullName}`}
+          />
+        </Tooltip>
+
+        {!iconOnly && (
+          <Box className={classes.content}>
+            <Typography className={classes.name} gutterBottom>
+              {data.user.firstName} {data.user.lastName}
+            </Typography>
+            <Button className={classes.name} variant="outlined">
+              {data.user.email}
+            </Button>
+          </Box>
+        )}
       </Paper>
       <Modal
         open={modalOpen}

@@ -5,14 +5,20 @@ import UserDetails from './UserDetails';
 import useStyles from './useStyles';
 import Image from 'material-ui-image';
 import PublicUserDetails from '@/Components/User/PublicUserDetails';
+import PrivateUserDetails from '@/Components/User/PrivateUserDetails';
 
-const UserItem = ({ user, me, isWizard }) => {
+const UserItem = ({ user, me }) => {
   const classes = useStyles();
   return (
     <RPaper className={classes.root}>
       <Box className={classes.details}>
         <Box className={classes.detailItem}>
-          <PublicUserDetails id={user.id} />
+          {me.isWizard ? (
+            <PrivateUserDetails id={user.id} />
+          ) : (
+            <PublicUserDetails id={user.id} />
+          )}
+
           {/* <Box
             style={{
               display: 'flex',

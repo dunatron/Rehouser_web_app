@@ -24,6 +24,7 @@ import { SectionExamples } from '../StyleExamples';
 import RenderCloudinaryType from '@/Components/UploadWidget/RenderType';
 
 import ForeignLinksTable from '@/Components/Tables/ForeignLinksTable';
+import PropertiesTable from '@/Components/Tables/PropertiesTable';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     flexWrap: 'wrap',
     margin: '0 auto',
+    width: '100%',
   },
 }));
 
@@ -55,11 +57,21 @@ export default function PrivateDetailsDisplay({ user }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Container gap={1}>
+      <Container gap={1} full>
         <GroupedSection title="Basic details">
           <String title="Phone" value={user.phone} orientation="vertical" />
           <String title="Email" value={user.email} orientation="vertical" />
-          isAdmin
+          <String
+            title="isAdmin"
+            value={user.isAdmin ? 'Yes' : 'NO'}
+            orientation="vertical"
+          />
+          <String
+            title="isWizard"
+            value={user.isWizard ? 'Yes' : 'NO'}
+            orientation="vertical"
+          />
+
           <Date
             title="CreatedAt"
             value={user.createdAt}
@@ -124,21 +136,26 @@ export default function PrivateDetailsDisplay({ user }) {
             value={user.emergencyContactEmail}
           />
         </GroupedSection>
-        <div>
-          <Typography variant="caption" gutterBottom>
-            Foreign Links
-          </Typography>
-          <ForeignLinksTable
-            type="user"
-            id={user.id}
-            where={{
-              user: {
-                id: user.id,
-              },
-            }}
-          />
-        </div>
       </Container>
+      <div style={{ overflow: 'scroll', marginTop: '32px' }}>
+        <ForeignLinksTable
+          type="user"
+          id={user.id}
+          where={{
+            user: {
+              id: user.id,
+            },
+          }}
+        />
+
+        <PropertiesTable
+          where={{
+            owners_some: {
+              id: user.id,
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }

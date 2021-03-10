@@ -20,6 +20,7 @@ import Modal from '@/Components/Modal/index';
 
 // maybe if user is admin swap public out with private
 import PublicUserDetails from '@/Components/User/PublicUserDetails';
+import Help from '@/Components/Help';
 
 import PropertyPublicDetails from '@/Components/Property/PublicDetails';
 import ApplicationFullDetails from '@/Components/RentalApplication/FullDetails';
@@ -29,6 +30,9 @@ import {
   RENTAL_APPLICATIONS_COUNT_QUERY,
 } from '../../graphql/connections';
 // mutations
+
+//help configs
+import { TENANT_APPLICATION_VISIBILTY_HELP } from '@/Lib/configs/help/tenant/applications/visibility';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -92,6 +96,14 @@ const RentalApplicationsTable = ({
       {
         title: 'visibility',
         field: 'visibility',
+        render: rowData => {
+          return (
+            <div>
+              <Help helpConf={TENANT_APPLICATION_VISIBILTY_HELP} />
+              {rowData.visibility}
+            </div>
+          );
+        },
       },
       {
         title: 'stage',
@@ -112,7 +124,11 @@ const RentalApplicationsTable = ({
                   {/* {JSON.stringify(applicant, null, 2)} */}
                   {/* {applicant.user.email} */}
 
-                  <PublicUserDetails id={applicant.user.id} />
+                  <PublicUserDetails
+                    id={applicant.user.id}
+                    iconOnly
+                    size="small"
+                  />
                 </div>
               ))}
             </div>
@@ -122,8 +138,6 @@ const RentalApplicationsTable = ({
     ],
     []
   );
-
-  const handleModalClose = () => setModalIsOpen(false);
 
   const goToApplication = (e, d) => {
     router.push({

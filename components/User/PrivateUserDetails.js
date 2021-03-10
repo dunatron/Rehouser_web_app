@@ -116,7 +116,7 @@ const useModalStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
-    maxWidth: '800px',
+    // maxWidth: '800px',
     margin: '0 auto',
   },
   avatar: {
@@ -147,7 +147,7 @@ const FullUserDetails = ({ user }) => {
   const hasStamp = user.rehouserStamp;
   return (
     <div className={classes.root}>
-      <Container>
+      <Container full>
         <PublicDetailsDisplay user={user} />
         <PrivateDetailsDisplay user={user} />
       </Container>

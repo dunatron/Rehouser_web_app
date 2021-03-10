@@ -37,6 +37,8 @@ import {
 } from '@/Components/LeaseManager/LeaseLengthInfo';
 
 import UserDetails from '@/Components/UserDetails';
+import CorrectUserDetails from '@/Components/User/CorrectDetails';
+
 import PropertyPublicDetails from '@/Components/Property/PublicDetails';
 
 import { FileInfoFragment } from '@/Gql/fragments/fileInfo';
@@ -473,13 +475,13 @@ const Details = props => {
       </RehouserPaper>
       <RehouserPaper>
         <Typography>Property creator</Typography>
-        <UserDetails me={me} user={property.creator} />
+        <CorrectUserDetails id={property.creator.id} />
       </RehouserPaper>
       <RehouserPaper>
         <Typography>Owners</Typography>
         {property.owners.length > 0 &&
           property.owners.map((owner, idx) => {
-            return <UserDetails me={me} user={owner} />;
+            return <CorrectUserDetails id={owner.id} />;
           })}
         {me.isWizard && (
           <DynamicAddUserToList
