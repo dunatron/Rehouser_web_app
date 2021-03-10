@@ -154,7 +154,7 @@ const RentalApplication = ({ id, me, invited }) => {
         )}
       </RehouserPaper>
       <Modal open={isPropertyModalOpen} close={handleClosePropertyModal}>
-        <PropertyPublicDetails />
+        <PropertyPublicDetails id={data.rentalApplication.property.id} />
       </Modal>
       <Modal open={isApplicationModalOpen} close={handleCloseApplicationModal}>
         <ApplicationFullDetails id={data.rentalApplication.id} />

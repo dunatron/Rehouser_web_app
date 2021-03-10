@@ -1,6 +1,7 @@
 import { RENTAL_APPRAISALS_CONNECTION_QUERY } from './rentalAppraisalsConnection';
 import { RENTAL_APPRAISALS_COUNT_QUERY } from './rentalAppraisalsCount';
 import { RENTAL_APPLICATIONS_CONNECTION_QUERY } from './rentalApplicationsConnection';
+import { RENTAL_APPLICATIONS_COUNT_QUERY } from './rentalApplicationsCount';
 import { PROPERTIES_CONNECTION_QUERY } from './propertiesConnection';
 import { PROPERTIES_COUNT_QUERY } from './propertiesCountQuery';
 import { INSPECTIONS_CONNECTION_QUERY } from './inspectionsConnection';
@@ -20,6 +21,7 @@ export {
   RENTAL_APPRAISALS_CONNECTION_QUERY,
   RENTAL_APPRAISALS_COUNT_QUERY,
   RENTAL_APPLICATIONS_CONNECTION_QUERY,
+  RENTAL_APPLICATIONS_COUNT_QUERY,
   PROPERTIES_CONNECTION_QUERY,
   PROPERTIES_COUNT_QUERY,
   INSPECTIONS_CONNECTION_QUERY,
