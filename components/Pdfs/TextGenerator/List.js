@@ -15,6 +15,7 @@ const List = ({ item }) => {
   } = item;
 
   const CustomTag = fieldProps.variant === 'ol' ? 'ol' : 'ul';
+  const disableIndent = fieldProps.disableIndent ? true : false;
 
   return (
     <CustomTag
@@ -22,10 +23,11 @@ const List = ({ item }) => {
       type={fieldProps.type}
       start={fieldProps.start}
       reversed={fieldProps.reversed}
-      //   style={{
-      //     paddingLeft: '16px',
-      //   }}
-    >
+      style={{
+        ...(disableIndent && {
+          paddingLeft: '0',
+        }),
+      }}>
       <HandleInners inners={inners} />
     </CustomTag>
   );

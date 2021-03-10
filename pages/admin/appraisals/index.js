@@ -14,11 +14,14 @@ const AdminAppraisalsPage = ({ appData: { currentUser } }) => {
     <>
       <PageHeader
         title="Admin Appraisals"
-        intro="This is where our admins will view appraicdsals that need to be appraised then fill in the details"
+        intro="This is where our admins will find appraisals that need to be appraised."
         children={[
           <Typography key={1} gutterBottom>
-            Perhaps some instructions on how to use it. FUck i guess thats my
-            job for bits like this
+            Make sure to give an accurate as possible appraisal
+          </Typography>,
+          <Typography key={2} gutterBottom>
+            Remember to refresh as the tables get cached. Emails are also sent
+            to the admin account when a new appraisal is requested
           </Typography>,
         ]}
         metaData={{

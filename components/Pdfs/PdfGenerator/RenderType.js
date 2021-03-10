@@ -36,7 +36,13 @@ const RenderType = ({ item }) => {
       );
     case 'List':
       return (
-        <View style={{ ...styles.ul }}>
+        <View
+          style={{
+            ...styles.ul,
+            ...(fieldProps.disableIndent && {
+              ...styles.ul_disableIndent,
+            }),
+          }}>
           <HandleInners inners={inners} />
         </View>
       );

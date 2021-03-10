@@ -15,6 +15,10 @@ import { Button } from '@material-ui/core';
 import ConnectionTable, {
   getEnumLookupList,
 } from '@/Components/SuperiorTable/ConnectionTable';
+import {
+  formatCentsToDollarsVal,
+  formatCentsToDollars,
+} from '@/Lib/formatCentsToDollars';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -70,8 +74,8 @@ const AppraisalsTable = ({
         editable: false,
         searchable: false,
         filtering: false,
+        render: rowData => formatCentsToDollarsVal(rowData.rent),
       },
-      // { title: 'owners', field: 'owners' },
       {
         title: 'hasBeenUsed',
         field: 'hasBeenUsed',
@@ -128,7 +132,7 @@ const AppraisalsTable = ({
         add={addAppraisalRoute}
         type="RentalAppraisal"
         enableAddressParams={enableAddressParams}
-        title="All Properties"
+        title="Appraisals"
         connectionKey={connectionKey}
         where={where}
         countQuery={RENTAL_APPRAISALS_COUNT_QUERY}

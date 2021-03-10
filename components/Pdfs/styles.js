@@ -48,7 +48,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
   },
-
+  ul_disableIndent: {
+    paddingLeft: '0pt',
+  },
   li_wrapper: {
     position: 'relative',
   },

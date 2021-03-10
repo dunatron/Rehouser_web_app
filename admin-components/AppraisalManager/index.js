@@ -22,7 +22,9 @@ import {
 
 import { PROPERTY_APPRAISAL_SUBSCRIPTION } from '../../graphql/subscriptions/PropertyAppraisalSub';
 import moment from 'moment';
-import formatCentsToDollars from '../../lib/formatCentsToDollars';
+import formatCentsToDollars, {
+  formatCentsToDollarsVal,
+} from '../../lib/formatCentsToDollars';
 import Modal from '../../components/Modal/index';
 import Error from '../../components/ErrorMessage';
 
@@ -108,7 +110,12 @@ const AdminRentalAppraisalsTable = ({ where }) => {
         editable: false,
         type: 'numeric',
       },
-      { title: 'rent', field: 'rent', type: 'numeric' },
+      {
+        title: 'rent',
+        field: 'rent',
+        type: 'numeric',
+        render: rowData => formatCentsToDollarsVal(rowData.rent),
+      },
       {
         title: 'property',
         field: 'property.id',
@@ -151,7 +158,7 @@ const AdminRentalAppraisalsTable = ({ where }) => {
             offerAppraisal({
               variables: {
                 data: {
-                  rent: parseFloat(newData.rent),
+                  rent: parseFloat(newData.rent * 100),
                 },
                 where: {
                   id: oldData.id,
