@@ -11,6 +11,9 @@ import FieldError from './FieldError';
 
 const useStyles = makeStyles(theme => ({}));
 
+/**
+ * ToDo: if a default location comes in we need to actualy force select it after render to get the details that the object it came frommight not have
+ */
 const Location = props => {
   const {
     register,
@@ -52,9 +55,10 @@ const Location = props => {
         ? rawData[config.fieldProps.fieldMaps['administrative_area_level_1']]
         : null,
     }),
-    ...(config.fieldProps.fieldMaps['country'] && {
-      country: rawData ? rawData[config.fieldProps.fieldMaps['country']] : null,
-    }),
+    // ...(config.fieldProps.fieldMaps['country'] && {
+    //   country: rawData ? rawData[config.fieldProps.fieldMaps['country']] : null,
+    // }),
+    country: 'A TEST',
     ...(config.fieldProps.fieldMaps['postal_code'] && {
       postal_code: rawData
         ? rawData[config.fieldProps.fieldMaps['postal_code']]
@@ -67,8 +71,11 @@ const Location = props => {
       if (mapToObjectKey) {
         const str = `${mapToObjectKey}.${value}`;
 
+        console.log('Useeffect string val => ', str);
+
         register({ name: str }, { ...config.refConf });
       } else {
+        console.log('Useeffect string val => ', value);
         register({ name: value }, { ...config.refConf });
       }
     }

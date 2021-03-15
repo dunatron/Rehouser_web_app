@@ -15,6 +15,12 @@ const RentalAppraisalInfoFragment = gql`
     location
     locationLat
     locationLng
+    administrative_area_level_1
+    country
+    locality
+    postal_code
+    route
+    street_number
     rooms
     bathrooms
     heatSources
