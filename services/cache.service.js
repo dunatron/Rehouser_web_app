@@ -44,11 +44,19 @@ export const writeMessage = async (client, message, optimisticId) => {
     __typename: 'MessageEdge',
   };
 
+  const updatedMessages = [pagedMesssage, ...data.messagesConnection.edges];
+
   // filter out optimistic message
-  const filteredMessages = data.messagesConnection.edges.filter((edge, idx) => {
-    if (edge.cursor === optimisticId && isOptimisticMessage) return;
+  const filteredMessages = updatedMessages.filter((edge, idx) => {
+    // if (edge.cursor === optimisticId && isOptimisticMessage) return;
     return edge;
   });
+
+  // // filter out optimistic message
+  // const filteredMessages = data.messagesConnection.edges.filter((edge, idx) => {
+  //   if (edge.cursor === optimisticId && isOptimisticMessage) return;
+  //   return edge;
+  // });
 
   // write the query to the cache
   client.writeQuery({
@@ -57,7 +65,8 @@ export const writeMessage = async (client, message, optimisticId) => {
     data: {
       messagesConnection: {
         ...data.messagesConnection,
-        edges: [pagedMesssage, ...filteredMessages],
+        edges: [...filteredMessages],
+        // edges: [pagedMesssage, ...filteredMessages],
       },
     },
   });

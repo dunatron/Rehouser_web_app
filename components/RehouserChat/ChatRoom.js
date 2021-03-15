@@ -72,7 +72,7 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
       if (!chat) return null;
       if (!data) return null;
       if (!data.messagesConnection) return null;
-      const cacheMessageId = uuid();
+      const cacheMessageId = `temp-id-${uuid()}`;
       createMessage({
         variables: {
           data: {
@@ -158,6 +158,8 @@ const ChatRoomScreenConnection = props => {
   });
   if (loading) return <Loader loading={loading} text="Initializing chat" />;
   if (error) return <Error error={error} />;
+
+  if (!data) return <div>Couldnt find chat</div>;
   // ToDo create a pagination provider for this
   return <ChatRoomScreen {...props} chat={data.chat} />;
 };
