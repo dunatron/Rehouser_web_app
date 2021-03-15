@@ -27,6 +27,9 @@ const Footer = () => {
         alignItems: 'center',
         // justifyContent: 'center',
       }}>
+      <ItemWrapper>
+        <InstallPWAButton />
+      </ItemWrapper>
       {/* <ItemWrapper>
         <InstallPWAButton />
       </ItemWrapper>

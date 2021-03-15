@@ -6,14 +6,6 @@ import { CURRENT_USER_QUERY } from '@/Components/User/index';
 import { useCurrentUser } from '@/Components/User';
 import Loader from '@/Components/Loader';
 
-/**
- * Ok listen up chump, here is the architecture
- * - rename to WithData
- * - useCurrentUser
- * - useWhatever
- * loggedUser => {loading: loading, error: error}
- * to avoid Conflicts in local component props, wrap in appData: { me}
- */
 const WithUser = props => {
   // const { data, error, loading } = useCurrentUser();
   const currentUserProps = useCurrentUser();
@@ -44,17 +36,6 @@ const WithUser = props => {
     return child;
   });
   return children;
-  // const children = React.Children.map(props.children, child => {
-  //   if (React.isValidElement(child)) {
-  //     return React.cloneElement(child, {
-  //       appData: {
-  //         currentUser: { data: { me: null }, loading: false, error: null },
-  //       },
-  //     });
-  //   }
-  //   return child;
-  // });
-  // return children;
 };
 
 WithUser.propTypes = {
