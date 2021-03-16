@@ -25,16 +25,19 @@ import Typography from '@material-ui/core/Typography';
 // icons
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TuneIcon from '@material-ui/icons/Tune';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import TodayIcon from '@material-ui/icons/Today';
+
 
 const useStyles = makeStyles(theme => ({
   AccordionRoot: {
     alignItems: 'center',
-    fontSize: '2rem',
+    fontSize: '1.3rem',
     // backgroundColor: 'rgb(212,220,231)',
     // color: theme.palette.secondary.main,
   },
   rentLabel: {
-    fontSize: '2rem',
+    fontSize: '1.3rem',
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: '400',
     lineHeight: '1.5',
@@ -99,6 +102,8 @@ const SearchFilter = () => {
     setBottomRoomPrice(bottomPrice);
   };
 
+  // 9,000,690.24
+
   // must be a all on one line
   // const filterLogic = `move_in_date_timestamp:0000000000 TO ${moveInDateStamp} AND onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
   const filterLogic = `onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
@@ -133,19 +138,20 @@ const SearchFilter = () => {
               {formatCentsToDollarsVal(bottomPrice)} -{' '}
               {formatCentsToDollarsVal(topPrice)}
             </Typography>
-            <Stats />
+            {/* <Stats /> */}
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.AccordionDetails}>
           <ConnectedRefinements childrenBefore={true}>
-            <ExpansionRefinement title="Property price per week">
+            <ExpansionRefinement title="Property price per week" icon={<AttachMoneyIcon />}>
               <PriceFilter
                 setPrice={handleSetPriceFilter}
                 items={[
                   {
                     label: 'ALL',
                     bottomPrice: 0,
-                    topPrice: dollarsToCents(9999999),
+                    // topPrice: dollarsToCents(9999999),
+                    topPrice: 900069024
                   },
                   {
                     label: '$200 - $400',
@@ -178,7 +184,7 @@ const SearchFilter = () => {
             {/* <ExpansionRefinement title="Price per room">
               <PriceFilter setPrice={handleSetRoomPriceFilter} />
             </ExpansionRefinement> */}
-            <ExpansionRefinement title={'Available before date'}>
+            {/* <ExpansionRefinement title={'Available before date'} icon={<TodayIcon />}>
               <div
                 style={{
                   padding: '16px',
@@ -188,7 +194,7 @@ const SearchFilter = () => {
                   onChange={setAndFormatMoveInDate}
                 />
               </div>
-            </ExpansionRefinement>
+            </ExpansionRefinement> */}
           </ConnectedRefinements>
         </AccordionDetails>
       </Accordion>

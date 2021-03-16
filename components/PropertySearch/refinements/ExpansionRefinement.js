@@ -13,6 +13,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 
+import FilterListIcon from '@material-ui/icons/FilterList';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -30,9 +32,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ExpansionRefinement = ({ children, title, nested }) => {
+const ExpansionRefinement = ({ children, title, nested, defaultOpen = false, icon }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(defaultOpen);
 
   const handleClick = () => {
     setOpen(!open);
@@ -50,7 +52,7 @@ const ExpansionRefinement = ({ children, title, nested }) => {
           classes={{
             root: classes.listItemIcon,
           }}>
-          <InboxIcon />
+          {icon ? icon : <FilterListIcon />}
         </ListItemIcon>
         <ListItemText
           primary={title}

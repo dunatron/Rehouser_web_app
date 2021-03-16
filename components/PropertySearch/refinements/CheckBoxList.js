@@ -61,10 +61,12 @@ const MaterialUiCheckBoxRefinementList = ({
   attribute,
   refine,
   createURL,
+  expansionProps
 }) => {
   const classes = useStyles();
+  
   return (
-    <ExpansionRefinement title={attribute.toUpperCase()} nested={true}>
+    <ExpansionRefinement expanded={true} title={attribute.toUpperCase()} nested={true} {...expansionProps}>
       {items.map(({ count, isRefined, label, value }, i) => (
         <FormControlLabel
           classes={{

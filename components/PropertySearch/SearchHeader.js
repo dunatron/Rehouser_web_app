@@ -21,7 +21,7 @@ const SearchHeader = () => {
       <Typography color="inherit" variant="body1">
         Find my happy home
       </Typography>
-      <CustomSearchBox />
+      {/* <CustomSearchBox /> */}
     </div>
   );
 };

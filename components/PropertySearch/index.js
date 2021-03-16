@@ -14,9 +14,14 @@ import { InstantSearch, Pagination, Stats } from 'react-instantsearch-dom';
 
 import ConnectedCheckBoxRefinementList from './refinements/CheckBoxList';
 
+import CustomSearchBox from './CustomSearchBox';
+
 import HorizonScrollHits from './HorizonScrollHits';
 import SearchHeader from './SearchHeader';
 import useStyles from './useStyles';
+
+//icons 
+import PublicIcon from '@material-ui/icons/Public';
 
 // THIS FOR NEXT JS
 // https://github.com/algolia/react-instantsearch/tree/master/examples/next
@@ -63,12 +68,18 @@ const PropertySearch = props => {
           <Paper variant="outlined" square={true}>
             <Box className={classes.searchPanel}>
               <Box className={classes.leftSearchPanel}>
-                <SearchHeader />
-                <SearchFilter />
+              <SearchHeader />
                 <ConnectedCheckBoxRefinementList
                   attribute="administrative_area_level_1"
                   operator="or"
+                  expansionProps={{
+                    title: "Administrative Area", 
+                    defaultOpen: true, 
+                    icon: <PublicIcon />
+                  }}
                 />
+                <CustomSearchBox />
+                <SearchFilter />
               </Box>
               <Box className={classes.rightSearchPanel}>
                 <GeoSearch />
