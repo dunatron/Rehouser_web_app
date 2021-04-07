@@ -7,7 +7,8 @@ import {
   Grid,
   ArrowKeyStepper,
 } from 'react-virtualized';
-import PropertyResultHit from './PropertyResultHit';
+// import PropertyResultHit from './PropertyResultHit';
+import PropertyResultHit from './PropertyResultHit/index';
 
 //material
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -17,6 +18,8 @@ import { Button, Card } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import useCurrentWidth from '@/Lib/hooks/useCurrentWidth';
+
+import NoResults from './NoResults';
 
 const Controls = ({ currPos, count, moveLeft, moveRight }) => {
   return (
@@ -102,7 +105,7 @@ const ColumnSizerExample = props => {
   }, [props.columnCount]);
 
   const _noContentRenderer = () => {
-    return <div>No Property Results. Try adjusting the search settings</div>;
+    return <NoResults clearsQuery />;
     // return <div className={styles.noCells}>No cells</div>;
   };
 

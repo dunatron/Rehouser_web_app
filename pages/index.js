@@ -74,7 +74,7 @@ const HomePageBannerBody = () => {
       <div>
         <Typography
           variant="h4"
-          color="secondary"
+          color="default"
           style={{ marginTop: '32px', textAlign: 'center' }}>
           More
         </Typography>
@@ -85,7 +85,7 @@ const HomePageBannerBody = () => {
           }}
           aria-label="read-more"
           href="#banner-footer"
-          color="secondary">
+          color="default">
           <ArrowDownwardIcon
             fontSize="large"
             style={{
@@ -108,8 +108,8 @@ const HomePage = props => {
         footer={[
           <Typography
             key={1}
-            variant="h5"
-            color="secondary"
+            variant="h4"
+            color="primary"
             style={{ textAlign: 'center', padding: '0 30px' }}>
             Turning empty houses into friendly abodes
           </Typography>,

@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {},
     [theme.breakpoints.up('md')]: {
       minWidth: '50%',
+      maxWidth: '50%',
     },
     [theme.breakpoints.up('lg')]: {},
   },
@@ -32,9 +33,11 @@ const useStyles = makeStyles(theme => ({
     minWidth: '50%',
     minHeight: '340px',
     // minHeight: '500px',
+    maxHeight: '420px',
     [theme.breakpoints.up('sm')]: {},
     [theme.breakpoints.up('md')]: {
       minWidth: '50%',
+      maxWidth: '50%',
     },
     [theme.breakpoints.up('lg')]: {},
     '& > div:first-of-type': {

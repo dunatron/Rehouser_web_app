@@ -3,12 +3,20 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import Error from '@/Components/ErrorMessage/index';
 import { RESEND_CONFIRM_EMAIL_MUTATION } from '@/Gql/mutations/index';
-import { Button, CircularProgress, Box, Typography } from '@material-ui/core';
+import {
+  Button,
+  CircularProgress,
+  Box,
+  Typography,
+  IconButton,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import clsx from 'clsx';
 import { useCurrentUser } from '@/Components/User';
 import { toast } from 'react-toastify';
+
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 const useStyles = makeStyles(theme => ({
   buttonSuccess: {
@@ -44,6 +52,7 @@ const ResendConfirmEmailButton = ({ email, ...rest }) => {
         </Typography>
       </Box>
     );
+    setSuccess(true);
   };
 
   const [acceptApplicationMutation, { data, loading, error }] = useMutation(
@@ -60,6 +69,16 @@ const ResendConfirmEmailButton = ({ email, ...rest }) => {
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
   });
+
+  if (success)
+    return (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Typography>Email Sent</Typography>
+        <IconButton onClick={() => setSuccess(false)}>
+          <RefreshIcon />
+        </IconButton>
+      </div>
+    );
 
   // return null;
   return (

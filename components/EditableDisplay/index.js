@@ -48,9 +48,11 @@ const EditableDisplay = ({ item }) => {
     fieldProps,
     label,
     editable = true,
+    viewable = true,
     permissions,
-    displayPermssions,
+    viewPermssions,
     editPermssions,
+    me,
   } = item;
   const classes = useStyles();
 
@@ -125,6 +127,10 @@ const EditableDisplay = ({ item }) => {
     classes.headerActions,
     state.editing && classes.headerActionsEditing
   );
+
+  // check has permissions or displayPermssions
+
+  if (!viewable) return null;
 
   return (
     <div className={editableDisplayClasses}>

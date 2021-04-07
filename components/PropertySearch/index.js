@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 
-import { Box, Paper } from '@material-ui/core';
+import { Box, Paper, Checkbox } from '@material-ui/core';
 import { SearchInterface } from './styles';
 import SearchFilter from './SearchFilter';
 
@@ -15,12 +16,14 @@ import { InstantSearch, Pagination, Stats } from 'react-instantsearch-dom';
 import ConnectedCheckBoxRefinementList from './refinements/CheckBoxList';
 
 import CustomSearchBox from './CustomSearchBox';
+import EnableBoundingBox from './EnableBoundingBox';
+import ClearQuery from './ClearQuery';
 
 import HorizonScrollHits from './HorizonScrollHits';
 import SearchHeader from './SearchHeader';
 import useStyles from './useStyles';
 
-//icons 
+//icons
 import PublicIcon from '@material-ui/icons/Public';
 
 // THIS FOR NEXT JS
@@ -59,6 +62,7 @@ const PropertySearch = props => {
   const { me } = props;
   const classes = useStyles();
 
+  const [enableBoundingBox, setEnableBoundingBox] = useState(false);
   return (
     <InstantSearch
       indexName={`${indexPrefix}_PropertySearch`}
@@ -68,23 +72,33 @@ const PropertySearch = props => {
           <Paper variant="outlined" square={true}>
             <Box className={classes.searchPanel}>
               <Box className={classes.leftSearchPanel}>
-              <SearchHeader />
+                <SearchHeader />
                 <ConnectedCheckBoxRefinementList
                   attribute="administrative_area_level_1"
                   operator="or"
                   expansionProps={{
-                    title: "Administrative Area", 
-                    defaultOpen: true, 
-                    icon: <PublicIcon />
+                    title: 'Administrative Area',
+                    defaultOpen: true,
+                    icon: <PublicIcon />,
                   }}
                 />
                 <CustomSearchBox />
                 <SearchFilter />
+                <EnableBoundingBox
+                  enableBoundingBox={enableBoundingBox}
+                  setEnableBoundingBox={() =>
+                    setEnableBoundingBox(!enableBoundingBox)
+                  }
+                  transformItems={items =>
+                    items.filter(({ attribute }) => attribute !== 'Rooms')
+                  }
+                />
               </Box>
               <Box className={classes.rightSearchPanel}>
-                <GeoSearch />
+                <GeoSearch enableBoundingBox={enableBoundingBox} />
               </Box>
             </Box>
+            <ClearQuery clearsQuery />
             <ConnectedCurrentRefinements />
           </Paper>
           <Content me={me} />

@@ -78,6 +78,7 @@ const PriceFilter = ({ setPrice, items }) => {
   const RenderListItem = ({ item, selected, onClick }) => {
     return (
       <ListItem
+        dense
         classes={{
           root: classes.listItemRoot,
           selected: classes.listItemSelected,

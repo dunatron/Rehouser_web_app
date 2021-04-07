@@ -50,12 +50,12 @@ const SendConfirmEmailButton = props => {
   );
 
   // if token is set in the url then confirm email once logged in
-  // useEffect(() => {
-  //   if (router.query.token && !sent) {
-  //     confirmEmailWithToken();
-  //     setSent(true);
-  //   }
-  // }, [router.query.token]);
+  useEffect(() => {
+    if (router.query.token && !sent) {
+      confirmEmailWithToken();
+      setSent(true);
+    }
+  }, [router.query.token]);
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -85,7 +85,7 @@ const SendConfirmEmailButton = props => {
           <CircularProgress size={24} className={classes.buttonProgress} />
         )}
       </Button>
-      <Typography gutterBottom variant="body1">
+      <Typography gutterBottom variant="body1" color="textSecondary">
         To get another token emailed to you click the below button
       </Typography>
       <ResendConfirmEmail />

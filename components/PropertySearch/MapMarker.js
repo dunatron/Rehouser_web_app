@@ -20,20 +20,24 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     height: '100%',
     width: '100%',
-    backgroundColor: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.secondary.contrastText,
+    backgroundColor: theme.palette.background.paper,
     color: theme.palette.secondary.main,
     top: 0,
     overflow: 'scroll',
-    borderTop: '3px solid gold',
-    borderBottom: '3px solid gold',
+    borderTop: `8px solid ${theme.palette.primary.main}`,
+    borderLeft: `8px solid ${theme.palette.primary.main}`,
+    borderBottom: `8px solid ${theme.palette.primary.main}`,
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     top: 0,
     position: 'sticky',
-    backgroundColor: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.secondary.contrastText,
+    backgroundColor: theme.palette.background.paper,
     color: theme.palette.secondary.main,
+    padding: theme.spacing(1),
     opacity: 0.9,
     zIndex: 100,
   },
@@ -58,7 +62,8 @@ const MapMarker = ({ hit }) => {
               display: 'flex',
               alignItems: 'center',
             }}>
-            {formatCentsToDollarsVal(hit.rent)}
+            {formatCentsToDollarsVal(hit.rent / hit.rooms)}
+            {/* {formatCentsToDollarsVal(hit.lowestRoomPrice)} */}
           </div>
         </div>
       </CustomMarker>

@@ -13,7 +13,7 @@ import MapLoadingContainer from '@/Components/Map/MapLoadingContainer';
  */
 const GeoSearchWidget = props => {
   const { google } = props;
-  const [enableRefine, setEnableRefine] = useState(true);
+  const [enableRefine, setEnableRefine] = useState(props.enableBoundingBox);
   const [enableRefineOnMapMove, setRefineOnMapMove] = useState(true);
   const [latPos, setLatPos] = useState(-43.5299773); // chch city center
   const [lngPos, setLngPos] = useState(172.6233322);
@@ -34,10 +34,11 @@ const GeoSearchWidget = props => {
         lat: latPos,
         lng: lngPos,
       }}
-      zoom={20}
+      // zoom={20}
+      zoom={5}
       enableRefineOnMapMove={enableRefineOnMapMove}
-      enableRefine={enableRefine} // If true, the map is used for refining the search. Otherwise, it’s only for display purposes.
-      mapTypeId="roadmap" // hybrid, roadmap, satellite, terrain
+      enableRefine={props.enableBoundingBox} // If true, the map is used for refining the search. Otherwise, it’s only for display purposes.
+      mapTypeId="hybrid" // hybrid, roadmap, satellite, terrain
     >
       {({ hits }) => (
         <div>

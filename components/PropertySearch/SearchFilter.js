@@ -28,16 +28,15 @@ import TuneIcon from '@material-ui/icons/Tune';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import TodayIcon from '@material-ui/icons/Today';
 
-
 const useStyles = makeStyles(theme => ({
   AccordionRoot: {
     alignItems: 'center',
-    fontSize: '1.3rem',
+    // fontSize: '1.3rem',
     // backgroundColor: 'rgb(212,220,231)',
     // color: theme.palette.secondary.main,
   },
   rentLabel: {
-    fontSize: '1.3rem',
+    // fontSize: '1.3rem',
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: '400',
     lineHeight: '1.5',
@@ -106,10 +105,62 @@ const SearchFilter = () => {
 
   // must be a all on one line
   // const filterLogic = `move_in_date_timestamp:0000000000 TO ${moveInDateStamp} AND onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
-  const filterLogic = `onTheMarket: true AND rent >= ${bottomPrice} AND rent <= ${topPrice}`;
+  // const filterLogic = `onTheMarket: true AND lowestRoomPrice >= ${bottomPrice} AND lowestRoomPrice <= ${topPrice}`;
+  const filterLogic = `onTheMarket: true AND lowestRoomPrice >= ${bottomPrice} AND lowestRoomPrice <= ${topPrice}`;
   return (
     <div>
       <Configure filters={filterLogic} />
+      <ExpansionRefinement
+        // title="Property price per week"
+        title={
+          <Typography className={classes.rentLabel}>
+            {formatCentsToDollarsVal(bottomPrice)} -{' '}
+            {formatCentsToDollarsVal(topPrice)} per room
+          </Typography>
+        }
+        icon={<AttachMoneyIcon />}>
+        <PriceFilter
+          setPrice={handleSetPriceFilter}
+          items={[
+            {
+              label: 'ALL',
+              bottomPrice: 0,
+              // topPrice: dollarsToCents(9999999),
+              topPrice: 900069024,
+            },
+            {
+              label: '$80 - $120',
+              bottomPrice: dollarsToCents(80),
+              topPrice: dollarsToCents(120),
+            },
+            {
+              label: '$120 - $180',
+              bottomPrice: dollarsToCents(120),
+              topPrice: dollarsToCents(180),
+            },
+            {
+              label: '$180 - $240',
+              bottomPrice: dollarsToCents(180),
+              topPrice: dollarsToCents(240),
+            },
+            {
+              label: '$240 - $280',
+              bottomPrice: dollarsToCents(240),
+              topPrice: dollarsToCents(280),
+            },
+            {
+              label: '$280 - $360',
+              bottomPrice: dollarsToCents(280),
+              topPrice: dollarsToCents(360),
+            },
+            {
+              label: '$360 - $420',
+              bottomPrice: dollarsToCents(360),
+              topPrice: dollarsToCents(420),
+            },
+          ]}
+        />
+      </ExpansionRefinement>
       <Accordion
         square={true}
         className={classes.AccordionRoot}
@@ -125,62 +176,10 @@ const SearchFilter = () => {
           aria-controls="panel1bh-content"
           id="panel1bh-header">
           <TuneIcon style={{ marginRight: '8px' }} />
-          <div>
-            {/* <Typography variant="button">SET FILTER</Typography> */}
-            {/* <Typography>{filterLogic}</Typography> */}
-            {/* <Typography>
-              <Typography component="span" variant="h6">
-                available:
-              </Typography>{' '}
-              {moment(moveInDate).format('ll')}
-            </Typography> */}
-            <Typography className={classes.rentLabel}>
-              {formatCentsToDollarsVal(bottomPrice)} -{' '}
-              {formatCentsToDollarsVal(topPrice)}
-            </Typography>
-            {/* <Stats /> */}
-          </div>
+          <Typography variant="button">Filters</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.AccordionDetails}>
           <ConnectedRefinements childrenBefore={true}>
-            <ExpansionRefinement title="Property price per week" icon={<AttachMoneyIcon />}>
-              <PriceFilter
-                setPrice={handleSetPriceFilter}
-                items={[
-                  {
-                    label: 'ALL',
-                    bottomPrice: 0,
-                    // topPrice: dollarsToCents(9999999),
-                    topPrice: 900069024
-                  },
-                  {
-                    label: '$200 - $400',
-                    bottomPrice: dollarsToCents(200),
-                    topPrice: dollarsToCents(400),
-                  },
-                  {
-                    label: '$400 - $600',
-                    bottomPrice: dollarsToCents(400),
-                    topPrice: dollarsToCents(600),
-                  },
-                  {
-                    label: '$600 - $800',
-                    bottomPrice: dollarsToCents(600),
-                    topPrice: dollarsToCents(800),
-                  },
-                  {
-                    label: '$800 - $1000',
-                    bottomPrice: dollarsToCents(800),
-                    topPrice: dollarsToCents(1000),
-                  },
-                  {
-                    label: '$1000 - $2000',
-                    bottomPrice: dollarsToCents(1000),
-                    topPrice: dollarsToCents(2000),
-                  },
-                ]}
-              />
-            </ExpansionRefinement>
             {/* <ExpansionRefinement title="Price per room">
               <PriceFilter setPrice={handleSetRoomPriceFilter} />
             </ExpansionRefinement> */}

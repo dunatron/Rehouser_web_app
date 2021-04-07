@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     color: 'inherit',
     alignItems: 'center',
-    fontWeight: '300',
+    fontWeight: '500',
     fontSize: '1rem',
     wordBreak: 'break-word',
   },
@@ -61,12 +61,16 @@ const MaterialUiCheckBoxRefinementList = ({
   attribute,
   refine,
   createURL,
-  expansionProps
+  expansionProps,
 }) => {
   const classes = useStyles();
-  
+
   return (
-    <ExpansionRefinement expanded={true} title={attribute.toUpperCase()} nested={true} {...expansionProps}>
+    <ExpansionRefinement
+      expanded={true}
+      title={attribute.toUpperCase()}
+      nested={true}
+      {...expansionProps}>
       {items.map(({ count, isRefined, label, value }, i) => (
         <FormControlLabel
           classes={{
@@ -76,6 +80,7 @@ const MaterialUiCheckBoxRefinementList = ({
           key={i}
           control={
             <Checkbox
+              size="small"
               classes={{
                 root: classes.checkboxRoot,
                 checked: classes.checkboxChecked,
@@ -90,6 +95,7 @@ const MaterialUiCheckBoxRefinementList = ({
               // value="checkedA"
             />
           }
+          // label={label}
           label={<CheckboxItemLabel label={label} count={count} />}
         />
       ))}

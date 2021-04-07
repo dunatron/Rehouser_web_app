@@ -13,7 +13,7 @@ const ConfirmEmail = ({ me, children, token }) => {
   if (!me) {
     return (
       <RehouserPaper>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom color="textSecondary">
           To confirm your email you must first be logged in
         </Typography>
         <OpenSuperLoginButton />
@@ -23,9 +23,9 @@ const ConfirmEmail = ({ me, children, token }) => {
   if (!me.emailValidated)
     return (
       <RehouserPaper>
-        <Typography variant="h6" gutterBottom>
-          PLease confirm your email address. You will be limited on the platform
-          untill you do
+        <Typography variant="h6" gutterBottom color="textSecondary">
+          Please confirm your email address. You will be limited on the platform
+          until you do
         </Typography>
         <SendConfrimEmailButton token={confirmEmailToken} />
       </RehouserPaper>

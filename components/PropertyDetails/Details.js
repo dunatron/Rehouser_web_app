@@ -29,6 +29,7 @@ import CameraIcon from '@/Styles/icons/CameraIcon';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import ChangeRouteButton from '@/Components/Routes/ChangeRouteButton';
+import { _hasPermission } from '@/Lib/_hasPermission';
 
 import {
   NowToDate,
@@ -297,9 +298,7 @@ const Details = props => {
       )}
       {me.isAgent ||
         (me.isWizard && (
-          <DisplayJson
-            title="Show property properties"
-            json={property}></DisplayJson>
+          <DisplayJson title="Show property data" json={property}></DisplayJson>
         ))}
 
       <RehouserPaper>
@@ -398,81 +397,21 @@ const Details = props => {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header">
-          <Typography className={classes.heading}>Editable Displays</Typography>
+          <Typography className={classes.heading}>
+            Property Variables
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <RehouserPaper>
-            <EditableDisplayItems
-              __typename="Property"
-              data={property}
-              items={PROPERTY_DETAILS_EDITABLE_DISPLAY_CONF}
-              where={{ id: property.id }}
-            />
-          </RehouserPaper>
+          <EditableDisplayItems
+            __typename="Property"
+            me={me}
+            data={property}
+            items={PROPERTY_DETAILS_EDITABLE_DISPLAY_CONF}
+            where={{ id: property.id }}
+            isAgent={isAgent}
+          />
         </AccordionDetails>
       </Accordion>
-
-      <DetailItems
-        title="Property Variables"
-        property={property}
-        items={[
-          {
-            name: 'rent',
-            label: 'Rent',
-            type: 'money',
-            icon: <CameraIcon color="default" />,
-          },
-          {
-            name: 'moveInDate',
-            label: 'Move in Date',
-            type: 'date',
-            icon: <CameraIcon color="default" />,
-          },
-          {
-            name: 'expiryDate',
-            label: 'Expiry date',
-            type: 'date',
-            icon: <CameraIcon color="default" />,
-          },
-          {
-            name: 'rooms',
-            label: 'Rooms',
-            type: 'int',
-            icon: <CameraIcon color="default" />,
-          },
-          {
-            name: 'chattels',
-            label: 'chattels',
-            type: 'enum',
-            fieldProps: {
-              __type: '',
-              variant: 'multi',
-            },
-            icon: <CameraIcon color="default" />,
-          },
-        ]}
-      />
-
-      <RehouserPaper>
-        <EnumMultiSelectChip
-          label="Chattels"
-          __type="PropertyChattel"
-          values={updates.chattels ? updates.chattels : property.chattels}
-          handleChange={values => {
-            setUpdates({
-              ...updates,
-              chattels: values,
-            });
-          }}
-        />
-      </RehouserPaper>
-      <RehouserPaper>
-        <LeaseLength
-          title="Lease will be for"
-          moveInDate={property.moveInDate}
-          expiryDate={property.expiryDate}
-        />
-      </RehouserPaper>
       <RehouserPaper>
         <Typography>Property creator</Typography>
         <CorrectUserDetails id={property.creator.id} />
@@ -535,15 +474,18 @@ const Details = props => {
           }}
         />
       </Card>
-      <ForeignLinksTable
-        type="property"
-        id={property.id}
-        where={{
-          property: {
-            id: property.id,
-          },
-        }}
-      />
+      {_hasPermission(['ADMIN', 'WIZARD'], me.permissions) && (
+        <ForeignLinksTable
+          type="property"
+          id={property.id}
+          where={{
+            property: {
+              id: property.id,
+            },
+          }}
+        />
+      )}
+
       <Modal
         open={publicDetailsModalIsOpen}
         close={handleClosePublicDetailsModal}>

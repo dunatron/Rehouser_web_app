@@ -10,6 +10,8 @@ import { Typography, Chip, Box } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+
 // displays
 import {
   ChipItems,
@@ -87,12 +89,21 @@ const PropertyPublicDetails = ({ id }) => {
         spacing={2}
       />
       <Money
-        title="Rent"
+        title="Total Rent"
         icon={<MoneyIcon />}
         orientation="horizontal"
         reverse
         variant="body2"
         value={property.rent}
+        valueProps={{ color: 'primary', variant: 'h5' }}
+      />
+      <Money
+        title="Per Room"
+        icon={<MoneyIcon />}
+        orientation="horizontal"
+        reverse
+        variant="body2"
+        value={property.rent / property.rooms}
         valueProps={{ color: 'primary', variant: 'h5' }}
       />
       <String
@@ -138,18 +149,21 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.titleType}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
       <String
         title="Type"
         value={property.type}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
       <String
         title="Fixed Length"
         value={property.fixedLength}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
 
       <String
@@ -157,6 +171,7 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.tenancyType}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
 
       <String
@@ -164,6 +179,7 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.bondType}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
 
       <String
@@ -171,18 +187,21 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.garageSpaces}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
       <String
         title="carportSpaces"
         value={property.carportSpaces}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
       <String
         title="offStreetSpaces"
         value={property.offStreetSpaces}
         orientation="horizontal"
         valueProps={{ color: 'secondary', variant: 'h6' }}
+        reverse
       />
       <ChipItems
         title="Chattels"

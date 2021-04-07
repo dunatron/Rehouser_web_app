@@ -5,11 +5,16 @@ import Account from '@/Components/Account/index';
 import { Typography } from '@material-ui/core';
 import PageHeader from '@/Components/PageHeader';
 
+import ConfirmEmail from '@/Components/ConfirmEmail';
+import Dashboard from '@/Components/Dashboard/index';
+import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
+
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
 import { CURRENT_USER_QUERY } from '@/Gql/queries';
 
 const ConfirmAccountPage = ({ appData: { currentUser } }) => {
+  const me = currentUser.data ? currentUser.data.me : null;
   return (
     <>
       <PageHeader
@@ -32,10 +37,18 @@ const ConfirmAccountPage = ({ appData: { currentUser } }) => {
             </Typography>
           </div>
         }>
-        <div>
-          ToDo: Place confirm account here too? or at very lease a resend token
-          and explaination
-        </div>
+        <ConfirmEmail me={me} token={''}>
+          <Typography variant="h5" gutterBottom>
+            Congratulations your {`account's`} email address has now been
+            validated
+          </Typography>
+          <Dashboard
+            config={HOME_PAGE_DASHBOARD_CONFIG}
+            elevation={1}
+            heading=""
+            intro={''}
+          />
+        </ConfirmEmail>
       </PleaseSignIn>
     </>
   );

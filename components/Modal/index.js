@@ -36,7 +36,11 @@ const useStyles = makeStyles(theme => ({
   },
   modalContent: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    // border: '2px solid #000',
+    borderRadius: '6px',
+    borderLeft: `8px solid ${theme.palette.primary.main}`,
+    borderTop: `8px solid ${theme.palette.primary.main}`,
+    borderBottom: `8px solid ${theme.palette.primary.main}`,
     // boxShadow: theme.shadows[5],
     // padding: theme.spacing(2, 4, 3),
     height: '800px',
@@ -51,6 +55,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     maxWidth: '100%',
     width: '100%',
+    borderRadius: '0px !important',
   },
   header: {
     display: 'flex',

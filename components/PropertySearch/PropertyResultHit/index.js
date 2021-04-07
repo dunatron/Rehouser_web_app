@@ -18,6 +18,8 @@ import Card from '@/Styles/Card';
 import RToolTip from '@/Styles/RToolTip';
 import Apply from '@/Components/PropertyCard/Apply';
 
+import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+
 //icons
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import ApartmentIcon from '@material-ui/icons/Apartment';
@@ -36,6 +38,10 @@ import PropertyPublicDetails from '@/Components/Property/PublicDetails';
 
 import RentalApplications from '@/Components/PropertyCard/RentalApplications';
 import Viewings from '@/Components/Viewings/index';
+
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+import AvailableDate from './AvailableDate';
 
 const StyledBadge = withStyles(theme => ({
   badge: {
@@ -167,6 +173,7 @@ const DetailItemsArr = [
 const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
   const classes = useStyles();
   const [modalIdx, setModalIdx] = useState();
+  const matches = useMediaQuery('(min-width:600px)');
   return (
     <Card
       style={{
@@ -197,13 +204,17 @@ const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
           <Typography variant="h6" color="textPrimary" gutterBottom>
             {hit.location}
           </Typography>
-          <Typography variant="h6" color="primary" gutterBottom>
-            ${hit.rent}{' '}
+          <Typography variant="body1" color="textSecondary" gutterBottom>
+            {formatCentsToDollarsVal(hit.rent)}
+            {' per week. '}
             <Typography component="span" color="textSecondary">
-              with an average of
+              Rooms are
             </Typography>{' '}
-            ${hit.rent / hit.rooms}
+            <Typography component="span" color="primary" variant="h6">
+              {formatCentsToDollarsVal(hit.rent / hit.rooms)}
+            </Typography>
           </Typography>
+          <AvailableDate hit={hit} />
           <Typography gutterBottom color="textSecondary">
             {hit.type}
           </Typography>
@@ -216,20 +227,19 @@ const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
         {/* Actions Container */}
         <RehouserPaper className={classes.actionsContainer} elevation={0}>
           <ButtonGroup
-            orientation="vertical"
+            orientation={matches ? 'vertical' : 'horizontal'}
+            // orientation="horizontal"
             color="default"
-            size="small"
+            size="medium"
             variant="text"
             aria-label="property actions">
-            <Button onClick={() => setModalIdx('Details')}>More details</Button>
-            <Button onClick={() => setModalIdx('Share')}>
+            <Button onClick={() => setModalIdx('Details')}>Details</Button>
+            {/* <Button onClick={() => setModalIdx('Share')}>
               Share to social
-            </Button>
+            </Button> */}
             <Button onClick={() => setModalIdx('Viewings')}>Viewings</Button>
-            <Button onClick={() => setModalIdx('Map')}>Show Map</Button>
-            <Button onClick={() => setModalIdx('Applications')}>
-              Apply for Property
-            </Button>
+            <Button onClick={() => setModalIdx('Map')}>Map</Button>
+            <Button onClick={() => setModalIdx('Applications')}>Apply</Button>
           </ButtonGroup>
         </RehouserPaper>
       </div>

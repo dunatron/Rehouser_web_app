@@ -30,6 +30,7 @@ const ImportantDetails = ({ property }) => {
       <Typography
         variant="h5"
         // color="primary"
+        color="textPrimary"
         gutterBottom={true}
         className={classes.variablesHeader}>
         Important Info
