@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -62,11 +63,12 @@ const AppraisalsTable = ({
       },
       {
         title: 'Appraised',
-        field: 'rent',
-        render: rowData => {
-          const appraised = rowData.rent ? 'YES' : 'Waiting to be appraised';
-          return appraised;
-        },
+        field: 'appraised',
+        type: 'boolean',
+        // render: rowData => {
+        //   const appraised = rowData.rent ? 'YES' : 'Waiting to be appraised';
+        //   return appraised;
+        // },
       },
       {
         title: 'rent',
@@ -116,7 +118,10 @@ const AppraisalsTable = ({
         title="Appraisal view"
         open={isModalOpen}
         close={() => setIsModalOpen(false)}>
-        <RentalAppraisal rentalAppraisal={appraisalModalData} />
+        <RentalAppraisal
+          // rentalAppraisal={appraisalModalData}
+          id={appraisalModalData.id}
+        />
       </Modal>
 
       <div className={classes.tableHeader}>

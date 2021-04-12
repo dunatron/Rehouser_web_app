@@ -126,7 +126,11 @@ const CreatePropertyComponent = props => {
           },
           data: {
             hasBeenUsed: true,
-            property: {},
+            property: {
+              connect: {
+                id: newPropertyId,
+              },
+            },
           },
         },
       });

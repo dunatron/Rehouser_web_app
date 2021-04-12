@@ -20,6 +20,8 @@ import { SINGLE_RENTAL_APPRAISAL_QUERY } from '@/Gql/queries';
 import Loader from '@/Components/Loader';
 import Error from '@/Components/ErrorMessage';
 
+import ChangeRouteButton from '@/Components/Routes/ChangeRouteButton';
+
 const RentalAppraisalView = ({ id }) => {
   const { data, loading, error } = useQuery(SINGLE_RENTAL_APPRAISAL_QUERY, {
     fetchPolicy: 'cache-and-network',
@@ -51,6 +53,8 @@ const RentalAppraisalView = ({ id }) => {
       property,
     },
   } = data;
+
+  console.log('Property DATA FOR APPRAISAL => ', property);
 
   return (
     <>
@@ -107,7 +111,12 @@ const RentalAppraisalView = ({ id }) => {
               ${formatMoney(rent, 2)}
             </Typography>
           </Typography>
-          <Typography>{hasBeenUsed}</Typography>
+          <Typography variant="h6" color="default">
+            Rent per room{' '}
+            <Typography component="span" variant="h5" color="primary">
+              ${formatMoney(rent / rooms, 2)}
+            </Typography>
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" color="default">
@@ -127,9 +136,11 @@ const RentalAppraisalView = ({ id }) => {
       </Grid>
       {property && (
         <Grid item xs={12} sm={6}>
-          <Typography variant="h6" color="default">
-            Cool WE should include the property created by this appraisal
-          </Typography>
+          <ChangeRouteButton
+            route={`/landlord/properties/${property.id}`}
+            query={''}
+            title={property.location}
+          />
         </Grid>
       )}
     </>

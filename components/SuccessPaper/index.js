@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Button, Typography } from '@material-ui/core';
+import { Paper, Button, Typography, Grid } from '@material-ui/core';
 import {
   deepOrange,
   deepPurple,
@@ -12,31 +12,43 @@ import {
   red,
 } from '@material-ui/core/colors';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import theme from '@/Themes/palettes/darkPalette';
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.secondary.main,
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 2, 0, 2),
     marginBottom: theme.spacing(2),
     maxWidth: '920px',
   },
   checkIcon: {
     color: theme.palette.secondary.contrastText,
     marginRight: theme.spacing(2),
-    marginTop: '6px',
   },
   messageStrip: {
     display: 'flex',
+    marginBottom: theme.spacing(2),
   },
   children: {
     color: theme.palette.secondary.contrastText,
   },
+  actions: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+  },
+  actionItem: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   button: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(2),
+    margin: theme.spacing(0, 1, 1, 0),
   },
 }));
 
-const SuccessPaper = ({ children, handleCreateMore, show }) => {
+const SuccessPaper = ({ children, actions, handleCreateMore, show }) => {
   const classes = useStyles();
 
   if (!show) return null;
@@ -49,13 +61,25 @@ const SuccessPaper = ({ children, handleCreateMore, show }) => {
           {children}
         </Typography>
       </div>
-      <Button
-        onClick={handleCreateMore}
-        className={classes.button}
-        variant="contained"
-        color="default">
-        Create More
-      </Button>
+      <div className={classes.actions}>
+        <Grid container spacing={3}>
+          <Grid item xs={6} md={4} className={classes.actionItem}>
+            <Button
+              onClick={handleCreateMore}
+              className={classes.button}
+              variant="text"
+              color="primary">
+              Create More
+            </Button>
+          </Grid>
+          {actions &&
+            actions.map((action, idx) => (
+              <Grid key={idx} item xs={6} md={4} className={classes.actionItem}>
+                <span className={classes.button}>{action}</span>
+              </Grid>
+            ))}
+        </Grid>
+      </div>
     </Paper>
   );
 };
@@ -63,7 +87,7 @@ const SuccessPaper = ({ children, handleCreateMore, show }) => {
 SuccessPaper.propTypes = {
   children: PropTypes.any,
   handleCreateMore: PropTypes.any,
-  show: PropTypes.any
+  show: PropTypes.any,
 };
 
 export default SuccessPaper;

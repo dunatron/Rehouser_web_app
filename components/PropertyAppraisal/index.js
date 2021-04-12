@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { Typography } from '@material-ui/core';
 import SuccessPaper from '@/Components/SuccessPaper';
+import ChangeRouteButton from '@/Components/Routes/ChangeRouteButton';
 
 import PROPERTY_APPRAISAL_CONF from '../../lib/configs/propertyAppraisalForm';
 
@@ -47,10 +48,21 @@ const PropertyAppraisal = props => {
         maxWidth: '800px',
       }}>
       {sentAppraisal && (
-        <SuccessPaper handleCreateMore={handleCreateMore} show={sentAppraisal}>
+        <SuccessPaper
+          handleCreateMore={handleCreateMore}
+          show={sentAppraisal}
+          actions={[
+            <ChangeRouteButton
+              route="/landlord/appraisals"
+              title="Go To My Appraisals"
+              color="primary"
+              variant="text"
+            />,
+          ]}>
           {message}
         </SuccessPaper>
       )}
+
       {!sentAppraisal && (
         <FormCreator
           title="Property Appraisal"

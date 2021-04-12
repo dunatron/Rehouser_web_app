@@ -26,6 +26,7 @@ const bannerStyles = makeStyles(theme => ({
       // marginTop: '12%',
     },
   },
+  logoContainer: {},
   btnContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -42,7 +43,7 @@ const HomePageBannerBody = () => {
         Rehouser
       </Typography> */}
       {/* <div className={classes.logo}></div> */}
-      <SVG name="main_logo" style={{ padding: '64px' }} />
+      <SVG name="main_logo" padding />
       <div className={classes.btnContainer}>
         <ChangeRouteButton
           title="Free Appraisal"
@@ -108,7 +109,7 @@ const HomePage = props => {
         footer={[
           <Typography
             key={1}
-            variant="h4"
+            variant="h5"
             color="primary"
             style={{ textAlign: 'center', padding: '0 30px' }}>
             Turning empty houses into friendly abodes

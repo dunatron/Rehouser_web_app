@@ -31,6 +31,7 @@ const RentalAppraisalInfoFragment = gql`
       id
       location
     }
+    appraised
     hasBeenUsed
   }
   ${PublicUserInfoFragment}

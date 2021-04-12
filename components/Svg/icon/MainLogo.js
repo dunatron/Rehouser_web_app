@@ -1,9 +1,14 @@
 import React from 'react';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
     color: theme.palette.text.primary,
+  },
+  padding: {
+    // padding: '9% 3%', // THESE WOULD CHANGE ALOT ON DIFF WIDTHS
+    padding: '6%',
   },
   st0: {
     // fill: '#e60085',
@@ -40,17 +45,23 @@ const SVG = ({
   width = '100%',
   className = '',
   viewBox = '0 0 479.17 393.15',
+  padding,
   theme,
 }) => {
   const classes = useStyles();
+  const iconClasses = clsx({
+    'svg-icon': true,
+    [classes.padding]: padding,
+  });
   return (
     <svg
       width={width}
-      style={style}
+      // style={style}
+      className={iconClasses}
       height={width}
       viewBox={viewBox}
       xmlns="http://www.w3.org/2000/svg"
-      className={`svg-icon ${className || ''}`}
+      // className={`svg-icon ${className || ''}`}
       xmlnsXlink="http://www.w3.org/1999/xlink">
       <g>
         <path

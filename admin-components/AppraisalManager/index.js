@@ -90,19 +90,25 @@ const AdminRentalAppraisalsTable = ({ where }) => {
         editable: false,
         filtering: false,
       },
+      {
+        title: 'appraised',
+        field: 'appraised',
+        editable: false,
+        type: 'boolean',
+      },
       { title: 'created', field: 'createdAt', editable: false, type: 'date' },
-      {
-        title: 'locationLat',
-        field: 'locationLat',
-        editable: false,
-        filtering: false,
-      },
-      {
-        title: 'locationLng',
-        field: 'locationLng',
-        editable: false,
-        filtering: false,
-      },
+      // {
+      //   title: 'locationLat',
+      //   field: 'locationLat',
+      //   editable: false,
+      //   filtering: false,
+      // },
+      // {
+      //   title: 'locationLng',
+      //   field: 'locationLng',
+      //   editable: false,
+      //   filtering: false,
+      // },
       { title: 'rooms', field: 'rooms', editable: false, type: 'numeric' },
       {
         title: 'bathrooms',
@@ -116,6 +122,8 @@ const AdminRentalAppraisalsTable = ({ where }) => {
         type: 'numeric',
         render: rowData => formatCentsToDollarsVal(rowData.rent),
       },
+
+      { title: 'used', field: 'hasBeenUsed', editable: false, type: 'boolean' },
       {
         title: 'property',
         field: 'property.id',
@@ -123,7 +131,6 @@ const AdminRentalAppraisalsTable = ({ where }) => {
         filtering: false,
         sorting: false,
       },
-      { title: 'used', field: 'hasBeenUsed', editable: false, type: 'boolean' },
     ],
     [houseTypeLookup]
   );
@@ -159,6 +166,7 @@ const AdminRentalAppraisalsTable = ({ where }) => {
               variables: {
                 data: {
                   rent: parseFloat(newData.rent * 100),
+                  appraised: true,
                 },
                 where: {
                   id: oldData.id,
