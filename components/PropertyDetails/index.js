@@ -265,7 +265,7 @@ const PropertyDetails = ({ id, location, me }) => {
               icon={<EventAvailableIcon />}
             />
             <Tab label="Files" icon={<FileCopyIcon />} />
-            <Tab label="Share" icon={<ShareIcon />} />
+            {/* <Tab label="Share" icon={<ShareIcon />} /> */}
           </Tabs>
         </Section>
 
@@ -318,11 +318,11 @@ const PropertyDetails = ({ id, location, me }) => {
             )}
           </TabContainer>
         )}
-        {tabIndex === 7 && (
+        {/* {tabIndex === 7 && (
           <TabContainer>
             <ShareProperty {...tabProps} />
           </TabContainer>
-        )}
+        )} */}
       </div>
     </>
   );

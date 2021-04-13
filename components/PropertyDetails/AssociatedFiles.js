@@ -22,6 +22,9 @@ const PROPERTY_FILES_QUERY = gql`
       certOfAcceptance {
         ...fileInfo
       }
+      insurancePolicy {
+        ...fileInfo
+      }
     }
   }
   ${FileInfoFragment}
@@ -151,6 +154,12 @@ const MappedFiles = ({ propertyFiles, placeId }) => {
       title: 'Certificate of acceptance',
       description: 'a describtion for each variable',
       folder: `properties/${placeId}/files/certOfAcceptance`,
+    },
+    {
+      key: 'insurancePolicy',
+      title: 'Insurance Policy',
+      description: 'a describtion for each variable',
+      folder: `properties/${placeId}/files/insurancePolicy`,
     },
   ];
 
