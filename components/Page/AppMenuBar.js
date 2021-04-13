@@ -25,6 +25,7 @@ import SearchIcon from '@material-ui/icons/Search';
 // account menu
 import AccountMenu from './AccountMenu';
 import ThemePicker from './ThemePicker';
+import CurrentUrl from './CurrentUrl';
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -63,28 +64,6 @@ const AppMenuBar = props => {
     noTransparency ? classes.appBarSolid : classes.appBarTransparent
   );
 
-  const pathParts = router.asPath.split('/');
-  const formattedPathParts = pathParts.filter(part => part !== '');
-
-  const routeToClickedPart = partIndex => {
-    const newRoute = formattedPathParts.reduce((acc, part, idx) => {
-      if (idx + 1 === formattedPathParts.length) return acc;
-      if (idx > partIndex) return acc; // shouldnt add any more than where we are going
-      if (idx === partIndex) {
-        return acc + part;
-      }
-      return acc + part + '/';
-    }, '/');
-    router.push({
-      pathname: newRoute,
-    });
-  };
-
-  const handleGoBackToPreviousPage = () => {
-    if (formattedPathParts.length === 0) return;
-    router.back();
-  };
-
   return (
     <HideOnScroll {...props}>
       <AppBar
@@ -113,58 +92,8 @@ const AppMenuBar = props => {
             }>
             <MenuIcon />
           </IconButton>
-          {formattedPathParts.length > 0 && (
-            <IconButton
-              onClick={handleGoBackToPreviousPage}
-              color="primary"
-              size="medium"
-              classes={{
-                root: classes.backBtnRoot,
-              }}>
-              <ArrowBackIcon fontSize="small" />
-            </IconButton>
-          )}
-          {formattedPathParts.length > 0 && (
-            <div
-              style={{
-                marginRight: '112px',
-                display: 'flex',
-                overflow: 'auto',
-                direction: 'rtl',
-              }}>
-              <div
-                style={{
-                  display: 'flex',
-                  direction: 'ltr',
-                }}>
-                {formattedPathParts.map((urlPart, idx) => {
-                  const isLastPart =
-                    idx + 1 === formattedPathParts.length ? true : false;
-                  return (
-                    <Typography
-                      key={idx}
-                      variant="h6"
-                      className={!isLastPart ? classes.routeablePart : null}
-                      noWrap
-                      onClick={() => {
-                        !isLastPart ? routeToClickedPart(idx) : null;
-                      }}>
-                      {urlPart}
-                      {!isLastPart && '/'}
-                    </Typography>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-          <div
-            style={{
-              position: 'absolute',
-              right: '16px',
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-            }}>
+          <CurrentUrl />
+          <div className={classes.actions}>
             <Tooltip title="Search available properties">
               <IconButton
                 color="secondary"

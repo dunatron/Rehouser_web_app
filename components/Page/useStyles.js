@@ -89,6 +89,20 @@ const useStyles = makeStyles(theme => {
         maxWidth: `calc(100% - ${theme.sideBarWidth}px)`,
       },
     },
+    urlSection: {
+      marginRight: '112px',
+      display: 'flex',
+      overflow: 'auto',
+      direction: 'rtl',
+      position: 'relative',
+    },
+    actions: {
+      position: 'absolute',
+      right: '16px',
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+    },
   };
 });
 
