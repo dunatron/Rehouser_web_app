@@ -6,6 +6,7 @@ import AdminOnly from '@/Components/AdminOnly';
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
 import { CURRENT_USER_QUERY } from '@/Gql/queries';
+import FilesTable from '@/Components/Tables/FilesTable'
 
 const AdminFilesPage = ({ appData: { currentUser } }) => {
   const me = currentUser.data ? currentUser.data.me : null;
@@ -21,7 +22,7 @@ const AdminFilesPage = ({ appData: { currentUser } }) => {
         }}
       />
       <AdminOnly me={me}>
-        <div>SOme sort of file manager. each file hosuld have a relation</div>
+        <FilesTable />
       </AdminOnly>
     </>
   );

@@ -16,6 +16,8 @@ import { CONTACT_SUBMISSIONS_CONNECTION_QUERY } from './contactSubmissionsConnec
 import { CONTACT_SUBMISSIONS_COUNT_QUERY } from './contactSubmissionsCount';
 import { FOREIGN_LINKS_CONNECTION_QUERY } from './foreignLinksConnection';
 import { FOREIGN_LINKS_COUNT_QUERY } from './foreignLinksCount';
+import {FILES_CONNECTION_QUERY} from './filesConnection';
+import {FILES_COUNT_QUERY} from './filesCountQuery';
 
 export {
   RENTAL_APPRAISALS_CONNECTION_QUERY,
@@ -36,4 +38,6 @@ export {
   CONTACT_SUBMISSIONS_COUNT_QUERY,
   FOREIGN_LINKS_CONNECTION_QUERY,
   FOREIGN_LINKS_COUNT_QUERY,
+  FILES_CONNECTION_QUERY,
+  FILES_COUNT_QUERY
 };
