@@ -46,14 +46,14 @@ const Signup = props => {
   };
 
   const handleCompleted = data => {
-    setCookie(null, 'token', data.signup.token, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
-    setCookie(null, 'refresh-token', data.signup.refreshToken, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
+    // setCookie(null, 'token', data.signup.token, {
+    //   maxAge: 30 * 24 * 60 * 60,
+    //   path: '/',
+    // });
+    // setCookie(null, 'refresh-token', data.signup.refreshToken, {
+    //   maxAge: 30 * 24 * 60 * 60,
+    //   path: '/',
+    // });
 
     toast.info(
       <div>
