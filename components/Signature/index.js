@@ -220,7 +220,7 @@ const SignatureComponent = () => {
             loading={loading}
             text="Set Signature"
             successText="Signature is set"
-            // color="secondary"
+            // color="primary"
             disabled={loading}
             success={!error && !loading && called}></ButtonLoader>
         </ButtonGroup>

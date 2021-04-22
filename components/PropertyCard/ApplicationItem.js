@@ -207,21 +207,21 @@ const ApplicationItem = props => {
         highlight={isAnApplicant}
         highlightReverse={isOwner}
         background={isAnApplicant ? 'green' : ''}>
-        <PersonIcon color={isOwner ? 'secondary' : 'primary'} />
+        <PersonIcon color={isOwner ? 'primary' : 'primary'} />
         <Typography
           highlightReverse={isOwner}
           highlight={isAnApplicant}
           style={{ padding: '0 16px 0 4px' }}>
           {numberOfApprovedApplicants}
         </Typography>
-        <PersonOutlineIcon color={isOwner ? 'secondary' : 'primary'} />
+        <PersonOutlineIcon color={isOwner ? 'primary' : 'primary'} />
         <Typography
           highlightReverse={isOwner}
           highlight={isAnApplicant}
           style={{ padding: '0 16px 0 4px' }}>
           {numberOfPendingApplicants}
         </Typography>
-        <StarIcon color={isOwner ? 'secondary' : 'primary'} />
+        <StarIcon color={isOwner ? 'primary' : 'primary'} />
         <Typography
           highlightReverse={isOwner}
           highlight={isAnApplicant}

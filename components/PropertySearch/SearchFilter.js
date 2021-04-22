@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     // fontSize: '1.3rem',
     // backgroundColor: 'rgb(212,220,231)',
-    // color: theme.palette.secondary.main,
+    // color: theme.palette.primary.main,
   },
   rentLabel: {
     // fontSize: '1.3rem',

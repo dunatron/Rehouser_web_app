@@ -18,12 +18,12 @@ const useStyles = makeStyles(theme => ({
   listRoot: {
     width: '100%',
     // maxWidth: 360,
-    // backgroundColor: theme.palette.secondary.main,
-    // color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.primary.main,
+    // color: theme.palette.primary.contrastText,
   },
   listItemRoot: {
-    // backgroundColor: theme.palette.secondary.main,
-    // color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.primary.main,
+    // color: theme.palette.primary.contrastText,
   },
   listItemSelected: {
     color: theme.palette.primary.contrastText,

@@ -102,12 +102,12 @@ const RenderFileType = ({
       style={{
         height: '180px',
         width: '180px',
-        border: '1px solid pink',
+        // border: '1px solid pink',
         position: 'relative',
       }}>
       {!disableActions && (
         <IconButtonLoader
-          color="secondary"
+          color="default"
           onClick={remove}
           loading={isBeingRemoved}
           style={{
@@ -116,7 +116,7 @@ const RenderFileType = ({
             right: 0,
             zIndex: 900,
           }}>
-          <DeleteForeverIcon />
+          <DeleteForeverIcon color="error" />
         </IconButtonLoader>
       )}
 

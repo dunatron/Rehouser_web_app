@@ -32,7 +32,7 @@ const OpenSuperLoginButton = () => {
     <Fab
       className={classes.root}
       variant="extended"
-      color="secondary"
+      color="primary"
       onClick={handleOpen}>
       <ExitToAppIcon className={classes.extendedIcon} />
       Login/Signup

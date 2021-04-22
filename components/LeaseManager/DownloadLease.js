@@ -36,7 +36,7 @@ const DownloadLease = ({ lease, me }) => {
           marginTop: '8px',
           borderRadius: 0,
         }}
-        color="secondary"
+        color="primary"
         variant="outlined"
         onClick={toggleChecked}>
         {checked ? 'Hide' : 'Show'} Lease

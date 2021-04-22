@@ -76,7 +76,7 @@ const DeleteAccount = () => {
       <Button
         data-cy="launch-delete-account"
         variant="contained"
-        color="secondary"
+        color="primary"
         className={classes.button}
         startIcon={<DeleteIcon />}
         aria-describedby={id}
@@ -122,7 +122,7 @@ const DeleteAccount = () => {
                   />
                   <ErrorButton
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     className={classes.button}
                     startIcon={<DeleteIcon />}
                     aria-describedby={id}

@@ -96,7 +96,7 @@ const TeamMember = ({ member }) => {
           </Typography>
           <div className={classes.contactDetails}>
             <ButtonGroup
-              color="secondary"
+              color="primary"
               variant="outlined"
               aria-label="contact member actions group">
               <Button href={`tel:${member.tel}`} startIcon={<PhoneIcon />}>

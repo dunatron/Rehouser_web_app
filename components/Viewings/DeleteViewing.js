@@ -32,7 +32,7 @@ const DeleteViewing = ({ viewing }) => {
     },
   });
   return (
-    <Button onClick={deleteViewing} disabled={loading} color="secondary">
+    <Button onClick={deleteViewing} disabled={loading} color="primary">
       DELETE VIEWING
     </Button>
   );

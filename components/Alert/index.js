@@ -7,8 +7,8 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 const useStyles = makeStyles(theme => {
   const defaultBg = {
-    // backgroundColor: theme.palette.secondary.main,
-    // color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.primary.main,
+    // color: theme.palette.primary.contrastText,
   };
   return createStyles({
     root: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => {
     },
     outlinedInfo: {
       // border: `1px solid #2196f3`
-      border: `2px solid ${theme.palette.secondary.main}`,
+      border: `2px solid ${theme.palette.primary.main}`,
     },
     outlinedWarning: {},
     outlinedError: {},
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => {
     filledWarning: {},
     filledError: {},
     icon: {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
       fontSize: '32px',
     },
     message: {},

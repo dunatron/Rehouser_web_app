@@ -61,6 +61,7 @@ const CheckReason = props => {
             value="Yes"
             control={
               <Radio
+                color="primary"
                 name={name}
                 inputRef={register ? register(refConf) : null}
               />
@@ -71,6 +72,7 @@ const CheckReason = props => {
             value="No"
             control={
               <Radio
+                color="primary"
                 name={name}
                 inputRef={register ? register(refConf) : null}
               />
@@ -109,7 +111,7 @@ CheckReason.propTypes = {
   errors: PropTypes.any,
   register: PropTypes.func.isRequired,
   reset: PropTypes.any,
-  setValue: PropTypes.any
+  setValue: PropTypes.any,
 };
 
 export default CheckReason;

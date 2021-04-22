@@ -32,7 +32,7 @@
 
 // ChangeRouteButton.propTypes = {
 //   btnProps: PropTypes.any,
-//   color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
+//   color: PropTypes.oneOf(['default', 'inherit', 'primary', 'primary']),
 //   query: PropTypes.object,
 //   route: PropTypes.string.isRequired,
 //   size: PropTypes.any,
@@ -79,7 +79,7 @@ const ChangeRouteButton = ({
 
 ChangeRouteButton.propTypes = {
   btnProps: PropTypes.any,
-  color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
+  color: PropTypes.oneOf(['default', 'inherit', 'primary', 'primary']),
   query: PropTypes.object,
   route: PropTypes.string.isRequired,
   size: PropTypes.any,

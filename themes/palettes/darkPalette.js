@@ -2,11 +2,23 @@
 //https://react-theming.github.io/create-mui-theme/
 import { makefontRgba } from './mainPalette';
 // secondary color dark blue
-export const mainPrimaryColor = '#fff59d';
-export const lightPrimaryColor = '#fff7b0';
-export const darkPrimaryColor = '#b2ab6d';
+// export const mainPrimaryColor = '#fff59d';
+// export const lightPrimaryColor = '#fff7b0';
+// export const darkPrimaryColor = '#b2ab6d';
+// // export const primaryContrastText = '#000';
 // export const primaryContrastText = '#000';
-export const primaryContrastText = '#000';
+// CAGBURY THEME LIGHTER
+export const mainPrimaryColor = '#9d8fff';
+export const lightPrimaryColor = '#d1bfff';
+export const darkPrimaryColor = '#6a61cb';
+// export const primaryContrastText = '#000';
+export const primaryContrastText = '#fff';
+
+// export const mainPrimaryColor = '#d1bfff';
+// export const lightPrimaryColor = '#fff2ff';
+// export const darkPrimaryColor = '#9f8fcc';
+// // export const primaryContrastText = '#000';
+// export const primaryContrastText = '#000';
 
 // secondary color dark blue
 export const mainSecondaryColor = '#90caf9';

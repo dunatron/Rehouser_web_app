@@ -152,7 +152,7 @@ const Signin = props => {
           style={{
             marginTop: '16px',
           }}
-          color="secondary"
+          color="primary"
           disabled={state.captchaToken.length <= 0 ? true : false || loading}
           success={false}>
           <NavigationIcon style={{ marginRight: 5 }} />

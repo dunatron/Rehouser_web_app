@@ -4,7 +4,7 @@ import { Paper, Typography } from '@material-ui/core';
 
 const RentalApplicationApplicantView = ({ me }) => {
   return (
-    <Typography variant="h3" gutterBottom color="secondary">
+    <Typography variant="h3" gutterBottom color="primary">
       You are an applicant for this application
     </Typography>
   );

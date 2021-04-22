@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => {
       ...theme.mixins.toolbar,
     },
     logoContainer: {
-      borderBottom: `2px solid ${theme.palette.secondary.contrastText}`,
+      borderBottom: `2px solid ${theme.palette.primary.contrastText}`,
       paddingBottom: '16px',
       paddingTop: '16px',
       '&:hover': {
@@ -73,11 +73,11 @@ const useStyles = makeStyles(theme => {
     drawerPaper: {
       width: theme.sideBarWidth,
       backgroundColor: theme.palette.background.default,
-      // backgroundColor: theme.palette.secondary.light,
+      // backgroundColor: theme.palette.primary.light,
       // backgroundColor: 'rgb(212,220,231)',
-      // backgroundColor: lighten(theme.palette.secondary.light, 0.7), // lighten by 50%. 1.0 is white
-      // backgroundColor: theme.palette.secondary.light,
-      // backgroundColor: theme.palette.secondary.light,
+      // backgroundColor: lighten(theme.palette.primary.light, 0.7), // lighten by 50%. 1.0 is white
+      // backgroundColor: theme.palette.primary.light,
+      // backgroundColor: theme.palette.primary.light,
     },
     content: {
       position: 'relative',

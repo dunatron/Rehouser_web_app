@@ -6,7 +6,7 @@ export default function ChipItems({
   items = [],
   title,
   size = 'small',
-  color = 'secondary',
+  color = 'primary',
   titleProps,
   ...rest
 }) {

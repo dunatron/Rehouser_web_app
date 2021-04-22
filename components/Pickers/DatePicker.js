@@ -21,7 +21,7 @@ const RehouserDatePicker = ({ value, onChange, ...rest }) => {
   return (
     <div>
       <KeyboardDatePicker
-        // color="secondary"
+        // color="primary"
         style={{
           color: `inherit !important`,
         }}

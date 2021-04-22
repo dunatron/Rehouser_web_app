@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     width: '100%',
     opacity: 0.85,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
   },
   content: {
     display: 'flex',
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     padding: '16px 16px 16px 0',
   },
   close: {
-    color: theme.palette.secondary.contrastText,
+    color: theme.palette.primary.contrastText,
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,

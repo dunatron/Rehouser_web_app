@@ -15,7 +15,7 @@ const ButtonExamples = () => {
       <Button color="primary" className={classes.button}>
         Primary Button
       </Button>
-      <Button color="secondary" className={classes.button}>
+      <Button color="primary" className={classes.button}>
         Secondary Button
       </Button>
 
@@ -28,7 +28,7 @@ const ButtonExamples = () => {
       <Button color="primary" variant="contained" className={classes.button}>
         Primary Contained Button
       </Button>
-      <Button color="secondary" variant="contained" className={classes.button}>
+      <Button color="primary" variant="contained" className={classes.button}>
         Secondary contained Button
       </Button>
       <Typography variant="h6" gutterBottom>
@@ -40,7 +40,7 @@ const ButtonExamples = () => {
       <Button color="primary" variant="outlined" className={classes.button}>
         Primary outlined Button
       </Button>
-      <Button color="secondary" variant="outlined" className={classes.button}>
+      <Button color="primary" variant="outlined" className={classes.button}>
         Secondary outlined Button
       </Button>
       <Typography variant="h6" gutterBottom>
@@ -52,7 +52,7 @@ const ButtonExamples = () => {
       <Button color="primary" variant="text" className={classes.button}>
         Primary text Button
       </Button>
-      <Button color="secondary" variant="text" className={classes.button}>
+      <Button color="primary" variant="text" className={classes.button}>
         Secondary text Button
       </Button>
       <Typography variant="h6" gutterBottom>
@@ -73,35 +73,35 @@ const ButtonExamples = () => {
         small outlined
       </Button>
       <Button
-        color="secondary"
+        color="primary"
         variant="outlined"
         className={classes.button}
         size="small">
         small outlined
       </Button>
       <Button
-        color="secondary"
+        color="primary"
         variant="outlined"
         className={classes.button}
         size="medium">
         medium outlined
       </Button>
       <Button
-        color="secondary"
+        color="primary"
         variant="outlined"
         className={classes.button}
         size="large">
         large outlined
       </Button>
       <Button
-        color="secondary"
+        color="primary"
         variant="contained"
         className={classes.button}
         size="medium">
         medium contained
       </Button>
       <Button
-        color="secondary"
+        color="primary"
         variant="contained"
         className={classes.button}
         size="large">

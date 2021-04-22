@@ -60,11 +60,11 @@ const TypographyExamples = () => {
       <Typography variant="body1" gutterBottom color="primary">
         body1.colorPrimary. For any Typography we can either give it a color
         value to override its deault color as defined above. it can be one of
-        sevan values ["initial", "inherit", "primary", "secondary", "error",
+        sevan values ["initial", "inherit", "primary", "primary", "error",
         "textPrimary", "textSecondary"]. All but "initial", and "inherit" colors
         will need to be defined
       </Typography>
-      <Typography variant="body1" gutterBottom color="secondary">
+      <Typography variant="body1" gutterBottom color="primary">
         body1.colorSecondary. We can override the color for any of these
         Typography fonts, useful possibly for the h tags in rare cases as I
         would like to carefully define the colors for each h tag and have it
@@ -82,7 +82,7 @@ const TypographyExamples = () => {
       <Typography variant="h5" gutterBottom color="primary">
         h5. with color primary
       </Typography>
-      <Typography variant="h5" gutterBottom color="secondary">
+      <Typography variant="h5" gutterBottom color="primary">
         h5. with color secondary
       </Typography>
       <Typography variant="h5" gutterBottom color="error">

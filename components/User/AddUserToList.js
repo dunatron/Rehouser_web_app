@@ -35,16 +35,16 @@ const getItemStyle = (isDragging, draggableStyle, theme) => ({
 
 const getListStyle = (isDraggingOver, theme) => ({
   // background: isDraggingOver
-  //   ? theme.palette.secondary.main
+  //   ? theme.palette.primary.main
   //   : theme.palette.background.default,
   // color: isDraggingOver
-  //   ? theme.palette.secondary.contrastText
+  //   ? theme.palette.primary.contrastText
   //   : theme.palette.text.primary,
   background: isDraggingOver
-    ? theme.palette.secondary.main
+    ? theme.palette.primary.main
     : theme.palette.background.paper,
   color: isDraggingOver
-    ? theme.palette.secondary.contrastText
+    ? theme.palette.primary.contrastText
     : theme.palette.text.primary,
   padding: grid,
   width: '50%',

@@ -3,7 +3,8 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   listItem: {
     // backgroundColor: 'rgba(0, 0, 0, 0.08)',
-    color: theme.palette.secondary.main,
+    // color: theme.palette.primary.main,
+    color: theme.palette.text.primary,
   },
   listItemSelected: {
     background: `${theme.palette.primary.main} !important`,
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     color: 'inherit',
   },
   listItemText: {
-    // color: theme.palette.secondary.main,
+    // color: theme.palette.primary.main,
     // fontFamily: 'GustanMedium',
     color: 'inherit',
   },
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
   },
   listItemDivider: {
-    // borderBottom: `2px solid ${theme.palette.secondary.contrastText}`,
+    // borderBottom: `2px solid ${theme.palette.primary.contrastText}`,
   },
 }));
 

@@ -73,8 +73,8 @@ export default function TabsWrappedLabel() {
           indicatorColor="primary"
           textColor="primary"
           // textColor="inherit"
-          // indicatorColor="secondary"
-          // textColor="secondary"
+          // indicatorColor="primary"
+          // textColor="primary"
           variant="scrollable"
           scrollButtons="auto"
           onChange={handleChange}

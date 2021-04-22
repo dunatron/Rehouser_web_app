@@ -127,7 +127,7 @@ const PhotoIdUploader = ({ me }) => {
                     </Button>
                     <TextInput
                       label="ID Number"
-                      color="secondary"
+                      color="primary"
                       name="photoId"
                       className="preUpload__id-number"
                       value={photoId}
@@ -160,9 +160,9 @@ const PhotoIdUploader = ({ me }) => {
 PhotoIdUploader.propTypes = {
   me: PropTypes.shape({
     photoIdentification: PropTypes.shape({
-      url: PropTypes.any
-    })
-  }).isRequired
+      url: PropTypes.any,
+    }),
+  }).isRequired,
 };
 
 function TabContainer({ children, dir }) {
@@ -175,7 +175,7 @@ function TabContainer({ children, dir }) {
 
 TabContainer.propTypes = {
   children: PropTypes.any,
-  dir: PropTypes.any
+  dir: PropTypes.any,
 };
 
 const contentAsSrc = content => {

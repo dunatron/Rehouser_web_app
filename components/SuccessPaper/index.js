@@ -16,13 +16,13 @@ import theme from '@/Themes/palettes/darkPalette';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(2, 2, 0, 2),
     marginBottom: theme.spacing(2),
     maxWidth: '920px',
   },
   checkIcon: {
-    color: theme.palette.secondary.contrastText,
+    color: theme.palette.primary.contrastText,
     marginRight: theme.spacing(2),
   },
   messageStrip: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   children: {
-    color: theme.palette.secondary.contrastText,
+    color: theme.palette.primary.contrastText,
   },
   actions: {
     display: 'flex',

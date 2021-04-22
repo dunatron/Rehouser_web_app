@@ -47,7 +47,7 @@ const RChat = props => {
       {...props}
       wrapperStyle={{
         left: {
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.primary.main,
           maxWidth: '212px',
         },
         right: {
@@ -63,7 +63,7 @@ const RChat = props => {
       // }}
       textStyle={{
         left: {
-          color: theme.palette.secondary.contrastText,
+          color: theme.palette.primary.contrastText,
         },
         right: {
           color: theme.palette.primary.contrastText,
@@ -95,7 +95,7 @@ const RChat = props => {
         scrollToBottom={true}
         scrollToBottomComponent={() => (
           <View>
-            <ArrowDownwardIcon color="secondary" />
+            <ArrowDownwardIcon color="primary" />
           </View>
         )}
         {...{ messages, onSend, user, inverted, bottomOffset }}

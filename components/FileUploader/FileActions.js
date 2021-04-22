@@ -41,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     color: red[500],
   },
   fabProgress: {
-    color: green[500],
+    // color: green[500],
+    color: theme.palette.primary.main,
     position: 'absolute',
   },
   buttonProgress: {
@@ -92,7 +93,7 @@ UploadFileButton.propTypes = {
   error: PropTypes.any,
   handleClick: PropTypes.any,
   loading: PropTypes.any,
-  uploadCompleted: PropTypes.bool.isRequired
+  uploadCompleted: PropTypes.bool.isRequired,
 };
 
 const FileActions = ({
@@ -126,7 +127,7 @@ const FileActions = ({
           }
         }}
       />
-      <IconButton
+      {/* <IconButton
         size="medium"
         disabled={isBeingActioned}
         onClick={() =>
@@ -135,8 +136,8 @@ const FileActions = ({
         color="default"
         aria-label="upload picture"
         component="span">
-        <ViewIcon size="small" />
-      </IconButton>
+        <ViewIcon size="small" color="action" />
+      </IconButton> */}
       {file.uploadCompleted ? (
         <IconButton
           size="medium"
@@ -145,7 +146,7 @@ const FileActions = ({
           color="default"
           aria-label="upload picture"
           component="span">
-          <DeleteForeverIcon size="small" />
+          <DeleteForeverIcon size="small" color="error" />
         </IconButton>
       ) : (
         <IconButton
@@ -155,7 +156,7 @@ const FileActions = ({
           color="default"
           aria-label="upload picture"
           component="span">
-          <TrashIcon size="small" />
+          <TrashIcon size="small" color="action" />
         </IconButton>
       )}
     </div>
@@ -168,14 +169,14 @@ FileActions.propTypes = {
     error: PropTypes.any,
     id: PropTypes.any,
     loading: PropTypes.any,
-    uploadCompleted: PropTypes.any
+    uploadCompleted: PropTypes.any,
   }).isRequired,
   isRemoving: PropTypes.any,
   remove: PropTypes.func.isRequired,
   removingIds: PropTypes.shape({
-    includes: PropTypes.func
+    includes: PropTypes.func,
   }).isRequired,
-  upload: PropTypes.func.isRequired
+  upload: PropTypes.func.isRequired,
 };
 
 export default FileActions;

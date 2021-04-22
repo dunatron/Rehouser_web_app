@@ -154,7 +154,7 @@ const AdminSettings = ({ me }) => {
                 icon={<NotificationsActiveIcon />}
                 label="SUBSCRIBED"
                 // clickable
-                color="secondary"
+                color="primary"
               />
             ) : null}
           </div>

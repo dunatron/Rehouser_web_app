@@ -52,7 +52,7 @@ const SubscriberBell = ({ me, variable, title }) => {
             })
           }>
           <NotificationsActiveIcon
-            color={adminSettings[variable] ? 'secondary' : 'default'}
+            color={adminSettings[variable] ? 'primary' : 'default'}
           />
         </IconButton>
       </Tooltip>

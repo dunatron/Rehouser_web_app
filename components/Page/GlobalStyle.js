@@ -65,8 +65,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .Toastify__toast--info {
-    background: ${p => p.theme.palette.secondary.main};
-    color: ${p => p.theme.palette.secondary.contrastText};
+    background: ${p => p.theme.palette.primary.main};
+    color: ${p => p.theme.palette.primary.contrastText};
   }
   .Toastify__toast--success {
     background: ${p => p.theme.palette.primary.main};
@@ -95,16 +95,16 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: ${p =>
       p.theme.palette.type === 'dark'
-        ? p.theme.palette.secondary.dark
-        : p.theme.palette.secondary.main};
+        ? p.theme.palette.primary.dark
+        : p.theme.palette.primary.main};
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: ${p =>
       p.theme.palette.type === 'dark'
-        ? p.theme.palette.secondary.main
-        : p.theme.palette.secondary.dark};
+        ? p.theme.palette.primary.main
+        : p.theme.palette.primary.dark};
   }
 
   .geosuggest {
@@ -140,8 +140,8 @@ const GlobalStyle = createGlobalStyle`
     max-height: 25em;
     padding: 0;
     margin-top: -1px;
-    background: ${p => p.theme.palette.secondary.main};
-    color: ${p => p.theme.palette.secondary.contrastText};
+    background: ${p => p.theme.palette.primary.main};
+    color: ${p => p.theme.palette.primary.contrastText};
     border: 2px solid #267dc0;
     border-top-width: 0;
     overflow-x: hidden;

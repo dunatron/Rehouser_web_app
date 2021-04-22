@@ -50,7 +50,7 @@ const HomePageBannerBody = () => {
         <ChangeRouteButton
           title="Free Appraisal"
           variant="contained"
-          color="secondary"
+          color="primary"
           route="/landlord/appraisals/add"
           btnProps={{
             size: 'large',
@@ -63,8 +63,8 @@ const HomePageBannerBody = () => {
         />
         <ChangeRouteButton
           title="Search for rental"
-          variant="contained"
-          color="secondary"
+          variant="outlined"
+          color="primary"
           route="/property-search"
           btnProps={{
             size: 'large',
@@ -114,7 +114,7 @@ const HomePage = props => {
           <Typography
             key={1}
             variant="h5"
-            color="primary"
+            color="default"
             style={{ textAlign: 'center', padding: '0 30px' }}>
             Turning empty houses into friendly abodes
           </Typography>,

@@ -18,21 +18,27 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    // backgroundColor: theme.palette.secondary.main,
-    // color: theme.palette.secondary.contrastText,
+    // backgroundColor: theme.palette.primary.main,
+    // color: theme.palette.primary.contrastText,
   },
   nested: {
     paddingLeft: theme.spacing(4),
   },
   listItemTextRoot: {
-    // color: theme.palette.secondary.contrastText,
+    // color: theme.palette.primary.contrastText,
   },
   listItemIcon: {
-    // color: theme.palette.secondary.contrastText,
+    // color: theme.palette.primary.contrastText,
   },
 }));
 
-const ExpansionRefinement = ({ children, title, nested, defaultOpen = false, icon }) => {
+const ExpansionRefinement = ({
+  children,
+  title,
+  nested,
+  defaultOpen = false,
+  icon,
+}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(defaultOpen);
 

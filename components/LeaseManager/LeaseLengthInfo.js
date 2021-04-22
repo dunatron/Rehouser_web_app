@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import Typography from '@material-ui/core/Typography';
@@ -25,8 +25,8 @@ const MoveInTime = props => {
 MoveInTime.propTypes = {
   component: PropTypes.any,
   moveInDate: PropTypes.any,
-  variant: PropTypes.any
-}
+  variant: PropTypes.any,
+};
 export { MoveInTime };
 
 const NowToDate = props => {
@@ -49,8 +49,8 @@ NowToDate.propTypes = {
   component: PropTypes.any,
   date: PropTypes.any,
   title: PropTypes.any,
-  variant: PropTypes.any
-}
+  variant: PropTypes.any,
+};
 export { NowToDate };
 
 const LongDatePretty = props => {
@@ -71,8 +71,8 @@ LongDatePretty.propTypes = {
   component: PropTypes.any,
   date: PropTypes.any,
   title: PropTypes.any,
-  variant: PropTypes.any
-}
+  variant: PropTypes.any,
+};
 export { LongDatePretty };
 
 const LeaseLength = props => {
@@ -107,8 +107,8 @@ LeaseLength.propTypes = {
   expiryDate: PropTypes.any,
   moveInDate: PropTypes.any,
   title: PropTypes.any,
-  variant: PropTypes.any
-}
+  variant: PropTypes.any,
+};
 export { LeaseLength };
 
 const LeaseLengthInfo = ({ moveInDate, expiryDate }) => {
@@ -126,7 +126,7 @@ const LeaseLengthInfo = ({ moveInDate, expiryDate }) => {
         date={expiryDate}
       />
       <LeaseLength
-        color="secondary"
+        color="primary"
         title="Lease is for"
         moveInDate={moveInDate}
         expiryDate={expiryDate}
@@ -139,8 +139,8 @@ const LeaseLengthInfo = ({ moveInDate, expiryDate }) => {
 
 LeaseLengthInfo.propTypes = {
   expiryDate: PropTypes.any,
-  moveInDate: PropTypes.any
-}
+  moveInDate: PropTypes.any,
+};
 export { LeaseLengthInfo };
 
 export default LeaseLengthInfo;

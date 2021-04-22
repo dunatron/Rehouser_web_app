@@ -17,12 +17,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    // color: theme.palette.secondary.contrastText,
-    // backgroundColor: theme.palette.secondary.main,
+    // color: theme.palette.primary.contrastText,
+    // backgroundColor: theme.palette.primary.main,
     margin: 0,
   },
   controlLabel: {
-    // color: theme.palette.secondary.contrastText,
+    // color: theme.palette.primary.contrastText,
   },
   label: {
     display: 'flex',

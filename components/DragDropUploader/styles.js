@@ -9,7 +9,7 @@ const DropZone = styled.div`
   /* width: 100%; */
   border: ${p =>
     p.dragging
-      ? `3px dashed ${p.theme.palette.secondary.main}`
+      ? `3px dashed ${p.theme.palette.primary.main}`
       : `1px dashed ${p.theme.palette.primary.main}`};
   height: ${p => p.theme.spacing(1) * 30 * 1.618}px;
   display: flex;

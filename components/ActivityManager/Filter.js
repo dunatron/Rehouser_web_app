@@ -90,7 +90,7 @@ const ActivityFilter = ({ doSearch, me }) => {
           btnProps={{
             fullWidth: true,
             variant: 'outlined',
-            color: 'secondary',
+            color: 'primary',
             startIcon: <SerachOutlinedIcon />,
           }}
           fullWidth
@@ -105,8 +105,8 @@ const ActivityFilter = ({ doSearch, me }) => {
 ActivityFilter.propTypes = {
   doSearch: PropTypes.func.isRequired,
   me: PropTypes.shape({
-    id: PropTypes.any
-  }).isRequired
+    id: PropTypes.any,
+  }).isRequired,
 };
 
 export default ActivityFilter;

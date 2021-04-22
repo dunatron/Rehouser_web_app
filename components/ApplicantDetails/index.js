@@ -13,14 +13,14 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    background: theme.palette.secondary.light,
+    background: theme.palette.primary.light,
     borderRadius: 0,
     wordWrap: 'break-word',
     height: '100%',
   },
   approvedPaper: {
-    background: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+    background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
   },
   gridItem: {
     // border: "1px solid red",

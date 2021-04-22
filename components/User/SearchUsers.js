@@ -52,7 +52,7 @@ const SearchUsers = ({ setHits, filters }) => {
         type="submit"
         onClick={handleSearch}
         aria-label="search"
-        color="secondary">
+        color="primary">
         <SearchIcon />
       </IconButton>
     </form>

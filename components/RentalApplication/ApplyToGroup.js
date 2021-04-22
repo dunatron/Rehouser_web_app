@@ -54,7 +54,7 @@ const ApplyToGroup = props => {
       <Tooltip title={`apply to group`} placement="top">
         <Fab
           size="small"
-          color="secondary"
+          color="primary"
           aria-label="Delete"
           style={{ cursor: 'pointer' }}
           onClick={() => applyToRentalGroup()}>

@@ -4,6 +4,23 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 
 import { InputFieldType } from './index';
 
+import { withStyles } from '@material-ui/core/styles';
+import { purple, green } from '@material-ui/core/colors';
+
+const GreenSwitch = withStyles({
+  switchBase: {
+    // color: green[300],
+    '&$checked': {
+      color: green[500],
+    },
+    '&$checked + $track': {
+      backgroundColor: green[500],
+    },
+  },
+  checked: {},
+  track: {},
+})(Switch);
+
 const BooleanField = props => {
   const {
     config,
@@ -22,6 +39,7 @@ const BooleanField = props => {
       <FormControlLabel
         control={
           <Switch
+            color="primary"
             {...fieldProps}
             name={name}
             defaultChecked={defaultValue}

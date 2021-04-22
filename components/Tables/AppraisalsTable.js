@@ -128,7 +128,7 @@ const AppraisalsTable = ({
         <Button
           // startIcon={}
           onClick={addAppraisalRoute}
-          color="secondary"
+          color="primary"
           variant="outlined">
           Request new APPRAISAL
         </Button>

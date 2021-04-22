@@ -98,7 +98,7 @@ const Signup = props => {
   };
   const accountBtn = (
     <Button
-      color="secondary"
+      color="primary"
       onClick={() => {
         handleLink('/account');
       }}>
@@ -263,7 +263,7 @@ const Signup = props => {
           style={{
             marginTop: '16px',
           }}
-          color="secondary"
+          color="primary"
           disabled={!canSignup()}
           success={false}>
           <NavigationIcon style={{ marginRight: 5 }} />

@@ -101,7 +101,7 @@ const PropertyApplicationsBadgeCount = ({ property }) => {
 
   return (
     <Badge
-      color="secondary"
+      color="primary"
       badgeContent={
         loading ? 0 : data.rentalApplicationsConnection.aggregate.count
       }>
@@ -228,8 +228,8 @@ const PropertyDetails = ({ id, location, me }) => {
           <Tabs
             value={tabIndex}
             onChange={(e, v) => setTabIndex(v)}
-            // indicatorColor="secondary"
-            // textColor="secondary"
+            // indicatorColor="primary"
+            // textColor="primary"
             // wrapped={false}
             indicatorColor="primary"
             textColor="primary"
@@ -239,7 +239,7 @@ const PropertyDetails = ({ id, location, me }) => {
             <Tab
               label={
                 <Badge
-                  color="secondary"
+                  color="primary"
                   badgeContent={rentalApplicationsCount.count}>
                   Applications
                 </Badge>
@@ -248,7 +248,7 @@ const PropertyDetails = ({ id, location, me }) => {
             />
             <Tab
               label={
-                <Badge color="secondary" badgeContent={leasesCount.count}>
+                <Badge color="primary" badgeContent={leasesCount.count}>
                   Leases
                 </Badge>
               }
@@ -258,7 +258,7 @@ const PropertyDetails = ({ id, location, me }) => {
             <Tab label="Viewings" icon={<StreetviewIcon />} />
             <Tab
               label={
-                <Badge color="secondary" badgeContent={inspectionsCount.count}>
+                <Badge color="primary" badgeContent={inspectionsCount.count}>
                   Inspections
                 </Badge>
               }

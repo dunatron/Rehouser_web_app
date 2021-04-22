@@ -27,10 +27,11 @@ const SpanRoute = ({ text, route, query, color }) => {
 };
 
 SpanRoute.propTypes = {
-  color: PropTypes.oneOf(["default", "inherit", "primary", "secondary"]).isRequired,
+  color: PropTypes.oneOf(['default', 'inherit', 'primary', 'primary'])
+    .isRequired,
   query: PropTypes.object.isRequired,
   route: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 export default SpanRoute;

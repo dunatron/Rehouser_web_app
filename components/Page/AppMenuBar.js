@@ -96,7 +96,7 @@ const AppMenuBar = props => {
           <div className={classes.actions}>
             <Tooltip title="Search available properties">
               <IconButton
-                color="secondary"
+                color="primary"
                 variant="contained"
                 onClick={() =>
                   router.push({

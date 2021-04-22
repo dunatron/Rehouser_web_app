@@ -104,7 +104,7 @@ const SelectMultipleEnum = props => {
             key={option.name}
             label={option.name}
             className={classes.chip}
-            color="secondary"
+            color="primary"
             label={option.name}
             {...getTagProps({ index })}
           />
@@ -149,7 +149,7 @@ const SelectMultipleEnum = props => {
                 key={value}
                 label={value}
                 className={classes.chip}
-                color="secondary"
+                color="primary"
               />
             ))}
           </div>

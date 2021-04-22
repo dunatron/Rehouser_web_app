@@ -108,22 +108,19 @@ export default function ExtraDetails({ property }) {
           aria-controls="panel1c-content"
           id="panel1c-header">
           <div className={classes.headingItem}>
-            <HouseIcon color="secondary" className={classes.headingIcon} />
+            <HouseIcon color="primary" className={classes.headingIcon} />
             <Typography className={classes.heading} color="textPrimary">
               {numberOfRooms}
             </Typography>
           </div>
           <div className={classes.headingItem}>
-            <AttachMoneyIcon
-              color="secondary"
-              className={classes.headingIcon}
-            />
+            <AttachMoneyIcon color="primary" className={classes.headingIcon} />
             <Typography className={classes.heading} color="textPrimary">
               {averageRoomPrice}
             </Typography>
           </div>
           <div className={classes.headingItem}>
-            <RoomIcon color="secondary" className={classes.headingIcon} />
+            <RoomIcon color="primary" className={classes.headingIcon} />
             <Typography className={classes.heading} color="textPrimary">
               {property.location}
             </Typography>
@@ -139,10 +136,10 @@ ExtraDetails.propTypes = {
   property: PropTypes.shape({
     accommodation: PropTypes.shape({
       length: PropTypes.any,
-      reduce: PropTypes.func
+      reduce: PropTypes.func,
     }),
-    location: PropTypes.any
-  }).isRequired
+    location: PropTypes.any,
+  }).isRequired,
 };
 
 const FullDetails = ({ algoliaProperty }) => {
@@ -159,7 +156,7 @@ const FullDetails = ({ algoliaProperty }) => {
     return (
       <Loader
         loading={loading}
-        color="secondary"
+        color="primary"
         text="Fetching full details for the property"
       />
     );
@@ -229,6 +226,6 @@ const FullDetails = ({ algoliaProperty }) => {
 
 FullDetails.propTypes = {
   algoliaProperty: PropTypes.shape({
-    id: PropTypes.any
-  }).isRequired
+    id: PropTypes.any,
+  }).isRequired,
 };

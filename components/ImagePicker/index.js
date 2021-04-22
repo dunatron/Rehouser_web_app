@@ -27,9 +27,9 @@ export default class ImagePicker extends PureComponent {
 
 ImagePicker.propTypes = {
   images: PropTypes.shape({
-    map: PropTypes.func
+    map: PropTypes.func,
   }).isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
 };
 const ImgTile = styled.div`
   background: white;
@@ -63,7 +63,7 @@ const ImageTile = ({ image, remove }) => {
       <Fab
         style={{ position: 'absolute' }}
         size="small"
-        color="secondary"
+        color="primary"
         aria-label="Add"
         onClick={remove}>
         X
@@ -76,8 +76,8 @@ const ImageTile = ({ image, remove }) => {
 ImageTile.propTypes = {
   image: PropTypes.shape({
     data: PropTypes.shape({
-      content: PropTypes.any
-    })
+      content: PropTypes.any,
+    }),
   }).isRequired,
-  remove: PropTypes.any
+  remove: PropTypes.any,
 };

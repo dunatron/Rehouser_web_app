@@ -51,7 +51,7 @@ StringDisplay.propTypes = {
     color: PropTypes.oneOf([
       'inherit',
       'primary',
-      'secondary',
+      'primary',
       'action',
       'error',
       'disabled',

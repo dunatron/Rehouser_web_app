@@ -22,5 +22,9 @@ const mainThemeSetup = {
     snackbar: 1400,
     tooltip: 1500,
   },
+  toggle: {
+    thumbOnColor: 'yellow',
+    trackOnColor: 'red',
+  },
 };
 export default mainThemeSetup;

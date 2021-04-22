@@ -71,7 +71,7 @@ class Modal extends Component {
                   <h2 className={classes.modalTitle}>{title}</h2>
                   <IconButton
                     data-cy="close-input-modal-btn"
-                    color={'secondary'}
+                    color={'primary'}
                     aria-label="Delete"
                     className={classes.closeBtn}
                     onClick={() => close()}>
@@ -102,13 +102,13 @@ Modal.propTypes = {
     modalBody: PropTypes.any,
     modalHeader: PropTypes.any,
     modalTitle: PropTypes.any,
-    root: PropTypes.any
+    root: PropTypes.any,
   }).isRequired,
   close: PropTypes.func.isRequired,
   height: PropTypes.any,
   open: PropTypes.any,
   title: PropTypes.any,
-  width: PropTypes.any
+  width: PropTypes.any,
 };
 
 export default withStyles(styles)(Modal);

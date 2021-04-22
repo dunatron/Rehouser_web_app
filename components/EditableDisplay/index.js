@@ -173,7 +173,7 @@ const EditableDisplay = ({ item }) => {
         <ButtonGroup
           style={{ marginBottom: '16px' }}
           disabled={saveProps.loading}
-          color="secondary"
+          color="primary"
           aria-label="outlined secondary button group">
           {canSave && <Button onClick={handleSaveButtonClick}>Save</Button>}
           {canSave && <Button onClick={handleReset}>Reset</Button>}

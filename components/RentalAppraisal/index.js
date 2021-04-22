@@ -70,7 +70,7 @@ const RentalAppraisalView = ({ id }) => {
                 flexWrap: 'wrap',
                 alignItems: 'center',
               }}>
-              <Typography variant="h5" color="secondary">
+              <Typography variant="h5" color="primary">
                 Appraisal
               </Typography>
               <Chip
@@ -87,7 +87,7 @@ const RentalAppraisalView = ({ id }) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h5" color="secondary" gutterBottom>
+          <Typography variant="h5" color="primary" gutterBottom>
             Requested by
           </Typography>
           {/* <RequestedBy user={requestedBy} /> */}
@@ -95,7 +95,7 @@ const RentalAppraisalView = ({ id }) => {
         </Grid>
         {appraisedBy && (
           <Grid item xs={12} sm={6}>
-            <Typography variant="h5" color="secondary" gutterBottom>
+            <Typography variant="h5" color="primary" gutterBottom>
               Appraised by
             </Typography>
             {appraisedBy && <PublicUserDetails id={appraisedBy.id} />}
@@ -178,7 +178,7 @@ const LabelArrayVal = ({ label, val }) => {
       </Typography>
       <Typography component="ul">
         {val.map(item => (
-          <Typography key={item} component="li" color="secondary">
+          <Typography key={item} component="li" color="primary">
             {item}
           </Typography>
         ))}
@@ -200,7 +200,7 @@ const LabelKeyVal = ({ label, val }) => {
       <Typography color="default" component="span">
         {label}:{' '}
       </Typography>
-      <Typography color="secondary" component="span">
+      <Typography color="primary" component="span">
         {val}
       </Typography>
     </Typography>

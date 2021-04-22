@@ -173,7 +173,7 @@ const AppraisalsTable = ({ where, me, orderBy = 'createdAt_DESC' }) => {
       </Modal>
 
       <div className={classes.tableHeader}>
-        <Button onClick={addAppraisalRoute} color="secondary">
+        <Button onClick={addAppraisalRoute} color="primary">
           Request new APPRAISAL
         </Button>
       </div>

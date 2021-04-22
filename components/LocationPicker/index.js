@@ -143,7 +143,7 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
             padding: '16px 0',
             alignItems: 'center',
           }}>
-          <LocationOnIcon color="secondary" />
+          <LocationOnIcon color="primary" />
           <Typography style={{ padding: '8px 16px' }}>{state.desc}</Typography>
         </div>
       )}

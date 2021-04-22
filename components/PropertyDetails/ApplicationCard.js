@@ -86,7 +86,7 @@ const ApplicationCard = ({ application, property, me }) => {
               id: application.leaseId,
             }}
             variant="contained"
-            color="secondary"
+            color="primary"
           />
           <Typography gutterBottom>LeaseId: {application.leaseId}</Typography>
         </Box>
@@ -108,7 +108,7 @@ const ApplicationCard = ({ application, property, me }) => {
 
       <Accordion highlight={false}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <PersonIcon color={'secondary'} />
+          <PersonIcon color={'primary'} />
           <Typography
             // highlightReverse={isOwner}
             // highlight={isAnApplicant}

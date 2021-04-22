@@ -141,7 +141,7 @@ const SearchInterface = styled.div`
     flex-wrap: wrap;
     // background-color: #002443;
     // color: #e60085;
-    background-color: ${props => `${props.theme.palette.secondary.main};`}
+    background-color: ${props => `${props.theme.palette.primary.main};`}
     // background-color: ${props =>
       `${props.theme.palette.primary.contrastText};`}
     border: ${props => `2px solid ${props.theme.palette.primary.main};`}

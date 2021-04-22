@@ -290,7 +290,7 @@ const Details = props => {
               aria-label="read-more"
               href="#agent-section"
               endIcon={<ArrowDownwardIcon fontSize="large" />}
-              color="secondary">
+              color="primary">
               Add Agents
             </Button>
           </Alert>

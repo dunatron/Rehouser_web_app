@@ -17,7 +17,7 @@ import RentalApplicationStepper from '@/Components/RentalApplicationStepper';
  */
 const RentalApplicationOwnerView = ({ me, rentalApplication }) => {
   return (
-    <Typography gutterBottom color="secondary">
+    <Typography gutterBottom color="primary">
       You are the creator of the application
     </Typography>
   );

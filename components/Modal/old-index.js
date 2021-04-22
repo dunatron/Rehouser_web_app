@@ -141,7 +141,7 @@ const Modal = props => {
                 }}>
                 <h2 className={classes.modalTitle}>{title}</h2>
                 <IconButton
-                  color={'secondary'}
+                  color={'primary'}
                   aria-label="Delete"
                   className={classes.closeBtn}
                   onClick={() => close()}>

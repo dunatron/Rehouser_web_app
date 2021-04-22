@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
   buttonProgress: {
     color: theme.palette.primary.main,
+    // color: green[700],
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -65,6 +66,7 @@ const IconButtonLoader = props => {
     btnProps,
     children,
     style = {},
+    color,
   } = props;
   const classes = useStyles();
   const buttonClassname = clsx({
@@ -76,7 +78,7 @@ const IconButtonLoader = props => {
     <StyledIconButton
       data-cy={cy}
       variant="contained"
-      color="primary"
+      color={color ? color : 'primary'}
       className={buttonClassname}
       disabled={loading}
       {...btnProps}
@@ -85,7 +87,11 @@ const IconButtonLoader = props => {
       onClick={onClick}>
       {children}
       {loading && (
-        <CircularProgress size={24} className={classes.buttonProgress} />
+        <CircularProgress
+          size={24}
+          className={classes.buttonProgress}
+          // color="inherit"
+        />
       )}
     </StyledIconButton>
   );

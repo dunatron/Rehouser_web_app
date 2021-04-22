@@ -48,7 +48,7 @@ const RequestReset = props => {
         className="main-fieldset">
         <Error error={error} />
         {!error && !loading && called && (
-          <Typography gutterBottom color="secondary">
+          <Typography gutterBottom color="primary">
             Success! Check your email for a reset link!
           </Typography>
         )}

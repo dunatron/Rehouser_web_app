@@ -13,7 +13,7 @@ const ClearRefinements = ({ items, refine }) => {
       <Button
         onClick={() => refine(items)}
         disabled={!items.length}
-        color="secondary"
+        color="primary"
         variant="contained">
         Reset All
       </Button>

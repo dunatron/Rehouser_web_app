@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'nowrap',
     overflowX: 'auto',
     WebkitOverflowScrolling: 'touch',
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     zIndex: 1,
     '&::-webkit-scrollbar': {
       // display: 'none',

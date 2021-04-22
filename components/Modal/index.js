@@ -38,9 +38,12 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     // border: '2px solid #000',
     borderRadius: '6px',
-    borderLeft: `8px solid ${theme.palette.primary.main}`,
-    borderTop: `8px solid ${theme.palette.primary.main}`,
-    borderBottom: `8px solid ${theme.palette.primary.main}`,
+    // borderLeft: `8px solid ${theme.palette.primary.main}`,
+    // borderTop: `8px solid ${theme.palette.primary.main}`,
+    // borderBottom: `8px solid ${theme.palette.primary.main}`,
+    borderLeft: `8px solid ${theme.palette.background.default}`,
+    borderTop: `8px solid ${theme.palette.background.default}`,
+    borderBottom: `8px solid ${theme.palette.background.default}`,
     // boxShadow: theme.shadows[5],
     // padding: theme.spacing(2, 4, 3),
     height: '800px',
@@ -140,7 +143,7 @@ const ModalComponent = props => {
             <div className={classes.headerActions}>
               <IconButton
                 size="small"
-                color={'secondary'}
+                color={'primary'}
                 aria-label="Delete"
                 className={classes.closeBtn}
                 onClick={() => toggleFullscreen()}>
@@ -152,7 +155,7 @@ const ModalComponent = props => {
               </IconButton>
               <IconButton
                 size="medium"
-                color={'secondary'}
+                color={'primary'}
                 aria-label="Delete"
                 className={classes.closeBtn}
                 onClick={() => close()}>
@@ -194,7 +197,7 @@ const ModalComponent = props => {
                 }}>
                 <h2 className={classes.modalTitle}>{title}</h2>
                 <IconButton
-                  color={'secondary'}
+                  color={'primary'}
                   aria-label="Delete"
                   className={classes.closeBtn}
                   onClick={() => close()}>

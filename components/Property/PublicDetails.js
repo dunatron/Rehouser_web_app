@@ -95,7 +95,7 @@ const PropertyPublicDetails = ({ id }) => {
         reverse
         variant="body2"
         value={property.rent}
-        valueProps={{ color: 'primary', variant: 'h5' }}
+        valueProps={{ color: 'default', variant: 'h5' }}
       />
       <Money
         title="Per Room"
@@ -104,7 +104,7 @@ const PropertyPublicDetails = ({ id }) => {
         reverse
         variant="body2"
         value={property.rent / property.rooms}
-        valueProps={{ color: 'primary', variant: 'h5' }}
+        valueProps={{ color: 'default', variant: 'h5' }}
       />
       <String
         title="Rooms"
@@ -112,7 +112,7 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.rooms}
         orientation="horizontal"
         reverse
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
       />
       <String
         icon={<BathtubIcon />}
@@ -120,7 +120,7 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.bathrooms}
         orientation="horizontal"
         reverse
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
       />
       <String
         title="Maximum Occupants"
@@ -128,7 +128,7 @@ const PropertyPublicDetails = ({ id }) => {
         value={property.maximumOccupants}
         orientation="horizontal"
         reverse
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
       />
       <Date
         title="Move in date"
@@ -137,32 +137,32 @@ const PropertyPublicDetails = ({ id }) => {
         format="ShortDateTime"
         orientation="horizontal"
         reverse
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
       />
       <RichText
         value={property.headline}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'body1' }}
+        valueProps={{ color: 'default', variant: 'body1' }}
       />
       <String
         title="Title type"
         value={property.titleType}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
       <String
         title="Type"
         value={property.type}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
       <String
         title="Fixed Length"
         value={property.fixedLength}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
 
@@ -170,7 +170,7 @@ const PropertyPublicDetails = ({ id }) => {
         title="tenancyType"
         value={property.tenancyType}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
 
@@ -178,7 +178,7 @@ const PropertyPublicDetails = ({ id }) => {
         title="bondType"
         value={property.bondType}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
 
@@ -186,21 +186,21 @@ const PropertyPublicDetails = ({ id }) => {
         title="garageSpaces"
         value={property.garageSpaces}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
       <String
         title="carportSpaces"
         value={property.carportSpaces}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
       <String
         title="offStreetSpaces"
         value={property.offStreetSpaces}
         orientation="horizontal"
-        valueProps={{ color: 'secondary', variant: 'h6' }}
+        valueProps={{ color: 'default', variant: 'h6' }}
         reverse
       />
       <ChipItems
@@ -210,7 +210,7 @@ const PropertyPublicDetails = ({ id }) => {
         }}
         items={property.chattels}
         variant="default"
-        color="secondary"
+        color="default"
       />
     </div>
   );

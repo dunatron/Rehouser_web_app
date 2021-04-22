@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
@@ -60,7 +60,7 @@ const MultiSelectChip = ({
                   onDelete={() => removeItem(value)}
                   icon={<LabelIcon mini />}
                   variant="outlined"
-                  color="secondary"
+                  color="primary"
                   label={label.name}
                   className={classes.chip}
                   key={value}
@@ -86,19 +86,19 @@ MultiSelectChip.propTypes = {
   classes: PropTypes.shape({
     chip: PropTypes.any,
     chips: PropTypes.any,
-    formControl: PropTypes.any
+    formControl: PropTypes.any,
   }).isRequired,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.shape({
-    name: PropTypes.any
+    name: PropTypes.any,
   }).isRequired,
   options: PropTypes.shape({
     find: PropTypes.func,
-    map: PropTypes.func
+    map: PropTypes.func,
   }).isRequired,
   removeItem: PropTypes.func.isRequired,
   selectID: PropTypes.any,
-  values: PropTypes.any
-}
+  values: PropTypes.any,
+};
 
 export default withStyles(styles)(MultiSelectChip);

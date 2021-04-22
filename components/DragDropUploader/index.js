@@ -83,7 +83,7 @@ const DragDropUploader = ({
         <div>
           <Button
             disabled={disabled}
-            color={dragging ? 'secondary' : 'primary'}
+            color={dragging ? 'primary' : 'primary'}
             variant="contained"
             component="span">
             {renderBtnText()}
@@ -95,7 +95,7 @@ const DragDropUploader = ({
       <label htmlFor="file-multi-input">
         <Button
           disabled={disabled}
-          color={dragging ? 'secondary' : 'primary'}
+          color={dragging ? 'primary' : 'primary'}
           variant="contained"
           component="span">
           {renderBtnText()}
@@ -212,7 +212,7 @@ const DragDropUploader = ({
         <LinearBuffer
           size={numToProcess}
           currentSize={numProcessed + 1}
-          color="secondary"
+          color="primary"
         />
       </ProgressBar>
     );
@@ -232,7 +232,7 @@ DragDropUploader.propTypes = {
   multiple: PropTypes.any,
   receiveFile: PropTypes.func.isRequired,
   title: PropTypes.any,
-  types: PropTypes.array.isRequired
+  types: PropTypes.array.isRequired,
 };
 
 export default DragDropUploader;

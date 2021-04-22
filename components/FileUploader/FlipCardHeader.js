@@ -40,7 +40,7 @@ const FlipCardHeader = ({
     <div className={classes.flipHeader}>
       {hasServerFile && (
         <Tooltip title={`We have a file for ${title} on the server`}>
-          <DoneIcon color="primary" className={classes.hasServerIcon} />
+          <DoneIcon color="secondary" className={classes.hasServerIcon} />
         </Tooltip>
       )}
       {!hasServerFile && hasFile && (
@@ -51,7 +51,7 @@ const FlipCardHeader = ({
       )}
       {!hasServerFile && !hasFile && (
         <Tooltip title={`No File on the server for ${title}`}>
-          <CloseIcon color="primary" className={classes.hasServerIcon} />
+          <CloseIcon color="error" className={classes.hasServerIcon} />
         </Tooltip>
       )}
       <ButtonGroup size="small" aria-label="small outlined button group">

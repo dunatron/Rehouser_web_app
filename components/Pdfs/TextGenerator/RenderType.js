@@ -69,7 +69,7 @@ const RenderType = ({ item }) => {
             return (
               <Chip
                 size="small"
-                color="secondary"
+                color="primary"
                 className={classes.chip}
                 key={idx}
                 label={chip}

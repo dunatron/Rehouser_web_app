@@ -42,14 +42,14 @@ const ChatsListSelector = ({ me }) => {
         <div>
           <IconButton
             aria-label="delete"
-            color={componentType === 'chats' ? 'secondary' : 'default'}
+            color={componentType === 'chats' ? 'primary' : 'default'}
             className={classes.margin}
             size="large"
             onClick={() => setComponentType('chats')}>
             <ChatIcon fontSize="inherit" />
           </IconButton>
           <IconButton
-            color={componentType === 'friends' ? 'secondary' : 'default'}
+            color={componentType === 'friends' ? 'primary' : 'default'}
             aria-label="delete"
             className={classes.margin}
             size="large"
@@ -77,7 +77,7 @@ const ChatsListSelector = ({ me }) => {
 };
 
 ChatsListSelector.propTypes = {
-  me: PropTypes.any
+  me: PropTypes.any,
 };
 
 export default ChatsListSelector;

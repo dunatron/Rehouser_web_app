@@ -14,7 +14,7 @@ const CurrentRefinementStyles = Styled.ul`
    
   }
   .refinement-group__label {
-    // color: ${props => props.theme.palette.secondary.main}
+    // color: ${props => props.theme.palette.primary.main}
     color: ${props => props.theme.palette.text.secondary}
     /* color: red; */
     /* border: ${props => props.border}; */
@@ -45,7 +45,7 @@ const RefinementValue = ({ item, refine, url }) => {
       className="refinement-chip"
       label={item.label}
       onDelete={() => refine(item.value)}
-      color="secondary"
+      color="primary"
       variant="outlined"
     />
   );

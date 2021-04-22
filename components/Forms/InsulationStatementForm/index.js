@@ -234,7 +234,7 @@ const InsulationStatementForm = ({
             <IconButton
               onClick={() => setIsOpen(true)}
               className={buttonClassname}
-              color="secondary">
+              color="primary">
               <AddIcon />
             </IconButton>
             {/* <CircularProgress size={58} className={classes.fabProgress} /> */}
@@ -250,7 +250,7 @@ const InsulationStatementForm = ({
             <IconButton
               onClick={() => loadForm()}
               className={buttonClassname}
-              color="secondary">
+              color="primary">
               <EditIcon />
             </IconButton>
             {/* <CircularProgress size={58} className={classes.fabProgress} /> */}
@@ -270,7 +270,7 @@ const InsulationStatementForm = ({
           />
         ) : (
           <CloseIcon
-            color={'secondary'}
+            color={'primary'}
             style={{
               margin: '16px',
             }}
