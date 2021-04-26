@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { isEmpty, is } from 'ramda';
@@ -17,6 +18,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import Card from '@/Styles/Card';
 
 import Fab from '@material-ui/core/Fab';
+
+import useSavedFormData from './useSavedFormData';
 
 const configIsValid = config => {
   if (isEmpty(config)) return false;
@@ -44,7 +47,11 @@ const getKeyTypes = conf => {
   }, {});
 };
 
-const FormCreator = props => {
+const _allData = () => {};
+
+// landlord/properties/add?appraisal_id=cknyy5h1u50nj0999ahdn7ixp
+
+const FormCreatorMain = props => {
   const {
     title,
     data,
@@ -62,12 +69,9 @@ const FormCreator = props => {
     hasCancel,
     cancel,
     selectOptionTypes,
+    disableCreate,
+    saveKey,
   } = props;
-
-  const [savedDataLoading, setSavedDataLoading] = useState(true);
-  const [saveData, setSaveData] = useState({});
-
-  console.log('savedData setState => ', saveData);
 
   // awesome we have {me} which now has isAdmin and isWizard
   // we can on the form creator if it has something like requiredPermissions
@@ -132,6 +136,8 @@ const FormCreator = props => {
     if (!canSubmit()) return;
     const postFormattedFormData = formatData(data, keysWithTypes, 'post');
     props.onSubmit(postFormattedFormData);
+    localStorage.removeItem(saveKey);
+    // we assume the data has gone to where it needs to go and we clear saveData
   };
 
   const _createText = () => {
@@ -147,28 +153,20 @@ const FormCreator = props => {
   const _saveData = () => {
     const formValsToSave = getValues();
 
-    localStorage.setItem('formData', JSON.stringify(formValsToSave));
-    toast.success('Form Data saved');
-  };
-
-  const _loadInSavedData = () => {
-    alert('Hiii');
-  };
-
-  useEffect(() => {
-    const localStorageFormData = localStorage.getItem('formData');
-    const formattedLocalStorageData = JSON.parse(localStorageFormData);
-    setSaveData({
-      ...saveData,
-      ...formattedLocalStorageData,
-    });
-    setSavedDataLoading(false);
-    setValue('rent', 69696969696);
-    toast.info(
-      'Some Save Data was found would you like to load it into the form'
+    localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
+    toast.success(
+      `${title} Form Data saved. You can leave this page and come back`
     );
-    return () => {};
-  }, []);
+  };
+
+  // const _loadInSavedData = () => {
+  //   // alert('Hiii');
+  //   // setValue('rent', 69696969696);
+  //   // setValue('rooms', 4);
+  //   Object.entries(saveDataProps.data).map(([key, val]) => {
+  //     setValue([key], val);
+  //   });
+  // };
 
   //// Store
   // localStorage.setItem("lastname", "Smith");
@@ -211,8 +209,6 @@ const FormCreator = props => {
     return item;
   });
 
-  if (savedDataLoading) return <div>CHecking for saved data </div>;
-
   return (
     <>
       <Card
@@ -221,6 +217,13 @@ const FormCreator = props => {
           maxWidth: '800px',
           overflow: 'initial',
         }}>
+        <Button
+          onClick={() => {
+            const theVals = getValues();
+            console.log('CURRENT FORM VALUES => ', theVals);
+          }}>
+          Log VALUES
+        </Button>
         {configIsValid(config) &&
           filteredConf.map((item, idx) => {
             return (
@@ -237,7 +240,8 @@ const FormCreator = props => {
                   getValues={getValues}
                   clearError={handleClearError}
                   // rawData={data}
-                  rawData={saveData ? saveData : data}
+                  _saveData={_saveData}
+                  rawData={data}
                   folder={folder}
                   defaultValues={preFormattedFormData}
                   refetchQueries={refetchQueries}
@@ -257,26 +261,15 @@ const FormCreator = props => {
         <FormErrors errors={errors} />
         <Errors error={error} />
         <div
-          style={{
-            position: '-webkit-sticky',
-            position: 'sticky',
-            bottom: 0,
-            borderColor: 'red',
-            zIndex: 999999,
-            padding: '16px 0',
-          }}>
-          <Fab
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={_loadInSavedData}>
-            <SaveIcon />
-
-            <Typography variant="button" style={{ margin: '0 4px' }}>
-              Load in Saved Data
-            </Typography>
-          </Fab>
+        // style={{
+        //   position: '-webkit-sticky',
+        //   position: 'sticky',
+        //   bottom: 0,
+        //   borderColor: 'red',
+        //   zIndex: 999999,
+        //   padding: '16px 0',
+        // }}
+        >
           <Fab
             variant="extended"
             size="small"
@@ -290,40 +283,7 @@ const FormCreator = props => {
             </Typography>
           </Fab>
         </div>
-        <div
-          style={{
-            position: '-webkit-sticky',
-            position: 'sticky',
-            bottom: 0,
-            borderColor: 'red',
-            zIndex: 999999,
-            padding: '16px 0',
-          }}>
-          <Fab
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={_loadInSavedData}>
-            <SaveIcon />
 
-            <Typography variant="button" style={{ margin: '0 4px' }}>
-              Load in Saved Data
-            </Typography>
-          </Fab>
-          <Fab
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={_saveData}>
-            <SaveIcon />
-
-            <Typography variant="button" style={{ margin: '0 4px' }}>
-              TESTINGGG
-            </Typography>
-          </Fab>
-        </div>
         <ButtonGroup
           style={{
             marginTop: '16px',
@@ -331,16 +291,18 @@ const FormCreator = props => {
           color="primary"
           aria-label="outlined primary button group square">
           {/* MAKE THIS A BUTTON LOADER PLEASE */}
-          <ButtonLoader
-            loading={posting}
-            text={isNew ? _createText() : _updateText()}
-            onClick={handleSubmit(onSubmit)}
-            btnProps={{
-              startIcon: isNew ? <AddIcon /> : <EditIcon />,
-              variant: 'contained',
-              color: 'primary',
-            }}
-          />
+          {!disableCreate && (
+            <ButtonLoader
+              loading={posting}
+              text={isNew ? _createText() : _updateText()}
+              onClick={handleSubmit(onSubmit)}
+              btnProps={{
+                startIcon: isNew ? <AddIcon /> : <EditIcon />,
+                variant: 'contained',
+                color: 'primary',
+              }}
+            />
+          )}
 
           {hasCancel && (
             <Button disabled={posting} onClick={cancel}>
@@ -352,6 +314,48 @@ const FormCreator = props => {
       </Card>
     </>
   );
+};
+
+/**
+ * Trying to set saveData from getValues and then inject it into data. Which might not work.
+ * Ask to load in if found. We may have to add an extra field called savedData. so FormCreatorMain can setValue.
+ * Also try inject the data for the visuals
+ *
+ */
+const FormCreator = props => {
+  const {
+    title,
+    data,
+    config,
+    isNew,
+    posting,
+    error,
+    updateCacheOnRemovedFile,
+    createText,
+    updateText,
+    refetchQueries,
+    folder,
+    watchFields = [],
+    handleWatchChanges,
+    hasCancel,
+    cancel,
+    selectOptionTypes,
+    disableCreate,
+  } = props;
+  const router = useRouter();
+  const saveKey = `savekey-${title}-${router.asPath}`;
+  const saveDataProps = useSavedFormData({ saveKey: saveKey });
+
+  if (saveDataProps.loading) return <div>Loading Form Data</div>;
+
+  const allData = {
+    ...data,
+    ...saveDataProps.data, // saved updates
+  };
+
+  console.log('THE SAVE KEY => ', saveKey);
+
+  return <FormCreatorMain {...props} data={allData} saveKey={saveKey} />;
 };
 
 FormCreator.propTypes = {

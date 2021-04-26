@@ -22,6 +22,7 @@ const AcceptTerms = props => {
           control={
             <Checkbox
               {...fieldProps}
+              color="primary"
               defaultChecked={defaultValue}
               aria-label="LoginSwitch"
               inputRef={register(refConf)}

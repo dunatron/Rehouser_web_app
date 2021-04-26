@@ -63,6 +63,7 @@ const CheckMultipleWithText = props => {
                 value={opt.name}
                 control={
                   <Checkbox
+                    color="primary"
                     checked={state[opt.name] ? state[opt.name] : false}
                     onChange={e => handleChange(e, opt.name)}
                     inputRef={register ? register(refConf) : null}
@@ -98,7 +99,7 @@ CheckMultipleWithText.propTypes = {
   errors: PropTypes.any,
   register: PropTypes.func.isRequired,
   reset: PropTypes.any,
-  setValue: PropTypes.any
+  setValue: PropTypes.any,
 };
 
 export default CheckMultipleWithText;

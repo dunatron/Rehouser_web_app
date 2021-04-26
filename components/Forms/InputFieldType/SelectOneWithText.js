@@ -72,6 +72,7 @@ const SelectOneWithText = props => {
                 control={
                   <Radio
                     // checked={true}
+                    color="primary"
                     name={name}
                     inputRef={register ? register(refConf) : register}
                   />

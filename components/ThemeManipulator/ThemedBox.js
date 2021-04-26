@@ -33,6 +33,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import SearchIcon from '@material-ui/icons/Search';
 
+// Themes
+import darkTheme from '../../themes/palettes/darkPalette';
+import lightTheme from '../../themes/palettes/mainPalette';
+
 const useStyles = makeStyles(theme => ({
   base: {},
   root: {
@@ -173,14 +177,7 @@ const ThemedBox = ({
             Landlord
           </Typography>
           <div className={classes.actions}>
-            <IconButton
-              color="primary"
-              variant="contained"
-              onClick={() =>
-                router.push({
-                  pathname: '/property-search',
-                })
-              }>
+            <IconButton color="primary" variant="contained">
               <SearchIcon />
             </IconButton>
             <Avatar
@@ -218,45 +215,57 @@ const ThemedBox = ({
   );
 };
 
+// rgba(62, 62, 62, 0.85)
 const darkFontRgb = `255, 255, 255`;
 const darkModeTypes = {
-  type: 'dark',
-  common: { black: 'rgba(59, 40, 40, 1)', white: 'rgba(255, 255, 255, 1)' },
-  background: { paper: '#424242', default: '#303030' },
-  error: {
-    light: '#e57373',
-    main: '#f44336',
-    dark: '#d32f2f',
-    contrastText: '#fff',
+  ...darkTheme,
+  palette: {
+    type: 'dark',
+    common: { black: 'rgba(59, 40, 40, 1)', white: 'rgba(255, 255, 255, 1)' },
+    background: { paper: '#424242', default: '#303030' },
+    error: {
+      light: '#e57373',
+      main: '#f44336',
+      dark: '#d32f2f',
+      contrastText: '#fff',
+    },
+    text: {
+      primary: makefontRgba(darkFontRgb, 0.87),
+      secondary: makefontRgba(darkFontRgb, 0.54),
+      disabled: makefontRgba(darkFontRgb, 0.38),
+      hint: makefontRgba(darkFontRgb, 0.38),
+    },
   },
-  text: {
-    primary: makefontRgba(darkFontRgb, 0.87),
-    secondary: makefontRgba(darkFontRgb, 0.54),
-    disabled: makefontRgba(darkFontRgb, 0.38),
-    hint: makefontRgba(darkFontRgb, 0.38),
+  typography: {
+    ...darkTheme.typography,
   },
 };
 
 const lightFontRgb = `62, 62, 62`;
 const lightModeTypes = {
-  type: 'light',
-  common: {
-    black: '#000',
-    white: '#fff',
-  },
+  palette: {
+    type: 'light',
+    common: {
+      black: '#000',
+      white: '#fff',
+    },
 
-  background: { paper: '#fff', default: '#fafafa' },
-  error: {
-    light: '#e57373',
-    main: '#f44336',
-    dark: '#d32f2f',
-    contrastText: '#fff',
+    background: { paper: '#fff', default: '#fafafa' },
+    error: {
+      light: '#e57373',
+      main: '#f44336',
+      dark: '#d32f2f',
+      contrastText: '#fff',
+    },
+    text: {
+      primary: makefontRgba(lightFontRgb, 0.87),
+      secondary: makefontRgba(lightFontRgb, 0.54),
+      disabled: makefontRgba(lightFontRgb, 0.38),
+      hint: makefontRgba(lightFontRgb, 0.38),
+    },
   },
-  text: {
-    primary: makefontRgba(lightFontRgb, 0.87),
-    secondary: makefontRgba(lightFontRgb, 0.54),
-    disabled: makefontRgba(lightFontRgb, 0.38),
-    hint: makefontRgba(lightFontRgb, 0.38),
+  typography: {
+    ...lightTheme.typography,
   },
 };
 
@@ -268,25 +277,27 @@ const ThemedBoxWithProvider = props => {
       ...stateTheme,
       ...props.theme,
       palette: {
-        ...props.theme.palette,
         type: darkMode ? 'dark' : 'light',
-        ...(darkMode && darkModeTypes),
-        ...(!darkMode && lightModeTypes),
+        ...props.theme.palette,
+        ...(darkMode && darkModeTypes.palette),
+        ...(!darkMode && lightModeTypes.palette),
+      },
+      typography: {
+        ...props.theme.typography,
+        ...(darkMode && darkModeTypes.palette),
+        ...(!darkMode && lightModeTypes.palette),
       },
     });
   }, [props.theme, darkMode]);
-
-  const _setMode = type => {
-    // "palette.type": "light",
-  };
 
   return (
     <ThemeProvider theme={stateTheme}>
       <ThemedBox
         {...props}
+        theme={stateTheme}
         darkMode={darkMode}
         setDarkMode={setDarkMode}
-        setTheme={() => props.setTheme(stateTheme)}
+        setTheme={t => props.setTheme(t)}
       />
     </ThemeProvider>
   );

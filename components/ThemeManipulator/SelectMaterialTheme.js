@@ -37,10 +37,11 @@ import Slider from '@material-ui/core/Slider';
 import { createMuiTheme } from '@material-ui/core/styles';
 import ThemedBox from './ThemedBox';
 
-const _makeTheme = color => {
-  console.log('COlor Being made => ', color);
+const _makeTheme = (color, themeObj) => {
   const t = createMuiTheme({
+    ...themeObj,
     palette: {
+      ...themeObj.palette,
       primary: {
         main: color,
       },
@@ -114,23 +115,22 @@ function valuetext(value) {
   return `${value} material color tint`;
 }
 
-console.log('MAP OF COLORS => ', colors);
-
-const SelectMaterialColor = ({ setColor }) => {
+const SelectMaterialColor = () => {
   const [themeObj, setThemeObj] = useRecoilState(themeState);
   const [range, setRange] = useState(500);
   const [appView, setAppView] = useState(false);
 
   const _handleSetTheme = theme => {
-    console.log('HANDLE THEME SET IS => ', theme);
     setThemeObj({
       ...themeObj,
       // ...theme,
+      maxWidth: 2000,
       palette: {
+        ...themeObj.palette,
+        ...theme.palette,
         nProgress: {
           main: theme.palette.primary.main,
         },
-        ...theme.palette,
       },
     });
   };
@@ -140,6 +140,20 @@ const SelectMaterialColor = ({ setColor }) => {
       style={{
         padding: '16px',
       }}>
+      <Button
+        onClick={() => {
+          setThemeObj({
+            ...themeObj,
+            palette: {
+              ...themeObj.palette,
+              nProgress: {
+                main: 'green',
+              },
+            },
+          });
+        }}>
+        TEST
+      </Button>
       <Slider
         defaultValue={range}
         getAriaValueText={valuetext}
@@ -167,7 +181,7 @@ const SelectMaterialColor = ({ setColor }) => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {Object.entries(colors).map(([colorKey, colorObj]) => {
           const color = colorObj[range];
-          const theme = _makeTheme(color);
+          const theme = _makeTheme(color, themeObj);
 
           return (
             <ThemedBox

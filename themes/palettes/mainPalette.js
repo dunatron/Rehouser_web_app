@@ -12,11 +12,11 @@ import { overrides } from '../overrides';
 // export const primaryContrastText = '#fff';
 
 // Flutter
-// export const mainPrimaryColor = '#0276e8';
-// export const lightPrimaryColor = '#64a4ff';
-// export const darkPrimaryColor = '#004bb5';
-// // export const primaryContrastText = '#000';
-// export const primaryContrastText = '#fff';
+export const mainPrimaryColor = '#0276e8';
+export const lightPrimaryColor = '#64a4ff';
+export const darkPrimaryColor = '#004bb5';
+// export const primaryContrastText = '#000';
+export const primaryContrastText = '#fff';
 
 // nINAS tEAL
 // export const mainPrimaryColor = '#0d7e8e';
@@ -26,11 +26,12 @@ import { overrides } from '../overrides';
 // export const primaryContrastText = '#fff';
 
 // FAcebOOk color palette
-export const mainPrimaryColor = '#1372f2';
-export const lightPrimaryColor = '#6aa0ff';
-export const darkPrimaryColor = '#0048be';
+
+// export const mainPrimaryColor = '#1372f2';
+// export const lightPrimaryColor = '#6aa0ff';
+// export const darkPrimaryColor = '#0048be';
+// // export const primaryContrastText = '#000';
 // export const primaryContrastText = '#000';
-export const primaryContrastText = '#000';
 
 // Nice bLUE
 // export const mainPrimaryColor = '#0276e8';
@@ -66,11 +67,6 @@ import defaultTypography from '../typographys/default';
 
 export const makefontRgba = (value, hue) => `rgba(${value}, ${hue})`;
 const fontRgb = `62, 62, 62`;
-
-// black": "#393939",
-//   "grey": "#3A3A3A",
-//   "lightgrey": "#E1E1E1",
-//   "offWhite": "#EDEDED",
 const mainPalette = {
   palette: {
     nProgress: {
@@ -100,6 +96,14 @@ const mainPalette = {
       disabled: makefontRgba(fontRgb, 0.38),
       hint: makefontRgba(fontRgb, 0.38),
     },
+  },
+  // Make sure any changes you add here such as color you add in for other themes i.e darkPallete
+  typography: {
+    ...defaultTypography,
+    // h1: {
+    //   ...defaultTypography.h1,
+    //   color: makefontRgba(fontRgb, 0.85),
+    // },
   },
   overrides: {
     // Style sheet name ⚛️

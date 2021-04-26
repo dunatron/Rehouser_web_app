@@ -162,7 +162,7 @@ const AccountMenu = ({ me = null }) => {
                   handleClose(e);
                 }}>
                 <ListItemIcon>
-                  <AccountCircleIcon />
+                  <AccountCircleIcon color="action" />
                 </ListItemIcon>
                 Account
               </MenuItem>,
