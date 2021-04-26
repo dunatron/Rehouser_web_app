@@ -63,12 +63,12 @@ const theme = {
       hint: makefontRgba(fontRgb, 0.38),
     },
   },
-  typography: {
-    ...defaultTypography,
-    h1: {
-      ...defaultTypography.h1,
-      color: makefontRgba(fontRgb, 1),
-    },
-  },
+  // typography: {
+  //   ...defaultTypography,
+  //   h1: {
+  //     ...defaultTypography.h1,
+  //     // color: makefontRgba(fontRgb, 1),
+  //   },
+  // },
 };
 export default theme;

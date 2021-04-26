@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    margin: '-8px -8px 16px -8px',
+    // margin: '-8px -8px 16px -8px',
     height: '180px',
     [theme.breakpoints.up('sm')]: {
       height: '260px',
@@ -81,7 +81,7 @@ const ParticleBanner = props => {
       className={classes.bannerContainer}
       style={{
         top: windowWidth > 600 ? '-64px' : '-56px',
-        height: windowHeight,
+        ...(!props.disableAutoHeight && { height: windowHeight }),
       }}>
       <ParticleOne />
       <div

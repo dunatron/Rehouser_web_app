@@ -15,8 +15,6 @@ import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashCon
 import { makeStyles } from '@material-ui/core/styles';
 import SVG from '@/Components/Svg';
 
-import ThemeManipulator from '@/Components/Page/ThemeManipulator';
-
 const bannerStyles = makeStyles(theme => ({
   logo: {
     textAlign: 'center',
@@ -37,7 +35,7 @@ const bannerStyles = makeStyles(theme => ({
   },
 }));
 
-const HomePageBannerBody = () => {
+export const HomePageBannerBody = () => {
   const classes = bannerStyles();
   return (
     <>
@@ -127,7 +125,6 @@ const HomePage = props => {
         heading=""
         intro=""
       />
-      <ThemeManipulator />
     </div>
   );
 };

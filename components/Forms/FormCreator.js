@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { isEmpty, is } from 'ramda';
@@ -12,8 +12,11 @@ import { toast } from 'react-toastify';
 import ButtonLoader from '@/Components/Loader/ButtonLoader';
 
 import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import Card from '@/Styles/Card';
+
+import Fab from '@material-ui/core/Fab';
 
 const configIsValid = config => {
   if (isEmpty(config)) return false;
@@ -60,6 +63,11 @@ const FormCreator = props => {
     cancel,
     selectOptionTypes,
   } = props;
+
+  const [savedDataLoading, setSavedDataLoading] = useState(true);
+  const [saveData, setSaveData] = useState({});
+
+  console.log('savedData setState => ', saveData);
 
   // awesome we have {me} which now has isAdmin and isWizard
   // we can on the form creator if it has something like requiredPermissions
@@ -136,6 +144,37 @@ const FormCreator = props => {
     return 'Update ' + title;
   };
 
+  const _saveData = () => {
+    const formValsToSave = getValues();
+
+    localStorage.setItem('formData', JSON.stringify(formValsToSave));
+    toast.success('Form Data saved');
+  };
+
+  const _loadInSavedData = () => {
+    alert('Hiii');
+  };
+
+  useEffect(() => {
+    const localStorageFormData = localStorage.getItem('formData');
+    const formattedLocalStorageData = JSON.parse(localStorageFormData);
+    setSaveData({
+      ...saveData,
+      ...formattedLocalStorageData,
+    });
+    setSavedDataLoading(false);
+    setValue('rent', 69696969696);
+    toast.info(
+      'Some Save Data was found would you like to load it into the form'
+    );
+    return () => {};
+  }, []);
+
+  //// Store
+  // localStorage.setItem("lastname", "Smith");
+  // Retrieve
+  // document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+
   useEffect(() => {
     // maybe you can get the default form values
     return () => {
@@ -144,7 +183,15 @@ const FormCreator = props => {
       // basically we will give formCreators a unique key and they will greate objects and values etc. Genius I know.
       // To think about is if we post format. I dont think we do. Its for like creating and shit right.
       // mmm not true. I think maybe we do want to postFormat and preFormat
-      const formValsToSave = getValues();
+      // const formValsToSave = getValues();
+      // localStorage.setItem('formData', JSON.stringify(formValsToSave));
+      // const postFormattedFormData = formatData(
+      //   formValsToSave,
+      //   keysWithTypes,
+      //   'post'
+      // );
+      // localStorage.setItem('formData', JSON.stringify(postFormattedFormData));
+      // console.log('savedData formValsToSave => ', formValsToSave);
       // alert('ToDo: CreateForm COntext which will handle all form values');
       // Maybe a bit of a caveat here and will have to be robust
       // ie. saving the form type to redux. if persistState = true
@@ -163,6 +210,8 @@ const FormCreator = props => {
     }
     return item;
   });
+
+  if (savedDataLoading) return <div>CHecking for saved data </div>;
 
   return (
     <>
@@ -187,7 +236,8 @@ const FormCreator = props => {
                   setValue={setValue}
                   getValues={getValues}
                   clearError={handleClearError}
-                  rawData={data}
+                  // rawData={data}
+                  rawData={saveData ? saveData : data}
                   folder={folder}
                   defaultValues={preFormattedFormData}
                   refetchQueries={refetchQueries}
@@ -206,6 +256,74 @@ const FormCreator = props => {
           })}
         <FormErrors errors={errors} />
         <Errors error={error} />
+        <div
+          style={{
+            position: '-webkit-sticky',
+            position: 'sticky',
+            bottom: 0,
+            borderColor: 'red',
+            zIndex: 999999,
+            padding: '16px 0',
+          }}>
+          <Fab
+            variant="extended"
+            size="small"
+            color="primary"
+            aria-label="add"
+            onClick={_loadInSavedData}>
+            <SaveIcon />
+
+            <Typography variant="button" style={{ margin: '0 4px' }}>
+              Load in Saved Data
+            </Typography>
+          </Fab>
+          <Fab
+            variant="extended"
+            size="small"
+            color="primary"
+            aria-label="add"
+            onClick={_saveData}>
+            <SaveIcon />
+
+            <Typography variant="button" style={{ margin: '0 4px' }}>
+              SAVE
+            </Typography>
+          </Fab>
+        </div>
+        <div
+          style={{
+            position: '-webkit-sticky',
+            position: 'sticky',
+            bottom: 0,
+            borderColor: 'red',
+            zIndex: 999999,
+            padding: '16px 0',
+          }}>
+          <Fab
+            variant="extended"
+            size="small"
+            color="primary"
+            aria-label="add"
+            onClick={_loadInSavedData}>
+            <SaveIcon />
+
+            <Typography variant="button" style={{ margin: '0 4px' }}>
+              Load in Saved Data
+            </Typography>
+          </Fab>
+          <Fab
+            variant="extended"
+            size="small"
+            color="primary"
+            aria-label="add"
+            onClick={_saveData}>
+            <SaveIcon />
+
+            <Typography variant="button" style={{ margin: '0 4px' }}>
+              TESTINGGG
+            </Typography>
+          </Fab>
+        </div>
         <ButtonGroup
           style={{
             marginTop: '16px',
@@ -223,6 +341,7 @@ const FormCreator = props => {
               color: 'primary',
             }}
           />
+
           {hasCancel && (
             <Button disabled={posting} onClick={cancel}>
               <AddIcon />

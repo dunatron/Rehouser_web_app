@@ -19,11 +19,18 @@ import { overrides } from '../overrides';
 // export const primaryContrastText = '#fff';
 
 // nINAS tEAL
-export const mainPrimaryColor = '#0d7e8e';
-export const lightPrimaryColor = '#52aebe';
-export const darkPrimaryColor = '#005161';
+// export const mainPrimaryColor = '#0d7e8e';
+// export const lightPrimaryColor = '#52aebe';
+// export const darkPrimaryColor = '#005161';
+// // export const primaryContrastText = '#000';
+// export const primaryContrastText = '#fff';
+
+// FAcebOOk color palette
+export const mainPrimaryColor = '#1372f2';
+export const lightPrimaryColor = '#6aa0ff';
+export const darkPrimaryColor = '#0048be';
 // export const primaryContrastText = '#000';
-export const primaryContrastText = '#fff';
+export const primaryContrastText = '#000';
 
 // Nice bLUE
 // export const mainPrimaryColor = '#0276e8';
@@ -38,6 +45,8 @@ export const primaryContrastText = '#fff';
 // export const darkPrimaryColor = '#004bb5';
 // // export const primaryContrastText = '#000';
 // export const primaryContrastText = '#fff';
+
+// // #1877f2
 
 // // secondary color dark blue
 // export const mainSecondaryColor = '#002443';
@@ -57,6 +66,11 @@ import defaultTypography from '../typographys/default';
 
 export const makefontRgba = (value, hue) => `rgba(${value}, ${hue})`;
 const fontRgb = `62, 62, 62`;
+
+// black": "#393939",
+//   "grey": "#3A3A3A",
+//   "lightgrey": "#E1E1E1",
+//   "offWhite": "#EDEDED",
 const mainPalette = {
   palette: {
     nProgress: {
@@ -85,14 +99,6 @@ const mainPalette = {
       secondary: makefontRgba(fontRgb, 0.54),
       disabled: makefontRgba(fontRgb, 0.38),
       hint: makefontRgba(fontRgb, 0.38),
-    },
-  },
-  // Make sure any changes you add here such as color you add in for other themes i.e darkPallete
-  typography: {
-    ...defaultTypography,
-    h1: {
-      ...defaultTypography.h1,
-      color: makefontRgba(fontRgb, 0.85),
     },
   },
   overrides: {

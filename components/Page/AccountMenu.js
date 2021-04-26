@@ -32,6 +32,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import BrushIcon from '@material-ui/icons/Brush';
 
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
@@ -54,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   icon: {
     width: theme.spacing(5),
     height: theme.spacing(5),
-    backgroundColor: theme.palette.primary.main,
+    // backgroundColor: theme.palette.primary.main,
     '&:hover': {
       cursor: 'pointer',
     },
@@ -117,6 +118,20 @@ const AccountMenu = ({ me = null }) => {
     return () => {};
   }, []);
 
+  const setThemeMenuItem = (
+    <MenuItem
+      key="set-theme"
+      onClick={e => {
+        handleLink('/set-theme');
+        handleClose(e);
+      }}>
+      <ListItemIcon>
+        <BrushIcon />
+      </ListItemIcon>
+      Set Theme
+    </MenuItem>
+  );
+
   return (
     <div className={classes.root}>
       <RToolTip
@@ -156,6 +171,7 @@ const AccountMenu = ({ me = null }) => {
                 isDarkMode={isDarkMode}
                 onClick={toggleTheme}
               />,
+              setThemeMenuItem,
               <MenuItem
                 key="account-menu-messages"
                 onClick={e => {
@@ -174,6 +190,7 @@ const AccountMenu = ({ me = null }) => {
                 isDarkMode={isDarkMode}
                 onClick={toggleTheme}
               />,
+              setThemeMenuItem,
               <MenuItem key="account-menu-login" onClick={handleOpenLoginModal}>
                 <ListItemIcon>
                   <ExitToAppIcon />

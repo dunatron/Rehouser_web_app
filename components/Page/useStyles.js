@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => {
       backgroundColor: 'transparent !important',
     },
     appBarSolid: {
-      backgroundColor: `${theme.palette.background.paper} !important`,
+      backgroundColor: `${theme.palette.background.default} !important`,
       // backgroundColor: theme.overrides.MuiAppBar
       //   ? `${theme.overrides.MuiAppBar.colorPrimary.backgroundColor} !important`
       //   : `${theme.palette.background.paper} !important`,
