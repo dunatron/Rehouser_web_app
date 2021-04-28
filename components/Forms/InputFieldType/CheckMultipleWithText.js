@@ -29,10 +29,11 @@ const CheckMultipleWithText = props => {
     setValue,
     reset,
     defaultValue,
+    label,
   } = props;
 
   const { type, inners, fieldProps, refConf } = config;
-  const { name, label } = fieldProps;
+  const { name } = fieldProps;
   const { options } = fieldProps;
 
   // const [state, setState] = useState({ PARTIAL: true });

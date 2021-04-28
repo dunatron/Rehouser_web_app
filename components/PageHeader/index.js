@@ -60,7 +60,11 @@ const PageHeader = ({
               {intro}
             </Typography>
           )}
-          {!hidden && children}
+          {!hidden &&
+            children?.length > 0 &&
+            children.map((child, idx) => (
+              <React.Fragment key={idx}>{child}</React.Fragment>
+            ))}
         </Card>
       )}
     </>

@@ -233,7 +233,7 @@ const SignOutMenuItem = props => {
         destroyCookie(null, 'token');
         client.cache.reset();
         client.resetStore();
-        console.log('SIgnout mutation ran');
+
         toast.info(data.signout.message);
         props.onClick();
       },

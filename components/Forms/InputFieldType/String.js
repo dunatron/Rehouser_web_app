@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import TextInput from '../../Inputs/TextInput';
 
 const StringInput = props => {
-  const { config, register, defaultValue, fieldError } = props;
+  const { config, register, defaultValue, fieldError, label } = props;
   const { type, fieldProps, refConf } = config;
-  const { name, label, ...restOfFieldProps } = fieldProps;
+  const { name, ...restOfFieldProps } = fieldProps;
 
   // const helperText = useState(fieldProps.helperText);
   return (

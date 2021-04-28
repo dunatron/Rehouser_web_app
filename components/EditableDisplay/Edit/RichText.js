@@ -5,7 +5,6 @@ import { is, isEmpty } from 'ramda';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
 
 const RichTextEdit = ({ item, onChange }) => {
-  console.log('Item for edit => ', item);
   const defaultValue = isEmpty(item.value) ? `` : item.value;
   return (
     <div>

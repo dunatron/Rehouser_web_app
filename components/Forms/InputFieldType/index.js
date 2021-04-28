@@ -1,10 +1,4 @@
-import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import TextInput from '../../Inputs/TextInput';
-import moment from 'moment';
-import { is } from 'ramda';
-
-import FieldError from '../InputFieldType/FieldError';
 
 //Material Components
 import { Typography, Paper, FormControlLabel, Switch } from '@material-ui/core';
@@ -72,10 +66,18 @@ const InputFieldType = props => {
     updateCacheOnRemovedFile,
     clearErrors,
     selectOptionTypes,
+    // isRequired,
+    // label,
   } = props;
   const { type, fieldProps, refConf } = config;
   const name = fieldProps ? fieldProps.name : null;
-  const label = fieldProps ? fieldProps.label : null;
+  // const label = fieldProps ? fieldProps.label : null;
+  const isRequired = refConf?.required?.value ? refConf.required.value : false;
+  const label = `${fieldProps?.label} ${isRequired ? '*' : ''}`;
+
+  const sharedProps = {
+    label: label,
+  };
 
   const fieldError = extractErrorFromErrors(errors, name);
   const defaultValue = extractDefaultValue(defaultValues, name, type);
@@ -87,15 +89,20 @@ const InputFieldType = props => {
       case 'Subheader':
         return <Typography variant="h5">{label}</Typography>;
       case 'RTypography':
-        return <Typography {...config.fieldProps}>{config.content}</Typography>;
+        return (
+          <Typography {...config.fieldProps} {...sharedProps}>
+            {config.content}
+          </Typography>
+        );
       case 'Section':
-        return <FormSection {...props} />;
+        return <FormSection {...props} {...sharedProps} />;
       case 'Password':
-        return <Password {...props} fieldError={fieldError} />;
+        return <Password {...props} {...sharedProps} fieldError={fieldError} />;
       case 'String':
         return (
           <String
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -104,22 +111,24 @@ const InputFieldType = props => {
         return (
           <Email
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
         );
       case 'CheckReason':
-        return <CheckReason {...props} />;
+        return <CheckReason {...props} {...sharedProps} />;
       case 'CheckboxText':
-        return <CheckboxText {...props} />;
+        return <CheckboxText {...props} {...sharedProps} />;
       case 'SelectOneWithText':
-        return <SelectOneWithText {...props} />;
+        return <SelectOneWithText {...props} {...sharedProps} />;
       case 'CheckMultipleWithText':
-        return <CheckMultipleWithText {...props} />;
+        return <CheckMultipleWithText {...props} {...sharedProps} />;
       case 'Entity':
         return (
           <EntityFormType
             {...fieldProps}
+            {...sharedProps}
             __type={config.__type}
             onChange={() => {}}
             {...props}
@@ -127,13 +136,18 @@ const InputFieldType = props => {
         );
       case 'SelectOne':
         return (
-          <SelectOne {...props} options={selectOptionTypes[config.optionKey]} />
+          <SelectOne
+            {...props}
+            {...sharedProps}
+            options={selectOptionTypes[config.optionKey]}
+          />
         );
       case 'SelectMultipleEnum':
         return (
           <SelectMultipleEnum
             {...fieldProps}
             {...props}
+            {...sharedProps}
             __type={config.__type}
             onChange={() => {}}
             helperText={fieldError}
@@ -145,6 +159,7 @@ const InputFieldType = props => {
           <SelectOneEnum
             {...fieldProps}
             {...props}
+            {...sharedProps}
             __type={config.__type}
             onChange={() => {}}
             helperText={fieldError}
@@ -155,6 +170,7 @@ const InputFieldType = props => {
         return (
           <Location
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -163,6 +179,8 @@ const InputFieldType = props => {
         return (
           <Boolean
             {...props}
+            {...sharedProps}
+            // label={label}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -171,6 +189,7 @@ const InputFieldType = props => {
         return (
           <Checkbox
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -180,6 +199,7 @@ const InputFieldType = props => {
         return (
           <Money
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -188,6 +208,7 @@ const InputFieldType = props => {
         return (
           <BankAccount
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -196,6 +217,7 @@ const InputFieldType = props => {
         return (
           <Phone
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
             extractErrorFromErrors={extractErrorFromErrors}
@@ -203,12 +225,18 @@ const InputFieldType = props => {
         );
       case 'Int':
         return (
-          <Int {...props} fieldError={fieldError} defaultValue={defaultValue} />
+          <Int
+            {...props}
+            {...sharedProps}
+            fieldError={fieldError}
+            defaultValue={defaultValue}
+          />
         );
       case 'Float':
         return (
           <Float
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -218,6 +246,7 @@ const InputFieldType = props => {
         return (
           <DateField
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -226,6 +255,7 @@ const InputFieldType = props => {
         return (
           <DateTimeInput
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
@@ -234,26 +264,28 @@ const InputFieldType = props => {
         return (
           <AcceptTerms
             {...props}
+            {...sharedProps}
             fieldError={fieldError}
             defaultValue={defaultValue}
           />
         );
       case 'Info':
-        return <Info {...props} />;
+        return <Info {...props} {...sharedProps} />;
       case 'File':
         return (
           <File
             {...props}
+            {...sharedProps}
             extractErrorFromErrors={extractErrorFromErrors}
             fieldError={fieldError}
           />
         );
       case 'Signature':
-        return <Signature {...props} />;
+        return <Signature {...props} {...sharedProps} />;
       case 'Image':
-        return <Image {...props} />;
+        return <Image {...props} {...sharedProps} />;
       case 'Captcha':
-        return <CaptchaField {...props} />;
+        return <CaptchaField {...props} {...sharedProps} />;
       default:
         return (
           <Typography color="error">

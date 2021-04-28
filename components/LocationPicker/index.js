@@ -38,7 +38,6 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
    * When a suggest got selected
    */
   const onSuggestSelect = suggest => {
-    console.log('GoOGLE SELETC OBJECT => ', suggest);
     if (!suggest) return;
     const { placeId, location, description, gmaps } = suggest;
 
@@ -62,8 +61,6 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
         // document.getElementById(addressType).value = val;
       }
     }
-
-    console.log('Final component form => ', componentForm);
 
     selection({
       placeId: placeId,

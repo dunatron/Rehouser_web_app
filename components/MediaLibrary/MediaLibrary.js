@@ -19,7 +19,6 @@ const MediaLibrary = ({ options, onUploadCompleted }) => {
   );
   useEffect(() => {
     if (!loading && !loaded && called) {
-      console.log('DATA ABOUT TO BE ASSIGNED => ', data);
       window.cloudinary.createMediaLibrary(
         {
           cloud_name: data.cloudinaryAccess.cloud_name,

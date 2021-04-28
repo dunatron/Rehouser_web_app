@@ -65,11 +65,11 @@ const PhoneInput = props => {
     updateCacheOnRemovedFile,
     fieldError,
     extractErrorFromErrors,
+    label,
   } = props;
   const classes = useStyles();
   const { type, fieldProps, refConf } = config;
   const name = fieldProps ? fieldProps.name : null;
-  const label = fieldProps ? fieldProps.label : null;
 
   const handleChange = e => {
     setValue(fieldProps.name, e.target.value);

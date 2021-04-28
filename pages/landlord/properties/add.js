@@ -14,14 +14,6 @@ const AddPropertyPage = ({ appData: { currentUser } }) => {
   const pleaseSignInMessage =
     'You must be signed in to add properties to the market';
 
-  // just send normal data, useRamda. if its a string, decode the fucker
-  const formattedData = {
-    location: 'bla bla bla',
-    rent: 209,
-    rooms: 6,
-    bathrooms: 2,
-  };
-
   const me = currentUser.data ? currentUser.data.me : null;
   return (
     <>
@@ -52,7 +44,7 @@ const AddPropertyPage = ({ appData: { currentUser } }) => {
             <strong>{pleaseSignInMessage}</strong>
           </Typography>
         }>
-        <CreateProperty prefilledData={formattedData} me={me} />
+        <CreateProperty me={me} />
       </PleaseSignIn>
     </>
   );

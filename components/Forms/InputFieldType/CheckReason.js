@@ -24,10 +24,11 @@ const CheckReason = props => {
     setValue,
     reset,
     defaultValues,
+    label,
     // defaultValue,
   } = props;
   const { type, inners, fieldProps, refConf } = config;
-  const { name, label } = fieldProps;
+  const { name } = fieldProps;
   const defaultValue = defaultValues[name];
   const [currVal, setCurrVal] = useState(_preFormatCheckReason(defaultValue));
   const handleChange = event => {

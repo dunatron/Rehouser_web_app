@@ -54,8 +54,6 @@ const RentalAppraisalView = ({ id }) => {
     },
   } = data;
 
-  console.log('Property DATA FOR APPRAISAL => ', property);
-
   return (
     <>
       <Grid container spacing={3}>

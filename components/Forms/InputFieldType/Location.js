@@ -70,12 +70,8 @@ const Location = props => {
     for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
       if (mapToObjectKey) {
         const str = `${mapToObjectKey}.${value}`;
-
-        console.log('Useeffect string val => ', str);
-
         register({ name: str }, { ...config.refConf });
       } else {
-        console.log('Useeffect string val => ', value);
         register({ name: value }, { ...config.refConf });
       }
     }
@@ -119,7 +115,7 @@ const Location = props => {
         inners.map((inner, idx) => {
           if (!canDisplayInner()) return null;
           return (
-            <div key={inner.key} style={{ marginTop: '16px' }}>
+            <div key={idx} style={{ marginTop: '16px' }}>
               <InputFieldType
                 {...props}
                 config={inner}

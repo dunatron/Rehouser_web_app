@@ -46,8 +46,6 @@ const ApplicationDetailsStep = ({
 }) => {
   const { applicants } = rentalApplication;
 
-  console.log('RENTAL APPLICATION DATA => ', rentalApplication);
-
   // SHould really use hooks ContextProvider as the main index has this
   const [updateApplication, { error, loading }] = useMutation(
     UPDATE_RENTAL_APPLICATION_MUTATION

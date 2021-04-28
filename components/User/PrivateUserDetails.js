@@ -67,8 +67,6 @@ export default function PublicUserDetails({ id, email }) {
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
 
-  console.log('Goy public user details ', data);
-
   if (loading)
     return (
       <Loader

@@ -65,7 +65,7 @@ const FilePreviewer = ({
 FilePreviewer.propTypes = {
   files: PropTypes.array.isRequired,
   isRemoving: PropTypes.any,
-  remove: PropTypes.func.isRequired,
+  remove: PropTypes.func,
   removingIds: PropTypes.any,
 };
 

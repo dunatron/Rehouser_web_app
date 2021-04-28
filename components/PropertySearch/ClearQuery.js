@@ -7,7 +7,6 @@ import DoneIcon from '@material-ui/icons/Done';
 import { connectCurrentRefinements } from 'react-instantsearch-dom';
 
 const ClearRefinements = props => {
-  console.log('Props for CLear Refinements => ', props);
   const { items, refine } = props;
 
   const queryItem = items.filter(item => item.id === 'query');

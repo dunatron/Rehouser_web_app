@@ -157,8 +157,6 @@ const RenderLastPart = ({ part }) => {
     data.push({ key: pair[0], value: pair[1] });
   });
 
-  console.log(data);
-
   return (
     <>
       {pathParts[0]}

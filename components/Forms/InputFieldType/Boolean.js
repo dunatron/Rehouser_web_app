@@ -27,12 +27,13 @@ const BooleanField = props => {
     register,
     errors,
     setValue,
-    defaultValue,
+    // defaultValue,
     defaultValues,
     label,
   } = props;
   const { fieldProps, refConf } = config;
   const name = fieldProps ? fieldProps.name : null;
+  const defaultValue = defaultValues[fieldProps.name];
 
   return (
     <>

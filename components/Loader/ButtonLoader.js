@@ -104,8 +104,8 @@ ButtonLoader.propTypes = {
   cy: PropTypes.any,
   loading: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
-  success: PropTypes.bool.isRequired,
-  successText: PropTypes.string.isRequired,
+  success: PropTypes.bool,
+  successText: PropTypes.string,
   text: PropTypes.string.isRequired,
 };
 

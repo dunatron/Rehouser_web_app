@@ -25,10 +25,11 @@ const SelectOneWithText = props => {
     setValue,
     reset,
     defaultValue,
+    label,
   } = props;
   const classes = useStyles();
   const { type, inners, fieldProps, refConf } = config;
-  const { name, label } = fieldProps;
+  const { name } = fieldProps;
   const { options } = fieldProps;
 
   const [currVal, setCurrVal] = useState(defaultValue);

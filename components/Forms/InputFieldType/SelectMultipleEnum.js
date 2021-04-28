@@ -27,7 +27,7 @@ const SelectMultipleEnum = props => {
     __type,
     defaultValues,
     label,
-    selectID,
+    // selectID,
     register,
     unregister,
     config,
@@ -38,6 +38,7 @@ const SelectMultipleEnum = props => {
   } = props;
 
   const { fieldProps, refConf } = config;
+  const selectID = `${fieldProps.name}-select-multi-enum`;
   const defaultValue = defaultValues[fieldProps.name]
     ? defaultValues[fieldProps.name].map((v, i) => ({ name: v, value: v }))
     : [];

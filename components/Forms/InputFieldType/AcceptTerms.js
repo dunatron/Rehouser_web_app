@@ -6,7 +6,7 @@ import FieldError from '../InputFieldType/FieldError';
 import { Box, Typography, Checkbox, FormControlLabel } from '@material-ui/core';
 
 const AcceptTerms = props => {
-  const { config, register, errors, defaultValue } = props;
+  const { config, register, errors, defaultValue, label } = props;
   const { fieldProps, refConf } = config;
   return (
     <>
@@ -28,7 +28,7 @@ const AcceptTerms = props => {
               inputRef={register(refConf)}
             />
           }
-          label={config.fieldProps.label}
+          label={label}
         />
       </Box>
       <FieldError errors={errors} name={fieldProps.name} />

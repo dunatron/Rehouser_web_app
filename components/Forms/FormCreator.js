@@ -71,6 +71,7 @@ const FormCreatorMain = props => {
     selectOptionTypes,
     disableCreate,
     saveKey,
+    stickySave = true,
   } = props;
 
   // awesome we have {me} which now has isAdmin and isWizard
@@ -91,6 +92,7 @@ const FormCreatorMain = props => {
     unregister,
     handleSubmit,
     errors,
+    setError,
     setValue,
     getValues,
     reset,
@@ -154,49 +156,19 @@ const FormCreatorMain = props => {
     const formValsToSave = getValues();
 
     localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
-    toast.success(
-      `${title} Form Data saved. You can leave this page and come back`
-    );
+    toast.success(`${title} Form Data saved`);
   };
 
-  // const _loadInSavedData = () => {
-  //   // alert('Hiii');
-  //   // setValue('rent', 69696969696);
-  //   // setValue('rooms', 4);
-  //   Object.entries(saveDataProps.data).map(([key, val]) => {
-  //     setValue([key], val);
-  //   });
-  // };
-
-  //// Store
-  // localStorage.setItem("lastname", "Smith");
-  // Retrieve
-  // document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-
+  // The location field that does the bad state call needs addressed first
+  // its the handleWatchChanges
+  // also Whenever they leave it will save and tell them it has saved
+  // Propbably not what we want
   useEffect(() => {
     // maybe you can get the default form values
     return () => {
-      // get the values from useForm and save it somewhere when component dismounts
-      // ahhh hmmmm, well lets have something called. FormContext.
-      // basically we will give formCreators a unique key and they will greate objects and values etc. Genius I know.
-      // To think about is if we post format. I dont think we do. Its for like creating and shit right.
-      // mmm not true. I think maybe we do want to postFormat and preFormat
-      // const formValsToSave = getValues();
-      // localStorage.setItem('formData', JSON.stringify(formValsToSave));
-      // const postFormattedFormData = formatData(
-      //   formValsToSave,
-      //   keysWithTypes,
-      //   'post'
-      // );
-      // localStorage.setItem('formData', JSON.stringify(postFormattedFormData));
-      // console.log('savedData formValsToSave => ', formValsToSave);
-      // alert('ToDo: CreateForm COntext which will handle all form values');
-      // Maybe a bit of a caveat here and will have to be robust
-      // ie. saving the form type to redux. if persistState = true
-      // Also perhaps a flag to say submitted? Would we have a clear? and a reset?
-      // clear would clear out the form. reset would reset to default state like, bank account and prefilled vals based on account
+      _saveData();
     };
-  });
+  }, []);
 
   const filteredConf = config.filter((item, idx) => {
     if (!item.permissions) return item;
@@ -220,16 +192,21 @@ const FormCreatorMain = props => {
         <Button
           onClick={() => {
             const theVals = getValues();
-            console.log('CURRENT FORM VALUES => ', theVals);
           }}>
           Log VALUES
         </Button>
+        * Indicates required field
         {configIsValid(config) &&
           filteredConf.map((item, idx) => {
+            // rats and roaches in the building, ima get it like bob the builder(_)
+            // with so much i could rebuild Anoya
+            // const label = `${item?.fieldProps?.label} ${isRequired && '*'}`;
             return (
               <div key={idx}>
                 <InputFieldType
+                  // label={item?.fieldProps?.label} for whatever reaseeon only sets the first field...
                   {...props}
+                  // isRequired={isRequired}
                   config={item}
                   key={idx}
                   register={register}
@@ -238,6 +215,7 @@ const FormCreatorMain = props => {
                   errors={errors}
                   setValue={setValue}
                   getValues={getValues}
+                  setError={setError}
                   clearError={handleClearError}
                   // rawData={data}
                   _saveData={_saveData}
@@ -260,30 +238,35 @@ const FormCreatorMain = props => {
           })}
         <FormErrors errors={errors} />
         <Errors error={error} />
-        <div
-        // style={{
-        //   position: '-webkit-sticky',
-        //   position: 'sticky',
-        //   bottom: 0,
-        //   borderColor: 'red',
-        //   zIndex: 999999,
-        //   padding: '16px 0',
-        // }}
-        >
-          <Fab
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={_saveData}>
-            <SaveIcon />
+        {/* Can only save on new forms as update and save could be confusing */}
+        {isNew && (
+          <div
+            style={
+              stickySave
+                ? {
+                    position: '-webkit-sticky',
+                    position: 'sticky',
+                    bottom: 0,
+                    borderColor: 'red',
+                    zIndex: 999999,
+                    padding: '16px 0',
+                  }
+                : {}
+            }>
+            <Fab
+              variant="extended"
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={_saveData}>
+              <SaveIcon />
 
-            <Typography variant="button" style={{ margin: '0 4px' }}>
-              SAVE
-            </Typography>
-          </Fab>
-        </div>
-
+              <Typography variant="button" style={{ margin: '0 4px' }}>
+                SAVE
+              </Typography>
+            </Fab>
+          </div>
+        )}
         <ButtonGroup
           style={{
             marginTop: '16px',
@@ -293,7 +276,7 @@ const FormCreatorMain = props => {
           {/* MAKE THIS A BUTTON LOADER PLEASE */}
           {!disableCreate && (
             <ButtonLoader
-              loading={posting}
+              loading={posting ? posting : false}
               text={isNew ? _createText() : _updateText()}
               onClick={handleSubmit(onSubmit)}
               btnProps={{
@@ -352,8 +335,6 @@ const FormCreator = props => {
     ...data,
     ...saveDataProps.data, // saved updates
   };
-
-  console.log('THE SAVE KEY => ', saveKey);
 
   return <FormCreatorMain {...props} data={allData} saveKey={saveKey} />;
 };
