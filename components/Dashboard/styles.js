@@ -11,8 +11,12 @@ const BoardItemStyles = styled(Paper)`
  
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, 0.3); */
   /* height: 300px; */
-  width: 258px;
+  max-width: 350px;
+  // width: 258px;
+  // margin: 8px;
   margin: 8px;
+  flex-grow: 1;
+  flex-basis: 25%;
 
   && {
     /* margin: ${props => props.theme.spacing(0)}px 0 0 0; */

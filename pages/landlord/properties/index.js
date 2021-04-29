@@ -29,12 +29,6 @@ const PropertiesPage = props => {
 
   const me = currentUser.data ? currentUser.data.me : null;
 
-  const where = {
-    owners_some: {
-      id: me.id,
-    },
-  };
-
   const goToAddPropertyPage = () => {
     handleLink('/landlord/properties/add');
   };
@@ -42,14 +36,15 @@ const PropertiesPage = props => {
   const goToAddBulkProperty = () => {
     handleLink('/landlord/properties/bulkadd');
   };
+
   return (
     <>
       <PageHeader
         title="My Properties"
-        intro="Here is the portal to your properties, you can get a quick overview etc etc and add a property with the add property button"
+        intro="You can find all of your properties here, where you can track the progress on your investments"
         children={[
           <Typography key={1} gutterBottom>
-            Maybe something else to say
+            You can also add property to the platform from here
           </Typography>,
         ]}
         metaData={{
@@ -76,10 +71,19 @@ const PropertiesPage = props => {
             </Button>
           </ButtonGroup>
         </div>
-        <PropertiesTable where={where} enableAddressParams />
+        <PropertiesTableBuildMethod me={me} />
       </PleaseSignIn>
     </>
   );
+};
+
+const PropertiesTableBuildMethod = ({ me }) => {
+  const where = {
+    owners_some: {
+      id: me.id,
+    },
+  };
+  return <PropertiesTable where={where} enableAddressParams />;
 };
 
 PropertiesPage.propTypes = {

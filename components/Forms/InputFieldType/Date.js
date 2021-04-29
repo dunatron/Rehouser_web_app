@@ -54,8 +54,6 @@ const DateField = props => {
     return v;
   };
 
-  return null;
-
   return (
     <div>
       <DatePicker

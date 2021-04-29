@@ -53,7 +53,9 @@ const PleaseSignIn = props => {
   const notSignedInRender = (
     <div>
       <Message message={props.message} alert={props.alert} />
-      <OpenSuperLoginButton />
+      <div>
+        <OpenSuperLoginButton />
+      </div>
     </div>
   );
 

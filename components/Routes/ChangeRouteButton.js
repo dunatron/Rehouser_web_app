@@ -56,6 +56,27 @@ const handleLink = ({ route, query }) => {
   }).then(() => window.scrollTo(0, 0));
 };
 
+// const ChangeRouteButton = ({
+//   route,
+//   query,
+//   color,
+//   title,
+//   variant,
+//   size,
+//   btnProps,
+// }) => (
+//   <Link href={route} passHref onClick={e => e.preventDefault()}>
+//     <Button
+//       color={color}
+//       variant={variant}
+//       size={size}
+//       onClick={() => handleLink({ route, query })}
+//       {...btnProps}>
+//       {title ? title : 'Route Button'}
+//     </Button>
+//   </Link>
+// );
+
 const ChangeRouteButton = ({
   route,
   query,
@@ -65,16 +86,14 @@ const ChangeRouteButton = ({
   size,
   btnProps,
 }) => (
-  <Link href={route} passHref>
-    <Button
-      color={color}
-      variant={variant}
-      size={size}
-      // onClick={() => handleLink({ route, query })}
-      {...btnProps}>
-      {title ? title : 'Route Button'}
-    </Button>
-  </Link>
+  <Button
+    color={color}
+    variant={variant}
+    size={size}
+    onClick={() => handleLink({ route, query })}
+    {...btnProps}>
+    {title ? title : 'Route Button'}
+  </Button>
 );
 
 ChangeRouteButton.propTypes = {

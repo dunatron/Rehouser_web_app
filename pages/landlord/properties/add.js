@@ -21,14 +21,14 @@ const AddPropertyPage = ({ appData: { currentUser } }) => {
         title="Add Property"
         intro="This is where you can add property to the platform. we estimate that you will need 15-20 minutes to complete the form provided you have the information on hand"
         children={[
-          <Typography>
+          <Typography gutterBottom>
             Some of the key files you will need include the following
           </Typography>,
           <Typography component="ul" gutterBottom>
             <Typography component="li">Proof of Ownership</Typography>
-            <Typography component="li">
-              Decide what should be here...
-            </Typography>
+            <Typography component="li">Insulation statement</Typography>
+            <Typography component="li">Certificate of acceptance</Typography>
+            <Typography component="li">Insurance policy</Typography>
           </Typography>,
         ]}
         metaData={{

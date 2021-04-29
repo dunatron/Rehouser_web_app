@@ -10,7 +10,7 @@ const LandLordAppraisalsPage = ({ appData: { currentUser } }) => {
   const me = currentUser.data ? currentUser.data.me : null;
   const where = {
     requestedBy: {
-      id: me.id,
+      id: me?.id,
     },
   };
 
@@ -19,9 +19,18 @@ const LandLordAppraisalsPage = ({ appData: { currentUser } }) => {
       currentUser={currentUser}
       message="Please Sign in to view: Landord Appraisals Page">
       {/* Let these load after 1st paint. i.e dont get it with serverside props */}
-      <AppraisalsTable where={where} enableAddressParams />
+      <AppraisalsTable where={where} enableAddressParams={false} />
     </PleaseSignIn>
   );
+};
+
+const PropertiesTableBuildMethod = ({ me }) => {
+  const where = {
+    owners_some: {
+      id: me.id,
+    },
+  };
+  return <PropertiesTable where={where} enableAddressParams />;
 };
 
 LandLordAppraisalsPage.propTypes = {

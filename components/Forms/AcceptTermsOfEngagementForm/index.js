@@ -13,6 +13,8 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import TextPdfGeneratorCombo from '@/Components/Pdfs/TextPdfGeneratorCombo';
 import termsOfEngagementPdfConf from '@/Lib/configs/pdfs/termsOfEngagement';
 
+import PleaseSignIn from '@/Components/PleaseSignIn';
+
 const AcceptTermsOfEngagementForm = ({ me }) => {
   const handleCompleted = data => {
     window.scrollTo(0, 0);
@@ -25,12 +27,14 @@ const AcceptTermsOfEngagementForm = ({ me }) => {
     }
   );
 
-  const accepted = me.acceptedTermsOfEngagement;
+  // if (me === null)
+  //   return (
+  //     <Typography>Please Signin to accept the terms of engagement</Typography>
+  //   );
 
-  if (me === null)
-    return (
-      <Typography>Please Signin to accept the terms of engagement</Typography>
-    );
+  const accepted = me?.acceptedTermsOfEngagement
+    ? me.acceptedTermsOfEngagement
+    : false;
 
   return (
     <div>
@@ -87,44 +91,46 @@ const AcceptTermsOfEngagementForm = ({ me }) => {
               Property to the platform
             </Typography>
           </Alert>
-          <FormCreator
-            folder={`users/${me.id}`}
-            title="huh"
-            data={{
-              ...me,
-            }}
-            isNew={true}
-            error={error}
-            posting={loading}
-            createText="Submit terms of engagement"
-            config={LANDLORD_TERMS_OF_ENGAGEMENT_FORM_CONF}
-            onSubmit={data => {
-              updateUser({
-                variables: {
-                  where: {
-                    id: me.id,
+          <PleaseSignIn message="You must be signed in to accept the terms of engagement">
+            <FormCreator
+              folder={`users/${me?.id}`}
+              title="Terms of engagement form"
+              data={{
+                ...me,
+              }}
+              isNew={true}
+              error={error}
+              posting={loading}
+              createText="Submit terms of engagement"
+              config={LANDLORD_TERMS_OF_ENGAGEMENT_FORM_CONF}
+              onSubmit={data => {
+                updateUser({
+                  variables: {
+                    where: {
+                      id: me?.id,
+                    },
+                    data: {
+                      ...data,
+                      currentAddress: data?.currentAddress
+                        ? {
+                            create: {
+                              ...data?.currentAddress,
+                            },
+                          }
+                        : {},
+                      bankDetails: data?.bankDetails
+                        ? {
+                            create: {
+                              ...data?.bankDetails,
+                            },
+                          }
+                        : {},
+                    },
                   },
-                  data: {
-                    ...data,
-                    currentAddress: data.currentAddress
-                      ? {
-                          create: {
-                            ...data.currentAddress,
-                          },
-                        }
-                      : {},
-                    bankDetails: data.bankDetails
-                      ? {
-                          create: {
-                            ...data.bankDetails,
-                          },
-                        }
-                      : {},
-                  },
-                },
-              });
-            }}
-          />
+                });
+              }}
+            />
+          </PleaseSignIn>
         </>
       )}
     </div>

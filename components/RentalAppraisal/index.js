@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types';
-import {
-  Box,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Grid,
-  Chip,
-  Button,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import formatMoney from '@/Lib/formatMoney';
+import { Box, Typography, Grid, Chip, Button } from '@material-ui/core';
+import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
 import EmailIcon from '@material-ui/icons/Email';
 
 import PublicUserDetails from '@/Components/User/PublicUserDetails';
@@ -68,7 +58,7 @@ const RentalAppraisalView = ({ id }) => {
                 flexWrap: 'wrap',
                 alignItems: 'center',
               }}>
-              <Typography variant="h5" color="primary">
+              <Typography variant="h5" color="default">
                 Appraisal
               </Typography>
               <Chip
@@ -85,7 +75,7 @@ const RentalAppraisalView = ({ id }) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h5" color="primary" gutterBottom>
+          <Typography variant="h5" color="default" gutterBottom>
             Requested by
           </Typography>
           {/* <RequestedBy user={requestedBy} /> */}
@@ -93,7 +83,7 @@ const RentalAppraisalView = ({ id }) => {
         </Grid>
         {appraisedBy && (
           <Grid item xs={12} sm={6}>
-            <Typography variant="h5" color="primary" gutterBottom>
+            <Typography variant="h5" color="default" gutterBottom>
               Appraised by
             </Typography>
             {appraisedBy && <PublicUserDetails id={appraisedBy.id} />}
@@ -105,33 +95,35 @@ const RentalAppraisalView = ({ id }) => {
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" color="default">
             Suggested rent{' '}
-            <Typography component="span" variant="h5" color="primary">
-              ${formatMoney(rent, 2)}
+            <Typography
+              component="span"
+              variant="h5"
+              color="default"
+              gutterBottom>
+              ${formatCentsToDollarsVal(rent)}
             </Typography>
           </Typography>
-          <Typography variant="h6" color="default">
+          <Typography variant="h6" color="default" gutterBottom>
             Rent per room{' '}
-            <Typography component="span" variant="h5" color="primary">
-              ${formatMoney(rent / rooms, 2)}
+            <Typography component="span" variant="h5" color="default">
+              ${formatCentsToDollarsVal(rent / rooms)}
             </Typography>
           </Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" color="default">
-            Appraisal used{' '}
-            <Typography component="span" variant="h5" color="primary">
-              {hasBeenUsed ? 'YES' : 'NO'}
-            </Typography>
-            {hasBeenUsed && (
-              <Typography color="default" variant="body2">
-                An appraisal can only be used once, suggesting it has already
-                been used to create the property
-              </Typography>
-            )}
-          </Typography>
-          <Typography>{hasBeenUsed}</Typography>
+
+          {!property && (
+            <Grid item xs={12}>
+              <ChangeRouteButton
+                variant="contained"
+                color="primary"
+                route={`/landlord/properties/add`}
+                query={{ appraisal_id: id }}
+                title="Create Property"
+              />
+            </Grid>
+          )}
         </Grid>
       </Grid>
+
       {property && (
         <Grid item xs={12} sm={6}>
           <ChangeRouteButton
@@ -176,7 +168,7 @@ const LabelArrayVal = ({ label, val }) => {
       </Typography>
       <Typography component="ul">
         {val.map(item => (
-          <Typography key={item} component="li" color="primary">
+          <Typography key={item} component="li" color="default">
             {item}
           </Typography>
         ))}
@@ -198,7 +190,7 @@ const LabelKeyVal = ({ label, val }) => {
       <Typography color="default" component="span">
         {label}:{' '}
       </Typography>
-      <Typography color="primary" component="span">
+      <Typography color="default" component="span">
         {val}
       </Typography>
     </Typography>
