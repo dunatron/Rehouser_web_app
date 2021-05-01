@@ -154,6 +154,7 @@ const FormCreatorMain = props => {
 
   const _saveData = () => {
     const formValsToSave = getValues();
+    console.log('Form Vals pre Save ', formValsToSave);
 
     localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
     toast.success(`${title} Form Data saved`);

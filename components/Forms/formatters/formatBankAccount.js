@@ -1,4 +1,9 @@
+import { is } from 'ramda';
+
 const _preFormatBankAccount = val => {
+  const isObjVal = is(Object, val);
+
+  if (!isObjVal) return val;
   // this may not quite work..
   const preformattedSring =
     val.bankNumber +

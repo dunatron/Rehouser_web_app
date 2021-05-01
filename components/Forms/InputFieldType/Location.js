@@ -11,6 +11,43 @@ import FieldError from './FieldError';
 
 const useStyles = makeStyles(theme => ({}));
 
+const getDefaultLocation = props => {
+  const {
+    register,
+    config,
+    setValue, // is from useForm
+    errors,
+    rawData,
+    fieldError,
+    reset,
+    defaultValues,
+  } = props;
+  const { fieldProps, refConf, mapToObjectKey, inners } = config;
+
+  let defaultLocation = {
+    // placeId: rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null,
+    // desc: rawData ? rawData[config.fieldProps.fieldMaps['desc']] : null,
+    // lat: rawData ? rawData[config.fieldProps.fieldMaps['lat']] : null,
+    // lng: rawData ? rawData[config.fieldProps.fieldMaps['lng']] : null,
+  };
+  for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
+    console.log('location Debug: field key => ', key);
+    console.log('location Debug: field value => ', value);
+    defaultLocation[key] = rawData[key];
+    if (mapToObjectKey) {
+      const str = `${mapToObjectKey}.${value}`;
+      console.log('location Debug: mapped str => ', str);
+      // register({ name: str }, { ...config.refConf });
+      // defaultLocation[key] = rawData[str];
+      defaultLocation[key] = rawData[str];
+    } else {
+      defaultLocation[key] = rawData[value];
+      // register({ name: value }, { ...config.refConf });
+    }
+  }
+  return defaultLocation;
+};
+
 /**
  * ToDo: if a default location comes in we need to actualy force select it after render to get the details that the object it came frommight not have
  */
@@ -26,50 +63,63 @@ const Location = props => {
     defaultValues,
   } = props;
 
+  const defaultLocation = getDefaultLocation(props);
+  console.log('location Debug: defaultLocation => ', defaultLocation);
+  console.log('location Debug: rawData => ', rawData);
+  console.log('location Debug: defaultValues => ', defaultValues);
+
   const { fieldProps, refConf, mapToObjectKey, inners } = config;
+
+  const defaultPlaceId = rawData
+    ? rawData[config.fieldProps.fieldMaps['placeId']]
+    : null;
 
   const [placeId, setPlaceId] = useState(
     rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null
   );
 
-  const defaultLocation = {
-    placeId: rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null,
-    desc: rawData ? rawData[config.fieldProps.fieldMaps['desc']] : null,
-    lat: rawData ? rawData[config.fieldProps.fieldMaps['lat']] : null,
-    lng: rawData ? rawData[config.fieldProps.fieldMaps['lng']] : null,
-    ...(config.fieldProps.fieldMaps['street_number'] && {
-      street_number: rawData
-        ? rawData[config.fieldProps.fieldMaps['street_number']]
-        : null,
-    }),
-    ...(config.fieldProps.fieldMaps['route'] && {
-      route: rawData ? rawData[config.fieldProps.fieldMaps['route']] : null,
-    }),
-    ...(config.fieldProps.fieldMaps['locality'] && {
-      locality: rawData
-        ? rawData[config.fieldProps.fieldMaps['locality']]
-        : null,
-    }),
-    ...(config.fieldProps.fieldMaps['administrative_area_level_1'] && {
-      administrative_area_level_1: rawData
-        ? rawData[config.fieldProps.fieldMaps['administrative_area_level_1']]
-        : null,
-    }),
-    // ...(config.fieldProps.fieldMaps['country'] && {
-    //   country: rawData ? rawData[config.fieldProps.fieldMaps['country']] : null,
-    // }),
-    country: 'A TEST',
-    ...(config.fieldProps.fieldMaps['postal_code'] && {
-      postal_code: rawData
-        ? rawData[config.fieldProps.fieldMaps['postal_code']]
-        : null,
-    }),
-  };
+  console.log('location Debug: defaultPlaceId => ', defaultPlaceId);
+
+  // const defaultLocation = {
+  //   placeId: rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null,
+  //   desc: rawData ? rawData[config.fieldProps.fieldMaps['desc']] : null,
+  //   lat: rawData ? rawData[config.fieldProps.fieldMaps['lat']] : null,
+  //   lng: rawData ? rawData[config.fieldProps.fieldMaps['lng']] : null,
+  //   ...(config.fieldProps.fieldMaps['street_number'] && {
+  //     street_number: rawData
+  //       ? rawData[config.fieldProps.fieldMaps['street_number']]
+  //       : null,
+  //   }),
+  //   ...(config.fieldProps.fieldMaps['route'] && {
+  //     route: rawData ? rawData[config.fieldProps.fieldMaps['route']] : null,
+  //   }),
+  //   ...(config.fieldProps.fieldMaps['locality'] && {
+  //     locality: rawData
+  //       ? rawData[config.fieldProps.fieldMaps['locality']]
+  //       : null,
+  //   }),
+  //   ...(config.fieldProps.fieldMaps['administrative_area_level_1'] && {
+  //     administrative_area_level_1: rawData
+  //       ? rawData[config.fieldProps.fieldMaps['administrative_area_level_1']]
+  //       : null,
+  //   }),
+  //   // ...(config.fieldProps.fieldMaps['country'] && {
+  //   //   country: rawData ? rawData[config.fieldProps.fieldMaps['country']] : null,
+  //   // }),
+  //   ...(config.fieldProps.fieldMaps['postal_code'] && {
+  //     postal_code: rawData
+  //       ? rawData[config.fieldProps.fieldMaps['postal_code']]
+  //       : null,
+  //   }),
+  // };
 
   useEffect(() => {
     for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
+      // console.log('location Debug: field key => ', key);
+      // console.log('location Debug: field value => ', value);
       if (mapToObjectKey) {
         const str = `${mapToObjectKey}.${value}`;
+        // console.log('location Debug: mapped str => ', str);
         register({ name: str }, { ...config.refConf });
       } else {
         register({ name: value }, { ...config.refConf });
@@ -86,6 +136,8 @@ const Location = props => {
   if (!fieldProps.fieldMaps) {
     return 'This form component needs fieldProps.fieldMaps to know how to map the values to your prisma ready object';
   }
+
+  console.log('location Debug: default Location => ', defaultLocation);
 
   return (
     <>
