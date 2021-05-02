@@ -13,15 +13,23 @@ import UserMenu from './UserMenu';
 import PropTypes from 'prop-types';
 import { mePropTypes, filePropTypes } from '../../propTypes';
 
+import PublicUserDetails from '@/Components/User/PublicUserDetails';
+import PrivateUserDetails from '@/Components/User/PrivateUserDetails';
+
 const UserDetails = ({ me, user }) => {
   const fullname = user.firstName + ' ' + user.lastName;
   return (
     <ListItem dense={true}>
       <ListItemAvatar dense={true}>
-        <Avatar
+        {/* <Avatar
           alt={fullname}
           src={user.profilePhoto ? user.profilePhoto.url : null}
-        />
+        /> */}
+        {me?.isAdmin ? (
+          <PrivateUserDetails id={user.id} />
+        ) : (
+          <PublicUserDetails id={user.id} iconOnly={true} />
+        )}
       </ListItemAvatar>
       <ListItemText primary={fullname} secondary={'Friend'} dense={true} />
       <ListItemSecondaryAction>

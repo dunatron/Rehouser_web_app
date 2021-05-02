@@ -119,6 +119,7 @@ const AppraisalsTable = ({
         open={isModalOpen}
         close={() => setIsModalOpen(false)}>
         <RentalAppraisal
+          me={me}
           // rentalAppraisal={appraisalModalData}
           id={appraisalModalData.id}
         />

@@ -66,9 +66,10 @@ export default function PublicUserDetails({
   email,
   iconOnly = false,
   size,
+  defaultOpen = false,
 }) {
   const classes = useStyles();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(defaultOpen);
 
   const { data, loading, error } = useQuery(PRIVATE_USER_QUERY, {
     variables: {

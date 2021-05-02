@@ -4,6 +4,7 @@ import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
 import EmailIcon from '@material-ui/icons/Email';
 
 import PublicUserDetails from '@/Components/User/PublicUserDetails';
+import UserDetails from '@/Components/UserDetails';
 
 import { useQuery } from '@apollo/client';
 import { SINGLE_RENTAL_APPRAISAL_QUERY } from '@/Gql/queries';
@@ -12,7 +13,9 @@ import Error from '@/Components/ErrorMessage';
 
 import ChangeRouteButton from '@/Components/Routes/ChangeRouteButton';
 
-const RentalAppraisalView = ({ id }) => {
+import List from '@material-ui/core/List';
+
+const RentalAppraisalView = ({ id, me }) => {
   const { data, loading, error } = useQuery(SINGLE_RENTAL_APPRAISAL_QUERY, {
     fetchPolicy: 'cache-and-network',
     variables: {
@@ -79,49 +82,61 @@ const RentalAppraisalView = ({ id }) => {
             Requested by
           </Typography>
           {/* <RequestedBy user={requestedBy} /> */}
-          {requestedBy && <PublicUserDetails id={requestedBy.id} />}
+          {/* {requestedBy && <PublicUserDetails id={requestedBy.id} />} */}
+          {requestedBy && (
+            <List style={{ maxWidth: '280px' }}>
+              <UserDetails user={requestedBy} me={me} />
+            </List>
+          )}
         </Grid>
         {appraisedBy && (
           <Grid item xs={12} sm={6}>
             <Typography variant="h5" color="default" gutterBottom>
               Appraised by
             </Typography>
-            {appraisedBy && <PublicUserDetails id={appraisedBy.id} />}
+            {/* {appraisedBy && <PublicUserDetails id={appraisedBy.id} />} */}
+            {appraisedBy && (
+              <List style={{ maxWidth: '280px' }}>
+                <UserDetails user={appraisedBy} me={me} />
+              </List>
+            )}
 
             {/* <AppraisedBy user={appraisedBy} /> */}
           </Grid>
         )}
 
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" color="default">
-            Suggested rent{' '}
-            <Typography
-              component="span"
-              variant="h5"
-              color="default"
-              gutterBottom>
-              ${formatCentsToDollarsVal(rent)}
+        {rent && (
+          <Grid item xs={12} sm={6}>
+            <Typography variant="h6" color="default">
+              Suggested rent{' '}
+              <Typography
+                component="span"
+                variant="h5"
+                color="default"
+                gutterBottom>
+                ${formatCentsToDollarsVal(rent)}
+              </Typography>
             </Typography>
-          </Typography>
-          <Typography variant="h6" color="default" gutterBottom>
-            Rent per room{' '}
-            <Typography component="span" variant="h5" color="default">
-              ${formatCentsToDollarsVal(rent / rooms)}
+            <Typography variant="h6" color="default" gutterBottom>
+              Rent per room{' '}
+              <Typography component="span" variant="h5" color="default">
+                ${formatCentsToDollarsVal(rent / rooms)}
+              </Typography>
             </Typography>
-          </Typography>
 
-          {!property && (
-            <Grid item xs={12}>
-              <ChangeRouteButton
-                variant="contained"
-                color="primary"
-                route={`/landlord/properties/add`}
-                query={{ appraisal_id: id }}
-                title="Create Property"
-              />
-            </Grid>
-          )}
-        </Grid>
+            {!property && rent && (
+              <Grid item xs={12}>
+                <ChangeRouteButton
+                  variant="contained"
+                  color="primary"
+                  route={`/landlord/properties/add`}
+                  query={{ appraisal_id: id }}
+                  title="Create Property"
+                />
+              </Grid>
+            )}
+          </Grid>
+        )}
       </Grid>
 
       {property && (

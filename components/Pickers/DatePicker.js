@@ -32,7 +32,7 @@ const RehouserDatePicker = ({ value, defaultValue, onChange, ...rest }) => {
         // readOnly
         disableToolbar
         clearable
-        emptyLabel="No Date picked"
+        emptyLabel=""
         variant="dialog"
         style={{
           color: `inherit !important`,

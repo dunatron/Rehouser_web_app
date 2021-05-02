@@ -55,8 +55,6 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
 
       if (componentForm[addressType]) {
         const val = component[componentForm[addressType]];
-
-        console.log('A VALUE ) GUESS => ', val);
         componentForm[addressType] = val;
         // document.getElementById(addressType).value = val;
       }

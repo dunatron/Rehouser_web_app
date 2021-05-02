@@ -55,7 +55,7 @@ const CheckMultipleWithText = props => {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">{label}</FormLabel>
-      <FieldError errors={errors} name={name} />
+
       <FormGroup>
         {options &&
           options.map((opt, i) => (
@@ -89,6 +89,7 @@ const CheckMultipleWithText = props => {
             </div>
           ))}
       </FormGroup>
+      <FieldError errors={errors} name={name} />
     </FormControl>
   );
 };

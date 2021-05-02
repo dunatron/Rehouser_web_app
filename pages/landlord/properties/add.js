@@ -20,8 +20,12 @@ const AddPropertyPage = ({ appData: { currentUser } }) => {
     <>
       <PageHeader
         title="Add Property"
-        intro="This is where you can add property to the platform. we estimate that you will need 15-20 minutes to complete the form provided you have the information on hand"
+        intro="This is where you can add property to the platform."
         children={[
+          <Typography gutterBottom>
+            We estimate that you will need 15-20 minutes to complete the form
+            provided you have the information on hand
+          </Typography>,
           <Typography gutterBottom>
             Some of the key files you will need include the following
           </Typography>,

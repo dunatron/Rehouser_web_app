@@ -16,6 +16,7 @@ import FlipToBackIcon from '@material-ui/icons/FlipToBackOutlined';
 import FlipToFrontIcon from '@material-ui/icons/FlipToFrontOutlined';
 import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
+import WarningIcon from '@material-ui/icons/Warning';
 import MinimizeIcon from '@material-ui/icons/Minimize';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -51,7 +52,7 @@ const FlipCardHeader = ({
       )}
       {!hasServerFile && !hasFile && (
         <Tooltip title={`No File on the server for ${title}`}>
-          <CloseIcon color="error" className={classes.hasServerIcon} />
+          <WarningIcon color="default" className={classes.hasServerIcon} />
         </Tooltip>
       )}
       <ButtonGroup size="small" aria-label="small outlined button group">

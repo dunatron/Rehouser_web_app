@@ -5,6 +5,7 @@ const SAVE_FORM_MUTATION = gql`
     saveForm(data: $data) {
       id
       identifier
+      name
     }
   }
 `;

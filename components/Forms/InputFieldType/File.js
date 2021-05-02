@@ -26,6 +26,8 @@ const File = props => {
   // we essentially dont want to set any files that have already been added
   const { fieldProps, inners } = config;
 
+  const fieldError = errors[config.key];
+
   useEffect(() => {
     if (config.refConf) {
       register({ name: config.key }, { ...config.refConf });

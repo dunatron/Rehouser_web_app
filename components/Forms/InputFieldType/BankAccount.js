@@ -75,13 +75,6 @@ const PhoneInput = props => {
     setValue(fieldProps.name, e.target.value);
   };
 
-  // register({ name: fieldProps.name }, refConf);
-
-  // register the field
-  useEffect(() => {
-    register({ name: fieldProps.name }, refConf);
-  }, []);
-
   // set the default value if it has one and monitor for its change
   useEffect(() => {
     if (defaultValue) {
@@ -97,7 +90,7 @@ const PhoneInput = props => {
         id={name}
         name={fieldProps.name}
         defaultValue={defaultValue}
-        // inputRef={register ? register(refConf) : null}
+        inputRef={register ? register(refConf) : null}
         // value={maskVal}
         onChange={handleChange}
         label={label}

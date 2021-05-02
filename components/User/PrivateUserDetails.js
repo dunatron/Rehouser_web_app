@@ -12,6 +12,8 @@ import Section from '@/Components/Section';
 import PublicDetailsDisplay from './PublicDetailsDisplay';
 import PrivateDetailsDisplay from './PrivateDetailsDisplay';
 
+import clsx from 'clsx';
+
 import {
   Avatar,
   Typography,
@@ -39,6 +41,20 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  avatarSm: {
+    margin: theme.spacing(0.5),
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  avatarMd: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
+  avatarLg: {
     width: theme.spacing(8),
     height: theme.spacing(8),
   },
@@ -50,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PublicUserDetails({ id, email }) {
+export default function PrivateUserDetails({ id, email, size = 'medium' }) {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -80,23 +96,50 @@ export default function PublicUserDetails({ id, email }) {
 
   const fullName = `${data.user.firstName} ${data.user.lastName}`;
 
+  const avatarClasses = clsx({
+    [classes.avatar]: true,
+    [classes.avatarSm]: size === 'small',
+    [classes.avatarMd]: size === 'medium',
+    [classes.avatarLg]: size === 'large',
+  });
+
   return (
     <>
       <Paper className={classes.card} elevation={0}>
-        <Avatar
+        {/* <Avatar
           onClick={handleOpenModal}
-          sizes="l"
-          className={classes.avatar}
+          sizes="0.5"
+          className={avatarClasses}
           src={data.user.profilePhoto ? data.user.profilePhoto.url : null}
           alt={`image of ${fullName}`}
         />
         <Box className={classes.content}>
-          <Typography className={classes.name} gutterBottom>
+          <Typography className={classes.name} gutterBottom={size !== 'small'}>
             {data.user.firstName} {data.user.lastName}
           </Typography>
-          <Button className={classes.name} variant="outlined">
+          <Button className={classes.name} variant="outlined" size={size}>
             {data.user.email}
           </Button>
+        </Box> */}
+
+        <Box className={classes.content}>
+          <Avatar
+            onClick={handleOpenModal}
+            sizes="0.5"
+            className={avatarClasses}
+            src={data.user.profilePhoto ? data.user.profilePhoto.url : null}
+            alt={`image of ${fullName}`}
+          />
+          {/* <Typography className={classes.name} gutterBottom={size !== 'small'}>
+            {data.user.firstName} {data.user.lastName}
+          </Typography>
+          <Button
+            className={classes.name}
+            variant="outlined"
+            size={size}
+            onClick={handleOpenModal}>
+            {data.user.email}
+          </Button> */}
         </Box>
       </Paper>
       <Modal

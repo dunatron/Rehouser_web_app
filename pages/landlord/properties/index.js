@@ -61,14 +61,14 @@ const PropertiesPage = props => {
         }>
         <div style={{ marginBottom: '16px' }}>
           <ButtonGroup
-            color="secondary"
+            color="primary"
             aria-label="outlined secondary button group">
             <Button onClick={goToAddPropertyPage} startIcon={<AddIcon />}>
-              Property
+              Add Property
             </Button>
-            <Button onClick={goToAddBulkProperty} startIcon={<AddIcon />}>
+            {/* <Button onClick={goToAddBulkProperty} startIcon={<AddIcon />}>
               Bulk Upload
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </div>
         <PropertiesTableBuildMethod me={me} />
@@ -83,7 +83,7 @@ const PropertiesTableBuildMethod = ({ me }) => {
       id: me.id,
     },
   };
-  return <PropertiesTable where={where} enableAddressParams />;
+  return <PropertiesTable where={where} enableAddressParams me={me} />;
 };
 
 PropertiesPage.propTypes = {

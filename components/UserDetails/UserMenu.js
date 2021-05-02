@@ -20,6 +20,8 @@ import { store } from '@/Store/index';
 import PropTypes from 'prop-types';
 import mePropTypes from '../../propTypes/mePropTypes';
 
+import PublicUserDetails from '@/Components/User/PublicUserDetails';
+
 const ITEM_HEIGHT = 48;
 
 const handleLink = (route = '/', query = {}) => {
@@ -47,6 +49,8 @@ const UserMenu = ({ me, user }) => {
 
   if (!me) return 'No Me';
 
+  const userIsMe = user.id === me.id;
+
   return (
     <Fragment>
       <IconButton
@@ -71,10 +75,12 @@ const UserMenu = ({ me, user }) => {
             width: 200,
           },
         }}>
+        {/* <MenuItem onClick={handleClose}>View Profile</MenuItem> */}
         {createChatProps.loading ? (
           'loading'
         ) : (
           <MenuItem
+            disabled={userIsMe}
             dense={true}
             onClick={e => {
               createChat({

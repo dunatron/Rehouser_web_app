@@ -27,6 +27,7 @@ import formatCentsToDollars, {
 } from '../../lib/formatCentsToDollars';
 import Modal from '../../components/Modal/index';
 import Error from '../../components/ErrorMessage';
+import PrivateUserDetails from '@/Components/User/PrivateUserDetails';
 
 // querys
 import { RENTAL_APPRAISALS_CONNECTION_QUERY } from '../../graphql/connections';
@@ -36,6 +37,8 @@ import { OFFER_RENTAL_APPRAISAL_MUTATION } from '../../graphql/mutations';
 //icons
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { propertyPropTypes } from 'propTypes';
+import ChangeRouteButton from '@/Components/Routes/ChangeRouteButton';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -127,6 +130,29 @@ const AdminRentalAppraisalsTable = ({ where }) => {
       {
         title: 'property',
         field: 'property.id',
+        render: rowData => (
+          <div>
+            {rowData.property && (
+              <ChangeRouteButton
+                route={`/landlord/properties/${rowData.property.id}`}
+                title="Go to Property"
+              />
+            )}
+
+            {propertyPropTypes.id}
+            {propertyPropTypes.location}
+          </div>
+        ),
+        editable: false,
+        filtering: false,
+        sorting: false,
+      },
+      {
+        title: 'requested By',
+        field: 'requestedBy.id',
+        render: rowData => (
+          <PrivateUserDetails id={rowData.requestedBy.id} size="small" />
+        ),
         editable: false,
         filtering: false,
         sorting: false,

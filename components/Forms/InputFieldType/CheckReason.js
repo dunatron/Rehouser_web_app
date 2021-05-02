@@ -53,7 +53,7 @@ const CheckReason = props => {
     <>
       <FormControl component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
-        <FieldError errors={errors} name={name} />
+
         <RadioGroup
           onChange={handleChange}
           defaultValue={defaultValue}
@@ -81,6 +81,7 @@ const CheckReason = props => {
             label="No"
           />
         </RadioGroup>
+        <FieldError errors={errors} name={name} />
       </FormControl>
 
       {inners &&

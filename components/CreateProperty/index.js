@@ -272,7 +272,7 @@ const CreatePropertyComponent = props => {
               isNew={true}
               config={CREATE_PROPERTY_FORM_CONF}
               onSubmit={submitFormWithData}
-              canSave={true}
+              canSave={isChecking ? false : true}
             />
           )}
         </>

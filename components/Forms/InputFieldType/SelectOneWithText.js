@@ -60,7 +60,6 @@ const SelectOneWithText = props => {
   return (
     <FormControl component="fieldset" className={classes.formControl}>
       <FormLabel component="legend">{label}</FormLabel>
-      <FieldError errors={errors} name={name} />
       <RadioGroup
         onChange={handleChange}
         defaultValue={defaultValue}
@@ -96,6 +95,7 @@ const SelectOneWithText = props => {
             </div>
           ))}
       </RadioGroup>
+      <FieldError errors={errors} name={name} />
     </FormControl>
   );
 };

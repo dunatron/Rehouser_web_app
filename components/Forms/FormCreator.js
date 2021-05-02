@@ -27,6 +27,8 @@ import Loader from '@/Components/Loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { useDebouncedCallback } from 'use-debounce';
 
+import AutoSave from './AutoSave';
+
 const configIsValid = config => {
   if (isEmpty(config)) return false;
   if (!is(Array, config)) return false;
@@ -79,16 +81,7 @@ const FormCreatorMain = props => {
   } = props;
 
   const [saveFormId, setSaveFormId] = useState(props.saveFormId);
-  const [saveCount, setSaveCount] = useState(0);
 
-  // awesome we have {me} which now has isAdmin and isWizard
-  // we can on the form creator if it has something like requiredPermissions
-  // or adminOnly and wizardOnly then disable the fields? or do we ommit them from the config entirely
-  // easiset right now is to ommit the config object entirely if they cannot edit it
-  // requiredPermissions : ["ADMIN", "WIZARD", "PERMISSIONUPDATE"]
-  // while isAdmin and isWizard @client is cool. We should use me.permissions
-  // we would check that on the requiredPermissions for each item we must find it in me.permissions
-  // if we dont it will remove the config object
   const currentUser = useCurrentUser();
   const me = currentUser.data ? currentUser.data.me : null;
   const keysWithTypes = getKeyTypes(config);
@@ -98,7 +91,6 @@ const FormCreatorMain = props => {
     onError: () => toast.error(`Couldnt save ${title}`),
     onCompleted: data => {
       setSaveFormId(data.saveForm.id);
-      toast.success(`Sucessfully saved the form`);
     },
   });
 
@@ -149,10 +141,27 @@ const FormCreatorMain = props => {
     return can;
   };
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     if (!canSubmit()) return;
     const postFormattedFormData = formatData(data, keysWithTypes, 'post');
-    props.onSubmit(postFormattedFormData);
+    // await clearSaveForm(postFormattedFormData);
+    saveForm({
+      variables: {
+        data: {
+          id: saveFormId,
+          name: title,
+          path: path,
+          json: {},
+          user: {
+            connect: {
+              id: me?.id,
+            },
+          },
+        },
+      },
+    }).then(() => {
+      props.onSubmit(postFormattedFormData);
+    });
     // we assume the data has gone to where it needs to go and we clear saveData
   };
 
@@ -168,12 +177,6 @@ const FormCreatorMain = props => {
 
   const _saveData = () => {
     const formValsToSave = getValues();
-    console.log('FORM VALUES on saveData => ', formValsToSave);
-    console.log('autoSave interval State ', saveState);
-
-    // console.log('Form Vals pre Save ', formValsToSave);
-
-    // localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
     if (me.id && canSave) {
       saveForm({
         variables: {
@@ -191,64 +194,7 @@ const FormCreatorMain = props => {
         },
       });
     }
-
-    // toast.success(`${title} Form Data saved`);
   };
-
-  const _autoSaveFromLocalStorage = () => {
-    const localStorageFormData = localStorage.getItem(
-      `${me.id}-${title}-${path}`
-    );
-    console.log('AUTO SAVE EXIT => ', localStorageFormData);
-    if (me.id && canSave) {
-      saveForm({
-        variables: {
-          data: {
-            id: saveFormId,
-            name: title,
-            path: path,
-            json: JSON.parse(localStorageFormData),
-            user: {
-              connect: {
-                id: me?.id,
-              },
-            },
-          },
-        },
-      });
-    }
-  };
-
-  // The location field that does the bad state call needs addressed first
-  // its the handleWatchChanges
-  // also Whenever they leave it will save and tell them it has saved
-  // Propbably not what we want
-  useEffect(() => {
-    // maybe you can get the default form values
-    return () => {
-      // Unfortunately on live it saves empty values so we cannot auto save on leave
-      _autoSaveFromLocalStorage();
-    };
-  }, []);
-
-  /**
-   * Save state to localStorage often. Then we can basically call that item on exit to save it
-   * then clear the itemn from localSTorage
-   */
-  useEffect(() => {
-    const intervalID = setTimeout(() => {
-      const formValsToSave = getValues();
-      localStorage.setItem(
-        `${me.id}-${title}-${path}`,
-        JSON.stringify(formValsToSave)
-      );
-      if (saveCount < 420) {
-        setSaveCount(saveCount + 1);
-      } else setSaveCount(0);
-    }, 1000);
-
-    return () => clearInterval(intervalID);
-  }, [saveCount]);
 
   const filteredConf = config.filter((item, idx) => {
     if (!item.permissions) return item;
@@ -263,6 +209,13 @@ const FormCreatorMain = props => {
 
   return (
     <>
+      <Button
+        onClick={() => {
+          const vals = getValues();
+          console.log('Current form values', vals);
+        }}>
+        GET VALUES
+      </Button>
       <Card
         style={{
           marginBottom: '16px',
@@ -312,38 +265,15 @@ const FormCreatorMain = props => {
           })}
         <FormErrors errors={errors} />
         <Errors error={error} />
-        {/* Can only save on new forms as update and save could be confusing */}
-        {isNew && me.id && canSave && (
-          <div
-            style={
-              stickySave
-                ? {
-                    position: '-webkit-sticky',
-                    position: 'sticky',
-                    bottom: 0,
-                    borderColor: 'red',
-                    zIndex: 900,
-                    padding: '16px 0',
-                  }
-                : {}
-            }>
-            {me.id && canSave && (
-              <Fab
-                variant="extended"
-                size="small"
-                color="primary"
-                aria-label="add"
-                disabled={saveFormProps.loading}
-                onClick={_saveData}>
-                <SaveIcon />
-
-                <Typography variant="button" style={{ margin: '0 4px' }}>
-                  SAVE
-                </Typography>
-              </Fab>
-            )}
-          </div>
-        )}
+        <AutoSave
+          title={title}
+          getValues={getValues}
+          stickySave={stickySave}
+          me={me}
+          canSave={canSave}
+          saveFormId={props.saveFormId}
+          path={path}
+        />
         <ButtonGroup
           style={{
             marginTop: '16px',

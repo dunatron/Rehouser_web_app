@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import { IconButton, CircularProgress } from '@material-ui/core';
 
@@ -9,6 +9,7 @@ import { green, red } from '@material-ui/core/colors';
 
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
+
 import UploadIcon from '@material-ui/icons/CloudUploadOutlined';
 
 const useStyles = makeStyles(theme => ({
@@ -83,7 +84,7 @@ UploadFileButton.propTypes = {
   error: PropTypes.any,
   handleClick: PropTypes.any,
   loading: PropTypes.any,
-  uploadCompleted: PropTypes.bool.isRequired
-}
+  uploadCompleted: PropTypes.bool.isRequired,
+};
 
 export default UploadFileButton;
