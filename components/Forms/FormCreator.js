@@ -79,7 +79,7 @@ const FormCreatorMain = props => {
   } = props;
 
   const [saveFormId, setSaveFormId] = useState(props.saveFormId);
-  const [saveState, setSaveState] = useState({});
+  const [saveCount, setSaveCount] = useState(0);
 
   // awesome we have {me} which now has isAdmin and isWizard
   // we can on the form creator if it has something like requiredPermissions
@@ -153,7 +153,6 @@ const FormCreatorMain = props => {
     if (!canSubmit()) return;
     const postFormattedFormData = formatData(data, keysWithTypes, 'post');
     props.onSubmit(postFormattedFormData);
-    localStorage.removeItem(saveKey);
     // we assume the data has gone to where it needs to go and we clear saveData
   };
 
@@ -196,6 +195,30 @@ const FormCreatorMain = props => {
     // toast.success(`${title} Form Data saved`);
   };
 
+  const _autoSaveFromLocalStorage = () => {
+    const localStorageFormData = localStorage.getItem(
+      `${me.id}-${title}-${path}`
+    );
+    console.log('AUTO SAVE EXIT => ', localStorageFormData);
+    if (me.id && canSave) {
+      saveForm({
+        variables: {
+          data: {
+            id: saveFormId,
+            name: title,
+            path: path,
+            json: JSON.parse(localStorageFormData),
+            user: {
+              connect: {
+                id: me?.id,
+              },
+            },
+          },
+        },
+      });
+    }
+  };
+
   // The location field that does the bad state call needs addressed first
   // its the handleWatchChanges
   // also Whenever they leave it will save and tell them it has saved
@@ -204,33 +227,28 @@ const FormCreatorMain = props => {
     // maybe you can get the default form values
     return () => {
       // Unfortunately on live it saves empty values so we cannot auto save on leave
-      _saveData();
+      _autoSaveFromLocalStorage();
     };
   }, []);
 
-  useEffect(() => {
-    const onbeforeunloadFn = () => {
-      console.log('onbeforeunloadFn');
-      // _saveData();
-    };
-
-    window.addEventListener('beforeunload', onbeforeunloadFn);
-    return () => {
-      window.removeEventListener('beforeunload', onbeforeunloadFn);
-    };
-  }, []);
-
+  /**
+   * Save state to localStorage often. Then we can basically call that item on exit to save it
+   * then clear the itemn from localSTorage
+   */
   useEffect(() => {
     const intervalID = setTimeout(() => {
       const formValsToSave = getValues();
-      console.log('Get current form data to autoSave... => ');
-      setSaveState({
-        ...formValsToSave,
-      });
-    }, 3000);
+      localStorage.setItem(
+        `${me.id}-${title}-${path}`,
+        JSON.stringify(formValsToSave)
+      );
+      if (saveCount < 420) {
+        setSaveCount(saveCount + 1);
+      } else setSaveCount(0);
+    }, 1000);
 
     return () => clearInterval(intervalID);
-  }, [saveState]);
+  }, [saveCount]);
 
   const filteredConf = config.filter((item, idx) => {
     if (!item.permissions) return item;
@@ -251,13 +269,7 @@ const FormCreatorMain = props => {
           maxWidth: '800px',
           overflow: 'initial',
         }}>
-        <Button
-          onClick={() => {
-            const theVals = getValues();
-          }}>
-          Log VALUES
-        </Button>
-        * Indicates required field
+        <Typography gutterBottom>* Indicates required field</Typography>
         {configIsValid(config) &&
           filteredConf.map((item, idx) => {
             // rats and roaches in the building, ima get it like bob the builder(_)

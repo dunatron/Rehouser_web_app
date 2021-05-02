@@ -89,6 +89,7 @@ const EntityFormType = props => {
           isNew={true}
           stickySave={false}
           createText={`Add ${title}`}
+          title={title}
           // error={error}
           // posting={loading}
           // onSubmit={submitFormWithData}]

@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 import RehouserPaper from '@/Styles/RehouserPaper';
 import { useRouter } from 'next/router';
 
-const ConfirmEmail = ({ me, children, token }) => {
+const ConfirmEmail = ({ me, children, token, title }) => {
   const router = useRouter();
 
   const confirmEmailToken = token ? token : router.query.token;
@@ -24,8 +24,20 @@ const ConfirmEmail = ({ me, children, token }) => {
     return (
       <RehouserPaper>
         <Typography variant="h6" gutterBottom color="textPrimary">
-          Please confirm your email address. You will be limited on the platform
-          until you do
+          {title
+            ? title
+            : 'Please confirm your email address. You will be limited on the platform until you do'}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          You recieved a confirmation email that has a token when you signed up.
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          Please copy the token in the email and paste it into the field below
+          to confirm your email address
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          If you need abother token there is a button below that will send you a
+          new email and token
         </Typography>
         <SendConfrimEmailButton token={confirmEmailToken} />
       </RehouserPaper>

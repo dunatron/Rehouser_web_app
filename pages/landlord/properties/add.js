@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CreateProperty from '@/Components/CreateProperty/index';
 import PleaseSignIn from '@/Components/PleaseSignIn';
+import ConfirmEmail from '@/Components/ConfirmEmail';
 import { is } from 'ramda';
 import PageHeader from '@/Components/PageHeader';
 import { Box, Typography } from '@material-ui/core';
@@ -44,7 +45,11 @@ const AddPropertyPage = ({ appData: { currentUser } }) => {
             <strong>{pleaseSignInMessage}</strong>
           </Typography>
         }>
-        <CreateProperty me={me} />
+        <ConfirmEmail
+          me={me}
+          title="You must confrim your email address before adding property">
+          <CreateProperty me={me} />
+        </ConfirmEmail>
       </PleaseSignIn>
     </>
   );
