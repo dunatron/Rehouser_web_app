@@ -25,6 +25,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { SAVE_FORM_MUTATION } from '@/Gql/mutations';
 import Loader from '@/Components/Loader';
 import NoSsr from '@material-ui/core/NoSsr';
+import { useDebouncedCallback } from 'use-debounce';
 
 const configIsValid = config => {
   if (isEmpty(config)) return false;
@@ -78,6 +79,7 @@ const FormCreatorMain = props => {
   } = props;
 
   const [saveFormId, setSaveFormId] = useState(props.saveFormId);
+  const [saveState, setSaveState] = useState({});
 
   // awesome we have {me} which now has isAdmin and isWizard
   // we can on the form creator if it has something like requiredPermissions
@@ -168,6 +170,7 @@ const FormCreatorMain = props => {
 
   const _saveData = () => {
     const formValsToSave = getValues();
+    console.log('FORM VALUES on saveData => ', formValsToSave);
     // console.log('Form Vals pre Save ', formValsToSave);
 
     // localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
@@ -200,9 +203,33 @@ const FormCreatorMain = props => {
     // maybe you can get the default form values
     return () => {
       // Unfortunately on live it saves empty values so we cannot auto save on leave
-      // _saveData();
+      _saveData();
     };
   }, []);
+
+  // useEffect(() => {
+  //   const onbeforeunloadFn = () => {
+  //     console.log('onbeforeunloadFn');
+  //     _saveData();
+  //   };
+
+  //   window.addEventListener('beforeunload', onbeforeunloadFn);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', onbeforeunloadFn);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   const intervalID = setTimeout(() => {
+  //     const formValsToSave = getValues();
+  //     console.log('Get current form data to autoSave... => ');
+  //     setSaveState({
+  //       ...formValsToSave,
+  //     });
+  //   }, 3000);
+
+  //   return () => clearInterval(intervalID);
+  // }, [saveState]);
 
   const filteredConf = config.filter((item, idx) => {
     if (!item.permissions) return item;
