@@ -92,6 +92,7 @@ const EntityFormType = props => {
           // error={error}
           // posting={loading}
           // onSubmit={submitFormWithData}]
+          canSave={true}
           disableCreate={disableCreate}
           onSubmit={submitEntityToLargerConcern}
         />

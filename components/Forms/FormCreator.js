@@ -198,7 +198,8 @@ const FormCreatorMain = props => {
   useEffect(() => {
     // maybe you can get the default form values
     return () => {
-      _saveData();
+      // Unfortunately on live it saves empty values so we cannot auto save on leave
+      // _saveData();
     };
   }, []);
 
