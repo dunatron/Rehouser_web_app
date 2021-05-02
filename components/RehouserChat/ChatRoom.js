@@ -44,19 +44,25 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
         cursor: data.messagesConnection.pageInfo.endCursor,
         skip: data.messagesConnection.edges.length,
       },
-      updateQuery: (prevResult, { fetchMoreResult }) => {
-        const newEdges = fetchMoreResult.messagesConnection.edges;
-        const pageInfo = fetchMoreResult.messagesConnection.pageInfo;
-        return newEdges.length
-          ? {
-              messagesConnection: {
-                __typename: prevResult.messagesConnection.__typename,
-                edges: [...newEdges, ...prevResult.messagesConnection.edges],
-                pageInfo,
-              },
-            }
-          : prevResult;
-      },
+      // Query.messagesConnection TpDo: create merge function
+      // updateQuery: (prevResult, { fetchMoreResult }) => {
+      //   const newEdges = fetchMoreResult.messagesConnection.edges;
+      //   const pageInfo = fetchMoreResult.messagesConnection.pageInfo;
+      //   // return {
+      //   //   __typename: prevResult.messagesConnection.__typename,
+      //   //   edges: [],
+      //   //   pageInfo,
+      //   // };
+      //   return newEdges.length
+      //     ? {
+      //         messagesConnection: {
+      //           __typename: prevResult.messagesConnection.__typename,
+      //           edges: [...newEdges, ...prevResult.messagesConnection.edges],
+      //           pageInfo,
+      //         },
+      //       }
+      //     : prevResult;
+      // },
     });
   };
 
@@ -95,23 +101,23 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
             },
           },
         },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          createMessage: {
-            id: cacheMessageId,
-            chat: chat,
-            __typename: 'Message',
-            content: content,
-            createdAt: '2020-12-01T03:20:45.346Z',
-            isMine: true,
-            sender: {
-              id: me.id,
-              firstName: me.firstName,
-              lastName: me.lastName,
-              __typename: 'User',
-            },
-          },
-        },
+        // optimisticResponse: {
+        //   __typename: 'Mutation',
+        //   createMessage: {
+        //     id: cacheMessageId,
+        //     chat: chat,
+        //     __typename: 'Message',
+        //     content: content,
+        //     // createdAt: '2020-12-01T03:20:45.346Z',
+        //     isMine: true,
+        //     sender: {
+        //       id: me.id,
+        //       firstName: me.firstName,
+        //       lastName: me.lastName,
+        //       __typename: 'User',
+        //     },
+        //   },
+        // },
         update: (proxy, { data }) => {
           if (data && data.createMessage) {
             writeMessage(client, data.createMessage, cacheMessageId);
@@ -126,6 +132,7 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
   if (loading) return 'Loaiding';
   if (error) return <Error error={error} />;
   const { messagesConnection } = data;
+  console.log('Messages connection => ', messagesConnection);
   const mappedMessages = messagesConnection.edges.map(edge => edge.node);
 
   return (
