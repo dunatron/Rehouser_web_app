@@ -390,17 +390,19 @@ const FormCreator = props => {
   };
 
   return (
-    <FormCreatorMain
-      {...props}
-      path={path}
-      data={allData}
-      saveKey={saveKey}
-      saveFormId={
-        saveDataProps.data?.getSavedForm?.id
-          ? saveDataProps.data?.getSavedForm?.id
-          : null
-      }
-    />
+    <NoSsr>
+      <FormCreatorMain
+        {...props}
+        path={path}
+        data={allData}
+        saveKey={saveKey}
+        saveFormId={
+          saveDataProps.data?.getSavedForm?.id
+            ? saveDataProps.data?.getSavedForm?.id
+            : null
+        }
+      />
+    </NoSsr>
   );
 };
 
