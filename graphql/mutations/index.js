@@ -39,6 +39,7 @@ import { UPDATE_WALLET_MUTATION } from './updateWallet';
 import { UPDATE_CONTACT_SUBMISSION_MUTATION } from './updateContactSubmission';
 import { CREATE_FOREIGN_LINK_MUTATION } from './createForeignLink';
 import { UPDATE_FOREIGN_LINK_MUTATION } from './updateForeignLink';
+import { SAVE_FORM_MUTATION } from './saveForm';
 
 export {
   SIGNUP_MUTATION,
@@ -82,4 +83,5 @@ export {
   UPDATE_CONTACT_SUBMISSION_MUTATION,
   CREATE_FOREIGN_LINK_MUTATION,
   UPDATE_FOREIGN_LINK_MUTATION,
+  SAVE_FORM_MUTATION,
 };

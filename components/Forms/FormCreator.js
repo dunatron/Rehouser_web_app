@@ -21,6 +21,10 @@ import Fab from '@material-ui/core/Fab';
 
 import useSavedFormData from './useSavedFormData';
 
+import { useQuery, useMutation } from '@apollo/client';
+import { SAVE_FORM_MUTATION } from '@/Gql/mutations';
+import Loader from '@/Components/Loader';
+
 const configIsValid = config => {
   if (isEmpty(config)) return false;
   if (!is(Array, config)) return false;
@@ -47,10 +51,6 @@ const getKeyTypes = conf => {
   }, {});
 };
 
-const _allData = () => {};
-
-// landlord/properties/add?appraisal_id=cknyy5h1u50nj0999ahdn7ixp
-
 const FormCreatorMain = props => {
   const {
     title,
@@ -72,7 +72,11 @@ const FormCreatorMain = props => {
     disableCreate,
     saveKey,
     stickySave = true,
+    path,
+    canSave,
   } = props;
+
+  const [saveFormId, setSaveFormId] = useState(props.saveFormId);
 
   // awesome we have {me} which now has isAdmin and isWizard
   // we can on the form creator if it has something like requiredPermissions
@@ -86,6 +90,15 @@ const FormCreatorMain = props => {
   const me = currentUser.data ? currentUser.data.me : null;
   const keysWithTypes = getKeyTypes(config);
   const preFormattedFormData = formatData(data, keysWithTypes, 'pre');
+
+  const [saveForm, saveFormProps] = useMutation(SAVE_FORM_MUTATION, {
+    onError: () => toast.error(`Couldnt save ${title}`),
+    onCompleted: data => {
+      setSaveFormId(data.saveForm.id);
+      console.log('Saved data returned => ', data);
+      toast.success(`Sucessfully saved the form`);
+    },
+  });
 
   const {
     register,
@@ -154,10 +167,28 @@ const FormCreatorMain = props => {
 
   const _saveData = () => {
     const formValsToSave = getValues();
-    console.log('Form Vals pre Save ', formValsToSave);
+    // console.log('Form Vals pre Save ', formValsToSave);
 
-    localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
-    toast.success(`${title} Form Data saved`);
+    // localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
+    if (me.id && canSave) {
+      saveForm({
+        variables: {
+          data: {
+            id: saveFormId,
+            name: title,
+            path: path,
+            json: formValsToSave,
+            user: {
+              connect: {
+                id: me?.id,
+              },
+            },
+          },
+        },
+      });
+    }
+
+    // toast.success(`${title} Form Data saved`);
   };
 
   // The location field that does the bad state call needs addressed first
@@ -240,7 +271,7 @@ const FormCreatorMain = props => {
         <FormErrors errors={errors} />
         <Errors error={error} />
         {/* Can only save on new forms as update and save could be confusing */}
-        {isNew && (
+        {isNew && me.id && canSave && (
           <div
             style={
               stickySave
@@ -254,18 +285,21 @@ const FormCreatorMain = props => {
                   }
                 : {}
             }>
-            <Fab
-              variant="extended"
-              size="small"
-              color="primary"
-              aria-label="add"
-              onClick={_saveData}>
-              <SaveIcon />
+            {me.id && canSave && (
+              <Fab
+                variant="extended"
+                size="small"
+                color="primary"
+                aria-label="add"
+                disabled={saveFormProps.loading}
+                onClick={_saveData}>
+                <SaveIcon />
 
-              <Typography variant="button" style={{ margin: '0 4px' }}>
-                SAVE
-              </Typography>
-            </Fab>
+                <Typography variant="button" style={{ margin: '0 4px' }}>
+                  SAVE
+                </Typography>
+              </Fab>
+            )}
           </div>
         )}
         <ButtonGroup
@@ -325,19 +359,48 @@ const FormCreator = props => {
     cancel,
     selectOptionTypes,
     disableCreate,
+    canSave = true,
   } = props;
-  const router = useRouter();
-  const saveKey = `savekey-${title}-${router.asPath}`;
-  const saveDataProps = useSavedFormData({ saveKey: saveKey });
 
-  if (saveDataProps.loading) return <div>Loading Form Data</div>;
+  const router = useRouter();
+  const currentUser = useCurrentUser();
+  const me = currentUser.data ? currentUser.data.me : null;
+
+  const path = router.asPath;
+  const saveKey = `savekey-${title}-${path}`;
+  const saveDataProps = useSavedFormData({
+    name: title,
+    path: path,
+    me: me,
+    canSave,
+  });
+
+  if (saveDataProps.loading)
+    return (
+      <Loader loading={saveDataProps.loading} text="Loading in Form and data" />
+    );
+  if (currentUser.loading) return <div>Loading User</div>;
 
   const allData = {
     ...data,
-    ...saveDataProps.data, // saved updates
+    ...(saveDataProps.data?.getSavedForm?.json && {
+      ...saveDataProps.data.getSavedForm.json,
+    }), // saved updates
   };
 
-  return <FormCreatorMain {...props} data={allData} saveKey={saveKey} />;
+  return (
+    <FormCreatorMain
+      {...props}
+      path={path}
+      data={allData}
+      saveKey={saveKey}
+      saveFormId={
+        saveDataProps.data?.getSavedForm?.id
+          ? saveDataProps.data?.getSavedForm?.id
+          : null
+      }
+    />
+  );
 };
 
 FormCreator.propTypes = {

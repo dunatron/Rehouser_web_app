@@ -26,6 +26,7 @@ import { PROPERTY_LEASES_QUERY } from './propertyLeases';
 import { PUBLIC_USER_QUERY } from './publicUserQuery';
 import { PRIVATE_USER_QUERY } from './privateUserQuery';
 import { CLOUDINARY_ACCESS_QUERY } from './cloudinaryAccess';
+import { GET_SAVED_FORM_QUERY } from './getSavedForm';
 
 export {
   PROPERTIES_QUERY,
@@ -54,5 +55,6 @@ export {
   PUBLIC_USER_QUERY,
   PRIVATE_USER_QUERY,
   CLOUDINARY_ACCESS_QUERY,
+  GET_SAVED_FORM_QUERY,
   chats,
 };

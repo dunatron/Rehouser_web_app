@@ -71,6 +71,7 @@ const PropertyAppraisal = props => {
           config={PROPERTY_APPRAISAL_CONF}
           error={error}
           posting={loading}
+          canSave
           onSubmit={prismaReadyData => {
             createRentalAppraisal({
               variables: {
