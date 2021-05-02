@@ -62,18 +62,19 @@ const ParticleBanner = props => {
   const windowWidth = useCurrentWidth();
 
   // Move main content dom up when using a banner
-  useEffect(() => {
-    const offsetAmount = windowWidth > 600 ? '-64px' : '-56px';
+  // useEffect(() => {
+  //   // const offsetAmount = windowWidth > 600 ? '-64px' : '-56px';
+  //   // const offsetAmount = 0;
 
-    if (window !== undefined && windowUsed === false) {
-      document.getElementById('main-content').style.top = offsetAmount;
-      setWindowUsed(true);
-    }
+  //   if (window !== undefined && windowUsed === false) {
+  //     document.getElementById('main-content').style.top = offsetAmount;
+  //     setWindowUsed(true);
+  //   }
 
-    return () => {
-      window && (document.getElementById('main-content').style.top = '0');
-    };
-  }, [windowWidth]);
+  //   return () => {
+  //     window && (document.getElementById('main-content').style.top = '0');
+  //   };
+  // }, [windowWidth]);
 
   return (
     <div

@@ -98,7 +98,6 @@ const FormCreatorMain = props => {
     onError: () => toast.error(`Couldnt save ${title}`),
     onCompleted: data => {
       setSaveFormId(data.saveForm.id);
-      console.log('Saved data returned => ', data);
       toast.success(`Sucessfully saved the form`);
     },
   });
@@ -171,6 +170,8 @@ const FormCreatorMain = props => {
   const _saveData = () => {
     const formValsToSave = getValues();
     console.log('FORM VALUES on saveData => ', formValsToSave);
+    console.log('autoSave interval State ', saveState);
+
     // console.log('Form Vals pre Save ', formValsToSave);
 
     // localStorage.setItem(saveKey, JSON.stringify(formValsToSave));
@@ -207,29 +208,29 @@ const FormCreatorMain = props => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const onbeforeunloadFn = () => {
-  //     console.log('onbeforeunloadFn');
-  //     _saveData();
-  //   };
+  useEffect(() => {
+    const onbeforeunloadFn = () => {
+      console.log('onbeforeunloadFn');
+      // _saveData();
+    };
 
-  //   window.addEventListener('beforeunload', onbeforeunloadFn);
-  //   return () => {
-  //     window.removeEventListener('beforeunload', onbeforeunloadFn);
-  //   };
-  // }, []);
+    window.addEventListener('beforeunload', onbeforeunloadFn);
+    return () => {
+      window.removeEventListener('beforeunload', onbeforeunloadFn);
+    };
+  }, []);
 
-  // useEffect(() => {
-  //   const intervalID = setTimeout(() => {
-  //     const formValsToSave = getValues();
-  //     console.log('Get current form data to autoSave... => ');
-  //     setSaveState({
-  //       ...formValsToSave,
-  //     });
-  //   }, 3000);
+  useEffect(() => {
+    const intervalID = setTimeout(() => {
+      const formValsToSave = getValues();
+      console.log('Get current form data to autoSave... => ');
+      setSaveState({
+        ...formValsToSave,
+      });
+    }, 3000);
 
-  //   return () => clearInterval(intervalID);
-  // }, [saveState]);
+    return () => clearInterval(intervalID);
+  }, [saveState]);
 
   const filteredConf = config.filter((item, idx) => {
     if (!item.permissions) return item;
@@ -309,7 +310,7 @@ const FormCreatorMain = props => {
                     position: 'sticky',
                     bottom: 0,
                     borderColor: 'red',
-                    zIndex: 999999,
+                    zIndex: 900,
                     padding: '16px 0',
                   }
                 : {}

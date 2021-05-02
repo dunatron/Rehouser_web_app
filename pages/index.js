@@ -30,7 +30,9 @@ const bannerStyles = makeStyles(theme => ({
   btnContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
     // height: '112px',
   },
 }));

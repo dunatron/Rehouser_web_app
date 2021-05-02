@@ -31,12 +31,9 @@ const getDefaultLocation = props => {
     // lng: rawData ? rawData[config.fieldProps.fieldMaps['lng']] : null,
   };
   for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
-    console.log('location Debug: field key => ', key);
-    console.log('location Debug: field value => ', value);
     defaultLocation[key] = rawData[key];
     if (mapToObjectKey) {
       const str = `${mapToObjectKey}.${value}`;
-      console.log('location Debug: mapped str => ', str);
       // register({ name: str }, { ...config.refConf });
       // defaultLocation[key] = rawData[str];
       defaultLocation[key] = rawData[str];
@@ -64,9 +61,6 @@ const Location = props => {
   } = props;
 
   const defaultLocation = getDefaultLocation(props);
-  console.log('location Debug: defaultLocation => ', defaultLocation);
-  console.log('location Debug: rawData => ', rawData);
-  console.log('location Debug: defaultValues => ', defaultValues);
 
   const { fieldProps, refConf, mapToObjectKey, inners } = config;
 
@@ -77,8 +71,6 @@ const Location = props => {
   const [placeId, setPlaceId] = useState(
     rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null
   );
-
-  console.log('location Debug: defaultPlaceId => ', defaultPlaceId);
 
   // const defaultLocation = {
   //   placeId: rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null,
@@ -115,11 +107,8 @@ const Location = props => {
 
   useEffect(() => {
     for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
-      // console.log('location Debug: field key => ', key);
-      // console.log('location Debug: field value => ', value);
       if (mapToObjectKey) {
         const str = `${mapToObjectKey}.${value}`;
-        // console.log('location Debug: mapped str => ', str);
         register({ name: str }, { ...config.refConf });
       } else {
         register({ name: value }, { ...config.refConf });
@@ -136,8 +125,6 @@ const Location = props => {
   if (!fieldProps.fieldMaps) {
     return 'This form component needs fieldProps.fieldMaps to know how to map the values to your prisma ready object';
   }
-
-  console.log('location Debug: default Location => ', defaultLocation);
 
   return (
     <>

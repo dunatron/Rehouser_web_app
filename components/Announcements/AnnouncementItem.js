@@ -42,7 +42,7 @@ const AnnouncementItem = ({
   };
 
   return (
-    <Card className={classes.announcement} square>
+    <Card className={classes.announcement} square component="li">
       <Box className={classes.content} onClick={handleUrlClick}>
         <Typography variant="body1" color="inherit" className={classes.text}>
           {text}
