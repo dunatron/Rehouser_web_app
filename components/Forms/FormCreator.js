@@ -24,6 +24,7 @@ import useSavedFormData from './useSavedFormData';
 import { useQuery, useMutation } from '@apollo/client';
 import { SAVE_FORM_MUTATION } from '@/Gql/mutations';
 import Loader from '@/Components/Loader';
+import NoSsr from '@material-ui/core/NoSsr';
 
 const configIsValid = config => {
   if (isEmpty(config)) return false;
