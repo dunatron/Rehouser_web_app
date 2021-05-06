@@ -10,9 +10,10 @@ const _createParticlesObj = theme => {
   // const dotColor = darkPrimaryColor;
   const lineColor = theme.palette.primary.main;
   const dotColor = theme.palette.primary.dark;
+
   return {
     number: {
-      value: 50,
+      value: 20,
       // value: 300,
       density: {
         enable: true,
@@ -317,83 +318,57 @@ OriginalParticle.propTypes = {
 const ImageParticle = ({ dimensions }) => {
   return (
     <Particles
-      id="rehouser-particles"
-      width={dimensions.width}
-      height={dimensions.height}
       params={{
-        fps_limit: 28,
         particles: {
-          collisions: {
+          number: {
+            value: 2,
+            density: {
+              enable: true,
+              value_area: 20,
+            },
+          },
+          line_linked: {
             enable: false,
           },
-          number: {
-            value: 200,
-            density: {
-              enable: false,
-            },
-          },
-          // line_linked: {
-          //   enable: true,
-          //   distance: 30,
-          //   opacity: 0.4,
-          // },
-          line_linked: {
-            enable: true,
-            distance: 30,
-            color: '#ff5baf',
-            opacity: 0.4,
-            width: 1,
-          },
           move: {
-            speed: 1,
+            speed: 5,
+            out_mode: 'out',
+          },
+          shape: {
+            type: ['image', 'circle'],
+            image: [
+              {
+                src: '/images/svg/react.svg',
+                height: 20,
+                width: 23,
+              },
+              {
+                src: '/images/svg/react.svg',
+                height: 20,
+                width: 20,
+              },
+              {
+                src: '/images/svg/react.svg',
+                height: 20,
+                width: 20,
+              },
+            ],
           },
           color: {
-            value: mainPrimaryColor,
+            value: '#CCC',
           },
-          opacity: {
+          size: {
+            value: 30,
+            random: false,
             anim: {
               enable: true,
-              opacity_min: 0.05,
-              speed: 1,
+              speed: 4,
+              size_min: 10,
               sync: false,
-            },
-            value: 0.4,
-          },
-        },
-        polygon: {
-          enable: true,
-          scale: 0.5,
-          type: 'inline',
-          move: {
-            radius: 10,
-          },
-          // url: 'images/svg/small-deer.svg',
-          url: 'images/svg/ReHouse_main_logo.svg',
-          inline: {
-            arrangement: 'equidistant',
-          },
-          draw: {
-            enable: true,
-            stroke: {
-              color: 'rgba(255, 255, 255, .8)',
             },
           },
         },
         retina_detect: false,
-        interactivity: {
-          events: {
-            onhover: {
-              enable: true,
-              mode: 'bubble',
-            },
-          },
-          modes: {
-            bubble: {
-              size: 6,
-              distance: 40,
-            },
-          },
-        },
       }}
     />
   );

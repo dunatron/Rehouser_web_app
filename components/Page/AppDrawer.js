@@ -39,7 +39,7 @@ const AppDrawer = ({ me }) => {
                   width: '133px',
                 }}>
                 {/* <img src="/images/svg/ReHouse_main_logo.svg" alt="my image" /> */}
-                <SVG name="main_logo" />
+                <SVG name="metatrons_cube" />
               </div>
             </Link>
           </ListItem>
