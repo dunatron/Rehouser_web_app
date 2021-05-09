@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/client';
 import { CREATE_PROPERTY_MUTATION } from '@/Gql/mutations/index';
 import { PROPERTIES_QUERY, OWNER_PROPERTIES_QUERY } from '@/Gql/queries/index';
+import { COMPANY_NAME, COMPANY_LEGAL_NAME } from '@/Lib/const';
 
 import {
   Typography,
@@ -110,11 +111,11 @@ const CheckAndSubmit = ({ me, formData, handlePropertyCreated }) => {
         Check your property details
       </Typography>
       <Typography gutterBottom variant="h5">
-        Rehouser Services Contract
+        {COMPANY_NAME} Services Contract
       </Typography>
       <Typography component="ol" gutterBottom>
         <Typography component="li">PARTIES</Typography>
-        <Typography>Letting Agent: Rehouser Limited.</Typography>
+        <Typography>Letting Agent:{COMPANY_LEGAL_NAME}.</Typography>
         <Typography>
           Owner: {me.firstName} {me.lastName}
         </Typography>

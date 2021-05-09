@@ -21,6 +21,7 @@ import PersonIcon from '@material-ui/icons/PersonOutline';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooksOutlined';
 import ChangeRouteButton from '@/Components/Routes/ChangeRouteButton';
 import ActivityIcon from './ActivityIcon';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const ACTIVITY_QUERY = gql`
   query ACTIVITY_QUERY(
@@ -106,7 +107,7 @@ const ActivitySkeleton = () => {
   const activityItem = {
     __typename: 'Activity',
     id: 'ck7wwuy7c55sz09811znjyea1',
-    title: 'Rehouser Created',
+    title: `${COMPANY_NAME} Created`,
     content: 'Property fields updated',
     jsonObj: {
       data: {

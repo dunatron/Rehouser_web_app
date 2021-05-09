@@ -20,7 +20,7 @@ const AdminLeasesPage = ({ appData: { currentUser } }) => {
         metaData={{
           title: 'Admin leases portal',
           content:
-            'Rehouser admins can visit this page to get all of the property leases that exists in the system',
+            'Admins can visit this page to get all of the property leases that exists in the system',
         }}
       />
       <AdminOnly me={me}>

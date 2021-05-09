@@ -1,11 +1,13 @@
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const SignupTerms = () => {
   return (
     <div>
       <Typography gutterBottom>
-        Please read these terms and conditions carefully before using Rehouser
-        and Rehouser Property Management Limited.
+        Please read these terms and conditions carefully before using{' '}
+        {COMPANY_NAME}
+        and {COMPANY_LEGAL_NAME}.
       </Typography>
       <ol>
         {/* 1 */}
@@ -39,11 +41,11 @@ const SignupTerms = () => {
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
             Copyright Content published on this website (digital downloads,
-            images, texts, graphics, logos) is the property of Rehouser Property
-            Management Limited and/or its content creators and protected by
+            images, texts, graphics, logos) is the property of{' '}
+            {COMPANY_LEGAL_NAME} and/or its content creators and protected by
             international copyright laws. The entire compilation of the content
-            found on this website is the exclusive property of Rehouser Property
-            Management Limited.
+            found on this website is the exclusive property of{' '}
+            {COMPANY_LEGAL_NAME}.
           </Typography>
         </Typography>
         {/* 5 */}
@@ -61,8 +63,8 @@ const SignupTerms = () => {
             Applicable Law By visiting this website, you agree that the laws of
             the New Zealand, without regard to principles of conflict laws, will
             govern these terms and conditions, or any dispute of any sort that
-            might come between Rehouser Property Management Limited and you, or
-            its business partners and associates.
+            might come between {COMPANY_LEGAL_NAME} and you, or its business
+            partners and associates.
           </Typography>
         </Typography>
         {/* 6 */}
@@ -89,7 +91,7 @@ const SignupTerms = () => {
             Content has to be free of software viruses, political campaign, and
             commercial solicitation. We reserve all rights (but not the
             obligation) to remove and/or edit such content. When you post your
-            content, you grant Rehouser PropertyManagement Limited
+            content, you grant {COMPANY_LEGAL_NAME}
             non-exclusive, royalty-free and irrevocable right to use, reproduce,
             publish, modify such content throughout the world in any media.
           </Typography>

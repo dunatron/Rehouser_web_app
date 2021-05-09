@@ -1,10 +1,11 @@
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const AppraisalTerms = () => {
   return (
     <div>
       <Typography gutterBottom>
-        I authorise the Rehouser Property Management to:
+        I authorise the {COMPANY_LEGAL_NAME} to:
       </Typography>
       <ul>
         <Typography component="li" gutterBottom>

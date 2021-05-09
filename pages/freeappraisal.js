@@ -5,6 +5,7 @@ import PropertyAppraisal from '@/Components/PropertyAppraisal';
 import { Typography } from '@material-ui/core';
 
 import PageHeader from '@/Components/PageHeader';
+import ConfirmEmail from '@/Components/ConfirmEmail';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -40,7 +41,11 @@ const FreeAppraisalPage = ({ appData: { currentUser } }) => {
             </Typography>
           </div>
         }>
-        <PropertyAppraisal />
+        <ConfirmEmail
+          me={me}
+          title="You must confrim your email address before requesting an appraisal">
+          <PropertyAppraisal />
+        </ConfirmEmail>
       </PleaseSignIn>
     </div>
   );

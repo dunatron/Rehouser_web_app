@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Typography } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { toast } from 'react-toastify';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent
 const InstallPWAButton = () => {
@@ -20,7 +21,11 @@ const InstallPWAButton = () => {
       interceptBeforeInstallHandler
     );
 
-    return () => window.removeEventListener('transitionend', handler);
+    return () =>
+      window.removeEventListener(
+        'transitionend',
+        interceptBeforeInstallHandler
+      );
   }, []);
 
   // Note: could be removed/changed
@@ -29,13 +34,16 @@ const InstallPWAButton = () => {
     const appinstalledListnerHandler = e => {
       //   e.preventDefault();
       toast.success(
-        <Typography variant="h5">Welcome to the Rehouser PWA</Typography>
+        <Typography variant="h5">
+          Welcome to the {COMPANY_NAME} Progressive Web App
+        </Typography>
       );
       setAppInstalled(true);
     };
     window.addEventListener('appinstalled', appinstalledListnerHandler);
 
-    return () => window.removeEventListener('transitionend', handler);
+    return () =>
+      window.removeEventListener('transitionend', appinstalledListnerHandler);
   }, []);
 
   const onClick = evt => {

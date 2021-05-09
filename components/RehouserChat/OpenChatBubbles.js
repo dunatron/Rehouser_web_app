@@ -6,6 +6,7 @@ import NewChatButton from './NewChatButton';
 import { store } from '@/Store/index';
 import CloseIcon from '@material-ui/icons/Close';
 import { getChatImageUrl } from '@/Lib/getChatImage';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,7 +57,7 @@ const OpenChatBubbles = ({ chats, me }) => {
                 </IconButton>
 
                 <Avatar
-                  alt="Rehouser Chat"
+                  alt={`${COMPANY_NAME} Chat`}
                   src={getChatImageUrl(c, me)}
                   onClick={() =>
                     dispatch({

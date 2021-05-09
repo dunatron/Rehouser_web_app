@@ -209,20 +209,13 @@ const FormCreatorMain = props => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          const vals = getValues();
-          console.log('Current form values', vals);
-        }}>
-        GET VALUES
-      </Button>
       <Card
         style={{
           marginBottom: '16px',
           maxWidth: '800px',
           overflow: 'initial',
         }}>
-        <Typography gutterBottom>* Indicates required field</Typography>
+        {/* <Typography gutterBottom>* Indicates required field</Typography> */}
         {configIsValid(config) &&
           filteredConf.map((item, idx) => {
             // rats and roaches in the building, ima get it like bob the builder(_)

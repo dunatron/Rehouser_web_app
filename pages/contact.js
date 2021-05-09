@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import PageHeader from '@/Components/PageHeader';
 import ContactForm from '@/Components/Contact/ContactForm';
 import { useQuery } from '@apollo/client';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -22,9 +23,8 @@ const ContactPage = props => {
         title="Contact"
         id="contact-page"
         metaData={{
-          title: 'Contact Rehouser Support',
-          content:
-            'Contact the rehouser support team who will be in touch with you promptly',
+          title: `Contact ${COMPANY_NAME} Support`,
+          content: `Contact the ${COMPANY_NAME} support team who will be in touch with you promptly`,
         }}
       />
       <ContactForm />

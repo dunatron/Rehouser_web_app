@@ -168,7 +168,7 @@ const RentalApplicationsTable = ({
         ]}
       />
       <Modal open={isPropertyModalOpen} close={handleClosePropertyModal}>
-        <PropertyPublicDetails id={propertyId} />
+        <PropertyPublicDetails id={propertyId} me={me} />
       </Modal>
     </div>
   );

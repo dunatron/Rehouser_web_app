@@ -4,6 +4,7 @@ import PleaseSignIn from '@/Components/PleaseSignIn';
 import { ActivityManager, Activity } from '@/Components/ActivityManager';
 import PageHeader from '@/Components//PageHeader';
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -13,13 +14,12 @@ const ActivityPage = ({ appData: { currentUser } }) => {
   return (
     <Fragment>
       <PageHeader
-        title="Rehouser Activity"
+        title={`${COMPANY_NAME} Activity`}
         intro="Here is the system activity in regards to you. You can use this to
         quickly see activity on your properties, applications and lease"
         metaData={{
           title: 'Activity',
-          content:
-            'Rehouser system activity where users can view activity in relation to properties, applications and leases',
+          content: `${COMPANY_NAME} system activity where users can view activity in relation to properties, applications and leases`,
         }}
       />
       <PleaseSignIn

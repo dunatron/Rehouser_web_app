@@ -66,6 +66,8 @@ const AutoSave = ({
     }
   };
 
+  if (!me) return null;
+
   return (
     <div
       style={

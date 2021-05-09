@@ -8,6 +8,7 @@ import PageHeader from '@/Components/PageHeader';
 import ConfirmEmail from '@/Components/ConfirmEmail';
 import Dashboard from '@/Components/Dashboard/index';
 import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -19,10 +20,10 @@ const ConfirmAccountPage = ({ appData: { currentUser } }) => {
     <>
       <PageHeader
         title="Confirm account"
-        intro="Confirm rehouser account page"
+        intro={`Confirm ${COMPANY_NAME} account page`}
         metaData={{
           title: 'Confirm account',
-          content: 'Confirm rehouser account page',
+          content: `Confirm ${COMPANY_NAME} account page`,
         }}
       />
       <PleaseSignIn

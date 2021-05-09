@@ -1,12 +1,12 @@
 import Head from 'next/head';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
-const APP_NAME = 'ReHouser Property Management Web App';
-const APP_DESCRIPTION =
-  'Rehouser property management app allows you to look for rental properties on our platform. You can also signup and manage the rental property lease with this app';
+const APP_NAME = `${COMPANY_LEGAL_NAME} Web App`;
+const APP_DESCRIPTION = `${COMPANY_LEGAL_NAME} property management app allows you to look for rental properties on our platform. You can also signup and manage the rental property lease with this app`;
 
 const Meta = () => (
   <Head>
-    <title>ReHouser</title>
+    <title>{COMPANY_NAME}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charSet="utf-8" />
     <meta
@@ -26,7 +26,7 @@ const Meta = () => (
 
     <meta
       name="keywords"
-      content="Property Management, Rental Property, Properties, Housing, Rehouser"
+      content={`Property Management, Rental Property, Properties, Housing, ${COMPANY_NAME}, ${COMPANY_LEGAL_NAME}`}
     />
     <meta name="author" content="Heath Dunlop"></meta>
     {/* TIP: set viewport head meta tag in _app.js, otherwise it will show a warning */}

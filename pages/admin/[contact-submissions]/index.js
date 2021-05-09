@@ -5,6 +5,7 @@ import { Typography } from '@material-ui/core';
 import AdminOnly from '@/Components/AdminOnly';
 
 import ContactSubmissionsTable from '@/Components/Tables/ContactSubmissionsTable';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -18,12 +19,11 @@ const AdminContactSubmissionsPage = ({ appData: { currentUser } }) => {
         title="Contact submissions"
         intro="To track if they have responded and will also render a profile if the email they used was in the system"
         metaData={{
-          title: 'Bank Manager',
-          content: 'Managing rehousers banking system',
+          title: 'Contact Submissions page',
+          content: `Managing ${COMPANY_NAME}'s contact submissions`,
         }}
       />
       <AdminOnly me={me}>
-        <h1>Siri spelt backwards, iriS</h1>
         <ContactSubmissionsTable />
       </AdminOnly>
     </>

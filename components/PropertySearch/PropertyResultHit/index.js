@@ -248,7 +248,9 @@ const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
         open={modalIdx ? true : false}
         close={() => setModalIdx(null)}
         title={`${modalIdx} for ${hit.location}`}>
-        {modalIdx === 'Details' && <PropertyPublicDetails id={hit.id} />}
+        {modalIdx === 'Details' && (
+          <PropertyPublicDetails id={hit.id} me={me} />
+        )}
         {modalIdx === 'Share' && <div>share Modal content</div>}
         {modalIdx === 'Viewings' && (
           <Viewings

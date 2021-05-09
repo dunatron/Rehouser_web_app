@@ -5,6 +5,7 @@ import ConfirmEmail from '@/Components/ConfirmEmail';
 import { Typography } from '@material-ui/core';
 import Dashboard from '@/Components/Dashboard/index';
 import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -23,7 +24,7 @@ const ConfirmAccountWithTokenPage = ({ appData: { currentUser }, query }) => {
         title="Confirm account"
         metaData={{
           title: 'Confirm account',
-          content: 'rehouser platform login',
+          content: `${COMPANY_NAME} platform login`,
         }}
       />
       <ConfirmEmail me={me} token={query.token}>

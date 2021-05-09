@@ -1,5 +1,6 @@
 import PageHeader from '@/Components/PageHeader';
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -15,12 +16,10 @@ const SetThemePage = ({ appData: { currentUser } }) => {
         hidden={false}
         title="Set Theme"
         id="set-theme"
-        intro="Rehouser allows you to set your prefered theme using the material UI guidelines"
+        intro={`${COMPANY_NAME} allows you to set your prefered theme using the material UI guidelines`}
         metaData={{
-          title:
-            'Rehouser allows you to set your prefered theme using the material UI guidelines',
-          content:
-            'Rehouser allows you to set your prefered theme using the material UI guidelines',
+          title: `${COMPANY_NAME} allows you to set your prefered theme using the material UI guidelines`,
+          content: `${COMPANY_NAME} allows you to set your prefered theme using the material UI guidelines`,
         }}
       />
       <ThemeManipulator />

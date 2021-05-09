@@ -27,8 +27,6 @@ const LegalPage = props => {
         config={LEGAL_STATMENTS_DASHBOARD_CONFIG}
         me={me}
         elevation={0}
-        // heading="Legal Statements"
-        // intro="Rehouser Legal statements dashboard"
       />
     </>
   );

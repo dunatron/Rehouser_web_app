@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles(theme => {
   const defaultBg = {
@@ -17,16 +18,19 @@ const useStyles = makeStyles(theme => {
     standardSuccess: {},
     standardInfo: {
       // ...defaultBg,
+      // color: theme.palette.primary.contrastText,
+      // backgroundColor: fade(theme.palette.primary.main, 0.5),
     },
     standardWarning: {},
     standardError: {},
     outlinedSuccess: {
       color: `rgb(183, 223, 185)`,
-      border: `2px solid #4caf50`,
+      border: `2px solid`,
+      borderColor: '#4caf50',
     },
     outlinedInfo: {
-      // border: `1px solid #2196f3`
-      border: `2px solid ${theme.palette.primary.main}`,
+      border: `2px solid`,
+      borderColor: theme.palette.primary.main,
     },
     outlinedWarning: {},
     outlinedError: {},
@@ -35,8 +39,8 @@ const useStyles = makeStyles(theme => {
     filledWarning: {},
     filledError: {},
     icon: {
-      color: theme.palette.primary.main,
-      fontSize: '32px',
+      // color: theme.palette.primary.main,
+      // fontSize: '32px',
     },
     message: {},
     action: {},

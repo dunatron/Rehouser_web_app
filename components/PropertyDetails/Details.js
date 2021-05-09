@@ -1,5 +1,6 @@
 import React, { Component, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 import Alert from '@/Components/Alert';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -263,9 +264,9 @@ const Details = props => {
             </Typography>
             {property.rehouserManaged && (
               <Typography gutterBottom variant="body2">
-                The Property is now managed by Rehouser at this point. You will
-                recieve updates from us along the way allowing you to see the
-                progress of your property
+                The Property is now managed by {COMPANY_NAME} at this point. You
+                will recieve updates from us along the way allowing you to see
+                the progress of your property
               </Typography>
             )}
           </Alert>
@@ -282,8 +283,8 @@ const Details = props => {
               variant="body2"
               style={{ whiteSpace: 'pre-line' }}>
               As A Wizard you will need to add an "Agent" against this property
-              for it to be managed. An agent acts for rehouser on behalf of the
-              property owner {'\n'}
+              for it to be managed. An agent acts for {COMPANY_NAME} on behalf
+              of the property owner {'\n'}
               {'\n'}
               Agents on property: {property.agents.length}
             </Typography>
@@ -356,7 +357,7 @@ const Details = props => {
                   },
                   {
                     name: 'rehouserManaged',
-                    label: 'Managed by Rehouser',
+                    label: `Managed by ${COMPANY_NAME}`,
                     type: 'boolean',
                     icon: <CameraIcon color="default" />,
                     disabled: true,
@@ -450,8 +451,8 @@ const Details = props => {
         )}
         {property.agents.length === 0 && (
           <Alert severity="info">
-            There are no Agents for this property. rehouser will assign an Agent
-            as soon as possible
+            There are no Agents for this property. {COMPANY_NAME} will assign an
+            Agent as soon as possible
           </Alert>
         )}
         {property.agents.length > 0 &&
@@ -496,7 +497,7 @@ const Details = props => {
       <Modal
         open={publicDetailsModalIsOpen}
         close={handleClosePublicDetailsModal}>
-        <PropertyPublicDetails id={property.id} />
+        <PropertyPublicDetails id={property.id} me={me} />
       </Modal>
     </div>
   );

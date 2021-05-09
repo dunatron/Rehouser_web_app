@@ -18,6 +18,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import ResendConfrimEmail from '@/Components/MutationButtons/ResendConfirmEmail';
 import useStyles from './useStyles';
 import Card from '@/Styles/Card';
+import clsx from 'clsx';
 
 const AnnouncementItem = ({
   index,
@@ -41,19 +42,26 @@ const AnnouncementItem = ({
     }
   };
 
+  const contentClasses = clsx({
+    [classes.content]: true,
+    [classes.contentUrl]: url ? true : false,
+  });
+
   return (
     <Card className={classes.announcement} square component="li">
-      <Box className={classes.content} onClick={handleUrlClick}>
-        <Typography variant="body1" color="inherit" className={classes.text}>
-          {text}
-          {/* <Box
+      <Box className={contentClasses} onClick={handleUrlClick}>
+        {text && (
+          <Typography variant="body1" color="inherit" className={classes.text}>
+            {text}
+            {/* <Box
             variant="body2"
             component="span"
             color="inherit"
             className={classes.type}>
             {type}
           </Box> */}
-        </Typography>
+          </Typography>
+        )}
         {actions && (
           <Box className={classes.actions}>
             {actions.map((a, i) => (

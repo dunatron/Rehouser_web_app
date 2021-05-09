@@ -5,6 +5,7 @@ import PageHeader from '@/Components/PageHeader';
 import { Box, Typography } from '@material-ui/core';
 import Dashboard from '@/Components/Dashboard';
 import LANDLORD_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/landlordDashConf';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -18,9 +19,9 @@ const LandlordPage = ({ appData: { currentUser } }) => {
     <>
       <PageHeader
         title="Landlord Portal"
-        intro="Take back control of your investment properties while still allowing a Property Manager to do the hard yards. 
-        Rehouser is structured to show letting property status at every stage of the tenancy lifecycle and notify you of important 
-        information at any stage. You can customise those notifications based on your preferences, so you can be as involved as you like."
+        intro={`Take back control of your investment properties while still allowing a Property Manager to do the hard yards. 
+        ${COMPANY_NAME} is structured to show letting property status at every stage of the tenancy lifecycle and notify you of important 
+        information at any stage. You can customise those notifications based on your preferences, so you can be as involved as you like.`}
         children={[
           <Typography key={1} gutterBottom>
             We do everything to ensure that your investment is managed
@@ -29,7 +30,7 @@ const LandlordPage = ({ appData: { currentUser } }) => {
           </Typography>,
           <Typography key={2} gutterBottom>
             All interactions with Tenants and Property Managers are completed
-            via the Rehouser website to ensure a transparent and seamless
+            via the {COMPANY_NAME} website to ensure a transparent and seamless
             tenancy.
           </Typography>,
           <Typography key={3} variant="h6" gutterBottom>
@@ -48,16 +49,15 @@ const LandlordPage = ({ appData: { currentUser } }) => {
             they will need to provide employment details, rental history,
             previous landlords contact details, references, credit check, photo
             identification and Tenancy Tribunal check. A face to face meeting
-            will then need to be booked with a Rehouser Property Manager for
-            final vetting. All information will be stored on the platform where
-            it will be readily available to the Property Owner.
+            will then need to be booked with a {COMPANY_NAME} Property Manager
+            for final vetting. All information will be stored on the platform
+            where it will be readily available to the Property Owner.
           </Typography>,
         ]}
         metaKeywords="Rentals, Property, Management, Landlord"
         metaData={{
           title: 'Landlord Portal',
-          content:
-            'Manage your rental properties from the rehouser landlord portal',
+          content: `Manage your rental properties from the ${COMPANY_NAME} landlord portal`,
         }}
       />
       <PleaseSignIn
@@ -73,7 +73,7 @@ const LandlordPage = ({ appData: { currentUser } }) => {
             </Typography>
           </Box>
         }>
-        <ConfirmEmail me={me}></ConfirmEmail>
+        <ConfirmEmail me={me} attrs={{ disablePadding: false }}></ConfirmEmail>
       </PleaseSignIn>
       <Dashboard
         config={LANDLORD_DASHBOARD_CONFIG}

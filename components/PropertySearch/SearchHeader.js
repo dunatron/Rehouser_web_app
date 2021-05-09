@@ -1,6 +1,7 @@
 import CustomSearchBox from './CustomSearchBox';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +17,7 @@ const SearchHeader = () => {
   return (
     <div className={classes.root}>
       <Typography color="inherit" variant="h4">
-        ReHouser
+        {COMPANY_NAME}
       </Typography>
       <Typography color="inherit" variant="body1">
         Find my happy home

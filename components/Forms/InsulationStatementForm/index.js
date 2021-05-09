@@ -26,6 +26,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Error from '@/Components/ErrorMessage';
 import FileUploader from '@/Components/FileUploader';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -202,8 +203,8 @@ const InsulationStatementForm = ({
           {requiresRehouser && (
             <Alert severity="info">
               <Typography variant="body1">
-                The owner has requested that Rehouser handle the insulation
-                statement
+                The owner has requested that {COMPANY_NAME} handle the
+                insulation statement
               </Typography>
             </Alert>
           )}

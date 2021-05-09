@@ -7,6 +7,7 @@ import PageHeader from '@/Components/PageHeader';
 import AdminOnly from '@/Components/AdminOnly';
 
 import ADMIN_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/adminDashConf';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -29,8 +30,7 @@ const AdminDashboardPage = ({ appData: { currentUser } }) => {
         intro="The admin portal is where staff can get an overview of the system"
         metaData={{
           title: 'Admin portal',
-          content:
-            'Admin portal to manage rehouser clients and day to day activities',
+          content: `Admin portal to manage ${COMPANY_NAME} clients and day to day activities`,
         }}
       />
       <AdminOnly me={me}>

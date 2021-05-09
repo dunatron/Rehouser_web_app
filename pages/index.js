@@ -3,6 +3,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 // import PropTypes from 'prop-types';
 import ParticleBanner from '@/Components/Banner/ParticleBanner';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 // import Banner from '@/Components/Banner/index';
 
 import { Button, Typography, IconButton } from '@material-ui/core';
@@ -43,7 +44,7 @@ export const HomePageBannerBody = () => {
   return (
     <>
       {/* <Typography variant="h1" className={classes.title}>
-        Rehouser
+        {COMPANY_NAME}
       </Typography> */}
       {/* <div className={classes.logo}></div> */}
       {/* <Image src="/images/svg/metatrons_cube.svg" height={500} width={600} /> */}
@@ -58,7 +59,7 @@ export const HomePageBannerBody = () => {
         />
       </div>
       <Typography variant="h1" gutterBottom>
-        Rehouser
+        {COMPANY_NAME}
       </Typography>
       <div className={classes.btnContainer}>
         <ChangeRouteButton

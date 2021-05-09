@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import FileUploader from '@/Components/FileUploader';
 import { Image, Transformation, CloudinaryContext } from 'cloudinary-react';
 import NoSSRUploadWidget from '@/Components/UploadWidget';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -18,10 +19,10 @@ const TutorialsPage = ({ appData: { currentUser } }) => {
   return (
     <Fragment>
       <PageHeader
-        title="Rehouser Tutorials"
+        title={`${COMPANY_NAME} Tutorials`}
         intro=""
         metaData={{
-          title: 'Rehouser Tutorials',
+          title: `${COMPANY_NAME} Tutorials`,
           content: '',
         }}
       />

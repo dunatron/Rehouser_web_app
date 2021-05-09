@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@/Components/Alert';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 import {
   Avatar,
@@ -70,8 +71,8 @@ export default function FullPublicDetails({ user }) {
         {hasStamp && (
           <Alert severity="success">
             <Typography className={classes.rehouserStamp}>
-              This User has been looked over by rehouser and confirmed that they
-              are who they say they are
+              This User has been looked over by {COMPANY_NAME} and confirmed
+              that they are who they say they are
             </Typography>
           </Alert>
         )}
@@ -79,8 +80,8 @@ export default function FullPublicDetails({ user }) {
           <>
             <Alert severity="info">
               <Typography className={classes.rehouserStamp} gutterBottom>
-                This User is still to recieve the rehouser stamp. This means
-                that that they have not yet been validated
+                This User is still to recieve the {COMPANY_NAME} stamp. This
+                means that that they have not yet been validated
               </Typography>
               <Typography className={classes.rehouserStamp} gutterBottom>
                 We usually validate users after a rental application has been

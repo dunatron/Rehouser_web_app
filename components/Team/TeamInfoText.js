@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const TeamInfoText = () => {
   return (
@@ -16,16 +17,17 @@ const TeamInfoText = () => {
 
       <Typography gutterBottom>
         We offer the full services of a Property Management agency, while giving
-        full transparency into the process through your online Rehouser account.
+        full transparency into the process through your online {COMPANY_NAME}
+        account.
       </Typography>
 
       <Typography gutterBottom>
-        Rehouser management is one part Property Investor and one part Coder,
-        both with the drive to collaborate to offer better value for local
-        landlords.
+        {COMPANY_NAME} management is one part Property Investor and one part
+        Coder, both with the drive to collaborate to offer better value for
+        local landlords.
       </Typography>
       <Typography gutterBottom>
-        Get in touch to see how Rehouser can help manage your Property
+        Get in touch to see how {COMPANY_NAME} can help manage your Property
         portfolio.
       </Typography>
     </>

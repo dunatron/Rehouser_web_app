@@ -16,6 +16,7 @@ const CheckboxFormInput = props => {
         control={
           <Checkbox
             // {...fieldProps}
+            color="primary"
             {...restOfFieldProps}
             name={name}
             defaultChecked={defaultValue}

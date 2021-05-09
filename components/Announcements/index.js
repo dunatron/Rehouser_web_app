@@ -5,6 +5,7 @@ import ResendConfrimEmail from '@/Components/MutationButtons/ResendConfirmEmail'
 import AnnouncementItem from './AnnouncementItem';
 
 import { announcementStore, AnnouncementProvider } from './store';
+import ConfirmEmail from '@/Components/ConfirmEmail';
 
 const Announcements = ({ me, bannerRoutes }) => {
   const router = useRouter();
@@ -18,12 +19,17 @@ const Announcements = ({ me, bannerRoutes }) => {
           type: 'addAnnouncement',
           payload: {
             key: 'validate-email',
-            text: `Email validation has not been completed. Please check your email for an account confirmation email`,
+            // text: `Email validation has not been completed. Please check your email for an account confirmation email`,
             type: 'todo',
             actions: [
-              <ResendConfrimEmail color="inherit" variant="outlined">
-                Resend Email
-              </ResendConfrimEmail>,
+              // <ResendConfrimEmail color="inherit" variant="outlined">
+              //   Resend Email
+              // </ResendConfrimEmail>,
+              <ConfirmEmail
+                me={me}
+                attrs={{ disablePadding: true }}
+                paperProps={{ elevation: 0 }}
+              />,
             ],
           },
         });

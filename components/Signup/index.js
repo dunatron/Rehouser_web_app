@@ -67,8 +67,6 @@ const Signup = props => {
     );
     clearRecaptcha();
 
-    // we should create a message between the admin and rehouser?
-
     props.handleCompleted();
   };
 

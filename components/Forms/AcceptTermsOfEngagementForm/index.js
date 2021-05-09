@@ -14,6 +14,7 @@ import TextPdfGeneratorCombo from '@/Components/Pdfs/TextPdfGeneratorCombo';
 import termsOfEngagementPdfConf from '@/Lib/configs/pdfs/termsOfEngagement';
 
 import PleaseSignIn from '@/Components/PleaseSignIn';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const AcceptTermsOfEngagementForm = ({ me }) => {
   const handleCompleted = data => {
@@ -59,7 +60,7 @@ const AcceptTermsOfEngagementForm = ({ me }) => {
             docConf={{
               title: 'Terms of Engagement',
               author: 'Dunatron',
-              subject: 'Rehouser Terms of Engagement for Landlords',
+              subject: `${COMPANY_NAME} Terms of Engagement for Landlords`,
               keywords: 'Terms of engagement, security, files, pdf',
               creator: 'Heath Dunlop',
               producer: 'Heath Dunlop',
@@ -74,7 +75,7 @@ const AcceptTermsOfEngagementForm = ({ me }) => {
             docConf={{
               title: 'Terms of Engagement',
               author: 'Dunatron',
-              subject: 'Rehouser Terms of Engagement for Landlords',
+              subject: `${COMPANY_NAME} Terms of Engagement for Landlords`,
               keywords: 'Terms of engagement, security, files, pdf',
               creator: 'Heath Dunlop',
               producer: 'Heath Dunlop',

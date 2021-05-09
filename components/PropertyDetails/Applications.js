@@ -11,6 +11,8 @@ import Error from '@/Components/ErrorMessage';
 import ApplicationCard from './ApplicationCard';
 import { Box, Paper, Typography } from '@material-ui/core';
 import { toast } from 'react-toastify';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
+import RehouserPaper from '@/Styles/RehouserPaper';
 
 const RentalApplications = props => {
   const { data, error, loading } = useQuery(RENTAL_APPLICATIONS_QUERY, {
@@ -55,10 +57,7 @@ const RentalApplications = props => {
   return (
     <div>
       {/* <PropertyPendingRentalApplicationsSub property={props.property} /> */}
-      <Paper
-        style={{
-          padding: '16px',
-        }}>
+      <RehouserPaper>
         <Typography gutterBottom>
           You can handle applications for your property here.
         </Typography>
@@ -69,10 +68,10 @@ const RentalApplications = props => {
           signed.
         </Typography>
         <Typography gutterBottom>
-          If the property is rehouserManaged then admins must sign the lease
-          instead.
+          If the property is managed by {COMPANY_NAME} then admins must sign the
+          lease instead.
         </Typography>
-      </Paper>
+      </RehouserPaper>
 
       {data.rentalApplications.map((application, i) => {
         return (

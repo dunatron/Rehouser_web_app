@@ -15,6 +15,7 @@ import {
 
 import styles from '../styles';
 import PageWithFooter from '../PageWithFooter';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // Sections
 import Section1 from './Section1'; // header
@@ -41,9 +42,9 @@ const SecurityStatementPdf = ({ me, lease }) => {
 const SecurityStatementDocument = ({ onRender }) => {
   return (
     <Document
-      title="Rehouser Security Statement"
+      title={`${COMPANY_NAME} Security Statement`}
       author="Dunatron"
-      subject="Rehouser security statement to our users"
+      subject={`${COMPANY_NAME} security statement to our users`}
       keywords="Security statemenet, security, files, pdf"
       creator="Heath Dunlop"
       producer="Heath McDonough"

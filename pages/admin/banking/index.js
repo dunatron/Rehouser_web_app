@@ -3,6 +3,7 @@ import AppraisalManager from '@/AdminComponents/AppraisalManager';
 import PageHeader from '@/Components/PageHeader';
 import { Typography } from '@material-ui/core';
 import AdminOnly from '@/Components/AdminOnly';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -15,10 +16,10 @@ const AdminBankingPage = ({ appData: { currentUser } }) => {
     <>
       <PageHeader
         title="Bank Manager"
-        intro="This is where the rehouser accountant will manage the banking. e.g add bank transfers with there refs into the system"
+        intro="This is where the accountant will manage the banking. e.g add bank transfers with there refs into the system"
         metaData={{
           title: 'Bank Manager',
-          content: 'Managing rehousers banking system',
+          content: `Managing ${COMPANY_NAME}'s banking system`,
         }}
       />
       <AdminOnly me={me}>

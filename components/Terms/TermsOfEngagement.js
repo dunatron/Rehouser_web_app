@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import mePropTypes from '../../propTypes/mePropTypes';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const TermsOfEngagement = ({ me }) => {
   return (
@@ -14,13 +15,13 @@ const TermsOfEngagement = ({ me }) => {
         legislation or regulations issued in relation to that legislation.
       </Typography>
       <Typography gutterBottom>
-        The OWNER hereby employs Rehouser Property Management Ltd to manage the
-        above property as the Owner’s sole Agent on the terms and conditions set
-        out within this agreement form.
+        The OWNER hereby employs {COMPANY_LEGAL_NAME} to manage the above
+        property as the Owner’s sole Agent on the terms and conditions set out
+        within this agreement form.
       </Typography>
       <Typography gutterBottom>
-        The OWNER instructs Rehouser Property Management Ltd to act as the Agent
-        for the Owner in relation to the Tenant and the tenancy.
+        The OWNER instructs {COMPANY_LEGAL_NAME} to act as the Agent for the
+        Owner in relation to the Tenant and the tenancy.
       </Typography>
       <Typography component="ol">
         {/* 1 */}
@@ -65,7 +66,7 @@ const TermsOfEngagement = ({ me }) => {
               Business and Innovation) on my/our behalf at a rate of three or
               four weeks rent. The bond will be paid within 21 days of receipt
               and to refund any part of the bonds at the end of tenancies that
-              Rehouser Property Managememnt Ltd decides is fair and reasonable.
+              {COMPANY_LEGAL_NAME} decides is fair and reasonable.
             </Typography>
             <Typography component="li" gutterBottom>
               be proactive and take reasonable steps in order to ensure payment
@@ -74,11 +75,11 @@ const TermsOfEngagement = ({ me }) => {
               the Owners discretion to obtain money owed from the tenant.
             </Typography>
             <Typography component="li" gutterBottom>
-              Rehouser Property Management Ltd has the right to exercise
-              Landlords right to end a Tenancy or serve notices to a Tenant and
-              take reasonable action against the Tenant which may involve
-              obtaining an order of possession or an order to terminate the
-              tenancy with assistance from the Tribunal.
+              {COMPANY_LEGAL_NAME} has the right to exercise Landlords right to
+              end a Tenancy or serve notices to a Tenant and take reasonable
+              action against the Tenant which may involve obtaining an order of
+              possession or an order to terminate the tenancy with assistance
+              from the Tribunal.
             </Typography>
             <Typography component="li" gutterBottom>
               complete dispute resolution with tenants by negotiation, mediation
@@ -117,11 +118,11 @@ const TermsOfEngagement = ({ me }) => {
               will be beyond $300 plus GST will the work be completed.
             </Typography>
             <Typography component="li" gutterBottom>
-              Repairs in an emergency situation that Rehouser Property
-              Management Ltd consider will impact the comfort and/or rentability
-              of the property, or Health and Safety issues will not require
-              my/our approval if I cannot be contacted. Best efforts to contact
-              you will be made
+              Repairs in an emergency situation that {COMPANY_LEGAL_NAME}{' '}
+              consider will impact the comfort and/or rentability of the
+              property, or Health and Safety issues will not require my/our
+              approval if I cannot be contacted. Best efforts to contact you
+              will be made
             </Typography>
           </Typography>
         </Typography>
@@ -158,8 +159,8 @@ const TermsOfEngagement = ({ me }) => {
         {/* 10 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            Rehouser property Management Ltd shall be entitled to be remunerated
-            for its services for holiday rentals as follows:
+            {COMPANY_LEGAL_NAME} shall be entitled to be remunerated for its
+            services for holiday rentals as follows:
           </Typography>
           <Typography
             component="ol"
@@ -175,10 +176,10 @@ const TermsOfEngagement = ({ me }) => {
         {/* 11 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            Rehouser Property Management Ltd will be remunerated for the
-            services it delivers – this is also outlined on our schedule of
-            fees: Rehouser Property Management Ltd can alter their fees by
-            providing one months notice written.
+            {COMPANY_LEGAL_NAME} will be remunerated for the services it
+            delivers – this is also outlined on our schedule of fees:{' '}
+            {COMPANY_LEGAL_NAME} can alter their fees by providing one months
+            notice written.
           </Typography>
           <Typography
             component="ol"
@@ -187,8 +188,7 @@ const TermsOfEngagement = ({ me }) => {
               listStyleType: 'lower-alpha',
             }}>
             <Typography component="li" gutterBottom>
-              Rental Income Collected - 7% will be Rehouser Property Management
-              Ltd’s Fee.
+              Rental Income Collected - 7% will be {COMPANY_LEGAL_NAME}’s Fee.
             </Typography>
             <Typography component="li" gutterBottom>
               on completion of each individual inspection for each Owners
@@ -214,9 +214,9 @@ const TermsOfEngagement = ({ me }) => {
               Owner.
             </Typography>
             <Typography component="li" gutterBottom>
-              any other costs incurred to Rehouser Property Management not
-              outlined here necessary for the agent to complete their management
-              of the property - these will be discussed with you at the time.
+              any other costs incurred to {COMPANY_LEGAL_NAME} not outlined here
+              necessary for the agent to complete their management of the
+              property - these will be discussed with you at the time.
             </Typography>
             <Typography component="li" gutterBottom>
               Advertising fee of $69 + GST per listing. Not on charged for long
@@ -231,54 +231,53 @@ const TermsOfEngagement = ({ me }) => {
         {/* 12 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            The Owner gives consent for Rehouser Property Management Ltd to pay
-            relevant bills which have been authorised in the accounts to be paid
-            section in the appendix 2. These amounts will be deducted from rent
-            when the cost is incurred. If the bills are in excess of the rent
-            collected then the Owner will pay the difference as soon as possible
-            to Rehouser Property Management Ltd. A statement will be provided to
-            the Owner outlining all of the money that has been paid to the Owner
-            at the end of the tenancy or when requested.
+            The Owner gives consent for {COMPANY_LEGAL_NAME} to pay relevant
+            bills which have been authorised in the accounts to be paid section
+            in the appendix 2. These amounts will be deducted from rent when the
+            cost is incurred. If the bills are in excess of the rent collected
+            then the Owner will pay the difference as soon as possible to
+            {COMPANY_LEGAL_NAME}. A statement will be provided to the Owner
+            outlining all of the money that has been paid to the Owner at the
+            end of the tenancy or when requested.
           </Typography>
         </Typography>
 
         {/* 13 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            Rehouser Property Management Ltd is as where stated to pay outgoings
-            regularly (rates, insurances, etc). Rehouser Property Management Ltd
-            will be permitted to deduct fees for services and compensation for
-            monies expended on my account, from any monies collected from rent.
-            Where there are no monies held I/we agree to compensate Rehouser
-            Property Management Ltd within fourteen days of receiving the
-            request.
+            {COMPANY_LEGAL_NAME} is as where stated to pay outgoings regularly
+            (rates, insurances, etc). {COMPANY_LEGAL_NAME} will be permitted to
+            deduct fees for services and compensation for monies expended on my
+            account, from any monies collected from rent. Where there are no
+            monies held I/we agree to compensate {COMPANY_LEGAL_NAME} within
+            fourteen days of receiving the request.
           </Typography>
         </Typography>
         {/* 14 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            Rehouser Property Management Ltd is not responsible for arranging
-            Landlord Insurance Protection unless is instructed to do so in
-            writing by the Owner for the specified property.
+            {COMPANY_LEGAL_NAME} is not responsible for arranging Landlord
+            Insurance Protection unless is instructed to do so in writing by the
+            Owner for the specified property.
           </Typography>
         </Typography>
         {/* 15 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            Rehouser Property Management Ltd shall use its best endeavours to
-            ensure continuity of rental and maintenance of the property(ies),
-            but shall not be liable for any default in payment of rent or any
-            damage caused to the property, vacant or occupied, by any tenant or
-            otherwise, whether or not a tenancy has been arranged by Rehouser
-            Property Management Ltd.
+            {COMPANY_LEGAL_NAME} shall use its best endeavours to ensure
+            continuity of rental and maintenance of the property(ies), but shall
+            not be liable for any default in payment of rent or any damage
+            caused to the property, vacant or occupied, by any tenant or
+            otherwise, whether or not a tenancy has been arranged by{' '}
+            {COMPANY_LEGAL_NAME}.
           </Typography>
         </Typography>
         {/* 16 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            Rehouser Property Management Ltd shall not be responsible for any
-            injury to persons and/or damage to the property arising out of the
-            condition of, or any hazard in or about, the property.
+            {COMPANY_LEGAL_NAME} shall not be responsible for any injury to
+            persons and/or damage to the property arising out of the condition
+            of, or any hazard in or about, the property.
           </Typography>
         </Typography>
         {/* 17 */}
@@ -291,18 +290,18 @@ const TermsOfEngagement = ({ me }) => {
         {/* 18 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
-            The owner(s) may terminate Rehousers Ltd involvement by giving three
-            calendar months notice in writing. Our minimum fee will apply.
-            Rehouser Property Management Ltd reserves the right to cancel this
-            agreement without notice.
+            The owner(s) may terminate {COMPANY_NAME}'s involvement by giving
+            three calendar months notice in writing. Our minimum fee will apply.
+            {COMPANY_LEGAL_NAME} reserves the right to cancel this agreement
+            without notice.
           </Typography>
         </Typography>
         {/* 19 */}
         <Typography component="li" gutterBottom>
           <Typography gutterBottom>
             Three sets of keys are required for new management. If the owner
-            does provide three sets of keys, Rehouser Property Management Ltd is
-            entitled to organise this at the owners cost.
+            does provide three sets of keys, {COMPANY_LEGAL_NAME} is entitled to
+            organise this at the owners cost.
           </Typography>
         </Typography>
       </Typography>

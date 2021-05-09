@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import PageHeader from '@/Components/PageHeader';
 import AcceptTermsOfEngagementForm from '@/Components/Forms/AcceptTermsOfEngagementForm';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -16,12 +17,9 @@ const TermsOfEngagementPage = props => {
   return (
     <>
       <PageHeader
-        // title="Terms of engagement"
-        // intro="These are the terms of engagement a landlord will need to agree to so Rehouser Property Management Ltd can act on their behalf."
         metaData={{
-          title: 'Rehouser | Terms of engagement',
-          content:
-            'These are the terms of engagement a landlord will need to agree to so Rehouser Property Management Ltd can act on their behalf.',
+          title: `${COMPANY_NAME} | Terms of engagement`,
+          content: `These are the terms of engagement a landlord will need to agree to so ${COMPANY_LEGAL_NAME} can act on their behalf.`,
         }}
       />
       <AcceptTermsOfEngagementForm me={me} />

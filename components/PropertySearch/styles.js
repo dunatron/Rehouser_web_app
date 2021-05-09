@@ -145,8 +145,9 @@ const SearchInterface = styled.div`
     // background-color: ${props =>
       `${props.theme.palette.primary.contrastText};`}
     border: ${props => `2px solid ${props.theme.palette.primary.main};`}
-    color: ${props => `${props.theme.palette.primary.main};`}
+    color: ${props => `${props.theme.palette.primary.contrastColor};`}
     margin-right: ${props => `${props.theme.spacing(1)}px;`}
+    font-weight: 700;
     font-size: 1rem;
     padding: 4px;
     max-width: 180px;

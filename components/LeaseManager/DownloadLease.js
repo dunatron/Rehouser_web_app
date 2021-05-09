@@ -8,6 +8,7 @@ import Collapse from '@material-ui/core/Collapse';
 
 import TextPdfGeneratorCombo from '@/Components/Pdfs/TextPdfGeneratorCombo';
 import _generateLeasePdf from '@/Lib/configs/pdfs/_generateLeasePdf';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -55,11 +56,11 @@ const DownloadLease = ({ lease, me }) => {
           config={leasePdfConf}
           docConf={{
             title: 'Lease',
-            author: 'Rehouser',
-            subject: 'Rehouser Property Lease',
-            keywords: 'Rehouser, property, lease, pdf',
-            creator: 'Rehouser',
-            producer: 'Rehouser',
+            author: COMPANY_LEGAL_NAME,
+            subject: `${COMPANY_NAME} Property Lease`,
+            keywords: `${COMPANY_NAME}, property, lease, pdf`,
+            creator: COMPANY_NAME,
+            producer: COMPANY_NAME,
           }}
         />
       </Collapse>

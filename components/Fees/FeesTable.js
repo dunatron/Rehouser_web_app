@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { COMPANY_NAME } from '@/Lib/const';
 
 const useStyles = makeStyles({
   container: {
@@ -34,7 +35,7 @@ const rows = [
   ),
   createData(
     'Advertising Fees',
-    'Marketing of property on Realestate.co.nz, Facebook and Rehouser',
+    `Marketing of property on Realestate.co.nz, Facebook and ${COMPANY_NAME}`,
     '$59 plus GST'
   ),
   createData(

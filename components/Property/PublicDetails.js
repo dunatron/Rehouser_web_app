@@ -6,7 +6,7 @@ import CarouselSlider from '@/Components/CarouselSlider';
 
 import Error from '@/Components/ErrorMessage';
 import Loader from '@/Components/Loader';
-import { Typography, Chip, Box } from '@material-ui/core';
+import { Typography, Chip, Box, List } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,6 +21,8 @@ import {
   RichText,
   Title,
 } from '@/Components/Displays';
+
+import UserDetails from '@/Components/UserDetails';
 
 // icons
 import BathtubIcon from '@material-ui/icons/Bathtub';
@@ -42,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PropertyPublicDetails = ({ id }) => {
+const PropertyPublicDetails = ({ id, me }) => {
   const classes = useStyles();
   const { data, loading, error } = useQuery(SINGLE_PROPERTY_QUERY, {
     fetchPolicy: 'cache-and-network',
@@ -212,6 +214,14 @@ const PropertyPublicDetails = ({ id }) => {
         variant="default"
         color="default"
       />
+      <div>
+        <Typography variant="h6">Agents</Typography>
+        <List style={{ maxWidth: '280px' }}>
+          {property.agents.map((agent, idx) => (
+            <UserDetails user={agent} key={agent.id} me={me} />
+          ))}
+        </List>
+      </div>
     </div>
   );
 };

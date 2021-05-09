@@ -18,6 +18,7 @@ import AcceptTermsOfEngagementForm from '@/Components/Forms/AcceptTermsOfEngagem
 import AssociatedAppraisal from './AssociatedAppraisal';
 import RPaper from '@/Styles/RehouserPaper';
 import Alert from '@/Components/Alert';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const LoadingAppraisal = () => (
   <Loader loading={true} text="Loading in Appraisal" />
@@ -170,9 +171,9 @@ const CreatePropertyComponent = props => {
         handleCreateMore={handleCreateMore}
         show={createdPropertyId}>
         <Typography gutterBottom color="inherit">
-          Rehouser Property Management Ltd will be in contact to arrange for
-          their three keys to be handed over and photos of the property to be
-          taken if this has not already occurred.
+          {COMPANY_LEGAL_NAME} will be in contact to arrange for their three
+          keys to be handed over and photos of the property to be taken if this
+          has not already occurred.
         </Typography>
         <Typography gutterBottom color="inherit">
           You can now rest easy knowing your investment is in safe hands. We

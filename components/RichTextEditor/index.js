@@ -3,6 +3,7 @@ import { is, isEmpty } from 'ramda';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { useTheme } from '@material-ui/core/styles';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const MyBlock = props => {
   const theme = useTheme();
@@ -23,7 +24,7 @@ const RichTextEdit = ({ defaultValue, onSave, viewOnly }) => {
     <div>
       <MUIRichTextEditor
         defaultValue={defaultValue}
-        label="Rehouser WYSYWYG Editor..."
+        label={`${COMPANY_NAME} WYSYWYG Editor...`}
         onSave={onSave}
         readOnly={viewOnly ? true : false}
         // "title", "bold", "italic", "underline", "strikethrough", "highlight", "undo", "redo", "link", "media", "numberList", "bulletList", "quote", "code", "clear", "save"

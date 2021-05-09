@@ -6,6 +6,7 @@ import Loader from '@/Components/Loader';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { CLOUDINARY_ACCESS_QUERY } from '@/Gql/queries/index';
 import moment from 'moment';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const MediaLibrary = ({ options, onUploadCompleted }) => {
   const [loaded, setLoaded] = useState(false);
@@ -74,7 +75,7 @@ const MediaLibrary = ({ options, onUploadCompleted }) => {
             makeCloudinaryAccess();
           }}>
           {!loaded
-            ? 'Get Cloudinary Access from Rehouser Server'
+            ? `Get Cloudinary Access from ${COMPANY_NAME} Server`
             : 'Refresh Access Token'}
         </Button>
         <div>

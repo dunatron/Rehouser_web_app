@@ -26,8 +26,7 @@ const AdminAppraisalsPage = ({ appData: { currentUser } }) => {
         ]}
         metaData={{
           title: 'Admin portal',
-          content:
-            'Admin portal to manage rehouser clients and day to day activities',
+          content: 'Admin portal to manage clients and day to day activities',
         }}
       />
       <AdminOnly me={me}>

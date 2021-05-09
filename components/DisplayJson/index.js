@@ -3,7 +3,7 @@ import { IconButton, Typography, Box } from '@material-ui/core';
 
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import RehouserPaper from '@/Styles/RehouserPaper';
+import { COMPANY_NAME } from '@/Lib/const';
 
 const DisplayJson = ({ json, title }) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ const DisplayJson = ({ json, title }) => {
           {open ? <VisibilityIcon /> : <VisibilityOffIcon />}
         </IconButton>
         <Typography variant="h6">
-          {title ? title : 'rehouser data dump'}
+          {title ? title : `${COMPANY_NAME} data dump`}
         </Typography>
       </Box>
       {open && (

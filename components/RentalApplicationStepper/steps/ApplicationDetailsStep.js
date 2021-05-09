@@ -32,6 +32,7 @@ import {
 } from '@/Gql/mutations/index';
 import Error from '@/Components/ErrorMessage';
 import InviteUser from '@/Components/User/Invite';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const ApplicationDetailsStep = ({
   property,
@@ -167,7 +168,7 @@ const ApplicationDetailsStep = ({
             Please make sure to submit the changed data at the bottom
           </Typography>
           <InviteUser
-            message={`Signup to the Rehouser platform and join me in my rental application for the property ${property.location}`}
+            message={`Signup to the ${COMPANY_NAME} platform and join me in my rental application for the property ${property.location}`}
             subUrl={`/tenant/applications/${rentalApplication.id}`}
           />
         </>

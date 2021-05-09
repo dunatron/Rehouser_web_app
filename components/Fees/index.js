@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FeesTable from './FeesTable';
 import { Typography } from '@material-ui/core';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 const useStyles = makeStyles({
   table: {
@@ -36,7 +37,8 @@ const Fees = () => {
           Maintenance management
         </Typography>
         <Typography component="li" gutterBottom>
-          Access to your own Rehouser digital Property Management portfolio
+          Access to your own {COMPANY_NAME} digital Property Management
+          portfolio
         </Typography>
         <Typography component="li" gutterBottom>
           Downloadable contracts and official documents
@@ -55,7 +57,7 @@ const Fees = () => {
           Rental Appraisal / Agreed Rental Amount
         </Typography>
         <Typography component="li" gutterBottom>
-          Rehouser Management form agreed to and confirmed.
+          {COMPANY_NAME} Management form agreed to and confirmed.
         </Typography>
         <Typography component="li" gutterBottom>
           Owners Instruction form.

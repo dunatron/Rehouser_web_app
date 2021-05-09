@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import OpenSuperLoginButton from '@/Components/SuperLogin/OpenSuperLoginButton';
 import Router from 'next/router';
 import ButtonLoader from '@/Components/Loader/ButtonLoader';
+import ConfirmEmail from '@/Components/ConfirmEmail';
 
 const handleLink = ({ route, query }) => {
   Router.push({
@@ -81,7 +82,9 @@ const Apply = props => {
   }
 
   return (
-    <div>
+    <ConfirmEmail
+      me={me}
+      title="You must confrim your email address before applying">
       <div style={{ padding: '16px' }}>
         <Error error={error} />
         <Modal
@@ -110,7 +113,7 @@ const Apply = props => {
           setApplicationData(rentalData);
         }}
       /> */}
-    </div>
+    </ConfirmEmail>
   );
 };
 

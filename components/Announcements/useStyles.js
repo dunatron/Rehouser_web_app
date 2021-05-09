@@ -28,8 +28,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     width: '100%',
     opacity: 0.85,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    border: '5px solid',
+    borderColor: theme.palette.primary.main,
+    // backgroundColor: theme.palette.primary.main,
+    // color: theme.palette.primary.contrastText,
   },
   content: {
     display: 'flex',
@@ -38,20 +40,25 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     width: '100%',
     padding: '16px',
+  },
+  contentUrl: {
     '&:hover': {
       opacity: 1,
       cursor: 'pointer',
-      // backgroundColor: theme.palette.primary.main,
-      // color: theme.palette.primary.contrastText,
     },
   },
-  text: {},
+  text: {
+    marginBottom: '16px',
+  },
   type: {},
   closeBox: {
-    padding: '16px 16px 16px 0',
+    // padding: '16px 16px 16px 0',
+    position: 'relative',
+    top: '-12px',
   },
   close: {
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.main,
+    transition: 'all .25s ease-in-out',
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
@@ -61,7 +68,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     color: theme.palette.primary.main,
-    marginTop: '16px',
+    marginBottom: '8px',
   },
   action: {
     marginRight: '8px',

@@ -3,6 +3,7 @@ import React from 'react';
 
 import PageHeader from '@/Components/PageHeader';
 import AdminOnly from '@/Components/AdminOnly';
+import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 
 // examples
 import {
@@ -97,7 +98,7 @@ const ConnectedTypographyPage = ({ appData: { currentUser } }) => {
   return (
     <>
       <PageHeader
-        title="Rehouser Brand Styles"
+        title={`${COMPANY_NAME} Brand Styles`}
         intro="Here are our global styles we have defined. I will try to expand on this collection, but the main parts are typography and buttons"
         metaData={{
           title: 'Admin Settings',

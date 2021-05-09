@@ -5,14 +5,21 @@ import { Typography } from '@material-ui/core';
 import RehouserPaper from '@/Styles/RehouserPaper';
 import { useRouter } from 'next/router';
 
-const ConfirmEmail = ({ me, children, token, title }) => {
+const ConfirmEmail = ({
+  me,
+  children,
+  token,
+  title,
+  attrs,
+  paperProps = {},
+}) => {
   const router = useRouter();
 
   const confirmEmailToken = token ? token : router.query.token;
 
   if (!me) {
     return (
-      <RehouserPaper>
+      <RehouserPaper attrs={attrs} {...paperProps}>
         <Typography variant="h5" gutterBottom color="textPrimary">
           To confirm your email you must first be logged in
         </Typography>
@@ -22,7 +29,7 @@ const ConfirmEmail = ({ me, children, token, title }) => {
   }
   if (!me.emailValidated)
     return (
-      <RehouserPaper>
+      <RehouserPaper attrs={attrs} {...paperProps}>
         <Typography variant="h6" gutterBottom color="textPrimary">
           {title
             ? title
