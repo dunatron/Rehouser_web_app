@@ -12,7 +12,7 @@ const DisplayJson = ({ json, title }) => {
 
   // Todo: look for me. must be an admin or just return null
   return (
-    <RehouserPaper>
+    <>
       <Box
         style={{
           display: 'flex',
@@ -38,7 +38,7 @@ const DisplayJson = ({ json, title }) => {
           <pre>{JSON.stringify(json, null, 2)}</pre>
         </Box>
       )}
-    </RehouserPaper>
+    </>
   );
 };
 

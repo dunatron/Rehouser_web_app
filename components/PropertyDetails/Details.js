@@ -61,6 +61,7 @@ import EditableDisplay from '@/Components/EditableDisplay';
 import PROPERTY_DETAILS_EDITABLE_DISPLAY_CONF from '@/Lib/configs/editableDisplays/propertyDetails';
 import Modal from '@/Components/Modal';
 import ForeignLinksTable from '@/Components/Tables/ForeignLinksTable';
+import SyncPropertyWithSearch from '@/Components/Property/SyncWithSearch';
 
 // icons
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -296,9 +297,15 @@ const Details = props => {
           </Alert>
         </RehouserPaper>
       )}
+
       {me.isAgent ||
         (me.isWizard && (
-          <DisplayJson title="Show property data" json={property}></DisplayJson>
+          <RehouserPaper>
+            <SyncPropertyWithSearch id={property.id} />
+            <DisplayJson
+              title="Show property data"
+              json={property}></DisplayJson>
+          </RehouserPaper>
         ))}
 
       <RehouserPaper>

@@ -94,6 +94,7 @@ const useStyles = makeStyles(theme => ({
   leftLine: {
     stroke: theme.palette.primary.main,
     strokeWidth: strokeWidth,
+    // strokeWidth: '2px',
   },
   topLeftBotRightLine: {
     // stroke: theme.palette.primary.main,
