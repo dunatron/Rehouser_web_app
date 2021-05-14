@@ -79,7 +79,7 @@ const mainPalette = {
     type: 'light',
     background: { paper: '#fff', default: '#fafafa' },
     primary: {
-      // light: lightPrimaryColor,
+      light: lightPrimaryColor,
       main: mainPrimaryColor,
       dark: darkPrimaryColor,
       contrastText: primaryContrastText,
