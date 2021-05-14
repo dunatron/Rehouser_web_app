@@ -14,6 +14,8 @@ import Dashboard from '@/Components/Dashboard';
 
 import HOME_PAGE_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/homepageDashConf';
 
+// static/images/avatar/1.jpg
+
 import { makeStyles } from '@material-ui/core/styles';
 import SVG from '@/Components/Svg';
 

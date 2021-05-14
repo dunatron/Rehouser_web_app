@@ -9,6 +9,8 @@ import moment from 'moment';
 import Loader from '@/Components/Loader';
 import Error from '@/Components/ErrorMessage';
 
+import Image from 'material-ui-image';
+
 export const MY_CHATS_QUERY = gql`
   query MY_CHATS_QUERY(
     $where: ChatWhereInput
@@ -99,8 +101,8 @@ const ChatsList = ({ me }) => {
 
 ChatsList.propTypes = {
   me: PropTypes.shape({
-    id: PropTypes.any
-  }).isRequired
+    id: PropTypes.any,
+  }).isRequired,
 };
 
 export default ChatsList;

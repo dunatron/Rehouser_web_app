@@ -47,7 +47,8 @@ const RChat = props => {
       {...props}
       wrapperStyle={{
         left: {
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.grey[300],
+          color: theme.palette.common.black,
           maxWidth: '212px',
         },
         right: {
@@ -63,7 +64,8 @@ const RChat = props => {
       // }}
       textStyle={{
         left: {
-          color: theme.palette.primary.contrastText,
+          // color: theme.palette.primary.contrastText,
+          color: theme.palette.common.black,
         },
         right: {
           color: theme.palette.primary.contrastText,
