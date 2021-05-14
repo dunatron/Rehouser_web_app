@@ -9,7 +9,12 @@ import FabButton from '@/Styles/FabButton';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import TextInput from '@/Styles/TextInput';
 import Router from 'next/router';
-import { Button, Checkbox, FormControlLabel } from '@material-ui/core';
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+} from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { SIGNUP_MUTATION } from '@/Gql/mutations';
 // import ReCAPTCHA from 'react-google-recaptcha';
@@ -57,7 +62,9 @@ const Signup = props => {
 
     toast.info(
       <div>
-        <h1>Congrats on signing up</h1>
+        <Typography variant="h6" gutterBottom>
+          Congrats on signing up
+        </Typography>
         {accountBtn}
       </div>,
       {

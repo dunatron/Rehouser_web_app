@@ -35,6 +35,13 @@ export const writeMessage = async (client, message, optimisticId) => {
     variables: variables,
   });
 
+  console.log('WHAT ARE THESE PRECIOUS => ', data);
+  //   messagesConnection:
+  // aggregate: {__typename: "AggregateMessage", count: 10}
+  // edges: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+  // pageInfo: {__typename: "PageInfo", hasNextPage: true, startCursor: "ckoo3x5vk9zib0999j4rns7n9", endCursor: "ckoo3vcr1psze0a26yz68qfb1"}
+  // __typename: "MessageConnection"
+
   // new message to write
   const pagedMesssage = {
     cursor: message.id,
@@ -52,6 +59,8 @@ export const writeMessage = async (client, message, optimisticId) => {
     return edge;
   });
 
+  console.log('FILTERED MESSAGES => ', filteredMessages);
+
   // // filter out optimistic message
   // const filteredMessages = data.messagesConnection.edges.filter((edge, idx) => {
   //   if (edge.cursor === optimisticId && isOptimisticMessage) return;
@@ -64,8 +73,18 @@ export const writeMessage = async (client, message, optimisticId) => {
     variables: variables,
     data: {
       messagesConnection: {
-        ...data.messagesConnection,
+        aggregate: {
+          __typename: 'AggregateMessage',
+          count: data.messagesConnection.aggregate.count + 1,
+        },
+        pageInfo: {
+          __typename: 'PageInfo',
+          hasNextPage: true,
+          startCursor: 'ckoo3x5vk9zib0999j4rns7n9',
+          endCursor: 'ckoo3vcr1psze0a26yz68qfb1',
+        },
         edges: [...filteredMessages],
+        __typename: 'MessageConnection',
         // edges: [pagedMesssage, ...filteredMessages],
       },
     },

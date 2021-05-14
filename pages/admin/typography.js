@@ -20,8 +20,10 @@ import {
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import { Typography, Button } from '@material-ui/core';
+import { toast } from 'react-toastify';
 
 import RichTextEditor from '@/Components/RichTextEditor';
 
@@ -67,6 +69,19 @@ const EXAMPLES_CONF = [
     label: 'Toast/Notifiction',
     component: (
       <div>
+        <Button onClick={() => toast.success('Some success toast')}>
+          Toast Success
+        </Button>
+        <Button onClick={() => toast('defgault')}>Toast default</Button>
+        <Button onClick={() => toast.info('Some info toast')}>
+          Toast Info
+        </Button>
+        <Button onClick={() => toast.warning('Some error toast')}>
+          Toast Warning
+        </Button>
+        <Button onClick={() => toast.error('Some error toast')}>
+          Toast Info
+        </Button>
         <a
           target="_blank"
           href="https://fkhadra.github.io/react-toastify/introduction/?fbclid=IwAR0oopCjlLHWyUVYdYy7XFu6Lk9qKdCaW_3HFtYQP-hY9Yz--GxNb_ut1_w">

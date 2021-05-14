@@ -12,7 +12,7 @@ const CustomToastContainer = () => {
       }}
       closeButton={
         <div>
-          <IconButton color={'primary'} aria-label="Delete">
+          <IconButton color={'inherit'} aria-label="Delete">
             <CloseIcon fontSize="small" />
           </IconButton>
         </div>

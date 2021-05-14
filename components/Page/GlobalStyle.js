@@ -65,12 +65,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .Toastify__toast--info {
-    background: ${p => p.theme.palette.primary.main};
+    background: ${p => p.theme.palette.primary.light};
     color: ${p => p.theme.palette.primary.contrastText};
   }
   .Toastify__toast--success {
-    background: ${p => p.theme.palette.primary.main};
-    color: ${p => p.theme.palette.primary.contrastText};
+    background: #07bc0c;
+    color: #fff};
   }
   .Toastify__toast--warning {
     background: #f1c40f;
