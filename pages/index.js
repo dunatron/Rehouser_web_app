@@ -54,8 +54,8 @@ export const HomePageBannerBody = () => {
           name="metatrons_cube"
           padding
           // width="140px"
-          canShowAdminPanel={false}
-          adminPanel={false}
+          canShowAdminPanel={true}
+          adminPanel={true}
         />
       </div>
       <Typography variant="h1" gutterBottom>

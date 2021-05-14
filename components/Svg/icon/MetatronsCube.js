@@ -52,7 +52,8 @@ const useStyles = makeStyles(theme => ({
     // stroke: 'none',
   },
   centreCircle: {
-    fill: 'none',
+    // fill: 'none',
+    fill: fade(theme.palette.primary.dark, 0.7),
     // stroke: theme.palette.primary.contrastText,
     // stroke: theme.palette.background.default,
     stroke: theme.palette.primary.main,
@@ -64,16 +65,6 @@ const useStyles = makeStyles(theme => ({
     stroke: theme.palette.primary.main,
     strokeWidth: '3px',
   },
-  topOuterTri: {
-    fill: 'none',
-    stroke: theme.palette.text.primary,
-    strokeWidth: strokeWidth,
-  },
-  upsidedownOuterTri: {
-    fill: 'none',
-    stroke: theme.palette.text.primary,
-    strokeWidth: strokeWidth,
-  },
   innerHexagon: {
     // fill: 'none',
     fill: fade(theme.palette.primary.light, 0.5),
@@ -81,6 +72,31 @@ const useStyles = makeStyles(theme => ({
     stroke: theme.palette.primary.main,
     strokeWidth: strokeWidth,
   },
+  // outerHexagon: {
+  //   // fill: 'none',
+  //   fill: fade(theme.palette.primary.main, 0.3),
+  //   // stroke: 'black',
+  //   stroke: theme.palette.primary.main,
+  //   strokeWidth: '3px',
+  // },
+  // innerHexagon: {
+  //   // fill: 'none',
+  //   fill: fade(theme.palette.primary.main, 0.6),
+  //   // fill: theme.palette.primary.light,
+  //   stroke: theme.palette.primary.main,
+  //   strokeWidth: strokeWidth,
+  // },
+  topOuterTri: {
+    fill: 'none',
+    stroke: theme.palette.primary.main,
+    strokeWidth: strokeWidth,
+  },
+  upsidedownOuterTri: {
+    fill: 'none',
+    stroke: theme.palette.primary.main,
+    strokeWidth: strokeWidth,
+  },
+
   topInnerTri: {
     fill: 'none',
     stroke: theme.palette.primary.main,
@@ -140,7 +156,8 @@ const SVG = ({
   });
 
   const [shapeState, setShapeState] = useState({
-    circles: false,
+    centerCircle: true,
+    middleCircles: false,
     outerHexagon: true,
     topOuterTri: false,
     upsidedownOuterTri: false,
@@ -224,24 +241,6 @@ const SVG = ({
             id="path2898"
           /> */}
           {/* LEFT LINE */}
-          <path
-            d="M51.5,147.5 L215.5,241.5"
-            // style="fill:none;stroke:black"
-            className={classes.leftLine}
-            id="path2898"
-          />
-          <path
-            d="M215.5,241.5 L215.5,429.5"
-            // style="fill:none;stroke:black"
-            className={classes.leftLine}
-            id="path2898"
-          />
-          <path
-            d="M215.5,241.5 L379.5,147.5"
-            // style="fill:none;stroke:black"
-            className={classes.leftLine}
-            id="path2898"
-          />
 
           {/* DUMMY CIRCLE */}
           {/* <path
@@ -268,101 +267,66 @@ const SVG = ({
             className={classes.style1}
             id="path1933"
           /> */}
-          {shapeState.circles && (
-            <g id="g7542">
-              {/* 1.  Middle Circle */}
+
+          <g id="g7542">
+            {/* 1.  Middle Circle */}
+            {shapeState.centerCircle && (
               <path
                 d="M 262.5 241.5 A 47 47 0 1 1  168.5,241.5 A 47 47 0 1 1  262.5 241.5 z"
                 // style="fill:none;stroke:black"
                 className={classes.centreCircle}
                 id="path1933"
               />
-              {/* 2.  Bottom Inner circle */}
-              <path
-                d="M 262.5 335.5 A 47 47 0 1 1  168.5,335.5 A 47 47 0 1 1  262.5 335.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.middleCircle}
-                id="path1961"
-              />
-              {/* 3. Top inner circle */}
-              <path
-                d="M 262.5 147.5 A 47 47 0 1 1  168.5,147.5 A 47 47 0 1 1  262.5 147.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.middleCircle}
-                id="path1967"
-              />
-              {/* 4. inner top left circle */}
-              <path
-                d="M 180.5 194.5 A 47 47 0 1 1  86.5,194.5 A 47 47 0 1 1  180.5 194.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.middleCircle}
-                id="path1971"
-              />
-              {/* 5. Inner top Right */}
-              <path
-                d="M 344.5 194.5 A 47 47 0 1 1  250.5,194.5 A 47 47 0 1 1  344.5 194.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.middleCircle}
-                id="path1973"
-              />
-              {/* 6. Inner bot Left circle  */}
-              <path
-                d="M 180.5 288.5 A 47 47 0 1 1  86.5,288.5 A 47 47 0 1 1  180.5 288.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.middleCircle}
-                id="path1979"
-              />
-              {/* 7. Inner Bot left circle */}
-              <path
-                d="M 344.5 288.5 A 47 47 0 1 1  250.5,288.5 A 47 47 0 1 1  344.5 288.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.middleCircle}
-                id="path1981"
-              />
-              {/* 8. Bot circle */}
-              <path
-                d="M 262.5 429.5 A 47 47 0 1 1  168.5,429.5 A 47 47 0 1 1  262.5 429.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.outerCircle}
-                id="path1963"
-              />
-              {/* 9. Top Circle */}
-              <path
-                d="M 262.5 53.5 A 47 47 0 1 1  168.5,53.5 A 47 47 0 1 1  262.5 53.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.outerCircle}
-                id="path1965"
-              />
-              {/* 10. Top left circle */}
-              <path
-                d="M 98.5 147.5 A 47 47 0 1 1  4.5,147.5 A 47 47 0 1 1  98.5 147.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.outerCircle}
-                id="path1969"
-              />
-              {/* 11. Top right circle */}
-              <path
-                d="M 426.5 147.5 A 47 47 0 1 1  332.5,147.5 A 47 47 0 1 1  426.5 147.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.outerCircle}
-                id="path1975"
-              />
-              {/* 12. Bottom left circle  */}
-              <path
-                d="M 98.5 335.5 A 47 47 0 1 1  4.5,335.5 A 47 47 0 1 1  98.5 335.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.outerCircle}
-                id="path1977"
-              />
-              {/* 13. Bottom right circle  */}
-              <path
-                d="M 426.5 335.5 A 47 47 0 1 1  332.5,335.5 A 47 47 0 1 1  426.5 335.5 z"
-                // style="fill:none;stroke:black"
-                className={classes.outerCircle}
-                id="path1983"
-              />
-            </g>
-          )}
+            )}
+
+            {/* 2.  Bottom Inner circle */}
+            {shapeState.middleCircles && (
+              <>
+                {' '}
+                <path
+                  d="M 262.5 335.5 A 47 47 0 1 1  168.5,335.5 A 47 47 0 1 1  262.5 335.5 z"
+                  // style="fill:none;stroke:black"
+                  className={classes.middleCircle}
+                  id="path1961"
+                />
+                {/* 3. Top inner circle */}
+                <path
+                  d="M 262.5 147.5 A 47 47 0 1 1  168.5,147.5 A 47 47 0 1 1  262.5 147.5 z"
+                  // style="fill:none;stroke:black"
+                  className={classes.middleCircle}
+                  id="path1967"
+                />
+                {/* 4. inner top left circle */}
+                <path
+                  d="M 180.5 194.5 A 47 47 0 1 1  86.5,194.5 A 47 47 0 1 1  180.5 194.5 z"
+                  // style="fill:none;stroke:black"
+                  className={classes.middleCircle}
+                  id="path1971"
+                />
+                {/* 5. Inner top Right */}
+                <path
+                  d="M 344.5 194.5 A 47 47 0 1 1  250.5,194.5 A 47 47 0 1 1  344.5 194.5 z"
+                  // style="fill:none;stroke:black"
+                  className={classes.middleCircle}
+                  id="path1973"
+                />
+                {/* 6. Inner bot Left circle  */}
+                <path
+                  d="M 180.5 288.5 A 47 47 0 1 1  86.5,288.5 A 47 47 0 1 1  180.5 288.5 z"
+                  // style="fill:none;stroke:black"
+                  className={classes.middleCircle}
+                  id="path1979"
+                />
+                {/* 7. Inner Bot left circle */}
+                <path
+                  d="M 344.5 288.5 A 47 47 0 1 1  250.5,288.5 A 47 47 0 1 1  344.5 288.5 z"
+                  // style="fill:none;stroke:black"
+                  className={classes.middleCircle}
+                  id="path1981"
+                />
+              </>
+            )}
+          </g>
 
           <g id="g7557">
             {/* 1. Outer hexagon */}
@@ -489,6 +453,24 @@ const SVG = ({
               // style="fill:none;stroke: transparent;"
               className={classes.style2}
               id="path2910"
+            />
+            <path
+              d="M51.5,147.5 L215.5,241.5"
+              // style="fill:none;stroke:black"
+              className={classes.leftLine}
+              id="path2898"
+            />
+            <path
+              d="M215.5,241.5 L215.5,429.5"
+              // style="fill:none;stroke:black"
+              className={classes.leftLine}
+              id="path2898"
+            />
+            <path
+              d="M215.5,241.5 L379.5,147.5"
+              // style="fill:none;stroke:black"
+              className={classes.leftLine}
+              id="path2898"
             />
           </g>
         </g>

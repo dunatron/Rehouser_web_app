@@ -20,10 +20,9 @@ import RChat from '@/Components/RChat';
 const ChatRoomScreen = ({ me, chat, chatId }) => {
   const client = useApolloClient();
 
-  const { data, loading, error, fetchMore, refetch } = useQuery(
+  const { data, loading, error, fetchMore } = useQuery(
     MESSAGES_CONNECTION_QUERY,
     {
-      fetchPolicy: 'network-only',
       variables: {
         orderBy: MESSAGES_CONNECTION_ORDER_BY,
         first: MESSAGES_CONNECTION_FIRST,
@@ -36,27 +35,6 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
       },
     }
   );
-
-  //   messagesConnection:
-  // aggregate:
-  // count: 5
-  // __typename: "AggregateMessage"
-  // __proto__: Object
-  // edges: Array(5)
-  // 0: {__typename: "MessageEdge", cursor: "ckoo0x5xapqxv0a26gl14prbo", node: {…}}
-  // 1: {__typename: "MessageEdge", cursor: "ckoo0x39c9uts09998yfn4hld", node: {…}}
-  // 2: {__typename: "MessageEdge", cursor: "ckoo0v1439uqg0999okz83d91", node: {…}}
-  // 3: {__typename: "MessageEdge", cursor: "ckoo0s8vkpqtt0a267rpxv8of", node: {…}}
-  // 4: {__typename: "MessageEdge", cursor: "ckonzmyqt9sti0999oo0m987d", node: {…}}
-  // length: 5
-  // __proto__: Array(0)
-  // pageInfo:
-  // endCursor: "ckonzmyqt9sti0999oo0m987d"
-  // hasNextPage: true
-  // startCursor: "ckoo0x5xapqxv0a26gl14prbo"
-  // __typename: "PageInfo"
-  // __proto__: Object
-  // __typename: "MessageConnection"
 
   const handleFetchMore = () => {
     if (!data.messagesConnection) return null;
@@ -147,7 +125,7 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
         //     chat: chat,
         //     __typename: 'Message',
         //     content: content,
-        //     // createdAt: '2020-12-01T03:20:45.346Z',
+        //     createdAt: '2020-12-01T03:20:45.346Z',
         //     isMine: true,
         //     sender: {
         //       id: me.id,
@@ -168,10 +146,9 @@ const ChatRoomScreen = ({ me, chat, chatId }) => {
   );
 
   if (!chat) return null;
-  if (loading) return 'Loading';
+  if (loading) return 'Loaiding';
   if (error) return <Error error={error} />;
   const { messagesConnection } = data;
-  console.log('Messages connection => ', messagesConnection);
   const mappedMessages = messagesConnection.edges.map(edge => edge.node);
 
   return (
