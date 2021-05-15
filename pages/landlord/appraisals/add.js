@@ -3,10 +3,6 @@ import PleaseSignIn from '@/Components/PleaseSignIn';
 import PropertyAppraisal from '@/Components/PropertyAppraisal';
 import ConfirmEmail from '@/Components/ConfirmEmail';
 
-// server side props
-import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
-import { CURRENT_USER_QUERY } from '@/Gql/queries';
-
 const LandlordAppraisalAddPage = ({ appData: { currentUser } }) => {
   const me = currentUser.data ? currentUser.data.me : null;
   return (
@@ -16,7 +12,7 @@ const LandlordAppraisalAddPage = ({ appData: { currentUser } }) => {
       <ConfirmEmail
         me={me}
         title="You must confrim your email address before requesting an appraisal">
-        <PropertyAppraisal />
+        <PropertyAppraisal me={me} />
       </ConfirmEmail>
     </PleaseSignIn>
   );

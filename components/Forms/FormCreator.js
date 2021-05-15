@@ -78,6 +78,7 @@ const FormCreatorMain = props => {
     stickySave = true,
     path,
     canSave,
+    disableCard = false,
   } = props;
 
   const [saveFormId, setSaveFormId] = useState(props.saveFormId);
@@ -207,6 +208,94 @@ const FormCreatorMain = props => {
     return item;
   });
 
+  const mainBuild = (
+    <>
+      {configIsValid(config) &&
+        filteredConf.map((item, idx) => {
+          return (
+            <div key={idx}>
+              <InputFieldType
+                {...props}
+                config={item}
+                key={idx}
+                register={register}
+                unregister={unregister}
+                reset={reset}
+                errors={errors}
+                setValue={setValue}
+                getValues={getValues}
+                setError={setError}
+                clearError={handleClearError}
+                _saveData={_saveData}
+                rawData={data}
+                folder={folder}
+                defaultValues={preFormattedFormData}
+                refetchQueries={refetchQueries}
+                updateCacheOnRemovedFile={updateCacheOnRemovedFile}
+                defaultValue={
+                  configIsValid(config)
+                    ? preFormattedFormData[
+                        item.fieldProps ? item.fieldProps.name : null
+                      ]
+                    : null
+                }
+              />
+              {errors[item.name] && item.errorMessage}
+            </div>
+          );
+        })}
+      <FormErrors errors={errors} />
+      <Errors error={error} />
+      <AutoSave
+        title={title}
+        getValues={getValues}
+        stickySave={stickySave}
+        me={me}
+        canSave={canSave}
+        saveFormId={props.saveFormId}
+        path={path}
+      />
+      <ButtonGroup
+        style={{
+          marginTop: '16px',
+        }}
+        color="primary"
+        aria-label="outlined primary button group square">
+        {!disableCreate && (
+          <ButtonLoader
+            loading={posting ? posting : false}
+            text={isNew ? _createText() : _updateText()}
+            onClick={handleSubmit(onSubmit)}
+            btnProps={{
+              startIcon: isNew ? <AddIcon /> : <EditIcon />,
+              variant: 'contained',
+              color: 'primary',
+            }}
+          />
+        )}
+        {hasCancel && (
+          <Button disabled={posting} onClick={cancel}>
+            <AddIcon />
+            Cancel
+          </Button>
+        )}
+      </ButtonGroup>
+    </>
+  );
+
+  if (disableCard)
+    return (
+      <div
+        style={{
+          marginTop: '16px',
+          marginBottom: '16px',
+          maxWidth: '800px',
+          overflow: 'initial',
+        }}>
+        {mainBuild}
+      </div>
+    );
+
   return (
     <>
       <Card
@@ -215,85 +304,14 @@ const FormCreatorMain = props => {
           maxWidth: '800px',
           overflow: 'initial',
         }}>
+        {/* <Button
+          onClick={() => {
+            console.log('VALUES +> ', getValues());
+          }}>
+          SHOW VALSE
+        </Button> */}
         {/* <Typography gutterBottom>* Indicates required field</Typography> */}
-        {configIsValid(config) &&
-          filteredConf.map((item, idx) => {
-            // rats and roaches in the building, ima get it like bob the builder(_)
-            // with so much i could rebuild Anoya
-            // const label = `${item?.fieldProps?.label} ${isRequired && '*'}`;
-            return (
-              <div key={idx}>
-                <InputFieldType
-                  // label={item?.fieldProps?.label} for whatever reaseeon only sets the first field...
-                  {...props}
-                  // isRequired={isRequired}
-                  config={item}
-                  key={idx}
-                  register={register}
-                  unregister={unregister}
-                  reset={reset}
-                  errors={errors}
-                  setValue={setValue}
-                  getValues={getValues}
-                  setError={setError}
-                  clearError={handleClearError}
-                  // rawData={data}
-                  _saveData={_saveData}
-                  rawData={data}
-                  folder={folder}
-                  defaultValues={preFormattedFormData}
-                  refetchQueries={refetchQueries}
-                  updateCacheOnRemovedFile={updateCacheOnRemovedFile}
-                  defaultValue={
-                    configIsValid(config)
-                      ? preFormattedFormData[
-                          item.fieldProps ? item.fieldProps.name : null
-                        ]
-                      : null
-                  }
-                />
-                {errors[item.name] && item.errorMessage}
-              </div>
-            );
-          })}
-        <FormErrors errors={errors} />
-        <Errors error={error} />
-        <AutoSave
-          title={title}
-          getValues={getValues}
-          stickySave={stickySave}
-          me={me}
-          canSave={canSave}
-          saveFormId={props.saveFormId}
-          path={path}
-        />
-        <ButtonGroup
-          style={{
-            marginTop: '16px',
-          }}
-          color="primary"
-          aria-label="outlined primary button group square">
-          {/* MAKE THIS A BUTTON LOADER PLEASE */}
-          {!disableCreate && (
-            <ButtonLoader
-              loading={posting ? posting : false}
-              text={isNew ? _createText() : _updateText()}
-              onClick={handleSubmit(onSubmit)}
-              btnProps={{
-                startIcon: isNew ? <AddIcon /> : <EditIcon />,
-                variant: 'contained',
-                color: 'primary',
-              }}
-            />
-          )}
-
-          {hasCancel && (
-            <Button disabled={posting} onClick={cancel}>
-              <AddIcon />
-              Cancel
-            </Button>
-          )}
-        </ButtonGroup>
+        {mainBuild}
       </Card>
     </>
   );

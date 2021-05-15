@@ -14,7 +14,9 @@ import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
 import { CURRENT_USER_QUERY } from '@/Gql/queries';
 
-const ConfirmAccountPage = ({ appData: { currentUser } }) => {
+import SendConfrimEmailButton from '@/Components/MutationButtons/SendConfrimEmailButton';
+
+const ConfirmAccountPage = ({ appData: { currentUser }, query }) => {
   const me = currentUser.data ? currentUser.data.me : null;
   return (
     <>
@@ -26,31 +28,7 @@ const ConfirmAccountPage = ({ appData: { currentUser } }) => {
           content: `Confirm ${COMPANY_NAME} account page`,
         }}
       />
-      <PleaseSignIn
-        currentUser={currentUser}
-        alert={
-          <div>
-            <Typography gutterBottom color="inherit">
-              <strong>Please Sign In</strong>
-            </Typography>
-            <Typography gutterBottom color="inherit">
-              You must be signed in to confirm your account
-            </Typography>
-          </div>
-        }>
-        <ConfirmEmail me={me} token={''}>
-          <Typography variant="h5" gutterBottom>
-            Congratulations your {`account's`} email address has now been
-            validated
-          </Typography>
-          <Dashboard
-            config={HOME_PAGE_DASHBOARD_CONFIG}
-            elevation={1}
-            heading=""
-            intro={''}
-          />
-        </ConfirmEmail>
-      </PleaseSignIn>
+      <SendConfrimEmailButton email={query.email} />
     </>
   );
 };

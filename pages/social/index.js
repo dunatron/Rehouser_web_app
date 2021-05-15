@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import PleaseSignIn from '@/Components/PleaseSignIn';
 import Dashboard from '@/Components/Dashboard';
-import SOCIAL_DASHBOARD_CONFIG from '@/Lib/configs/socialDashboard';
+import SOCIAL_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/socialDashboard';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';

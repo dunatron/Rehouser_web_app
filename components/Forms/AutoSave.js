@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
-import { isEmpty, is } from 'ramda';
-import Errors from '@/Components/ErrorMessage';
-import InputFieldType from './InputFieldType/index';
 import { Typography, Button, ButtonGroup } from '@material-ui/core';
 import FormErrors from './FormErrors';
 import formatData from './formatters/formatData';
@@ -27,6 +21,28 @@ import Loader from '@/Components/Loader';
 import NoSsr from '@material-ui/core/NoSsr';
 import { useDebouncedCallback } from 'use-debounce';
 
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  stickySave: {
+    position: '-webkit-sticky',
+    position: 'sticky',
+    bottom: 0,
+    zIndex: 900,
+    // padding: '16px 0',
+    padding: 0,
+  },
+  fabRoot: {
+    borderRadius: '0 !important',
+    padding: '100px',
+  },
+}));
+
 const AutoSave = ({
   getValues,
   stickySave,
@@ -37,6 +53,7 @@ const AutoSave = ({
   path,
   submitting,
 }) => {
+  const classes = useStyles();
   const [saveForm, saveFormProps] = useMutation(SAVE_FORM_MUTATION, {
     onError: () => toast.error(`Couldnt save ${title}`),
     onCompleted: data => {
@@ -66,22 +83,19 @@ const AutoSave = ({
     }
   };
 
+  const saveBtnContainerClasses = clsx({
+    [classes.saveBtnContainer]: true,
+    [classes.stickySave]: stickySave,
+  });
+
+  const fabRootClasses = clsx({
+    [classes.fabRoot]: true,
+  });
+
   if (!me) return null;
 
   return (
-    <div
-      style={
-        stickySave
-          ? {
-              position: '-webkit-sticky',
-              position: 'sticky',
-              bottom: 0,
-              borderColor: 'red',
-              zIndex: 900,
-              padding: '16px 0',
-            }
-          : {}
-      }>
+    <div className={saveBtnContainerClasses}>
       {me.id && canSave && (
         <Fab
           disabled={saveFormProps.loading}
@@ -89,6 +103,9 @@ const AutoSave = ({
           size="small"
           color="primary"
           aria-label="add"
+          classes={{
+            root: fabRootClasses,
+          }}
           onClick={_saveData}>
           <SaveIcon />
 

@@ -1,19 +1,46 @@
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import Map from '@/Components/Map/index';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import StyledGeoSuggest from '@/Styles/GeoSuggest';
+
+import Geosuggest from 'react-geosuggest';
 
 // icons
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import {
+  Tooltip,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+} from '@material-ui/core';
+
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import PublicIcon from '@material-ui/icons/Public';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import { CSSTransition } from 'react-transition-group';
+
+const useStyles = makeStyles(theme => ({
+  noLocationContainer: {
+    padding: '16px',
+    width: '100%',
+    border: `1px dashed ${theme.palette.grey[400]}`,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+}));
 
 /**
  * This is not ok,
  * https://github.com/facebook/react/issues/14994
  */
-const LocationPicker = ({ selection, defaultLocation, id, label }) => {
+const LocationPicker = ({ selection, defaultLocation, id, label, onClear }) => {
+  const classes = useStyles();
   const geosuggestEl = useRef(null);
   const defaultState = {
     placeId: null,
@@ -27,6 +54,8 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
     // type: 'ALL',
   };
   const [state, setState] = useState(defaultState);
+  const [mapIn, setMapIn] = useState(defaultState.placeId ? true : false);
+  const [alertIn, setAlertIn] = useState(defaultState.placeId ? false : true);
 
   const fixtures = [
     // { label: 'New York', location: { lat: 40.7033127, lng: -73.979681 } },
@@ -74,6 +103,8 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
       lng: location.lng,
       desc: description,
     });
+    // setMapIn(true);
+    setAlertIn(false);
   };
 
   const _getZoom = desc => {
@@ -98,10 +129,33 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
     return 18;
   };
 
+  const handleClear = () => {
+    setMapIn(false);
+  };
+
+  const handleOnMapExit = () => {
+    setState({
+      ...state,
+      placeId: null,
+      desc: '',
+      lat: null,
+      lng: null,
+    });
+    geosuggestEl.current.clear();
+    onClear();
+    setAlertIn(true);
+  };
+
+  const handleOnAlertExit = () => {
+    setMapIn(true);
+  };
+
   return (
     <div>
-      <StyledGeoSuggest
+      <Geosuggest
         label={label}
+        type="search"
+        autoComplete="off"
         id={id}
         ref={geosuggestEl}
         placeholder={
@@ -112,6 +166,7 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
         country="nz"
         queryDelay={250}
         initialValue={defaultLocation.desc ? defaultLocation.desc : ''}
+        radius="20"
         // types={['establishment', 'geocode', 'regions', 'cities']}
         location={
           new google.maps.LatLng(
@@ -119,29 +174,73 @@ const LocationPicker = ({ selection, defaultLocation, id, label }) => {
             defaultLocation.lng ? defaultLocation.lng : 168.89592100000004
           )
         }
-        radius="20"
+        renderSuggestItem={suggestion => {
+          return (
+            <ListItem button divider>
+              <ListItemIcon>
+                <LocationCityIcon />
+              </ListItemIcon>
+              <ListItemText primary={suggestion.description} />
+            </ListItem>
+          );
+        }}
       />
-      {state.showMap && state.desc && (
-        <Map
-          center={{
-            lat: state.lat,
-            lng: state.lng,
-          }}
-          zoom={_getZoom(state.desc)}
-        />
-      )}
-      {state.desc && (
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            padding: '16px 0',
-            alignItems: 'center',
-          }}>
-          <LocationOnIcon color="primary" />
-          <Typography style={{ padding: '8px 16px' }}>{state.desc}</Typography>
+      <CSSTransition
+        in={mapIn}
+        timeout={600}
+        classNames="rehouser-fade"
+        unmountOnExit
+        // onEnter={() => setShowButton(false)}
+        onExited={() => handleOnMapExit()}>
+        <div>
+          {state.showMap && state.desc && (
+            <Map
+              center={{
+                lat: state.lat,
+                lng: state.lng,
+              }}
+              zoom={_getZoom(state.desc)}
+            />
+          )}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'no-wrap',
+              padding: '16px 0',
+              alignItems: 'center',
+            }}>
+            <LocationOnIcon color="primary" />
+            <Typography style={{ padding: '8px 16px' }}>
+              {state.desc}
+            </Typography>
+            <Tooltip
+              title="Remove location data"
+              aria-label="remove location data">
+              <IconButton onClick={() => handleClear()}>
+                <RemoveCircleOutlineIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
         </div>
-      )}
+      </CSSTransition>
+      <CSSTransition
+        in={alertIn}
+        timeout={600}
+        classNames="rehouser-fade"
+        onExited={() => handleOnAlertExit()}
+        unmountOnExit>
+        <div className={classes.noLocationContainer}>
+          <Typography variant="h6" gutterBottom>
+            NO LOCATION SELECTED
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Please use the places dropdown picker above
+          </Typography>
+          <Typography variant="body2">
+            (Ensure you have selected the option from the list)
+          </Typography>
+        </div>
+      </CSSTransition>
     </div>
   );
 };

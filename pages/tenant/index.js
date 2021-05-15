@@ -3,7 +3,7 @@ import PleaseSignIn from '@/Components/PleaseSignIn';
 import PageHeader from '@/Components/PageHeader';
 import { Typography } from '@material-ui/core';
 import Dashboard from '@/Components/Dashboard';
-import TENANT_DASHBOARD_CONFIG from '@/Lib/configs/tenantDashboardConfig';
+import TENANT_DASHBOARD_CONFIG from '@/Lib/configs/dashboards/tenantDashboardConfig';
 
 // server side props
 import { initializeApollo, addApolloState } from '@/Lib/apolloClient';
@@ -35,8 +35,8 @@ const TenantPage = ({ appData: { currentUser } }) => {
         <Dashboard
           config={TENANT_DASHBOARD_CONFIG}
           elevation={10}
-          heading="Tenant Dashboard"
-          intro="Here is the tenant portal dashboard"
+          // heading="Tenant Dashboard"
+          // intro="Here is the tenant portal dashboard"
         />
       </PleaseSignIn>
     </>

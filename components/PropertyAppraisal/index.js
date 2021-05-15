@@ -27,7 +27,15 @@ const PropertyAppraisal = props => {
     const msg = `Rental Appraisal has been requested, you will receive an email confirming this. We will contact you to confirm the appraisal. \n RentalAppraisal ID ${id}`;
     setSentAppraisal(true);
     setMessage(msg);
-    toast.success(msg);
+    toast.success(msg, {
+      position: 'top-right',
+      autoClose: 30000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const handleCreateMore = () => {

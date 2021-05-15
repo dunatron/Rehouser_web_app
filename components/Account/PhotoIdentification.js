@@ -100,6 +100,7 @@ const PhotoIdentification = props => {
         forceFormUpdates={true}
         refetchQueries={refetchQueries}
         updateCacheOnRemovedFile={(cache, result) => {}}
+        disableCard
         onSubmit={data =>
           updateUser({
             variables: {

@@ -9,6 +9,7 @@ const ConfirmEmail = ({
   me,
   children,
   token,
+  email,
   title,
   attrs,
   paperProps = {},
@@ -16,18 +17,19 @@ const ConfirmEmail = ({
   const router = useRouter();
 
   const confirmEmailToken = token ? token : router.query.token;
+  const foundEmail = me?.email ? me.email : email;
 
-  if (!me) {
-    return (
-      <RehouserPaper attrs={attrs} {...paperProps}>
-        <Typography variant="h5" gutterBottom color="textPrimary">
-          To confirm your email you must first be logged in
-        </Typography>
-        <OpenSuperLoginButton />
-      </RehouserPaper>
-    );
-  }
-  if (!me.emailValidated)
+  // if (!me) {
+  //   return (
+  //     <RehouserPaper attrs={attrs} {...paperProps}>
+  //       <Typography variant="h5" gutterBottom color="textPrimary">
+  //         To confirm your email you must first be logged in
+  //       </Typography>
+  //       <OpenSuperLoginButton />
+  //     </RehouserPaper>
+  //   );
+  // }
+  if (!me?.emailValidated)
     return (
       <RehouserPaper attrs={attrs} {...paperProps}>
         <Typography variant="h6" gutterBottom color="textPrimary">
@@ -46,7 +48,7 @@ const ConfirmEmail = ({
           If you need abother token there is a button below that will send you a
           new email and token
         </Typography>
-        <SendConfrimEmailButton token={confirmEmailToken} />
+        <SendConfrimEmailButton token={confirmEmailToken} email={foundEmail} />
       </RehouserPaper>
     );
   return children ? children : null;

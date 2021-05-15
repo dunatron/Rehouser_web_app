@@ -55,12 +55,12 @@ const ResendConfirmEmailButton = ({ email, ...rest }) => {
     setSuccess(true);
   };
 
-  const [acceptApplicationMutation, { data, loading, error }] = useMutation(
+  const [resendConfirmEmail, { data, loading, error }] = useMutation(
     RESEND_CONFIRM_EMAIL_MUTATION,
     {
       variables: {
         // email: user.data.me.email, // usingLoggedInUser and would need configured on backend
-        email: 'eanything',
+        email: email,
       },
       onCompleted: handleCompleted,
     }
@@ -89,10 +89,10 @@ const ResendConfirmEmailButton = ({ email, ...rest }) => {
         variant="outlined"
         disabled={loading}
         onClick={() => {
-          acceptApplicationMutation();
+          resendConfirmEmail();
         }}
         {...rest}>
-        Resend email
+        Resend email {email}
         {loading && (
           <CircularProgress size={24} className={classes.buttonProgress} />
         )}

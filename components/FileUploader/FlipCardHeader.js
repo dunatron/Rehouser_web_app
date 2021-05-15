@@ -22,6 +22,9 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HelpIcon from '@material-ui/icons/Help';
 
+import BackupIcon from '@material-ui/icons/Backup';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+
 const FlipCardHeader = ({
   title,
   isFlipped,
@@ -44,6 +47,7 @@ const FlipCardHeader = ({
           <DoneIcon color="secondary" className={classes.hasServerIcon} />
         </Tooltip>
       )}
+
       {!hasServerFile && hasFile && (
         <Tooltip
           title={`Files are staged on the server for ${title} and will be attached when you upload the form`}>
@@ -55,28 +59,17 @@ const FlipCardHeader = ({
           <WarningIcon color="default" className={classes.hasServerIcon} />
         </Tooltip>
       )}
-      <ButtonGroup size="small" aria-label="small outlined button group">
-        <Button
-          startIcon={isFlipped ? <FlipToBackIcon /> : <FlipToFrontIcon />}
-          onClick={flip}>
-          Flip
-        </Button>
-        <Button
-          startIcon={
-            expanded ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />
-          }
-          onClick={expand}>
-          {expanded ? 'Close' : `Add ${hasServerFile && '/ remove'}`}
-        </Button>
-        {hasServerFile && (
-          <Button
-            startIcon={isFlipped ? <FlipToBackIcon /> : <FlipToFrontIcon />}
-            onClick={viewFiles}>
-            View
-          </Button>
-        )}
-      </ButtonGroup>
-      <Typography style={{ marginLeft: '8px' }}>{title}</Typography>
+      <Typography style={{ marginLeft: '8px', marginRight: '8px' }}>
+        {title}
+      </Typography>
+      {hasServerFile && expanded && (
+        <IconButton onClick={flip}>
+          {isFlipped ? <VisibilityIcon /> : <BackupIcon />}
+        </IconButton>
+      )}
+      <IconButton onClick={expand}>
+        {expanded ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
+      </IconButton>
     </div>
   );
 };

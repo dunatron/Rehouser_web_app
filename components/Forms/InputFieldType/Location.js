@@ -58,7 +58,9 @@ const Location = props => {
     fieldError,
     reset,
     defaultValues,
+    clearError,
   } = props;
+  const classes = useStyles();
 
   const defaultLocation = getDefaultLocation(props);
 
@@ -71,39 +73,6 @@ const Location = props => {
   const [placeId, setPlaceId] = useState(
     rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null
   );
-
-  // const defaultLocation = {
-  //   placeId: rawData ? rawData[config.fieldProps.fieldMaps['placeId']] : null,
-  //   desc: rawData ? rawData[config.fieldProps.fieldMaps['desc']] : null,
-  //   lat: rawData ? rawData[config.fieldProps.fieldMaps['lat']] : null,
-  //   lng: rawData ? rawData[config.fieldProps.fieldMaps['lng']] : null,
-  //   ...(config.fieldProps.fieldMaps['street_number'] && {
-  //     street_number: rawData
-  //       ? rawData[config.fieldProps.fieldMaps['street_number']]
-  //       : null,
-  //   }),
-  //   ...(config.fieldProps.fieldMaps['route'] && {
-  //     route: rawData ? rawData[config.fieldProps.fieldMaps['route']] : null,
-  //   }),
-  //   ...(config.fieldProps.fieldMaps['locality'] && {
-  //     locality: rawData
-  //       ? rawData[config.fieldProps.fieldMaps['locality']]
-  //       : null,
-  //   }),
-  //   ...(config.fieldProps.fieldMaps['administrative_area_level_1'] && {
-  //     administrative_area_level_1: rawData
-  //       ? rawData[config.fieldProps.fieldMaps['administrative_area_level_1']]
-  //       : null,
-  //   }),
-  //   // ...(config.fieldProps.fieldMaps['country'] && {
-  //   //   country: rawData ? rawData[config.fieldProps.fieldMaps['country']] : null,
-  //   // }),
-  //   ...(config.fieldProps.fieldMaps['postal_code'] && {
-  //     postal_code: rawData
-  //       ? rawData[config.fieldProps.fieldMaps['postal_code']]
-  //       : null,
-  //   }),
-  // };
 
   useEffect(() => {
     for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
@@ -126,6 +95,32 @@ const Location = props => {
     return 'This form component needs fieldProps.fieldMaps to know how to map the values to your prisma ready object';
   }
 
+  const handleSelection = data => {
+    setPlaceId(data.placeId);
+    for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
+      if (mapToObjectKey) {
+        const str = `${mapToObjectKey}.${value}`;
+        setValue(`${mapToObjectKey}.${value}`, data[key]);
+        clearError(str);
+      } else {
+        setValue(value, data[key]);
+        clearError(value);
+      }
+    }
+  };
+
+  const handleClear = () => {
+    for (const [key, value] of Object.entries(config.fieldProps.fieldMaps)) {
+      if (mapToObjectKey) {
+        const str = `${mapToObjectKey}.${value}`;
+        setValue(`${mapToObjectKey}.${value}`, null);
+      } else {
+        setValue(value, null);
+      }
+    }
+    setPlaceId(null);
+  };
+
   return (
     <>
       <FieldError errors={errors} name={config.fieldProps.name} />
@@ -137,19 +132,23 @@ const Location = props => {
         defaultLocation={defaultLocation}
         inputRef={register(config.refConf)}
         error={fieldError}
-        selection={data => {
-          setPlaceId(data.placeId);
-          for (const [key, value] of Object.entries(
-            config.fieldProps.fieldMaps
-          )) {
-            if (mapToObjectKey) {
-              setValue(`${mapToObjectKey}.${value}`, data[key]);
-            } else {
-              setValue(value, data[key]);
-            }
-          }
-        }}
+        selection={data => handleSelection(data)}
+        onClear={() => handleClear()}
       />
+      {/* {!placeId && (
+        <div className={classes.noLocationContainer}>
+          <Typography variant="h6" gutterBottom>
+            NO LOCATION SELECTED
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Please use the places dropdown picker above
+          </Typography>
+          <Typography variant="body2">
+            (Ensure you have selected the option from the list)
+          </Typography>
+        </div>
+      )} */}
+
       {inners &&
         inners.map((inner, idx) => {
           if (!canDisplayInner()) return null;

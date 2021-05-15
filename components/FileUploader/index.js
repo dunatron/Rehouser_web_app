@@ -19,6 +19,7 @@ import UploadedServerFiles from './UploadedServerFiles';
 
 //component pieces
 import FlipCardHeader from './FlipCardHeader';
+import { CSSTransition } from 'react-transition-group';
 
 // https://www.apollographql.com/blog/graphql-file-uploads-with-react-hooks-typescript-amazon-s3-tutorial-ef39d21066a2
 // maybe try for progress https://github.com/jaydenseric/apollo-upload-client/issues/88
@@ -291,7 +292,11 @@ const FileManager = props => {
       <Modal open={state.isViewModalOpen} close={handleCloseViewModal}>
         <FilePreviewer files={files} disableActions />
       </Modal>
-      {state.expanded && (
+      <CSSTransition
+        in={state.expanded}
+        timeout={250}
+        classNames="rehouser-fade"
+        unmountOnExit>
         <ReactCardFlip
           cardZIndex={theme.zIndex.flipCard}
           containerStyle={{
@@ -299,8 +304,8 @@ const FileManager = props => {
           }}
           isFlipped={state.isFlipped}
           flipDirection="vertical"
-          flipSpeedBackToFront={0.6}
-          flipSpeedFrontToBack={0.6}
+          flipSpeedBackToFront={0.3}
+          flipSpeedFrontToBack={0.3}
           infinite={false}>
           {/* FRONT OF CARD */}
           <UploadedServerFiles
@@ -326,7 +331,7 @@ const FileManager = props => {
             fileParams={fileParams}
           />
         </ReactCardFlip>
-      )}
+      </CSSTransition>
     </>
   );
 };

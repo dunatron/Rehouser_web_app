@@ -118,7 +118,7 @@ const GlobalStyle = createGlobalStyle`
   }
   .geosuggest__input {
     width: 100%;
-    border: 2px solid ${p => p.theme.palette.background.paper};
+    // border: 2px solid ${p => p.theme.palette.background.paper};
     background: ${p => p.theme.palette.background.paper};
     box-shadow: 0 0 1px ${p => p.theme.palette.primary.main};
     color: ${p => p.theme.palette.text.primary};
@@ -140,9 +140,9 @@ const GlobalStyle = createGlobalStyle`
     max-height: 25em;
     padding: 0;
     margin-top: -1px;
-    background: ${p => p.theme.palette.primary.main};
-    color: ${p => p.theme.palette.primary.contrastText};
-    border: 2px solid #267dc0;
+    background: ${p => p.theme.palette.background.paper};
+    color: ${p => p.theme.palette.text.primary};
+    border: ${p => `2px solid ${p.theme.palette.primary.main}`};
     border-top-width: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -163,7 +163,7 @@ const GlobalStyle = createGlobalStyle`
   .geosuggest__item {
     font-size: 18px;
     font-size: 1rem;
-    padding: 0.5em 0.65em;
+    padding: 0;
     cursor: pointer;
   }
   .geosuggest__item:hover,
@@ -182,6 +182,25 @@ const GlobalStyle = createGlobalStyle`
   }
   .geosuggest__item__matched-text {
     font-weight: bold;
+  }
+
+
+  .rehouser-fade-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .rehouser-fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .rehouser-fade-exit {
+    opacity: 1;
+  }
+  .rehouser-fade-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
   }
 `;
 

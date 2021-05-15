@@ -38,13 +38,19 @@ const SendConfirmEmailButton = props => {
   const [token, setToken] = useState(
     props.token ? props.token : router.query.token
   );
+  // const [email, setEmail] = useState(props.email);
+  const [email, setEmail] = useState(
+    props.email ? props.email : router.query.email
+  );
   const [success, setSuccess] = useState(false);
 
   const [confirmEmailWithToken, { data, loading, error }] = useMutation(
     CONFIRM_EMAIL_MUTATION,
     {
+      // onCompleted: TODO: login users when this succeeds
       variables: {
         token: token,
+        email: email,
       },
     }
   );
@@ -88,7 +94,7 @@ const SendConfirmEmailButton = props => {
       <Typography gutterBottom variant="body1" color="textSecondary">
         To get another token emailed to you click the below button
       </Typography>
-      <ResendConfirmEmail />
+      <ResendConfirmEmail email={email} />
     </>
   );
 };

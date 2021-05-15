@@ -64,7 +64,6 @@ const InputFieldType = props => {
     rawData,
     defaultValues,
     updateCacheOnRemovedFile,
-    clearErrors,
     selectOptionTypes,
     // isRequired,
     // label,

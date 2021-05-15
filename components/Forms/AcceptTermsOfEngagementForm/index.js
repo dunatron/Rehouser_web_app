@@ -105,6 +105,11 @@ const AcceptTermsOfEngagementForm = ({ me }) => {
               createText="Submit terms of engagement"
               config={LANDLORD_TERMS_OF_ENGAGEMENT_FORM_CONF}
               onSubmit={data => {
+                console.log(
+                  'data submited for LL Terms of engagement => ',
+                  data
+                );
+
                 updateUser({
                   variables: {
                     where: {
@@ -112,13 +117,6 @@ const AcceptTermsOfEngagementForm = ({ me }) => {
                     },
                     data: {
                       ...data,
-                      currentAddress: data?.currentAddress
-                        ? {
-                            create: {
-                              ...data?.currentAddress,
-                            },
-                          }
-                        : {},
                       bankDetails: data?.bankDetails
                         ? {
                             create: {
