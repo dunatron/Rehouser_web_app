@@ -47,6 +47,16 @@ const SendConfirmEmailButton = props => {
   const [confirmEmailWithToken, { data, loading, error }] = useMutation(
     CONFIRM_EMAIL_MUTATION,
     {
+      update(cache, { data }) {
+        console.log('Data returned from confirm email token => ', data);
+        // cache.modify({
+        //   fields: {
+        //     me(existingMeRef = {}, { readField }) {
+        //       return { ...signup };
+        //     },
+        //   },
+        // });
+      },
       // onCompleted: TODO: login users when this succeeds
       variables: {
         token: token,
