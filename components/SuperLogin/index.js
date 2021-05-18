@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
 import PropTypes from 'prop-types';
@@ -44,10 +44,16 @@ const styles = theme => ({
 
 const LoginPage = props => {
   const [loginModal, setLoginModal] = useRecoilState(loginModalState);
+  const [animateHeight, setAnimateHeight] = useState(false);
   const [state, setState] = useState({
     email: '',
     password: '',
   });
+
+  // useEffect(() => {
+  //   if (animateHeight !== true) setAnimateHeight(true);
+  //   return () => {};
+  // }, []);
 
   const saveToState = e => {
     setState({
@@ -67,6 +73,7 @@ const LoginPage = props => {
 
   const handleChange = (event, value) => {
     // setTabIndex(value);
+    if (animateHeight !== true) setAnimateHeight(true);
     setLoginModal({
       ...loginModal,
       tabIndex: value,
@@ -110,6 +117,7 @@ const LoginPage = props => {
         </Tabs>
       </AppBar>
       <SwipeableViews
+        animateHeight={animateHeight}
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={loginModal.tabIndex}
         onChangeIndex={(index, indexLatest, meta) => {

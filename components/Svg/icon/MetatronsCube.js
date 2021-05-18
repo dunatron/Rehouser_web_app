@@ -57,6 +57,7 @@ const useStyles = makeStyles(theme => ({
     // stroke: theme.palette.primary.contrastText,
     // stroke: theme.palette.background.default,
     stroke: theme.palette.primary.main,
+    animation: 'pulse-metatrons-cube-circle 10s infinite',
   },
   outerHexagon: {
     // fill: 'none',

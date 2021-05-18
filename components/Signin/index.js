@@ -13,6 +13,8 @@ import ButtonLoader from '@/Components/Loader/ButtonLoader';
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 import PasswordInput from '@/Components/Inputs/Password';
 
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 const Signin = props => {
   const [state, setState] = useState({
     email: props.email ? props.email : '',
@@ -152,10 +154,12 @@ const Signin = props => {
           style={{
             marginTop: '16px',
           }}
-          color="primary"
-          disabled={state.captchaToken.length <= 0 ? true : false || loading}
+          btnProps={{
+            color: 'primary',
+            disabled: state.captchaToken.length <= 0 ? true : false || loading,
+          }}
           success={false}>
-          <NavigationIcon style={{ marginRight: 5 }} />
+          <ExitToAppIcon style={{ marginRight: 5 }} />
         </ButtonLoader>
       </fieldset>
     </Form>

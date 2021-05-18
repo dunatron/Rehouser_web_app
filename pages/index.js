@@ -45,19 +45,13 @@ export const HomePageBannerBody = () => {
   const classes = bannerStyles();
   return (
     <>
-      {/* <Typography variant="h1" className={classes.title}>
-        {COMPANY_NAME}
-      </Typography> */}
-      {/* <div className={classes.logo}></div> */}
-      {/* <Image src="/images/svg/metatrons_cube.svg" height={500} width={600} /> */}
-      {/* <SVG name="main_logo" padding /> */}
-      <div style={{ marginTop: '32px', height: '33vh' }}>
+      <div style={{ marginTop: '32px', height: '24vh' }}>
         <SVG
           name="metatrons_cube"
           padding
           // width="140px"
-          canShowAdminPanel={true}
-          adminPanel={true}
+          canShowAdminPanel={false}
+          adminPanel={false}
         />
       </div>
       <Typography variant="h1" gutterBottom>
@@ -93,7 +87,12 @@ export const HomePageBannerBody = () => {
           }}
         />
       </div>
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
         <Typography
           variant="h4"
           color="default"
@@ -102,7 +101,6 @@ export const HomePageBannerBody = () => {
         </Typography>
         <IconButton
           style={{
-            marginTop: '16px',
             pointerEvents: 'all',
           }}
           aria-label="read-more"

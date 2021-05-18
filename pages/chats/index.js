@@ -21,7 +21,7 @@ const MessagesPage = ({ appData: { currentUser } }) => {
         }}
       />
       <ChatsListScreen me={me} />
-      <RChat />
+      {/* <RChat me={me} /> */}
     </>
   );
 };

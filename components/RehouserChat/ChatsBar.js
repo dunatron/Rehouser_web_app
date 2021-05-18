@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 import { store } from '@/Store/index';
+import { useRouter } from 'next/router';
 
 import OpenChatBubbles from './OpenChatBubbles';
 import ChatsListSelector from './ChatsListSelector';
@@ -31,6 +32,9 @@ const useStyles = makeStyles(theme => ({
 const ChatsBar = ({ me }) => {
   const classes = useStyles();
   const { state, dispatch } = useContext(store);
+  const router = useRouter();
+
+  if (router.asPath.includes('chats')) return null;
 
   return (
     <div className={classes.root}>

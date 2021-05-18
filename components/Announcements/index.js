@@ -12,35 +12,35 @@ const Announcements = ({ me, bannerRoutes }) => {
   const store = useContext(announcementStore);
   const { dispatch, state } = store;
 
-  useEffect(() => {
-    if (me) {
-      if (!me.emailValidated) {
-        dispatch({
-          type: 'addAnnouncement',
-          payload: {
-            key: 'validate-email',
-            // text: `Email validation has not been completed. Please check your email for an account confirmation email`,
-            type: 'todo',
-            actions: [
-              // <ResendConfrimEmail color="inherit" variant="outlined">
-              //   Resend Email
-              // </ResendConfrimEmail>,
-              <ConfirmEmail
-                me={me}
-                attrs={{ disablePadding: true }}
-                paperProps={{ elevation: 0 }}
-              />,
-            ],
-          },
-        });
-      } else if (me.emailValidated === true) {
-        dispatch({
-          type: 'rmAnnouncementByKey',
-          payload: 'validate-email',
-        });
-      }
-    }
-  }, [me]);
+  // useEffect(() => {
+  //   if (me) {
+  //     if (!me.emailValidated) {
+  //       dispatch({
+  //         type: 'addAnnouncement',
+  //         payload: {
+  //           key: 'validate-email',
+  //           // text: `Email validation has not been completed. Please check your email for an account confirmation email`,
+  //           type: 'todo',
+  //           actions: [
+  //             // <ResendConfrimEmail color="inherit" variant="outlined">
+  //             //   Resend Email
+  //             // </ResendConfrimEmail>,
+  //             <ConfirmEmail
+  //               me={me}
+  //               attrs={{ disablePadding: true }}
+  //               paperProps={{ elevation: 0 }}
+  //             />,
+  //           ],
+  //         },
+  //       });
+  //     } else if (me.emailValidated === true) {
+  //       dispatch({
+  //         type: 'rmAnnouncementByKey',
+  //         payload: 'validate-email',
+  //       });
+  //     }
+  //   }
+  // }, [me]);
 
   const beDisabled = bannerRoutes.includes(router.pathname);
 

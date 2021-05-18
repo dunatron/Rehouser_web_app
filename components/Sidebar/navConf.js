@@ -68,10 +68,10 @@ const NavigationConfig = (me, loadingUser, pathname) => {
           canRender: () => true,
         },
         {
-          key: 'freeappraisal',
+          key: 'free-appraisal',
           icon: <HomeWorkIcon />,
           text: 'Free Appraisal',
-          route: '/freeappraisal',
+          route: '/landlord/appraisals/add',
           style: { ...defaultNavItemStyle },
           canRender: () => {
             if (me === null) return true;
@@ -85,7 +85,7 @@ const NavigationConfig = (me, loadingUser, pathname) => {
           route: '/landlord',
           isCurrentPath: true,
           style: { ...defaultNavItemStyle },
-          canRender: () => true, // set to try just to run it alot on the same account in dev
+          canRender: () => true, // set to try just to run it a lot on the same account in dev
         },
         {
           key: 'tenant',
@@ -101,7 +101,7 @@ const NavigationConfig = (me, loadingUser, pathname) => {
         //   text: 'About Us',
         //   route: '/about-us',
         //   style: { ...defaultNavItemStyle },
-        //   canRender: () => true, // set to try just to run it alot on the same account in dev
+        //   canRender: () => true, // set to try just to run it a lot on the same account in dev
         // },
         {
           key: 'legal',
@@ -109,7 +109,7 @@ const NavigationConfig = (me, loadingUser, pathname) => {
           text: 'Legal',
           route: '/legal',
           style: { ...defaultNavItemStyle },
-          canRender: () => true, // set to try just to run it alot on the same account in dev
+          canRender: () => true, // set to try just to run it a lot on the same account in dev
         },
         {
           key: 'contact',
@@ -117,7 +117,7 @@ const NavigationConfig = (me, loadingUser, pathname) => {
           text: 'Contact',
           route: '/contact',
           style: { ...defaultNavItemStyle },
-          canRender: () => true, // set to try just to run it alot on the same account in dev
+          canRender: () => true, // set to try just to run it a lot on the same account in dev
         },
       ],
     },
@@ -136,7 +136,7 @@ const NavigationConfig = (me, loadingUser, pathname) => {
     //       route: '/landlord',
     //       isCurrentPath: true,
     //       style: { ...defaultNavItemStyle },
-    //       canRender: () => true, // set to try just to run it alot on the same account in dev
+    //       canRender: () => true, // set to try just to run it a lot on the same account in dev
     //     },
     //   ],
     // },

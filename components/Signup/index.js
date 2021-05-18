@@ -26,6 +26,8 @@ import PhoneInput from '@/Components/Inputs/PhoneInput';
 import PasswordInput from '@/Components/Inputs/Password';
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
 const Signup = props => {
   const recaptchaRef = useRef();
   const clearRecaptcha = () => {
@@ -268,10 +270,12 @@ const Signup = props => {
           style={{
             marginTop: '16px',
           }}
-          color="primary"
-          disabled={!canSignup()}
+          btnProps={{
+            color: 'primary',
+            disabled: !canSignup(),
+          }}
           success={false}>
-          <NavigationIcon style={{ marginRight: 5 }} />
+          <PersonAddIcon style={{ marginRight: 5 }} />
         </ButtonLoader>
       </fieldset>
     </Form>

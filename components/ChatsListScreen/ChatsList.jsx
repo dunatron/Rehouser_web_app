@@ -108,10 +108,7 @@ const ChatsList = props => {
 
   const navToChat = chat => {
     Router.push({
-      pathname: '/messages/chat',
-      query: {
-        chatId: chat.id,
-      },
+      pathname: `/chats/${chat.id}`,
     });
   };
   if (data === undefined || data.chats === undefined) {

@@ -11,6 +11,7 @@ import {
   Typography,
   Slide,
   useScrollTrigger,
+  Chip,
 } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => {
     },
     routeablePart: {
       cursor: 'pointer',
-      color: theme.palette.primary.main,
+      color: theme.palette.text.primary,
       '&:hover': {
         textDecoration: 'underline',
       },
@@ -94,7 +95,7 @@ const CurrentUrl = () => {
       {formattedPathParts.length > 0 && (
         <IconButton
           onClick={handleGoBackToPreviousPage}
-          color="primary"
+          color="default"
           size="medium"
           classes={{
             root: classes.backBtnRoot,
@@ -107,6 +108,7 @@ const CurrentUrl = () => {
           <div
             style={{
               display: 'flex',
+              alignItems: 'center',
               direction: 'ltr',
             }}>
             {formattedPathParts.map((urlPart, idx) => {
@@ -115,6 +117,18 @@ const CurrentUrl = () => {
 
               //   if (isLastPart) return <RenderLastPart />;
 
+              if (!isLastPart) {
+                return (
+                  <Chip
+                    label={urlPart}
+                    size="small"
+                    style={{ marginRight: '4px' }}
+                    onClick={() => {
+                      !isLastPart ? routeToClickedPart(idx) : null;
+                    }}
+                  />
+                );
+              }
               return (
                 <Typography
                   key={idx}

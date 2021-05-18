@@ -52,14 +52,17 @@ const useStyles = makeStyles(theme => ({
       marginRight: 0,
     },
   },
-  icon: {
+  accountAvatar: {
     width: theme.spacing(5),
     height: theme.spacing(5),
     // backgroundColor: theme.palette.primary.main,
     '&:hover': {
       cursor: 'pointer',
     },
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
   },
+  icon: {},
 }));
 
 const handleLink = (route = '/', query = {}) => {
@@ -139,11 +142,16 @@ const AccountMenu = ({ me = null }) => {
         <Avatar
           alt={me ? `${me.firstName} ${me.lastName}` : 'Account'}
           src={photoUrl}
-          className={classes.icon}
+          className={classes.accountAvatar}
           aria-controls="faccount-menu"
           aria-haspopup="true"
-          onClick={handleClick}
-        />
+          onClick={handleClick}>
+          {me ? (
+            `${me?.firstName.charAt(0)}${me?.lastName.charAt(0)}`
+          ) : (
+            <LockOpenIcon />
+          )}
+        </Avatar>
       </RToolTip>
 
       <Menu
@@ -175,13 +183,13 @@ const AccountMenu = ({ me = null }) => {
               <MenuItem
                 key="account-menu-messages"
                 onClick={e => {
-                  handleLink('/messages');
+                  handleLink('/chats');
                   handleClose(e);
                 }}>
                 <ListItemIcon>
                   <MessageIcon />
                 </ListItemIcon>
-                Messages
+                Chats
               </MenuItem>,
             ]
           : [

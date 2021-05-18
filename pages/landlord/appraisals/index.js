@@ -12,7 +12,7 @@ const LandLordAppraisalsPage = ({ appData: { currentUser } }) => {
   return (
     <PleaseSignIn
       currentUser={currentUser}
-      message="Please Sign in to view: Landlord Appraisals Page">
+      message="Signup / Login to view your Property Appraisals">
       {/* Let these load after 1st paint. i.e dont get it with serverside props */}
       <AppraisalsTableBuildMethod me={me} />
     </PleaseSignIn>

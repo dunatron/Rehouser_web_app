@@ -20,6 +20,7 @@ const LoginModal = props => {
 
   return (
     <Modal
+      fullScreen
       title="Login / Signup / Reset"
       open={loginModal.open}
       close={_close}

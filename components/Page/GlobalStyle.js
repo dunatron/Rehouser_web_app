@@ -49,6 +49,8 @@ const GlobalStyle = createGlobalStyle`
       background: ${p => p.theme.palette.nProgress.main};
     }
     .spinner {
+      position: absolute;
+      left: 50%;
       .spinner-icon {
         border-top-color: ${p => p.theme.palette.nProgress.main};
         border-left-color: ${p => p.theme.palette.nProgress.main};
@@ -95,16 +97,16 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: ${p =>
       p.theme.palette.type === 'dark'
-        ? p.theme.palette.primary.dark
-        : p.theme.palette.primary.main};
+        ? p.theme.palette.text.primary
+        : p.theme.palette.text.primary};
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: ${p =>
       p.theme.palette.type === 'dark'
-        ? p.theme.palette.primary.main
-        : p.theme.palette.primary.dark};
+        ? p.theme.palette.text.primary
+        : p.theme.palette.text.primary};
   }
 
   .geosuggest {
@@ -201,6 +203,16 @@ const GlobalStyle = createGlobalStyle`
     opacity: 0;
     transform: scale(0.9);
     transition: opacity 300ms, transform 300ms;
+  }
+
+  @keyframes pulse-metatrons-cube-circle {
+    0%   { fill: ${p => p.theme.palette.primary.main} }
+    17%  { fill: ${p => p.theme.palette.primary.dark} }
+    33%  { fill: ${p => p.theme.palette.primary.main} }
+    50%  { fill: ${p => p.theme.palette.primary.light} }
+    67%  { fill: ${p => p.theme.palette.primary.main} }
+    83%  { fill: ${p => p.theme.palette.primary.dark} }
+    100% { fill: ${p => p.theme.palette.primary.main} }
   }
 `;
 
