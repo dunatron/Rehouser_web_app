@@ -13,6 +13,7 @@ import ConnectionTable, {
 import Error from '@/Components/ErrorMessage';
 import UserDetails from '../../components/UserDetails';
 import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
 import Modal from '@/Components/Modal';
 
 import {
@@ -21,6 +22,7 @@ import {
 } from '../../graphql/connections';
 import { UPDATE_FOREIGN_LINK_MUTATION } from '@/Gql/mutations';
 import AddForeignLink from '@/Components/ForeignLink/AddForeignLink';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -31,6 +33,17 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
   },
 }));
+
+const dateFormatOptions = {
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+  timeZone: 'Pacific/Auckland',
+  timeZoneName: 'short',
+};
 
 const ForeignLinksTable = ({
   where,
@@ -56,7 +69,34 @@ const ForeignLinksTable = ({
     () => [
       { title: 'name', field: 'name' },
       { title: 'url', field: 'url' },
-      { title: 'notes', field: 'notes' },
+      { title: 'notes', field: 'notes', filter: false },
+      {
+        title: 'created',
+        field: 'createdAt',
+        type: 'date',
+        filter: false,
+        render: rowData => {
+          const date = new Date(rowData.createdAt);
+          return (
+            <Typography>
+              {new Intl.DateTimeFormat('en-NZ', dateFormatOptions).format(date)}
+            </Typography>
+          );
+        },
+      },
+      {
+        title: 'updated',
+        field: 'updatedAt',
+        filter: false,
+        render: rowData => {
+          const date = new Date(rowData.updatedAt);
+          return (
+            <Typography>
+              {new Intl.DateTimeFormat('en-NZ', dateFormatOptions).format(date)}
+            </Typography>
+          );
+        },
+      },
       // {
       //   title: 'Open',
       //   field: 'url',
@@ -100,7 +140,7 @@ const ForeignLinksTable = ({
         actions={[
           {
             icon: 'add',
-            tooltip: 'Add User',
+            tooltip: 'Add New Link',
             isFreeAction: true,
             onClick: addForeignLinkBtnClick,
           },
@@ -108,6 +148,7 @@ const ForeignLinksTable = ({
             icon: 'link',
             tooltip: `Open: ${rowData.url}`,
             isFreeAction: false,
+            disabled: !rowData.url,
             onClick: e => openForeignLink(e, rowData),
           }),
         ]}

@@ -62,7 +62,7 @@
     "downshift": "^3.2.6",
     "enzyme": "^3.9.0",
     "glamor": "^2.20.40",
-    "google-maps-react": "^2.0.2",
+    "google-maps-react": "^2.0.6",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "gsap": "^3.5.0",

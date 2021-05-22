@@ -35,10 +35,10 @@ const GeoSearchWidget = props => {
         lng: lngPos,
       }}
       // zoom={20}
-      zoom={5}
+      // zoom={5}
       enableRefineOnMapMove={enableRefineOnMapMove}
       enableRefine={props.enableBoundingBox} // If true, the map is used for refining the search. Otherwise, it’s only for display purposes.
-      mapTypeId="hybrid" // hybrid, roadmap, satellite, terrain
+      mapTypeId="roadmap" // hybrid, roadmap, satellite, terrain
     >
       {({ hits }) => (
         <div>

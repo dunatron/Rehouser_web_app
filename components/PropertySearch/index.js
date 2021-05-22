@@ -34,21 +34,29 @@ var apiKey = process.env.ALGOLIA_API_KEY;
 const searchClient = algoliasearch(applicationId, apiKey);
 const indexPrefix = process.env.NODE_ENV === 'development' ? 'dev' : 'prod';
 
-const Hit = ({ hit, me }) => (
-  <div className="si-hit">
-    <PropertyResultHit hit={hit} me={me} />
-  </div>
-);
+// const Hit = ({ hit, me }) => (
+//   <div className="si-hit">
+//     <PropertyResultHit hit={hit} me={me} />
+//   </div>
+// );
 
+const Hit = ({ hit, me }) => {
+  console.log('Does a hit get me => ', me);
+  return (
+    <div className="si-hit">
+      <PropertyResultHit hit={hit} me={me} />
+    </div>
+  );
+};
 Hit.propTypes = {
   hit: PropTypes.any,
 };
 
 const Content = ({ me }) => (
   <div className="si-content">
-    <div className="si-info">
+    {/* <div className="si-info">
       <Stats />
-    </div>
+    </div> */}
 
     <HorizonScrollHits hitComponent={<Hit me={me} />} me={me} />
     <div className="pagination">

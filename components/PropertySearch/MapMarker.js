@@ -41,6 +41,19 @@ const useStyles = makeStyles(theme => ({
     opacity: 0.9,
     zIndex: 100,
   },
+  marker: {
+    border: '1px solid grey',
+    padding: '4px',
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.primary.main,
+    fontWeight: 900,
+    fontSize: '1.6em',
+    '&:hover': {
+      color: theme.palette.primary.contrastText,
+      backgroundColor: theme.palette.primary.main,
+      cursor: 'pointer',
+    },
+  },
 }));
 
 const MapMarker = ({ hit }) => {
@@ -56,13 +69,14 @@ const MapMarker = ({ hit }) => {
         <div
           ref={node}
           onClick={() => setShowMore(true)}
-          className="map-marker">
+          // className="map-marker"
+          className={classes.marker}>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
             }}>
-            {formatCentsToDollarsVal(hit.rent / hit.rooms)}
+            {formatCentsToDollarsVal(hit.rent, { minimumFractionDigits: 0 })}
             {/* {formatCentsToDollarsVal(hit.lowestRoomPrice)} */}
           </div>
         </div>

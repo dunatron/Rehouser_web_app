@@ -25,6 +25,7 @@ const MapContainer = props => {
         google={props.google}
         mapTypeId="SATELLITE"
         options={{
+          mapId: 'Rehouser-Property',
           mapTypeId: 'SATELLITE',
         }}
         onReady={(mapProps, map) => _mapLoaded(mapProps, map)}
@@ -36,22 +37,7 @@ const MapContainer = props => {
         initialCenter={{
           lat: center ? center.lat : -46.1326615,
           lng: center ? center.lng : 168.89592100000004,
-        }}>
-        <Marker onClick={onMarkerClick} name={'Current location'} />
-
-        <Marker
-          title={'The marker`s title will appear as a tooltip.'}
-          name={'SOMA'}
-          position={{
-            lat: center ? center.lat : -46.1326615,
-            lng: center ? center.lng : 168.89592100000004,
-          }}
-        />
-
-        <InfoWindow onClose={onInfoWindowClose}>
-          <div>{/* <h1>{this.state.selectedPlace.name}</h1> */}</div>
-        </InfoWindow>
-      </Map>
+        }}></Map>
     </div>
   );
 };

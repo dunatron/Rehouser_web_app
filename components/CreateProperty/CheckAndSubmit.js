@@ -57,6 +57,7 @@ const CheckAndSubmit = ({ me, formData, handlePropertyCreated }) => {
         // rent: rentVal, should now format to integer in cents in form creator
         onTheMarket: false,
         useAdvancedRent: false,
+        inspectionFrequency: 'EVERY_3_MONTHS',
         bankDetails: formData.bankDetails
           ? {
               create: {

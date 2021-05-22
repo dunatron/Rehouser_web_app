@@ -47,7 +47,9 @@ const StyledBadge = withStyles(theme => ({
   badge: {
     right: -3,
     top: 13,
+    fontSize: '1.1em',
     border: `2px solid ${theme.palette.background.paper}`,
+    // border: `2px solid ${theme.palette.primary.main}`,
     padding: '0 4px',
   },
 }))(Badge);
@@ -130,7 +132,7 @@ const DetailItem = ({ hit, conf }) => {
       <RToolTip
         title={`${conf.title}: ${hit[conf.name]}`}
         style={{ fontSize: '16px' }}>
-        <StyledBadge badgeContent={hit[conf.name]} color="primary">
+        <StyledBadge badgeContent={hit[conf.name]} color="default">
           {conf.icon}
         </StyledBadge>
       </RToolTip>
@@ -149,22 +151,22 @@ DetailItem.propTypes = {
 
 const DetailItemsArr = [
   {
-    title: 'rooms',
+    title: 'Rooms',
     name: 'rooms',
     icon: <ApartmentIcon fontSize="large" color="inherit" />,
   },
   {
-    title: 'bathrooms',
+    title: 'Bathrooms',
     name: 'bathrooms',
     icon: <BathtubIcon fontSize="large" color="inherit" />,
   },
   {
-    title: 'carportSpaces',
+    title: 'Carport spaces',
     name: 'carportSpaces',
     icon: <EmojiTransportationIcon fontSize="large" color="inherit" />,
   },
   {
-    title: 'garageSpaces',
+    title: 'Garage spaces',
     name: 'garageSpaces',
     icon: <DriveEtaIcon fontSize="large" color="inherit" />,
   },
@@ -204,15 +206,8 @@ const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
           <Typography variant="h6" color="textPrimary" gutterBottom>
             {hit.location}
           </Typography>
-          <Typography variant="body1" color="textSecondary" gutterBottom>
-            {formatCentsToDollarsVal(hit.rent)}
-            {' per week. '}
-            <Typography component="span" color="textSecondary">
-              Rooms are
-            </Typography>{' '}
-            <Typography component="span" color="primary" variant="h6">
-              {formatCentsToDollarsVal(hit.rent / hit.rooms)}
-            </Typography>
+          <Typography component="span" color="primary" variant="h6">
+            {formatCentsToDollarsVal(hit.rent / hit.rooms)}
           </Typography>
           <AvailableDate hit={hit} />
           <Typography gutterBottom color="textSecondary">
