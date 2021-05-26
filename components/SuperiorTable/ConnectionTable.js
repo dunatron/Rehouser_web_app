@@ -3,7 +3,7 @@ import tableIcons from './tableIcons';
 
 import PropTypes from 'prop-types';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 import { useApolloClient, useQuery, NetworkStatus } from '@apollo/client';
@@ -268,6 +268,7 @@ const MaterialConnectionTable = props => {
   return (
     <div ref={wrapperDivRef}>
       <Error error={remoteErrors} />
+
       <MaterialTable
         {...rest}
         tableRef={tableRef}
@@ -302,6 +303,7 @@ const MaterialConnectionTable = props => {
         }
         actions={[
           ...actions,
+
           {
             icon: 'add',
             tooltip: `Add ${type}`,
