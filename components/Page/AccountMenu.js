@@ -147,7 +147,7 @@ const AccountMenu = ({ me = null }) => {
           aria-haspopup="true"
           onClick={handleClick}>
           {me ? (
-            `${me?.firstName.charAt(0)}${me?.lastName.charAt(0)}`
+            `${me?.firstName?.charAt(0)}${me?.lastName?.charAt(0)}`
           ) : (
             <LockOpenIcon />
           )}

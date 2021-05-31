@@ -1,17 +1,25 @@
 import { Typography } from '@material-ui/core';
 import { COMPANY_LEGAL_NAME, COMPANY_NAME } from '@/Lib/const';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  item: {
+    color: theme.palette.text.primary,
+    marginBottom: theme.spacing(2),
+  },
+}));
 
 const SignupTerms = () => {
+  const classes = useStyles();
   return (
-    <div>
+    <div style={{ textAlign: 'left' }}>
       <Typography gutterBottom>
         Please read these terms and conditions carefully before using{' '}
-        {COMPANY_NAME}
-        and {COMPANY_LEGAL_NAME}.
+        {COMPANY_NAME} and {COMPANY_LEGAL_NAME}.
       </Typography>
       <ol>
         {/* 1 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Under the Privacy Act 1993, you have the right to ask for a copy of
             all information held about you, and have the right to request the
@@ -19,7 +27,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 2 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Conditions of Use We will provide their services to you, which are
             subject to the conditions stated below in this document. Every time
@@ -29,7 +37,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 3 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Privacy Policy Before you continue using our website we advise you
             to read our privacy policy [link to privacy policy] regarding our
@@ -38,7 +46,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 4 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Copyright Content published on this website (digital downloads,
             images, texts, graphics, logos) is the property of{' '}
@@ -49,7 +57,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 5 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Communications: The entire communication with us is electronic.
             Every time you send us an email or visit our website, you are going
@@ -68,7 +76,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 6 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Disputes: Any dispute related in any way to your visit to this
             website or to services you purchase from us shall be arbitrated by
@@ -77,7 +85,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 7 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Comments, Reviews, and Emails Visitors may post content as long as
             it is not obscene, illegal, defamatory, threatening, infringing, of
@@ -86,7 +94,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 8 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             Content has to be free of software viruses, political campaign, and
             commercial solicitation. We reserve all rights (but not the
@@ -97,7 +105,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 9 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             License and Site Access We grant you a limited license to access and
             make personal use of this website. You are not allowed to download
@@ -105,7 +113,7 @@ const SignupTerms = () => {
           </Typography>
         </Typography>
         {/* 10 */}
-        <Typography component="li" gutterBottom>
+        <Typography component="li" className={classes.item}>
           <Typography gutterBottom>
             User Account: If you are an owner of an account on this website, you
             are solely responsible for maintaining the confidentiality of your
