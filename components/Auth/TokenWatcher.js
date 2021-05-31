@@ -1,15 +1,15 @@
 import { parseCookies } from 'nookies';
-import { CURRENT_USER_QUERY } from '../../graphql/queries/index';
-
 import { useApolloClient, useQuery, NetworkStatus } from '@apollo/client';
 import { useRecoilState } from 'recoil';
-import { authState as rAuthState } from '../../recoil/AuthState';
+
 import useInterval from '@/Lib/hooks/useInterval';
+import { CURRENT_USER_QUERY } from '@/Gql/queries/index';
+import { authState as reAuthedState } from '../../recoil/AuthState';
 
 const MINUTE_MS = 3000; // 3 seconds
 
 const TokenWatcher = () => {
-  const [authState, setAuthState] = useRecoilState(rAuthState);
+  const [authState, setAuthState] = useRecoilState(reAuthedState);
   const client = useApolloClient();
 
   const _clearStore = () => {
