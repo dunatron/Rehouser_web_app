@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 import Page from '@/Components/Page/index';
 
+import TokenWatcher from '@/Components/Auth/TokenWatcher';
+
 // import css for SSR
 // import '../public/css/rehouser-fonts.css';
 import '../public/css/global.css';
@@ -28,6 +30,7 @@ function RehouserApp(props) {
         <Page>
           <Component {...pageProps} />
         </Page>
+        <TokenWatcher />
       </ApolloProvider>
     </RecoilRoot>
   );
