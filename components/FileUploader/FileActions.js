@@ -127,17 +127,6 @@ const FileActions = ({
           }
         }}
       />
-      {/* <IconButton
-        size="medium"
-        disabled={isBeingActioned}
-        onClick={() =>
-          alert('Todo: create modal to handle viewing differnet file types')
-        }
-        color="default"
-        aria-label="upload picture"
-        component="span">
-        <ViewIcon size="small" color="action" />
-      </IconButton> */}
       {file.uploadCompleted ? (
         <IconButton
           size="medium"

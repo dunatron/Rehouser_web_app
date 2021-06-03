@@ -299,6 +299,8 @@ const InsulationStatementForm = ({
         </Modal>
         <FileUploader
           // files={[property.insulationStatementFile]}
+          title="Insulation Statement"
+          description="Please upload your insulation statement if you have one"
           files={
             property.insulationStatementFile
               ? [property.insulationStatementFile]

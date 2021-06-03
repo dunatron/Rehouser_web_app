@@ -112,6 +112,7 @@ const CurrentUrl = () => {
               direction: 'ltr',
             }}>
             {formattedPathParts.map((urlPart, idx) => {
+              const key = `${urlPart}-${idx}`;
               const isLastPart =
                 idx + 1 === formattedPathParts.length ? true : false;
 
@@ -120,6 +121,7 @@ const CurrentUrl = () => {
               if (!isLastPart) {
                 return (
                   <Chip
+                    key={key}
                     label={urlPart}
                     size="small"
                     style={{ marginRight: '4px' }}
@@ -131,7 +133,7 @@ const CurrentUrl = () => {
               }
               return (
                 <Typography
-                  key={idx}
+                  key={key}
                   variant="h6"
                   className={!isLastPart ? classes.routeablePart : null}
                   noWrap

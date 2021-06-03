@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import {
   AppBar,
@@ -14,7 +14,6 @@ import clsx from 'clsx';
 
 import { useRouter } from 'next/router';
 import useStyles from './useStyles';
-import useCurrentScrollTop from '@/Lib/hooks/useCurrentScrollTop';
 
 import { store } from '@/Store/index';
 //icons
@@ -46,8 +45,6 @@ HideOnScroll.propTypes = {
 const AppMenuBar = props => {
   const globalStore = useContext(store);
   const { dispatch, state } = globalStore;
-  const topPos = useCurrentScrollTop();
-  const noTransparency = topPos > 10 ? true : false;
   const { container, appData } = props;
   const { currentUser } = appData;
 
@@ -55,33 +52,22 @@ const AppMenuBar = props => {
   const router = useRouter();
   // i think maybe we do this as an inline style...
   // or use like clsx and actually have the classes you clown
-  const classes = useStyles({
-    noTransparency: noTransparency,
-  });
-
-  const barClasses = clsx(
-    classes.rehouserAppBar,
-    noTransparency ? classes.appBarSolid : classes.appBarTransparent
-  );
+  const classes = useStyles();
 
   return (
     <HideOnScroll {...props}>
       <AppBar
         color="default"
         position="fixed"
-        className={barClasses}
-        elevation={noTransparency ? 4 : 0}>
+        className={classes.rehouserAppBar}
+        elevation={4}>
         <Toolbar disableGutters={true} variant="regular">
           <IconButton
             // color="inherit"
             color="primary"
             aria-label="open drawer"
             edge="start"
-            // classes={{
-            //   root: classes.menuButton,
-            // }}
             className={classes.menuButton}
-            // onClick={props.handleDrawerToggle}
             onClick={() =>
               dispatch({
                 type: 'updateState',

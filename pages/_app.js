@@ -13,7 +13,7 @@ import '../public/css/customToast.css';
 import '../public/css/geosuggest.css';
 import '../public/css/nprogress.css';
 
-function RehouserApp(props) {
+function ReHouserApp(props) {
   const { Component, pageProps, apollo } = props;
   return (
     <RecoilRoot>
@@ -36,7 +36,7 @@ function RehouserApp(props) {
   );
 }
 
-RehouserApp.getInitialProps = async function({ Component, ctx }) {
+ReHouserApp.getInitialProps = async function({ Component, ctx }) {
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
@@ -45,4 +45,4 @@ RehouserApp.getInitialProps = async function({ Component, ctx }) {
   return { pageProps };
 };
 
-export default withData(RehouserApp);
+export default withData(ReHouserApp);

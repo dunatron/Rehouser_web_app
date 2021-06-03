@@ -53,8 +53,8 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const aggregateFields = gql`
-  fragment aggregateFields on RentalApplicationConnection {
+const rentalApplicationAggregateFields = gql`
+  fragment rentalApplicationAggregateFields on RentalApplicationConnection {
     aggregate {
       count
     }
@@ -80,10 +80,10 @@ const RENTAL_APPLICATIONS_CONNECTION = gql`
       first: $first
       last: $last
     ) {
-      ...aggregateFields
+      ...rentalApplicationAggregateFields
     }
   }
-  ${aggregateFields}
+  ${rentalApplicationAggregateFields}
 `;
 
 // 1. create gql rentalApplicationsConnection for the aggregate data

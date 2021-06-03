@@ -1,11 +1,9 @@
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { StateProvider } from '@/Store/index';
-
 import MaterialPage from './MaterialPage';
-import { FacebookProvider, Like } from 'react-facebook';
 
 import CustomToastContainer from '@/Containers/CustomToastContainer';
 
@@ -52,25 +50,18 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-const SubLoader = () => {
-  return <div>Loading General Notifications</div>;
-};
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+// https://stripe.com/docs/stripe-js/react
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 /**
  * Do do this =>https://spectrum.chat/next-js/general/how-do-i-setup-a-global-toast-notification-system-using-next-js-i-am-using-next-alongside-apollo-client-and-graphql~211bf34c-56c2-4fee-bb04-c64f73a0cdfd
  */
 const Page = props => {
-  const [stripe, setStripe] = useState(null);
-
   useServiceWorker();
   useDisableDrop();
   useDisableDragover();
-
-  useEffect(() => {
-    if (window.Stripe) {
-      setStripe(window.Stripe(process.env.STRIPE_KEY));
-    }
-  }, []);
 
   const [themeObj, setThemeObj] = useRecoilState(themeState);
 
@@ -85,19 +76,11 @@ const Page = props => {
       <GlobalStyle theme={theme} />
       <CustomToastContainer />
       <ThemeProvider theme={theme}>
-        {/* FB Provider is too big */}
-        {/* I want to use it later to share properties to FB etc easily */}
-        {/* Something adding wait param then it will only download when it renders a compknent. i.e if this is true remove it from the fucken footer */}
-        {/* Then just have FB components load in via share this now buttons etc */}
-        {/* <FacebookProvider
-          appId={process.env.FACEBOOK_APP_ID}
-          chatSupport={true}
-          wait={true}>
-          
-        </FacebookProvider> */}
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <StateProvider>
-            <Elements stripe={stripe}>
+            {/* <Elements stripe={stripe}> */}
+            {/* TESTING NOT LOADING THE SCRIPT IN HERE AND JUST USING THE PACKAGE... */}
+            <Elements stripe={stripePromise}>
               <WithUser>
                 <MaterialPage children={props.children} {...props} />
                 {/* Admin Alerts straight up break general subs. general subs should be copied */}

@@ -303,7 +303,6 @@ const MaterialConnectionTable = props => {
         }
         actions={[
           ...actions,
-
           {
             icon: 'add',
             tooltip: `Add ${type}`,

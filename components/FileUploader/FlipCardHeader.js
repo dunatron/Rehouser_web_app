@@ -26,7 +26,7 @@ import BackupIcon from '@material-ui/icons/Backup';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const FlipCardHeader = ({
-  title,
+  title = '',
   isFlipped,
   flip,
   expanded,

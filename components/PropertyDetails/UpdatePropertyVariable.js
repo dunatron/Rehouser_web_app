@@ -230,7 +230,7 @@ const UpdatePropertyVariable = ({
         data-cy={`${cy}-variable-modal-btn`}
         aria-label="Delete"
         onClick={() => setModalIsOpen(true)}>
-        <EditIcon color="default" />
+        <EditIcon color="inherit" />
       </IconButton>
     </div>
   );
@@ -242,7 +242,7 @@ UpdatePropertyVariable.propTypes = {
   name: PropTypes.any,
   propertyId: PropTypes.any,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
 };
 
 export default UpdatePropertyVariable;

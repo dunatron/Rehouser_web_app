@@ -40,12 +40,15 @@ const DetailItems = ({ title, property, items }) => {
           {title}
         </Typography>
       )}
-      <div className={classes.detailsWrapper} square>
+      <div className={classes.detailsWrapper}>
         {items &&
           items.map((item, idx) => {
             const itemVal = property[item.name];
             return (
-              <Box component="div" className={classes.detailItem}>
+              <Box
+                key={item.name}
+                component="div"
+                className={classes.detailItem}>
                 <DetailItem
                   icon={item.icon}
                   label={item.label}
