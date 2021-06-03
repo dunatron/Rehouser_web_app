@@ -352,14 +352,14 @@ const Details = props => {
                     name: 'onTheMarket',
                     label: 'On The Market',
                     type: 'boolean',
-                    icon: <CameraIcon color="default" />,
+                    icon: <CameraIcon color="inherit" />,
                     disabled: true,
                   },
                   {
                     name: 'rehouserManaged',
                     label: `Managed by ${COMPANY_NAME}`,
                     type: 'boolean',
-                    icon: <CameraIcon color="default" />,
+                    icon: <CameraIcon color="inherit" />,
                     disabled: true,
                   },
                 ]
@@ -428,7 +428,7 @@ const Details = props => {
         <Typography>Owners</Typography>
         {property.owners.length > 0 &&
           property.owners.map((owner, idx) => {
-            return <CorrectUserDetails id={owner.id} />;
+            return <CorrectUserDetails key={owner.id} id={owner.id} />;
           })}
         {me.isWizard && (
           <DynamicAddUserToList
@@ -457,7 +457,7 @@ const Details = props => {
         )}
         {property.agents.length > 0 &&
           property.agents.map((agent, idx) => {
-            return <UserDetails me={me} user={agent} />;
+            return <UserDetails key={agent.id} me={me} user={agent} />;
           })}
         {me.isWizard && (
           <DynamicAddUserToList
@@ -495,6 +495,7 @@ const Details = props => {
       )}
 
       <Modal
+        title={property.location}
         open={publicDetailsModalIsOpen}
         close={handleClosePublicDetailsModal}>
         <PropertyPublicDetails id={property.id} me={me} />
@@ -507,9 +508,7 @@ Details.propTypes = {
   property: PropTypes.shape({
     expiryDate: PropTypes.any,
     id: PropTypes.any,
-    images: PropTypes.shape({
-      map: PropTypes.func,
-    }),
+    images: PropTypes.array,
     insulationForm: PropTypes.shape({
       id: PropTypes.any,
     }),

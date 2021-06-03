@@ -15,25 +15,11 @@ const useStyles = makeStyles(theme => {
 
     // MAYBE THIS FFS
     rehouserAppBar: {
-      // backgroundColor: props =>
-      //   props.noTransparency
-      //     ? theme.overrides.MuiAppBar
-      //       ? `${theme.overrides.MuiAppBar.colorPrimary.backgroundColor} !important`
-      //       : `${theme.palette.background.paper} !important`
-      //     : 'transparent !important',
       width: '100%',
+      backgroundColor: `${theme.palette.background.default} !important`,
       [theme.breakpoints.up('lg')]: {
         width: `calc(100% - ${theme.sideBarWidth}px) !important`,
       },
-    },
-    appBarTransparent: {
-      backgroundColor: 'transparent !important',
-    },
-    appBarSolid: {
-      backgroundColor: `${theme.palette.background.default} !important`,
-      // backgroundColor: theme.overrides.MuiAppBar
-      //   ? `${theme.overrides.MuiAppBar.colorPrimary.backgroundColor} !important`
-      //   : `${theme.palette.background.paper} !important`,
     },
     menuButton: {
       marginLeft: 0,
@@ -73,11 +59,6 @@ const useStyles = makeStyles(theme => {
     drawerPaper: {
       width: theme.sideBarWidth,
       backgroundColor: theme.palette.background.default,
-      // backgroundColor: theme.palette.primary.light,
-      // backgroundColor: 'rgb(212,220,231)',
-      // backgroundColor: lighten(theme.palette.primary.light, 0.7), // lighten by 50%. 1.0 is white
-      // backgroundColor: theme.palette.primary.light,
-      // backgroundColor: theme.palette.primary.light,
     },
     content: {
       position: 'relative',

@@ -81,8 +81,9 @@ const ParticleBanner = props => {
       ref={bannerNode}
       className={classes.bannerContainer}
       style={{
-        top: windowWidth > 600 ? '-64px' : '-56px',
-        ...(!props.disableAutoHeight && { height: windowHeight }),
+        top: windowWidth > 600 ? '-72px' : '-56px',
+        ...(!props.disableAutoHeight && { height: '100vh' }),
+        // ...(!props.disableAutoHeight && { height: windowHeight }),
       }}>
       <ParticleOne />
       <div

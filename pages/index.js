@@ -45,7 +45,7 @@ export const HomePageBannerBody = () => {
   const classes = bannerStyles();
   return (
     <>
-      <div style={{ marginTop: '32px', height: '24vh' }}>
+      <div style={{ marginTop: '72px', height: '24vh' }}>
         <SVG
           name="metatrons_cube"
           padding
@@ -95,7 +95,7 @@ export const HomePageBannerBody = () => {
         }}>
         <Typography
           variant="h4"
-          color="default"
+          color="inherit"
           style={{ marginTop: '32px', textAlign: 'center' }}>
           More
         </Typography>
@@ -105,7 +105,7 @@ export const HomePageBannerBody = () => {
           }}
           aria-label="read-more"
           href="#banner-footer"
-          color="default">
+          color="inherit">
           <ArrowDownwardIcon
             fontSize="large"
             style={{
@@ -129,7 +129,7 @@ const HomePage = props => {
           <Typography
             key={1}
             variant="h5"
-            color="default"
+            color="inherit"
             style={{ textAlign: 'center', padding: '0 30px' }}>
             Turning empty houses into friendly abodes
           </Typography>,

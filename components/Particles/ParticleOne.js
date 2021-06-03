@@ -172,8 +172,10 @@ const ParticleOne = () => {
       style={{
         opacity: 0.6,
       }}
-      width={dimensions.width}
-      height={dimensions.height}
+      // width={dimensions.width}
+      // height={dimensions.height}
+      width={'100vw'}
+      height={'100vh'}
       params={{
         particles: particlesObj,
         interactivity: interactivityObj,
@@ -199,9 +201,6 @@ const OriginalParticle = ({ dimensions }) => {
             },
           },
           color: {
-            // value: '#ff5baf',
-            // value: '#000',
-            // value: darkPrimaryColor,
             value: mainPrimaryColor,
           },
           shape: {
@@ -221,8 +220,6 @@ const OriginalParticle = ({ dimensions }) => {
           },
           opacity: {
             value: 0.5,
-            // value: 1,
-            // value: 0.7,
             random: false,
             anim: {
               enable: false,

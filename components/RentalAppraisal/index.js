@@ -61,7 +61,7 @@ const RentalAppraisalView = ({ id, me }) => {
                 flexWrap: 'wrap',
                 alignItems: 'center',
               }}>
-              <Typography variant="h5" color="default">
+              <Typography variant="h5" color="textSecondary">
                 Appraisal
               </Typography>
               <Chip
@@ -78,7 +78,7 @@ const RentalAppraisalView = ({ id, me }) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h5" color="default" gutterBottom>
+          <Typography variant="h5" color="textPrimary" gutterBottom>
             Requested by
           </Typography>
           {/* <RequestedBy user={requestedBy} /> */}
@@ -91,7 +91,7 @@ const RentalAppraisalView = ({ id, me }) => {
         </Grid>
         {appraisedBy && (
           <Grid item xs={12} sm={6}>
-            <Typography variant="h5" color="default" gutterBottom>
+            <Typography variant="h5" color="textPrimary" gutterBottom>
               Appraised by
             </Typography>
             {/* {appraisedBy && <PublicUserDetails id={appraisedBy.id} />} */}
@@ -107,19 +107,19 @@ const RentalAppraisalView = ({ id, me }) => {
 
         {rent && (
           <Grid item xs={12} sm={6}>
-            <Typography variant="h6" color="default">
+            <Typography variant="h6" color="textPrimary">
               Suggested rent{' '}
               <Typography
                 component="span"
                 variant="h5"
-                color="default"
+                color="textPrimary"
                 gutterBottom>
                 ${formatCentsToDollarsVal(rent)}
               </Typography>
             </Typography>
-            <Typography variant="h6" color="default" gutterBottom>
+            <Typography variant="h6" color="textPrimary" gutterBottom>
               Rent per room{' '}
-              <Typography component="span" variant="h5" color="default">
+              <Typography component="span" variant="h5" color="textPrimary">
                 ${formatCentsToDollarsVal(rent / rooms)}
               </Typography>
             </Typography>
@@ -178,12 +178,12 @@ const RequestedBy = ({ user: { id, firstName, lastName, email } }) => {
 const LabelArrayVal = ({ label, val }) => {
   return (
     <Box>
-      <Typography color="default" gutterBottom>
+      <Typography color="textPrimary" gutterBottom>
         {label}
       </Typography>
       <Typography component="ul">
         {val.map(item => (
-          <Typography key={item} component="li" color="default">
+          <Typography key={item} component="li" color="textPrimary">
             {item}
           </Typography>
         ))}
@@ -202,10 +202,10 @@ LabelArrayVal.propTypes = {
 const LabelKeyVal = ({ label, val }) => {
   return (
     <Typography gutterBottom>
-      <Typography color="default" component="span">
+      <Typography color="textPrimary" component="span">
         {label}:{' '}
       </Typography>
-      <Typography color="default" component="span">
+      <Typography color="textPrimary" component="span">
         {val}
       </Typography>
     </Typography>

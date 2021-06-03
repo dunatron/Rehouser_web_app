@@ -52,13 +52,14 @@ const Meta = () => (
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
     {/* async load stripe js */}
-    <script
+    {/* TESTING NOT LOADING THE SCRIPT IN HERE AND JUST USING THE PACKAGE... */}
+    {/* <script
       key="stripe-js"
       id="stripe-js"
       src="https://js.stripe.com/v3/"
       as="script"
       defer
-    />
+    /> */}
     <script src="https://media-library.cloudinary.com/global/all.js"></script>
     {/* <script
       rel="preconnect"

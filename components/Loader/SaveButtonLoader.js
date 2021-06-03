@@ -108,9 +108,9 @@ SaveButtonLoader.propTypes = {
   disabled: PropTypes.any,
   loading: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  success: PropTypes.bool.isRequired,
-  successText: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  success: PropTypes.bool,
+  successText: PropTypes.string,
+  text: PropTypes.string,
 };
 
 export default SaveButtonLoader;
