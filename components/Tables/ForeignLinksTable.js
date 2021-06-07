@@ -49,7 +49,6 @@ const ForeignLinksTable = ({
   where,
   me,
   orderBy = 'createdAt_DESC',
-  enableAddressParams,
   id,
   type = 'user',
 }) => {
@@ -127,7 +126,6 @@ const ForeignLinksTable = ({
     <div className={classes.root}>
       <Error error={tableErr} />
       <ConnectionTable
-        enableAddressParams={enableAddressParams}
         title="Foreign Links"
         connectionKey={connectionKey}
         where={where}

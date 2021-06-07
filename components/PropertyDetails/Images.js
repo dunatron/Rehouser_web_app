@@ -52,6 +52,7 @@ const PropertyImages = ({ property, updateProperty }) => {
     <div>
       <FileUploader
         title="Property Images"
+        description="Here you can manage the images that get marketed for the property "
         files={property.images ? property.images : []}
         fileParams={{
           type: 'upload',
@@ -59,6 +60,7 @@ const PropertyImages = ({ property, updateProperty }) => {
           type: 'upload',
           access_mode: 'public',
         }}
+        maxFilesAllowed={10}
         updateCacheOnRemovedFile={(cache, result) => {
           updateProperty({
             variables: {

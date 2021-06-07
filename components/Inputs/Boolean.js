@@ -21,7 +21,6 @@ const BooleanInput = ({
   return (
     <div className={classes.wrapper}>
       <FormControlLabel
-        fullWidth
         control={
           <Switch
             {...rest}
@@ -41,10 +40,10 @@ BooleanInput.propTypes = {
   classes: PropTypes.shape({
     wrapper: PropTypes.any,
   }).isRequired,
-  defaultChecked: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  defaultChecked: PropTypes.bool,
+  disabled: PropTypes.bool,
   handleChange: PropTypes.func.isRequired,
-  helperText: PropTypes.string.isRequired,
+  helperText: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };

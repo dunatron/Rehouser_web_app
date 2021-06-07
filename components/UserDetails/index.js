@@ -20,7 +20,7 @@ const UserDetails = ({ me, user }) => {
   const fullname = user.firstName + ' ' + user.lastName;
   return (
     <ListItem dense={true}>
-      <ListItemAvatar dense={true}>
+      <ListItemAvatar>
         {/* <Avatar
           alt={fullname}
           src={user.profilePhoto ? user.profilePhoto.url : null}
@@ -31,7 +31,7 @@ const UserDetails = ({ me, user }) => {
           <PublicUserDetails id={user.id} iconOnly={true} />
         )}
       </ListItemAvatar>
-      <ListItemText primary={fullname} secondary={'Friend'} dense={true} />
+      <ListItemText primary={fullname} secondary={'Friend'} />
       <ListItemSecondaryAction>
         <UserMenu me={me} user={user} />
       </ListItemSecondaryAction>

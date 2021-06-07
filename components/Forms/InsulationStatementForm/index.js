@@ -312,6 +312,9 @@ const InsulationStatementForm = ({
             access_mode: 'public',
           }}
           recieveFile={recieveFile}
+          fileRemovedFromServer={() => {}}
+          updateCacheOnRemovedFile={() => {}}
+          maxFilesAllowed={1}
         />
       </div>
     </div>

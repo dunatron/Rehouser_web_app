@@ -225,46 +225,6 @@ const MaterialConnectionTable = props => {
       });
   };
 
-  const copyRouteAndParamsToClipboard = () => {
-    isBrowser() &&
-      navigator.clipboard.writeText(`${getOrigin()}${router.asPath}`);
-  };
-
-  // kinda need this as component does a soft reload when the query params are changed
-  // so we scroll the window to the top of the table element instead
-  useEffect(() => {
-    const handleRouteChangeComplete = url => {
-      // tableRef.current &&
-      //   tableRef.current.tableContainerDiv.current.scrollIntoView(true);
-      wrapperDivRef.current && wrapperDivRef.current.scrollIntoView(true);
-    };
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChangeComplete);
-    };
-  }, []);
-
-  // only use url params when specifically enabled. So we can use more than one table on a page
-  useEffect(() => {
-    if (enableAddressParams) {
-      Router.replace(
-        Router.pathname,
-        {
-          query: {
-            page: addressParams.page,
-            orderBy: addressParams.orderBy,
-            first: addressParams.first,
-            search: addressParams.searchText,
-            filters: addressParams.filters,
-          },
-        },
-        { shallow: true }
-      );
-    }
-
-    return () => {};
-  }, [addressParams]);
-
   return (
     <div ref={wrapperDivRef}>
       <Error error={remoteErrors} />
@@ -317,12 +277,6 @@ const MaterialConnectionTable = props => {
             tooltip: 'Refresh Data',
             isFreeAction: true,
             onClick: refreshTableData,
-          },
-          {
-            icon: 'bookmark',
-            tooltip: 'Copy URL',
-            isFreeAction: true,
-            onClick: copyRouteAndParamsToClipboard(),
           },
         ]}
       />

@@ -6,9 +6,9 @@ const MoneyEdit = ({ item, onChange }) => {
       <MoneyInput
         id={`${item.key}-money-edit-field`}
         label={item.label}
-        defaultValue={item.value ? item.value / 100 : null}
         fieldProps={item.fieldProps}
-        onChange={e => onChange(parseFloat(e.target.value * 100))}
+        defaultValue={item.value ? item.value : null}
+        onChange={e => onChange(parseFloat(e.target.value))}
       />
     </div>
   );

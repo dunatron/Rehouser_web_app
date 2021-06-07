@@ -1,7 +1,6 @@
-import { Typography, Chip } from '@material-ui/core';
+import Chip from '@material-ui/core/Chip';
 import useViewStyles from './useViewStyles';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
-import { is } from 'ramda';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 
 const MoneyDisplay = ({ item }) => {
   const classes = useViewStyles();
@@ -9,7 +8,7 @@ const MoneyDisplay = ({ item }) => {
     <Chip
       className={classes.chip}
       size="small"
-      label={formatCentsToDollarsVal(item.value)}
+      label={formatMoneyVal(item.value)}
     />
   );
 };

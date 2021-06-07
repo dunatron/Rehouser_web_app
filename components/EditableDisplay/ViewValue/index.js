@@ -12,7 +12,7 @@ import SelectMultipleEnumDisplay from './SelectMultipleEnum';
 import DateDisplay from './Date';
 import DateTimeDisplay from './DateTime';
 import BankAccountDisplay from './BankAcount';
-import RichTextDisplay from './RichText';
+import DynamicRichTextDisplay from './DynamicRichText';
 
 /**
  * case String ✔️
@@ -65,7 +65,7 @@ const ViewValue = ({ item }) => {
       case 'SelectMultipleEnum':
         return <SelectMultipleEnumDisplay item={item} />;
       case 'RichText':
-        return <RichTextDisplay item={item} />;
+        return <DynamicRichTextDisplay item={item} />;
       default:
         return <StringDisplay item={item} />;
     }

@@ -289,7 +289,10 @@ const FileManager = props => {
       />
       <Error error={error} />
       {/* View Files Modale */}
-      <Modal open={state.isViewModalOpen} close={handleCloseViewModal}>
+      <Modal
+        title="File Preview"
+        open={state.isViewModalOpen}
+        close={handleCloseViewModal}>
         <FilePreviewer files={files} disableActions />
       </Modal>
       <CSSTransition
@@ -348,7 +351,7 @@ FileManager.propTypes = {
     type: PropTypes.oneOf(['upload', 'private', 'authenticated']),
     access_mode: PropTypes.oneOf(['public', 'authenticated']),
   }).isRequired,
-  fileRemovedFromServer: PropTypes.func.isRequired,
+  fileRemovedFromServer: PropTypes.func,
   files: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

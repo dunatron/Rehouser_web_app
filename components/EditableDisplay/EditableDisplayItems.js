@@ -59,6 +59,7 @@ const EditableDisplayItems = ({
       {items.map((item, idx) => {
         return (
           <EditableDisplay
+            key={item.key}
             item={{
               ...item,
               value: data[item.key],

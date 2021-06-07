@@ -56,7 +56,7 @@ const FlipCardHeader = ({
       )}
       {!hasServerFile && !hasFile && (
         <Tooltip title={`No File on the server for ${title}`}>
-          <WarningIcon color="default" className={classes.hasServerIcon} />
+          <WarningIcon color="inherit" className={classes.hasServerIcon} />
         </Tooltip>
       )}
       <Typography style={{ marginLeft: '8px', marginRight: '8px' }}>

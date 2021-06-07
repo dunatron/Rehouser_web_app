@@ -96,7 +96,7 @@ const EnumMultiSelectChip = ({
                 <Chip
                   onDelete={() => removeItem(value)}
                   size="small"
-                  icon={<LabelIcon mini />}
+                  icon={<LabelIcon />}
                   variant="outlined"
                   color="primary"
                   label={label.name}
@@ -128,10 +128,8 @@ EnumMultiSelectChip.propTypes = {
     formControl: PropTypes.any,
   }).isRequired,
   handleChange: PropTypes.func.isRequired,
-  label: PropTypes.shape({
-    name: PropTypes.any,
-  }).isRequired,
-  removeItem: PropTypes.func.isRequired,
+  label: PropTypes.node,
+  removeItem: PropTypes.func,
   selectID: PropTypes.any,
   values: PropTypes.any,
 };

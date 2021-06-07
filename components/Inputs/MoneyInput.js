@@ -61,11 +61,11 @@ function NumberFormatCustom(props) {
   );
 }
 
-NumberFormatCustom.propTypes = {
-  inputRef: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+// NumberFormatCustom.propTypes = {
+//   inputRef: PropTypes.func.isRequired,
+//   name: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
 
 const MoneyInput = props => {
   const { onChange, defaultValue, value, fieldProps, ...rest } = props;
@@ -93,7 +93,7 @@ MoneyInput.propTypes = {
   fieldError: PropTypes.any,
   getValues: PropTypes.any,
   onChange: PropTypes.any,
-  register: PropTypes.func.isRequired,
+  register: PropTypes.func, // used for useForm to register
   reset: PropTypes.any,
   setValue: PropTypes.any,
   updateCacheOnRemovedFile: PropTypes.any,
