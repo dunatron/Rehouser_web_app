@@ -23,10 +23,7 @@ import {
 } from '../../graphql/connections';
 // mutations
 
-import {
-  formatCentsToDollars,
-  formatCentsToDollarsVal,
-} from '@/Lib/formatCentsToDollars';
+import { formatMoney, formatMoneyVal } from '@/Lib/formatMoney';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -79,7 +76,7 @@ const LeasesTable = ({
         title: 'wallet',
         field: 'wallet',
         render: rowData => {
-          const val = formatCentsToDollars(rowData.wallet.amount);
+          const val = formatMoney(rowData.wallet.amount);
           return <Typography>{val}</Typography>;
         },
       },
@@ -88,7 +85,7 @@ const LeasesTable = ({
         field: 'rent',
         editable: false,
         render: rowData => {
-          return `${formatCentsToDollarsVal(rowData.rent)}`;
+          return `${formatMoneyVal(rowData.rent)}`;
         },
       },
     ],

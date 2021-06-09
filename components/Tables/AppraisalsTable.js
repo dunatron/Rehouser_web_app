@@ -15,10 +15,7 @@ import { Button } from '@material-ui/core';
 import ConnectionTable, {
   getEnumLookupList,
 } from '@/Components/SuperiorTable/ConnectionTable';
-import {
-  formatCentsToDollarsVal,
-  formatCentsToDollars,
-} from '@/Lib/formatCentsToDollars';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -76,7 +73,7 @@ const AppraisalsTable = ({
         editable: false,
         searchable: false,
         filtering: false,
-        render: rowData => formatCentsToDollarsVal(rowData.rent),
+        render: rowData => formatMoneyVal(rowData.rent),
       },
       {
         title: 'hasBeenUsed',

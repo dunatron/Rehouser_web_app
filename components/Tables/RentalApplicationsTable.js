@@ -10,12 +10,8 @@ import ConnectionTable, {
 
 //components
 import Error from '@/Components/ErrorMessage';
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
-import formatCentsToDollars from '@/Lib/formatCentsToDollars';
-import moment from 'moment';
-
-import SinglePayment from '@/Components/Payments/SinglePayment';
 import Modal from '@/Components/Modal/index';
 
 // maybe if user is admin swap public out with private

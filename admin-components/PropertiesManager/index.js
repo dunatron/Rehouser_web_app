@@ -4,33 +4,16 @@ import { store } from '../../store';
 import gql from 'graphql-tag';
 import { useApolloClient, useQuery, NetworkStatus } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
-// import MaterialTable from 'material-table';
 import ConnectionTable, {
   getEnumLookupList,
 } from '@/Components/SuperiorTable/ConnectionTable';
-import {
-  Input,
-  Typography,
-  IconButton,
-  Icon,
-  Badge,
-  Button,
-} from '@material-ui/core';
-import { PROPERTY_APPRAISAL_SUBSCRIPTION } from '../../graphql/subscriptions/PropertyAppraisalSub';
-import moment from 'moment';
-import formatCentsToDollars from '../../lib/formatCentsToDollars';
 
-import SubscriberBell from '../SubscriberBell';
-
-//components
 import Modal from '../../components/Modal/index';
 import Error from '@/Components/ErrorMessage';
 import Loader from '@/Components/Loader';
 import UserDetails from '../../components/UserDetails';
 import List from '@material-ui/core/List';
 
-//rentalApplicationsConnection
-// connection querys
 import { PROPERTIES_CONNECTION_QUERY } from '../../graphql/connections';
 // mutations
 import { OFFER_RENTAL_APPRAISAL_MUTATION } from '../../graphql/mutations';
@@ -71,15 +54,6 @@ export const PROPERTIES_COUNT_QUERY = gql`
     }
   }
 `;
-
-// const getEnumLookupList = __type => {
-//   const { data, error, loading } = useQuery(GET_ENUM_QUERY, {
-//     variables: {
-//       name: __type,
-//     },
-//   });
-//   return data ? data.__type.enumValues.map(enumObj => enumObj.name) : [];
-// };
 
 const AdminRentalApplicationsTable = ({
   where,

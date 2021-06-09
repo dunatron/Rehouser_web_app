@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_BANK_TRANSFER_TO_LEASE_MUTATION } from '@/Gql/mutations';
 import { toast } from 'react-toastify';
 import { Box, Typography, FormControlLabel, Switch } from '@material-ui/core';
-import { formatCentsToDollars } from '@/Lib/formatCentsToDollars';
+import { formatMoney } from '@/Lib/formatMoney';
 
 const MANUALLY_ADD_BANK_TRANSFER_FORM_CONF = [
   {
@@ -137,8 +137,7 @@ const AddManualPayment = ({ lease, onCompleted }) => {
       <Box>
         <Typography variant="body1">Payment added to lease wallet.</Typography>
         <Typography variant="body1">
-          New Balance:{' '}
-          {formatCentsToDollars(data.addBankTransferToLease.wallet.amount)}
+          New Balance: {formatMoney(data.addBankTransferToLease.wallet.amount)}
         </Typography>
       </Box>
     );

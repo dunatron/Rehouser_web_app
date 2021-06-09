@@ -1,17 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { IconButton } from '@material-ui/core';
-
-import PropertyCard from '@/Components/PropertyCard/index';
-
 import { CustomMarker } from 'react-instantsearch-dom-maps';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 //icons
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import CloseIcon from '@material-ui/icons/Close';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 
 import PropertyResultHit from './PropertyResultHit';
 
@@ -69,15 +65,13 @@ const MapMarker = ({ hit }) => {
         <div
           ref={node}
           onClick={() => setShowMore(true)}
-          // className="map-marker"
           className={classes.marker}>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
             }}>
-            {formatCentsToDollarsVal(hit.rent, { minimumFractionDigits: 0 })}
-            {/* {formatCentsToDollarsVal(hit.lowestRoomPrice)} */}
+            {formatMoneyVal(hit.rent, { minimumFractionDigits: 0 })}
           </div>
         </div>
       </CustomMarker>

@@ -1,16 +1,16 @@
 import gql from 'graphql-tag';
 
-const PAYMENTS_COUNT_QUERY = gql`
-  query PAYMENTS_COUNT_QUERY(
-    $where: PaymentWhereInput
-    $orderBy: PaymentOrderByInput
+const WALLET_TRANSACTIONS_COUNT_QUERY = gql`
+  query WALLET_TRANSACTIONS_COUNT_QUERY(
+    $where: WalletTransactionWhereInput
+    $orderBy: WalletTransactionOrderByInput
     $skip: Int
     $after: String
     $before: String
     $first: Int
     $last: Int
   ) {
-    paymentsConnection(
+    walletTransactionsConnection(
       where: $where
       orderBy: $orderBy
       skip: $skip
@@ -25,4 +25,4 @@ const PAYMENTS_COUNT_QUERY = gql`
     }
   }
 `;
-export { PAYMENTS_COUNT_QUERY };
+export { WALLET_TRANSACTIONS_COUNT_QUERY };

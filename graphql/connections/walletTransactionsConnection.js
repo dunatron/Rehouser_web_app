@@ -1,17 +1,17 @@
 import gql from 'graphql-tag';
-import { PaymentInfoFragment } from '../fragments/index';
+import { WalletTransactionInfoFragment } from '../fragments/index';
 
-const PAYMENTS_CONNECTION_QUERY = gql`
-  query PAYMENTS_CONNECTION_QUERY(
-    $where: PaymentWhereInput
-    $orderBy: PaymentOrderByInput
+const WALLET_TRANSACTIONS_CONNECTION_QUERY = gql`
+  query WALLET_TRANSACTIONS_CONNECTION_QUERY(
+    $where: WalletTransactionWhereInput
+    $orderBy: WalletTransactionOrderByInput
     $skip: Int
     $after: String
     $before: String
     $first: Int
     $last: Int
   ) {
-    paymentsConnection(
+    walletTransactionsConnection(
       where: $where
       orderBy: $orderBy
       skip: $skip
@@ -32,11 +32,11 @@ const PAYMENTS_CONNECTION_QUERY = gql`
       edges {
         cursor
         node {
-          ...paymentInfo
+          ...walletTransactionInfo
         }
       }
     }
   }
-  ${PaymentInfoFragment}
+  ${WalletTransactionInfoFragment}
 `;
-export { PAYMENTS_CONNECTION_QUERY };
+export { WALLET_TRANSACTIONS_CONNECTION_QUERY };

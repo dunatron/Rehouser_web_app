@@ -1,7 +1,5 @@
-import { Typography, Chip } from '@material-ui/core';
+import { Chip } from '@material-ui/core';
 import useViewStyles from './useViewStyles';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
-import { is } from 'ramda';
 
 const BooleanDisplay = ({ item }) => {
   const classes = useViewStyles();

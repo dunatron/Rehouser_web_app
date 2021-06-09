@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
-/**
- * Not working.. maybe because we are spreading on an array
- */
-const PaymentInfoFragment = gql`
-  fragment paymentInfo on Payment {
+
+const WalletTransactionInfoFragment = gql`
+  fragment walletTransactionInfo on WalletTransaction {
     id
+    transactionType
+    txCode
     wallet {
       id
     }
@@ -28,5 +28,5 @@ const PaymentInfoFragment = gql`
   }
 `;
 
-export { PaymentInfoFragment };
-export default PaymentInfoFragment;
+export { WalletTransactionInfoFragment };
+export default WalletTransactionInfoFragment;

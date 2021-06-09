@@ -28,31 +28,12 @@ import CardPaymentForm from './CardPaymentForm';
 import { WALLET_SUBSCRIPTION } from '@/Gql/subscriptions/WalletSubscription';
 import Loader from '@/Components/Loader';
 import { toast } from 'react-toastify';
-import PaymentsTable from '@/Components/Tables/PaymentsTable';
-import ChargesTable from '@/Components/Tables/ChargesTable';
+import WalletTransactionsTable from '@/Components/Tables/WalletTransactionsTable';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
 import Error from '@/Components/ErrorMessage';
 
-const formatCentsToDollar = amount => {
-  const dollarAmount = amount / 100;
-
-  const isPositive = dollarAmount > 0;
-
-  const formattedMoney = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    // currency: 'NZD',
-    currency: 'USD',
-  }).format(dollarAmount); // '$100.00'
-  return (
-    <span
-      style={{
-        color: isPositive ? 'green' : 'red',
-      }}>
-      {formattedMoney}
-    </span>
-  );
-};
+import { formatMoney } from '@/Lib/formatMoney';
 
 const serverBackend = process.env.ENDPOINT;
 
@@ -71,7 +52,7 @@ const LeaseWallet = ({ lease, me }) => {
 
   const handleOnSubscriptionData = ({ client, subscriptionData }) => {
     const { amount } = subscriptionData.data.walletSub.node;
-    const formattedAmount = formatCentsToDollar(amount);
+    const formattedAmount = formatMoney(amount);
 
     setWalletUpdating(false);
     toast.success(
@@ -157,7 +138,7 @@ const LeaseWallet = ({ lease, me }) => {
           Wallet: {wallet.id}
         </Typography>
         <Typography gutterBottom>
-          amount: {formatCentsToDollar(wallet.amount)}
+          amount: {formatMoney(wallet.amount)}
         </Typography>
 
         {walletUpdating && (
@@ -224,13 +205,13 @@ const LeaseWallet = ({ lease, me }) => {
             <IconButton onClick={() => setIntentSecret(null)}>
               <RemoveCircleOutlineIcon color="error" />
             </IconButton>
-            Remove Payment Intent of {formatCentsToDollar(amount * 100)}
+            Remove Payment Intent of {formatMoney(amount * 100)}
           </div>
         )}
         {intentSecret && (
           <div>
             The server is aware of your intent on a payment of
-            {formatCentsToDollar(amount * 100)}
+            {formatMoney(amount * 100)}
             <CardPaymentForm
               intentSecret={intentSecret}
               amount={amount}
@@ -240,15 +221,8 @@ const LeaseWallet = ({ lease, me }) => {
           </div>
         )}
       </RehouserPaper>
-      <ChargesTable
-        walletId={wallet.id}
-        where={{
-          wallet: {
-            id: wallet.id,
-          },
-        }}
-      />
-      <PaymentsTable
+
+      <WalletTransactionsTable
         walletId={wallet.id}
         where={{
           wallet: {

@@ -12,7 +12,6 @@ import ConnectionTable, {
 import Error from '@/Components/ErrorMessage';
 import { Typography } from '@material-ui/core';
 
-import formatCentsToDollars from '@/Lib/formatCentsToDollars';
 import moment from 'moment';
 
 import SinglePayment from '@/Components/Payments/SinglePayment';

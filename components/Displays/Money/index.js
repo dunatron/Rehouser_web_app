@@ -1,18 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Typography, Chip, Icon } from '@material-ui/core';
 import useStyles from './useStyles';
-
-// Our db values are in cents
-const formatCentsToDollarsVal = amount => {
-  const dollarAmount = amount / 100;
-  const formattedMoney = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(dollarAmount); // '$100.00'
-
-  return formattedMoney;
-};
-
+import { formatMoneyVal } from '@/Lib/formatMoney';
 export default function Money({
   value,
   title,
@@ -25,7 +14,7 @@ export default function Money({
   iconProps,
 }) {
   const classes = useStyles({ orientation, reverse });
-  const formattedValue = formatCentsToDollarsVal(value);
+  const formattedValue = formatMoneyVal(value);
   return (
     <Box className={classes.root}>
       {icon && (

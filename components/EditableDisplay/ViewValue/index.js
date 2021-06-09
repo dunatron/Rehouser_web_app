@@ -1,7 +1,4 @@
-import { Typography, Chip } from '@material-ui/core';
 import useViewStyles from './useViewStyles';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
-import { is } from 'ramda';
 
 // Displays
 import StringDisplay from './String';

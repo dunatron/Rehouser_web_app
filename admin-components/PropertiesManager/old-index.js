@@ -15,8 +15,6 @@ import {
   Button,
 } from '@material-ui/core';
 import { PROPERTY_APPRAISAL_SUBSCRIPTION } from '../../graphql/subscriptions/PropertyAppraisalSub';
-import moment from 'moment';
-import formatCentsToDollars from '../../lib/formatCentsToDollars';
 
 import SubscriberBell from '../SubscriberBell';
 

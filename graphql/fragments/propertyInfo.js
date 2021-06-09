@@ -87,6 +87,10 @@ const PropertyInfoFragment = gql`
     }
     rehouserManaged
     bondType
+    wallet {
+      id
+      amount
+    }
   }
   ${FileInfoFragment}
   ${PublicUserInfoFragment}

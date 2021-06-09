@@ -22,8 +22,7 @@ import SplitButtonGroup from '@/Components/Buttons/SplitButtonGroup';
 import Modal from '@/Components/Modal';
 import DelayedInput from '@/Components/Inputs/DelayedInput';
 import LeaseManager from '@/Components/LeaseManager';
-import ChargesTable from '@/Components/Tables/ChargesTable';
-import PaymentsTable from '@/Components/Tables/PaymentsTable';
+import WalletTransactionsTable from '@/Components/Tables/WalletTransactionsTable';
 import EditableDisplayItems from '@/Components/EditableDisplay/EditableDisplayItems';
 import PROPERTY_LEASE_DETAILS_EDITABLE_DISPLAY_CONF from '@/Lib/configs/editableDisplays/leaseDetails';
 
@@ -31,7 +30,7 @@ import PROPERTY_LEASE_DETAILS_EDITABLE_DISPLAY_CONF from '@/Lib/configs/editable
 import AddManualPayment from './AddManualPayment';
 import ChargeLeaseWallet from './ChargeLeaseWallet';
 import RehouserPaper from '@/Styles/RehouserPaper';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 
 /**
  * Make a lazy useLazyQuery call to getLeases where bankRef = searchText.
@@ -93,30 +92,15 @@ const LeaseWalletBalance = ({ wallet }) => {
     <RehouserPaper>
       <Typography>Lease Wallet</Typography>
       <Typography>id: {wallet.id}</Typography>
-      <Typography>balance: {formatCentsToDollarsVal(wallet.amount)}</Typography>
+      <Typography>balance: {formatMoneyVal(wallet.amount)}</Typography>
     </RehouserPaper>
   );
 };
 
-const ViewCharges = ({ wallet }) => {
+const ViewWalletTransactions = ({ wallet }) => {
   return (
     <div>
-      <ChargesTable
-        walletId={wallet.id}
-        where={{
-          wallet: {
-            id: wallet.id,
-          },
-        }}
-      />
-    </div>
-  );
-};
-
-const ViewPayments = ({ wallet }) => {
-  return (
-    <div>
-      <PaymentsTable
+      <WalletTransactionsTable
         walletId={wallet.id}
         where={{
           wallet: {
@@ -130,8 +114,7 @@ const ViewPayments = ({ wallet }) => {
 
 const splitBtnOptions = [
   'Add Payment',
-  'View Payments',
-  'View Charges',
+  'View Wallet Transactions',
   'Lease Manager',
   'Lease Details',
   'Charge Lease Wallet',
@@ -146,9 +129,7 @@ const getModalContent = ({ index, lease, closeModal, ...rest }) => {
         <AddManualPayment lease={lease} onCompleted={data => closeModal()} />
       );
     case 1:
-      return <ViewPayments wallet={lease.wallet} />;
-    case 2:
-      return <ViewCharges wallet={lease.wallet} />;
+      return <ViewWalletTransactions wallet={lease.wallet} />;
     case 3:
       return <LeaseManager leaseId={lease.id} />;
     case 4:

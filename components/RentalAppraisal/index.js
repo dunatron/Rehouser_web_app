@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Box, Typography, Grid, Chip, Button } from '@material-ui/core';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 import EmailIcon from '@material-ui/icons/Email';
 
 import PublicUserDetails from '@/Components/User/PublicUserDetails';
@@ -114,13 +114,13 @@ const RentalAppraisalView = ({ id, me }) => {
                 variant="h5"
                 color="textPrimary"
                 gutterBottom>
-                ${formatCentsToDollarsVal(rent)}
+                ${formatMoneyVal(rent)}
               </Typography>
             </Typography>
             <Typography variant="h6" color="textPrimary" gutterBottom>
-              Rent per room{' '}
+              average price per room{' '}
               <Typography component="span" variant="h5" color="textPrimary">
-                ${formatCentsToDollarsVal(rent / rooms)}
+                ${formatMoneyVal(rent / rooms)}
               </Typography>
             </Typography>
 

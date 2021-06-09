@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_WALLET_MUTATION } from '@/Gql/mutations';
 import { CHARGE_WALLET_FORM_CONF } from '@/Lib/configs/forms/chargeWalletForm';
 import FormCreator from '@/Components/Forms/FormCreator';
-import { formatCentsToDollars } from '@/Lib/formatCentsToDollars';
+import { formatMoney } from '@/Lib/formatMoney';
 
 import { Box, Typography, Button } from '@material-ui/core';
 import { toast } from 'react-toastify';
@@ -17,7 +17,7 @@ const ChargeLeaseWallet = ({ lease, onCompleted }) => {
       <Box>
         <Typography variant="body1">Charge added to lease wallet.</Typography>
         <Typography variant="body1">
-          New Balance: {formatCentsToDollars(data.updateWallet.amount)}
+          New Balance: {formatMoney(data.updateWallet.amount)}
         </Typography>
       </Box>
     );

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { store } from '../../store';
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 // import MaterialTable from 'material-table';
 import ConnectionTable, {
@@ -10,12 +10,7 @@ import ConnectionTable, {
 
 //components
 import Error from '@/Components/ErrorMessage';
-import { Typography } from '@material-ui/core';
 
-import formatCentsToDollars from '@/Lib/formatCentsToDollars';
-import moment from 'moment';
-
-import SinglePayment from '@/Components/Payments/SinglePayment';
 import Modal from '@/Components/Modal/index';
 import PrivateUserDetails from '@/Components/User/PrivateUserDetails';
 

@@ -12,6 +12,28 @@ const BankingCodeItems = [
     description:
       'property lease rental payment. This code is used for lessees paying a property lease rental payment',
   },
+  {
+    code: 'PLBC',
+    description: 'property lease bond charged',
+  },
+  {
+    code: 'PLDC',
+    description: 'property lease damage charge',
+  },
+  {
+    code: 'PLDP',
+    description: 'property lease damage payment',
+  },
+  {
+    code: 'RCSP',
+    description:
+      'rehouser company service payment. ie an owner could pay this to us',
+  },
+  {
+    code: 'RCSC',
+    description:
+      'rehouser company service charge. this can be added to the system to charge a property for a rehouser service',
+  },
 ];
 
 const useStyles = makeStyles(theme => ({

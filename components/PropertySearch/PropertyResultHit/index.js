@@ -18,7 +18,7 @@ import Card from '@/Styles/Card';
 import RToolTip from '@/Styles/RToolTip';
 import Apply from '@/Components/PropertyCard/Apply';
 
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 
 //icons
 import BathtubIcon from '@material-ui/icons/Bathtub';
@@ -207,7 +207,7 @@ const PropertyResultHit = ({ hit, me, disableImages, reverse }) => {
             {hit.location}
           </Typography>
           <Typography component="span" color="primary" variant="h6">
-            {formatCentsToDollarsVal(hit.rent / hit.rooms)}
+            {formatMoneyVal(hit.rent)}
           </Typography>
           <AvailableDate hit={hit} />
           <Typography gutterBottom color="textSecondary">

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Configure, Stats } from 'react-instantsearch-dom';
 import dollarsToCents from '@/Lib/dollarsToCents';
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
+import { formatMoneyVal } from '@/Lib/formatMoney';
 import TextInput from '@/Components/Inputs/TextInput';
 import DateInput from '@/Components/Inputs/DateInput';
 import moment from 'moment';
@@ -114,8 +114,7 @@ const SearchFilter = () => {
         // title="Property price per week"
         title={
           <Typography className={classes.rentLabel}>
-            {formatCentsToDollarsVal(bottomPrice)} -{' '}
-            {formatCentsToDollarsVal(topPrice)} per room
+            {formatMoneyVal(bottomPrice)} - {formatMoneyVal(topPrice)} per room
           </Typography>
         }
         icon={<AttachMoneyIcon />}>

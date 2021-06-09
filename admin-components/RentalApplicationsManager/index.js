@@ -15,11 +15,6 @@ import {
 import ConnectionTable, {
   getEnumLookupList,
 } from '@/Components/SuperiorTable/ConnectionTable';
-import { PROPERTY_APPRAISAL_SUBSCRIPTION } from '../../graphql/subscriptions/PropertyAppraisalSub';
-import moment from 'moment';
-import formatCentsToDollars from '../../lib/formatCentsToDollars';
-
-import SubscriberBell from '../SubscriberBell';
 
 //components
 import Modal from '../../components/Modal/index';

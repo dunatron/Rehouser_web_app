@@ -1,7 +1,5 @@
 import { useQuery } from '@apollo/client';
 import { SINGLE_PROPERTY_QUERY } from '@/Gql/queries';
-import { PROPERTY_DETAILS_EDITABLE_DISPLAY_CONF } from '@/Lib/configs/editableDisplays/propertyDetails';
-import EditableDisplayItems from '@/Components/EditableDisplay/EditableDisplayItems';
 import CarouselSlider from '@/Components/CarouselSlider';
 
 import Error from '@/Components/ErrorMessage';
@@ -9,8 +7,6 @@ import Loader from '@/Components/Loader';
 import { Typography, Chip, Box, List } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
-
-import { formatCentsToDollarsVal } from '@/Lib/formatCentsToDollars';
 
 // displays
 import {

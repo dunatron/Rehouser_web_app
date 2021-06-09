@@ -48,6 +48,7 @@ import { PropertyInfoFragment } from '@/Gql/fragments/propertyInfo';
 import DetailItems from './DetailItems';
 import ImportantDetails from './ImportantDetails';
 import PropertyImages from './Images';
+import PropertyWallet from './PropertyWallet';
 
 import DynamicAddUserToList from '@/Components/User/DynamicAddUserToList';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -265,7 +266,7 @@ const Details = props => {
             {property.rehouserManaged && (
               <Typography gutterBottom variant="body2">
                 The Property is now managed by {COMPANY_NAME} at this point. You
-                will recieve updates from us along the way allowing you to see
+                will receive updates from us along the way allowing you to see
                 the progress of your property
               </Typography>
             )}
@@ -284,9 +285,7 @@ const Details = props => {
               style={{ whiteSpace: 'pre-line' }}>
               As A Wizard you will need to add an "Agent" against this property
               for it to be managed. An agent acts for {COMPANY_NAME} on behalf
-              of the property owner {'\n'}
-              {'\n'}
-              Agents on property: {property.agents.length}
+              of the property owner Agents on property: {property.agents.length}
             </Typography>
             <Button
               aria-label="read-more"
@@ -308,6 +307,10 @@ const Details = props => {
               json={property}></DisplayJson>
           </RehouserPaper>
         ))}
+
+      <RehouserPaper>
+        <PropertyWallet id={property.wallet.id} property={property} />
+      </RehouserPaper>
 
       <RehouserPaper>
         <ButtonGroup
