@@ -10,6 +10,7 @@ import PropertyResultHit from './PropertyResultHit';
 // connected refinements
 import ConnectedCurrentRefinements from './refinements/CurrentRefinements';
 import GeoSearch from './GeoSearch';
+import DynamicGeoSearch from './DynamicGeoSearch';
 
 import { InstantSearch, Pagination, Stats } from 'react-instantsearch-dom';
 
@@ -103,7 +104,7 @@ const PropertySearch = props => {
                 />
               </Box>
               <Box className={classes.rightSearchPanel}>
-                <GeoSearch enableBoundingBox={enableBoundingBox} />
+                <DynamicGeoSearch enableBoundingBox={enableBoundingBox} />
               </Box>
             </Box>
             <ClearQuery clearsQuery />
