@@ -36,6 +36,11 @@ const withTM = require('next-transpile-modules')([
 module.exports = withPWA(
   withTM({
     // future: { webpack5: true }, // will need to upgrade to use
+    eslint: {
+      // Warning: Dangerously allow production builds to successfully complete even if
+      // your project has ESLint errors.
+      ignoreDuringBuilds: true,
+    },
     pwa: {
       // disable: process.env.NODE_ENV === 'development' ? true : false,
       disable: false,

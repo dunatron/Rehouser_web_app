@@ -26,6 +26,8 @@ import AccountMenu from './AccountMenu';
 import ThemePicker from './ThemePicker';
 import CurrentUrl from './CurrentUrl';
 
+import NotificationsOffIcon from '@material-ui/icons/NotificationsOff';
+
 function HideOnScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({ target: window ? window() : undefined });
@@ -80,6 +82,18 @@ const AppMenuBar = props => {
           </IconButton>
           <CurrentUrl />
           <div className={classes.actions}>
+            <Tooltip title="Set notification preferences">
+              <IconButton
+                color="primary"
+                variant="contained"
+                onClick={() =>
+                  router.push({
+                    pathname: '/account/notifications',
+                  })
+                }>
+                <NotificationsOffIcon />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Search available properties">
               <IconButton
                 color="primary"
