@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -80,8 +80,8 @@ const ChatNavbar = ({ chat }) => {
 ChatNavbar.propTypes = {
   chat: PropTypes.shape({
     name: PropTypes.any,
-    picture: PropTypes.any
-  }).isRequired
-}
+    picture: PropTypes.any,
+  }).isRequired,
+};
 
 export default ChatNavbar;

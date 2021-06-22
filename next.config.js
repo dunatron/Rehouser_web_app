@@ -35,13 +35,17 @@ const withTM = require('next-transpile-modules')([
 
 module.exports = withPWA(
   withTM({
+    // future: { webpack5: true }, // will need to upgrade to use
     pwa: {
-      disable: process.env.NODE_ENV === 'development' ? true : false,
+      // disable: process.env.NODE_ENV === 'development' ? true : false,
+      disable: false,
       dest: 'public',
       // register: false, // we enable/register it in Page component
       // skipWaiting: false,
-      register: true, // trying to auto download
-      skipWaiting: true, // trying to auto download
+      // register: true, // trying to auto download
+      // skipWaiting: true, // trying to auto download
+      register: false, // we need to register the events oursel
+      skipWaiting: false, // trying to auto download
       runtimeCaching,
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -93,6 +97,10 @@ module.exports = withPWA(
       ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
       CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
       CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+      WEB_PUSH_EMAIL: process.env.WEB_PUSH_EMAIL,
+      NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY:
+        process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
+      WEB_PUSH_PRIVATE_KEY: process.env.WEB_PUSH_PRIVATE_KEY,
     },
   })
 );

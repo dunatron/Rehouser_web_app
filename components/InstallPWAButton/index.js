@@ -53,9 +53,15 @@ const InstallPWAButton = () => {
     }
     promptInstall.prompt();
   };
-  if (!supportsPWA) {
-    return null;
-  }
+  // currently not accounting for a. not installed/installing service wb & already installed... so just return null
+  if (!supportsPWA) return null;
+  // if (!supportsPWA) {
+  //   return (
+  //     <Typography>
+  //       Browser does not support PWA. Try a different browser
+  //     </Typography>
+  //   );
+  // }
   if (appInstalled) {
     return null;
   }
@@ -67,7 +73,7 @@ const InstallPWAButton = () => {
       title="Install app"
       startIcon={<GetAppIcon />}
       onClick={onClick}>
-      Install Rehsouser Web App
+      Install ReHouser Web App
     </Button>
   );
 };

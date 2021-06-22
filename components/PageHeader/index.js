@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import Head from 'next/head';
@@ -63,7 +64,7 @@ const PageHeader = ({
           {!hidden &&
             children?.length > 0 &&
             children.map((child, idx) => (
-              <React.Fragment key={idx}>{child}</React.Fragment>
+              <Fragment key={idx}>{child}</Fragment>
             ))}
         </Card>
       )}
