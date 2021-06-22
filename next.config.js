@@ -1,4 +1,4 @@
-const { parsed: localEnv } = require('dotenv').config();
+// const { parsed: localEnv } = require('dotenv').config();
 const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -39,7 +39,7 @@ module.exports = withPWA(
     eslint: {
       // Warning: Dangerously allow production builds to successfully complete even if
       // your project has ESLint errors.
-      ignoreDuringBuilds: true,
+      ignoreDuringBuilds: true, // set to true to dangerously pass
     },
     pwa: {
       // disable: process.env.NODE_ENV === 'development' ? true : false,
@@ -54,7 +54,7 @@ module.exports = withPWA(
       runtimeCaching,
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-      config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
+      // config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
       const absolutePaths = dev
         ? {}
         : {

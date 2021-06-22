@@ -27,10 +27,10 @@ const AdminBankingPage = ({ appData: { currentUser }, query: { id } }) => {
   );
 };
 
-AdminBankingPage.propTypes = {
-  appData: PropTypes.shape({
-    currentUser: PropTypes.object.isRequired,
-  }),
-};
+// AdminBankingPage.propTypes = {
+//   appData: PropTypes.shape({
+//     currentUser: PropTypes.object.isRequired,
+//   }),
+// };
 
 export default AdminBankingPage;

@@ -1,4 +1,11 @@
 'use strict';
+/**
+ * DOCS
+ * progressive web apps base overview: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
+ * next pwa custom service workers example: https://github.com/shadowwalker/next-pwa/tree/master/examples/custom-worker
+ * next pwa notifications: https://github.com/imekachi/next-pwa-notification
+ * https://github.com/shadowwalker/next-pwa/blob/master/examples/web-push/pages/index.js
+ */
 
 // To disable all workbox logging during development, you can set self.__WB_DISABLE_DEV_LOGS to true
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox#disable_logging
